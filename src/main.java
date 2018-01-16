@@ -8,5 +8,11 @@ public class main {
 			System.out.println("Test");
 		}
 	}
+	public void test() {
+		System.out.println("Test");
+	}
+	public void test() {
+		System.out.println("Test");
+	}
 
 }
