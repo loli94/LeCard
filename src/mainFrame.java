@@ -28,6 +28,7 @@ public class mainFrame {
 	private JComboBox kartenMenu;
 	private JComboBox sprachenMenu;
 	private JLabel lBenutzer;
+	private JLabel lAngBenutzer;
 	private JLabel lKarten;
 	private Locale locale;
 	private String country;
@@ -59,6 +60,7 @@ public class mainFrame {
 		kartei3 = new JButton("3");
 		kartei4 = new JButton("4");
 		kartei5 = new JButton("5");
+		lAngBenutzer = new JLabel("Roman");
 		home = new JButton(ResourceBundle.getBundle("Bundle", locale).getString("ButtonKartei"));
 		lBenutzer = new JLabel(ResourceBundle.getBundle("Bundle", locale).getString("Benutzer"));
 		lKarten = new JLabel(ResourceBundle.getBundle("Bundle", locale).getString("Karten"));
@@ -83,7 +85,7 @@ public class mainFrame {
 	}
 
 	public void paint() {
-		mainFrame.setSize(500, 500);
+		mainFrame.setSize(1000, 500);
 		// mainFrame.setLayout(new GridLayout(1,2));
 		karteiPanel.setLayout(new GridLayout(6, 1));
 		menuPanel.setLayout(new GridLayout(1, 3));
@@ -99,6 +101,7 @@ public class mainFrame {
 		karteiPanel.add(kartei5);
 
 		menuPanel.add(lBenutzer);
+		menuPanel.add(lAngBenutzer);
 		menuPanel.add(lKarten);
 		menuPanel.add(this.kartenMenu);
 		menuPanel.add(lSprache);
