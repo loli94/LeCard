@@ -1,76 +1,247 @@
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import javafx.scene.control.ComboBox;
+
 public class mainFrame {
 
 	private JFrame mainFrame;
-	
-	private JButton home; 
+	private JLabel lSprache;
+	private JButton home;
 	private JButton kartei1;
 	private JButton kartei2;
 	private JButton kartei3;
 	private JButton kartei4;
 	private JButton kartei5;
-	
-	
-	private JLabel benutzer; 
-	
-	private JPanel karteiPanel; 
+	private JComboBox kartenMenu;
+	private JComboBox sprachenMenu;
+	private JLabel lBenutzer;
+	private JLabel lKarten;
+	private Locale locale;
+	private String country;
+	private String language;
+	private JPanel statPanel;
+
+	private JPanel karteiPanel;
 	private JPanel menuPanel;
-	
-	
-	
+
 	public mainFrame() {
+		this.language = "de";
+		this.country = "DE";
+		this.locale = new Locale(language, country);
 		mainFrame = new JFrame("LeCard");
-		kartei1 = new JButton("1"); 
-		kartei2 = new JButton("2"); 
-		kartei3 = new JButton("3"); 
-		kartei4 = new JButton("4"); 
-		kartei5 = new JButton("5"); 
-		home = new JButton("Kartei"); 
-		
-		benutzer = new JLabel("Benutzer: "); 
-		
-		karteiPanel = new JPanel(); 
-		menuPanel = new JPanel(); 
-		
-		
+		karteiPanel = new JPanel();
+		menuPanel = new JPanel();
+
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		JComponent jc = (JComponent) mainFrame.getContentPane();
+		initComponents();
+		bindListener();
 	}
-	
+
+	private void initComponents() {
+		statPanel = new JPanel();
+
+		kartei1 = new JButton("1");
+		kartei2 = new JButton("2");
+		kartei3 = new JButton("3");
+		kartei4 = new JButton("4");
+		kartei5 = new JButton("5");
+		home = new JButton(ResourceBundle.getBundle("Bundle", locale).getString("ButtonKartei"));
+		lBenutzer = new JLabel(ResourceBundle.getBundle("Bundle", locale).getString("Benutzer"));
+		lKarten = new JLabel(ResourceBundle.getBundle("Bundle", locale).getString("Karten"));
+		lSprache = new JLabel(ResourceBundle.getBundle("Bundle", locale).getString("Sprache"));
+		// Dropdown Sprachenmenu
+		String spracheBox[] = { "Deutsch", "English", "Francaise", "Italiano" };
+		sprachenMenu = new JComboBox(spracheBox);
+		// Dropdown Karteimenu
+		String kartenMenuBox[] = { "bearbeiten", "löschen" };
+		kartenMenu = new JComboBox(kartenMenuBox);
+
+	}
+
+	public void bindListener() {
+		sprachenMenu.addActionListener(new DropDownListenerSprache());
+		home.addActionListener(new ButtonListenerKartei());
+		kartei1.addActionListener(new ButtonListenerKartei());
+		kartei2.addActionListener(new ButtonListenerKartei());
+		kartei3.addActionListener(new ButtonListenerKartei());
+		kartei4.addActionListener(new ButtonListenerKartei());
+		kartei5.addActionListener(new ButtonListenerKartei());
+	}
+
 	public void paint() {
 		mainFrame.setSize(500, 500);
 		// mainFrame.setLayout(new GridLayout(1,2));
-		karteiPanel.setLayout(new GridLayout(6,1));
-		menuPanel.setLayout(new GridLayout(1,3));
-		//menuPanel.setLayout(new GridLayout(2,1));
-		
-		karteiPanel.add(home); 
-		karteiPanel.add(kartei1); 
-		karteiPanel.add(kartei2); 
-		karteiPanel.add(kartei3); 
-		karteiPanel.add(kartei4); 
-		karteiPanel.add(kartei5); 
-			
+		karteiPanel.setLayout(new GridLayout(6, 1));
+		menuPanel.setLayout(new GridLayout(1, 3));
+		// menuPanel.setLayout(new GridLayout(2,1));
 		mainFrame.add(karteiPanel, BorderLayout.WEST);
-		
-		
-		
-		
-		menuPanel.add(benutzer);
-		menuPanel.add(benutzer, BorderLayout.NORTH); 
-		mainFrame.add(menuPanel);
+		statPanel.setLayout(new BorderLayout(50, 50));
+
+		karteiPanel.add(home);
+		karteiPanel.add(kartei1);
+		karteiPanel.add(kartei2);
+		karteiPanel.add(kartei3);
+		karteiPanel.add(kartei4);
+		karteiPanel.add(kartei5);
+
+		menuPanel.add(lBenutzer);
+		menuPanel.add(lKarten);
+		menuPanel.add(this.kartenMenu);
+		menuPanel.add(lSprache);
+		menuPanel.add(this.sprachenMenu);
+
+		mainFrame.add(statPanel, BorderLayout.CENTER);
+		mainFrame.add(menuPanel, BorderLayout.NORTH);
+
 		mainFrame.setVisible(true);
-		
+
+	}
+
+	class DropDownListenerSprache implements ActionListener {
+
+		public void actionPerformed(ActionEvent e) {
+			JComboBox cb = (JComboBox) e.getSource();
+			String msg = (String) cb.getSelectedItem();
+			System.out.println(msg);
+
+			switch (msg) {
+			case "Deutsch":
+				country = new String("DE");
+				language = new String("de");
+				break;
+			case "English":
+				country = new String("EN");
+				language = new String("en");
+				break;
+			case "Francaise":
+				country = new String("FR");
+				language = new String("fr");
+				break;
+			case "Italiano":
+				country = new String("IT");
+				language = new String("it");
+				break;
+
+			}
+
+			locale = new Locale(language, country);
+			lBenutzer.setText(ResourceBundle.getBundle("Bundle", locale).getString("Benutzer"));
+			lKarten.setText(ResourceBundle.getBundle("Bundle", locale).getString("Karten"));
+			lSprache.setText(ResourceBundle.getBundle("Bundle", locale).getString("Sprache"));
+			home.setText(ResourceBundle.getBundle("Bundle", locale).getString("ButtonKartei"));
+
+		}
+
 	}
 	
+	class DropDownListenerKarten implements ActionListener {
+
+		public void actionPerformed(ActionEvent e) {
+			JComboBox cb = (JComboBox) e.getSource();
+			String msg = (String) cb.getSelectedItem();
+			System.out.println(msg);
+
+			switch (msg) {
+			case "bearbeiten":
+				//Methode bearbeiten
+				//Muss erst gemacht werden
+				break;
+			case "löschen":
+				//Methode löschen
+				//Muss erst gemacht werden
+				break;
+			}
+
+
+		}
+
+	}
+	
+	class ButtonListenerKartei implements ActionListener {
+
+		public void actionPerformed(ActionEvent e) {
+			JButton b = (JButton) e.getSource();
+			String msg = (String) b.getText();
+			switch (msg) {
+			case "Kartei":
+				home.setBackground(Color.blue);
+				kartei1.setBackground(Color.GRAY);
+				kartei2.setBackground(Color.GRAY);
+				kartei3.setBackground(Color.GRAY);
+				kartei4.setBackground(Color.GRAY);
+				kartei5.setBackground(Color.GRAY);
+			break;
+			case "Index":
+				home.setBackground(Color.blue);
+				kartei1.setBackground(Color.GRAY);
+				kartei2.setBackground(Color.GRAY);
+				kartei3.setBackground(Color.GRAY);
+				kartei4.setBackground(Color.GRAY);
+				kartei5.setBackground(Color.GRAY);
+			break;
+			case "1":
+				home.setBackground(Color.GRAY);
+				kartei1.setBackground(Color.blue);
+				kartei2.setBackground(Color.GRAY);
+				kartei3.setBackground(Color.GRAY);
+				kartei4.setBackground(Color.GRAY);
+				kartei5.setBackground(Color.GRAY);
+				break;
+			case "2":
+				home.setBackground(Color.GRAY);
+				kartei1.setBackground(Color.GRAY);
+				kartei2.setBackground(Color.blue);
+				kartei3.setBackground(Color.GRAY);
+				kartei4.setBackground(Color.GRAY);
+				kartei5.setBackground(Color.GRAY);
+				break;
+			case "3":
+				home.setBackground(Color.GRAY);
+				kartei1.setBackground(Color.GRAY);
+				kartei2.setBackground(Color.GRAY);
+				kartei3.setBackground(Color.BLUE);
+				kartei4.setBackground(Color.GRAY);
+				kartei5.setBackground(Color.GRAY);
+				break;
+			case "4":
+				home.setBackground(Color.GRAY);
+				kartei1.setBackground(Color.GRAY);
+				kartei2.setBackground(Color.GRAY);
+				kartei3.setBackground(Color.GRAY);
+				kartei4.setBackground(Color.blue);
+				kartei5.setBackground(Color.GRAY);
+				break;
+			case "5":
+				home.setBackground(Color.GRAY);
+				kartei1.setBackground(Color.GRAY);
+				kartei2.setBackground(Color.GRAY);
+				kartei3.setBackground(Color.GRAY);
+				kartei4.setBackground(Color.GRAY);
+				kartei5.setBackground(Color.BLUE);
+				break;
+			}
+			
+			
+			
+
+		}
+
+	}
+
 	public static void main(String[] args) {
 		mainFrame gui1 = new mainFrame();
 		gui1.paint();
