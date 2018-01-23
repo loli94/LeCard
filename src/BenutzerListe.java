@@ -5,13 +5,20 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 
-@XmlRootElement(name = "Benutzerliste")
+@XmlRootElement(name = "BenutzerListe")
+@XmlAccessorType(XmlAccessType.FIELD)
+
 public class BenutzerListe {
 	
+	@XmlElement(name = "Benutzer")
 	private ArrayList<Benutzer> benutzerListe;
-
+	
 	public BenutzerListe() {
 		benutzerListe = new ArrayList<Benutzer>();
 	}
@@ -25,6 +32,15 @@ public class BenutzerListe {
 		return false;
 	}
 	
+	public Benutzer benutzerLaden(String benutzername) {
+		for (Benutzer b : benutzerListe) {
+			if (b.getBenutzername().equals(benutzername)) {
+				return b;
+			}
+		}
+		return null;
+	}
+	
 	public void benutzerHinzufuegen(Benutzer b) {
 		benutzerListe.add(b);
 	}
@@ -32,18 +48,30 @@ public class BenutzerListe {
 	public void benutzerLoeschen(Benutzer b) {
 		benutzerListe.remove(b);
 	}
-	
+		
+	public ArrayList<Benutzer> getBenutzerListe() {
+		return benutzerListe;
+	}
+
 	public void benutzerListeLaden(String pfad) {
 		if (new File(pfad).isFile()) {
+			
+			System.out.println("Starte Benutzerimport");
+			
 			try {
 
 				JAXBContext context = JAXBContext.newInstance(BenutzerListe.class);
 
 				Unmarshaller unmarshaller = context.createUnmarshaller();
 
-				BenutzerListe benutzerStatus = (BenutzerListe) unmarshaller.unmarshal(new File(pfad));
+				BenutzerListe imp = (BenutzerListe) unmarshaller.unmarshal(new File(pfad));
 
-				System.out.println(benutzerStatus);
+				for (Benutzer b : imp.getBenutzerListe()) {
+					//System.out.println("Importiere Karte:" + k.toString());
+					benutzerListe.add(b);
+					System.out.println(b);
+				}
+
 
 			} catch (JAXBException e) {
 				e.printStackTrace();

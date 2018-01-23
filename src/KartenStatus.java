@@ -1,14 +1,24 @@
 import java.util.UUID;
 
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlElement;
+
+@XmlRootElement (name = "KartenStatus")
 public class KartenStatus {
+	
 	private UUID uid;
 	private int fach;
+	
 
-	public KartenStatus(UUID uid, int fach ) {
+	public KartenStatus(UUID uid, int f ) {
 		this.uid = uid;
-		this.fach = fach;
+		this.fach = f;
+	}
+	
+	public KartenStatus () {
 	}
 
+	@XmlElement
 	public UUID getUid() {
 		return uid;
 	}
@@ -17,12 +27,13 @@ public class KartenStatus {
 		this.uid = uid;
 	}
 
+	@XmlElement
 	public int getFach() {
 		return fach;
 	}
 
-	public void setFach(int fach) {
-		this.fach = fach;
+	public void setFach(int f) {
+		this.fach = f;
 	}
 
 	@Override
@@ -30,6 +41,7 @@ public class KartenStatus {
 		return "KartenStatus [uid=" + uid + ", fach=" + fach + "]";
 	}
 	
+
 	
 	
 	

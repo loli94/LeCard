@@ -1,10 +1,10 @@
 import java.util.ArrayList;
 
-public class FaecherListe {
+public class Faecher {
 
 	private Fach[] faecher;	
 	
-	public FaecherListe() {
+	public Faecher() {
 		this.faecher = new Fach[5];
 	}
 

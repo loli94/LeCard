@@ -8,41 +8,47 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 
 @XmlRootElement(name = "Kartei")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Kartei {
 	
 	@XmlElement(name = "Karte")
-	private ArrayList<Karte> lernkartei;
+	private ArrayList<Karte> kartei;
 
 	public Kartei() {
-		this.lernkartei = new ArrayList<Karte>();
+		this.kartei = new ArrayList<Karte>();
+	}
+	
+	public Kartei(String pfad) throws Exception {
+		this.kartei = new ArrayList<Karte>();
+		karteiEinlesen(pfad);
 	}
 
 	public ArrayList<Karte> kartenAusgeben(){
-		return lernkartei;
+		return kartei;
 	}
 	
 	public void kartenLaden(ArrayList<Karte> karten) {
-		this.lernkartei = karten;
+		this.kartei = karten;
 	}
 	
 	
 	public void karteHinzufuegen(Karte k) {
-		lernkartei.add(k);
+		kartei.add(k);
 	}
 	
 	public void karteLoeschen(Karte k) {
-		lernkartei.remove(k);
+		kartei.remove(k);
 	}
 	
 	
 	
 	
 	public ArrayList<Karte> getLernkartei() {
-		return lernkartei;
+		return kartei;
 	}
 
 	public void setLernkartei(ArrayList<Karte> lernkartei) {
-		this.lernkartei = lernkartei;
+		this.kartei = lernkartei;
 	}
 
 	public void lernkarteiSpeichern(String pfad) {
@@ -55,7 +61,7 @@ public class Kartei {
 	    jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 	     
 	    //Marshal the card list in console
-	    jaxbMarshaller.marshal(this, System.out);
+	    //jaxbMarshaller.marshal(this, System.out);
 	     
 	    //Marshal the card list in file
 	    jaxbMarshaller.marshal(this, new File(pfad));
@@ -65,10 +71,11 @@ public class Kartei {
     }
 	
 	
-	public void karteiEinlesen(String pfad) {
+	public void karteiEinlesen(String pfad) throws Exception {
 		/*
 		 * XML File einlesen und die enthaltenen Elemente zu Objekten (Karte) umwandeln
 		 */
+
 		
 	try {
     		
@@ -76,10 +83,12 @@ public class Kartei {
 			
 			Unmarshaller unmarshaller = context.createUnmarshaller();
 			
-			Kartei geleseneKarten =  (Kartei) unmarshaller.unmarshal(new File(pfad));
+			Kartei imp =  (Kartei) unmarshaller.unmarshal(new File(pfad));
 			
-				System.out.println(geleseneKarten);
-			
+				for (Karte k : imp.getLernkartei()) {
+					//System.out.println("Importiere Karte:" + k.toString());
+					kartei.add(k);
+				}
 			
 		      } catch (JAXBException e) {
 			e.printStackTrace();
@@ -88,7 +97,7 @@ public class Kartei {
 	}
 
 	public void kartenAnzeigen() {
-		for (Karte k : lernkartei) {
+		for (Karte k : kartei) {
 			System.out.println(k.toString());
 	}
 	
