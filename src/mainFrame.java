@@ -34,7 +34,7 @@ public class mainFrame {
 	private String country;
 	private String language;
 	private JPanel statPanel;
-
+	private PanelLernen p1;
 	private JPanel karteiPanel;
 	private JPanel menuPanel;
 
@@ -54,7 +54,7 @@ public class mainFrame {
 
 	private void initComponents() {
 		statPanel = new JPanel();
-
+		p1 = new PanelLernen();
 		kartei1 = new JButton("1");
 		kartei2 = new JButton("2");
 		kartei3 = new JButton("3");
@@ -91,8 +91,9 @@ public class mainFrame {
 		menuPanel.setLayout(new GridLayout(1, 3));
 		// menuPanel.setLayout(new GridLayout(2,1));
 		mainFrame.add(karteiPanel, BorderLayout.WEST);
-		statPanel.setLayout(new BorderLayout(50, 50));
-
+		
+		statPanel.add(p1);
+		
 		karteiPanel.add(home);
 		karteiPanel.add(kartei1);
 		karteiPanel.add(kartei2);
