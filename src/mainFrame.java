@@ -150,7 +150,7 @@ public class mainFrame {
 		}
 
 	}
-
+	
 	class DropDownListenerKarten implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
@@ -160,19 +160,20 @@ public class mainFrame {
 
 			switch (msg) {
 			case "bearbeiten":
-				// Methode bearbeiten
-				// Muss erst gemacht werden
+				//Methode bearbeiten
+				//Muss erst gemacht werden
 				break;
 			case "löschen":
-				// Methode löschen
-				// Muss erst gemacht werden
+				//Methode löschen
+				//Muss erst gemacht werden
 				break;
 			}
+
 
 		}
 
 	}
-
+	
 	class ButtonListenerKartei implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
@@ -180,62 +181,65 @@ public class mainFrame {
 			String msg = (String) b.getText();
 			switch (msg) {
 			case "Kartei":
-				home.setBackground(Color.blue);
-				kartei1.setBackground(Color.GRAY);
-				kartei2.setBackground(Color.GRAY);
-				kartei3.setBackground(Color.GRAY);
-				kartei4.setBackground(Color.GRAY);
-				kartei5.setBackground(Color.GRAY);
-				break;
+				home.setBackground(Color.CYAN);
+				kartei1.setBackground(Color.lightGray);
+				kartei2.setBackground(Color.lightGray);
+				kartei3.setBackground(Color.lightGray);
+				kartei4.setBackground(Color.lightGray);
+				kartei5.setBackground(Color.lightGray);
+			break;
 			case "Index":
-				home.setBackground(Color.blue);
-				kartei1.setBackground(Color.GRAY);
-				kartei2.setBackground(Color.GRAY);
-				kartei3.setBackground(Color.GRAY);
-				kartei4.setBackground(Color.GRAY);
-				kartei5.setBackground(Color.GRAY);
-				break;
+				home.setBackground(Color.CYAN);
+				kartei1.setBackground(Color.lightGray);
+				kartei2.setBackground(Color.lightGray);
+				kartei3.setBackground(Color.lightGray);
+				kartei4.setBackground(Color.lightGray);
+				kartei5.setBackground(Color.lightGray);
+			break;
 			case "1":
-				home.setBackground(Color.GRAY);
-				kartei1.setBackground(Color.blue);
-				kartei2.setBackground(Color.GRAY);
-				kartei3.setBackground(Color.GRAY);
-				kartei4.setBackground(Color.GRAY);
-				kartei5.setBackground(Color.GRAY);
+				home.setBackground(Color.lightGray);
+				kartei1.setBackground(Color.CYAN);
+				kartei2.setBackground(Color.lightGray);
+				kartei3.setBackground(Color.lightGray);
+				kartei4.setBackground(Color.lightGray);
+				kartei5.setBackground(Color.lightGray);
 				break;
 			case "2":
-				home.setBackground(Color.GRAY);
-				kartei1.setBackground(Color.GRAY);
-				kartei2.setBackground(Color.blue);
-				kartei3.setBackground(Color.GRAY);
-				kartei4.setBackground(Color.GRAY);
-				kartei5.setBackground(Color.GRAY);
+				home.setBackground(Color.lightGray);
+				kartei1.setBackground(Color.lightGray);
+				kartei2.setBackground(Color.CYAN);
+				kartei3.setBackground(Color.lightGray);
+				kartei4.setBackground(Color.lightGray);
+				kartei5.setBackground(Color.lightGray);
 				break;
 			case "3":
-				home.setBackground(Color.GRAY);
-				kartei1.setBackground(Color.GRAY);
-				kartei2.setBackground(Color.GRAY);
-				kartei3.setBackground(Color.BLUE);
-				kartei4.setBackground(Color.GRAY);
-				kartei5.setBackground(Color.GRAY);
+				home.setBackground(Color.lightGray);
+				kartei1.setBackground(Color.lightGray);
+				kartei2.setBackground(Color.lightGray);
+				kartei3.setBackground(Color.CYAN);
+				kartei4.setBackground(Color.lightGray);
+				kartei5.setBackground(Color.lightGray);
 				break;
 			case "4":
-				home.setBackground(Color.GRAY);
-				kartei1.setBackground(Color.GRAY);
-				kartei2.setBackground(Color.GRAY);
-				kartei3.setBackground(Color.GRAY);
-				kartei4.setBackground(Color.blue);
-				kartei5.setBackground(Color.GRAY);
+				home.setBackground(Color.lightGray);
+				kartei1.setBackground(Color.lightGray);
+				kartei2.setBackground(Color.lightGray);
+				kartei3.setBackground(Color.lightGray);
+				kartei4.setBackground(Color.CYAN);
+				kartei5.setBackground(Color.lightGray);
 				break;
 			case "5":
-				home.setBackground(Color.GRAY);
-				kartei1.setBackground(Color.GRAY);
-				kartei2.setBackground(Color.GRAY);
-				kartei3.setBackground(Color.GRAY);
-				kartei4.setBackground(Color.GRAY);
-				kartei5.setBackground(Color.BLUE);
+				home.setBackground(Color.lightGray);
+				kartei1.setBackground(Color.lightGray);
+				kartei2.setBackground(Color.lightGray);
+				kartei3.setBackground(Color.lightGray);
+				kartei4.setBackground(Color.lightGray);
+				kartei5.setBackground(Color.CYAN);
 				break;
 			}
+			
+			
+			
 
 		}
 
