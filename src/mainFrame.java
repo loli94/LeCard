@@ -150,7 +150,7 @@ public class mainFrame {
 		}
 
 	}
-	
+
 	class DropDownListenerKarten implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
@@ -160,20 +160,19 @@ public class mainFrame {
 
 			switch (msg) {
 			case "bearbeiten":
-				//Methode bearbeiten
-				//Muss erst gemacht werden
+				// Methode bearbeiten
+				// Muss erst gemacht werden
 				break;
 			case "löschen":
-				//Methode löschen
-				//Muss erst gemacht werden
+				// Methode löschen
+				// Muss erst gemacht werden
 				break;
 			}
-
 
 		}
 
 	}
-	
+
 	class ButtonListenerKartei implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
@@ -187,7 +186,7 @@ public class mainFrame {
 				kartei3.setBackground(Color.GRAY);
 				kartei4.setBackground(Color.GRAY);
 				kartei5.setBackground(Color.GRAY);
-			break;
+				break;
 			case "Index":
 				home.setBackground(Color.blue);
 				kartei1.setBackground(Color.GRAY);
@@ -195,7 +194,7 @@ public class mainFrame {
 				kartei3.setBackground(Color.GRAY);
 				kartei4.setBackground(Color.GRAY);
 				kartei5.setBackground(Color.GRAY);
-			break;
+				break;
 			case "1":
 				home.setBackground(Color.GRAY);
 				kartei1.setBackground(Color.blue);
@@ -237,9 +236,6 @@ public class mainFrame {
 				kartei5.setBackground(Color.BLUE);
 				break;
 			}
-			
-			
-			
 
 		}
 
