@@ -99,6 +99,13 @@ public class mainFrame {
 		karteiPanel.add(kartei3);
 		karteiPanel.add(kartei4);
 		karteiPanel.add(kartei5);
+		
+		home.setBackground(Color.CYAN);
+		kartei1.setBackground(Color.lightGray);
+		kartei2.setBackground(Color.lightGray);
+		kartei3.setBackground(Color.lightGray);
+		kartei4.setBackground(Color.lightGray);
+		kartei5.setBackground(Color.lightGray);
 
 		menuPanel.add(lBenutzer);
 		menuPanel.add(lAngBenutzer);
