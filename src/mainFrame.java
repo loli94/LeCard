@@ -34,7 +34,10 @@ public class mainFrame {
 	private String country;
 	private String language;
 	private JPanel statPanel;
-
+	// muss noch geändert werden
+	private PanelLernen p1;
+	private PanelKartei k1; 
+	// ------------
 	private JPanel karteiPanel;
 	private JPanel menuPanel;
 
@@ -54,7 +57,8 @@ public class mainFrame {
 
 	private void initComponents() {
 		statPanel = new JPanel();
-
+		p1 = new PanelLernen();
+		k1 = new PanelKartei(); 
 		kartei1 = new JButton("1");
 		kartei2 = new JButton("2");
 		kartei3 = new JButton("3");
@@ -91,14 +95,23 @@ public class mainFrame {
 		menuPanel.setLayout(new GridLayout(1, 3));
 		// menuPanel.setLayout(new GridLayout(2,1));
 		mainFrame.add(karteiPanel, BorderLayout.WEST);
-		statPanel.setLayout(new BorderLayout(50, 50));
-
+		
+		// statPanel.add(p1);
+		statPanel.add(k1); 
+		
 		karteiPanel.add(home);
 		karteiPanel.add(kartei1);
 		karteiPanel.add(kartei2);
 		karteiPanel.add(kartei3);
 		karteiPanel.add(kartei4);
 		karteiPanel.add(kartei5);
+		
+		home.setBackground(Color.CYAN);
+		kartei1.setBackground(Color.lightGray);
+		kartei2.setBackground(Color.lightGray);
+		kartei3.setBackground(Color.lightGray);
+		kartei4.setBackground(Color.lightGray);
+		kartei5.setBackground(Color.lightGray);
 
 		menuPanel.add(lBenutzer);
 		menuPanel.add(lAngBenutzer);
@@ -181,60 +194,73 @@ public class mainFrame {
 			String msg = (String) b.getText();
 			switch (msg) {
 			case "Kartei":
-				home.setBackground(Color.blue);
-				kartei1.setBackground(Color.GRAY);
-				kartei2.setBackground(Color.GRAY);
-				kartei3.setBackground(Color.GRAY);
-				kartei4.setBackground(Color.GRAY);
-				kartei5.setBackground(Color.GRAY);
+				home.setBackground(Color.CYAN);
+				kartei1.setBackground(Color.lightGray);
+				kartei2.setBackground(Color.lightGray);
+				kartei3.setBackground(Color.lightGray);
+				kartei4.setBackground(Color.lightGray);
+				kartei5.setBackground(Color.lightGray);
+				statPanel.removeAll();
+				statPanel.add(k1);
+				statPanel.validate();
+				statPanel.repaint();
+				
 			break;
 			case "Index":
-				home.setBackground(Color.blue);
-				kartei1.setBackground(Color.GRAY);
-				kartei2.setBackground(Color.GRAY);
-				kartei3.setBackground(Color.GRAY);
-				kartei4.setBackground(Color.GRAY);
-				kartei5.setBackground(Color.GRAY);
+				home.setBackground(Color.CYAN);
+				kartei1.setBackground(Color.lightGray);
+				kartei2.setBackground(Color.lightGray);
+				kartei3.setBackground(Color.lightGray);
+				kartei4.setBackground(Color.lightGray);
+				kartei5.setBackground(Color.lightGray);
+				statPanel.removeAll();
+				statPanel.add(k1);
+				statPanel.validate();
+				statPanel.repaint();
 			break;
 			case "1":
-				home.setBackground(Color.GRAY);
-				kartei1.setBackground(Color.blue);
-				kartei2.setBackground(Color.GRAY);
-				kartei3.setBackground(Color.GRAY);
-				kartei4.setBackground(Color.GRAY);
-				kartei5.setBackground(Color.GRAY);
+				home.setBackground(Color.lightGray);
+				kartei1.setBackground(Color.CYAN);
+				kartei2.setBackground(Color.lightGray);
+				kartei3.setBackground(Color.lightGray);
+				kartei4.setBackground(Color.lightGray);
+				kartei5.setBackground(Color.lightGray);
+				statPanel.removeAll();
+				statPanel.add(p1);
+				statPanel.validate();
+				statPanel.repaint();
 				break;
 			case "2":
-				home.setBackground(Color.GRAY);
-				kartei1.setBackground(Color.GRAY);
-				kartei2.setBackground(Color.blue);
-				kartei3.setBackground(Color.GRAY);
-				kartei4.setBackground(Color.GRAY);
-				kartei5.setBackground(Color.GRAY);
+				home.setBackground(Color.lightGray);
+				kartei1.setBackground(Color.lightGray);
+				kartei2.setBackground(Color.CYAN);
+				kartei3.setBackground(Color.lightGray);
+				kartei4.setBackground(Color.lightGray);
+				kartei5.setBackground(Color.lightGray);
 				break;
 			case "3":
-				home.setBackground(Color.GRAY);
-				kartei1.setBackground(Color.GRAY);
-				kartei2.setBackground(Color.GRAY);
-				kartei3.setBackground(Color.BLUE);
-				kartei4.setBackground(Color.GRAY);
-				kartei5.setBackground(Color.GRAY);
+				home.setBackground(Color.lightGray);
+				kartei1.setBackground(Color.lightGray);
+				kartei2.setBackground(Color.lightGray);
+				kartei3.setBackground(Color.CYAN);
+				kartei4.setBackground(Color.lightGray);
+				kartei5.setBackground(Color.lightGray);
 				break;
 			case "4":
-				home.setBackground(Color.GRAY);
-				kartei1.setBackground(Color.GRAY);
-				kartei2.setBackground(Color.GRAY);
-				kartei3.setBackground(Color.GRAY);
-				kartei4.setBackground(Color.blue);
-				kartei5.setBackground(Color.GRAY);
+				home.setBackground(Color.lightGray);
+				kartei1.setBackground(Color.lightGray);
+				kartei2.setBackground(Color.lightGray);
+				kartei3.setBackground(Color.lightGray);
+				kartei4.setBackground(Color.CYAN);
+				kartei5.setBackground(Color.lightGray);
 				break;
 			case "5":
-				home.setBackground(Color.GRAY);
-				kartei1.setBackground(Color.GRAY);
-				kartei2.setBackground(Color.GRAY);
-				kartei3.setBackground(Color.GRAY);
-				kartei4.setBackground(Color.GRAY);
-				kartei5.setBackground(Color.BLUE);
+				home.setBackground(Color.lightGray);
+				kartei1.setBackground(Color.lightGray);
+				kartei2.setBackground(Color.lightGray);
+				kartei3.setBackground(Color.lightGray);
+				kartei4.setBackground(Color.lightGray);
+				kartei5.setBackground(Color.CYAN);
 				break;
 			}
 			

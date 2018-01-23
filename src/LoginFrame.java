@@ -15,7 +15,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.event.CaretListener;
 
-public class LoginFrame{
+public class LoginFrame {
 
 	private JFrame mainFrame;
 	private JPanel loginPanel;
@@ -30,7 +30,6 @@ public class LoginFrame{
 	private JPasswordField pPasswort;
 	public JLabel lBenutzerlogin;
 
-
 	private JLabel lPasswort;
 
 	public LoginFrame() {
@@ -38,7 +37,7 @@ public class LoginFrame{
 		bindListener();
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
-	
+
 	public JLabel getlBenutzerlogin() {
 		return lBenutzerlogin;
 	}
@@ -128,7 +127,7 @@ public class LoginFrame{
 			JButton b = (JButton) e.getSource();
 			System.out.println(tUser.getText());
 			System.out.println(pPasswort.getPassword());
-			
+
 			mainFrame gui1 = new mainFrame();
 			gui1.paint();
 		}
