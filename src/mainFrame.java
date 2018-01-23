@@ -34,7 +34,10 @@ public class mainFrame {
 	private String country;
 	private String language;
 	private JPanel statPanel;
+	// muss noch geändert werden
 	private PanelLernen p1;
+	private PanelKartei k1; 
+	// ------------
 	private JPanel karteiPanel;
 	private JPanel menuPanel;
 
@@ -55,6 +58,7 @@ public class mainFrame {
 	private void initComponents() {
 		statPanel = new JPanel();
 		p1 = new PanelLernen();
+		k1 = new PanelKartei(); 
 		kartei1 = new JButton("1");
 		kartei2 = new JButton("2");
 		kartei3 = new JButton("3");
@@ -92,7 +96,8 @@ public class mainFrame {
 		// menuPanel.setLayout(new GridLayout(2,1));
 		mainFrame.add(karteiPanel, BorderLayout.WEST);
 		
-		statPanel.add(p1);
+		// statPanel.add(p1);
+		statPanel.add(k1); 
 		
 		karteiPanel.add(home);
 		karteiPanel.add(kartei1);
@@ -195,6 +200,11 @@ public class mainFrame {
 				kartei3.setBackground(Color.lightGray);
 				kartei4.setBackground(Color.lightGray);
 				kartei5.setBackground(Color.lightGray);
+				statPanel.removeAll();
+				statPanel.add(k1);
+				statPanel.validate();
+				statPanel.repaint();
+				
 			break;
 			case "Index":
 				home.setBackground(Color.CYAN);
@@ -203,6 +213,10 @@ public class mainFrame {
 				kartei3.setBackground(Color.lightGray);
 				kartei4.setBackground(Color.lightGray);
 				kartei5.setBackground(Color.lightGray);
+				statPanel.removeAll();
+				statPanel.add(k1);
+				statPanel.validate();
+				statPanel.repaint();
 			break;
 			case "1":
 				home.setBackground(Color.lightGray);
@@ -211,6 +225,10 @@ public class mainFrame {
 				kartei3.setBackground(Color.lightGray);
 				kartei4.setBackground(Color.lightGray);
 				kartei5.setBackground(Color.lightGray);
+				statPanel.removeAll();
+				statPanel.add(p1);
+				statPanel.validate();
+				statPanel.repaint();
 				break;
 			case "2":
 				home.setBackground(Color.lightGray);
