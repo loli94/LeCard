@@ -58,15 +58,7 @@ public class Benutzer {
 		for (KartenStatus k : lernfortschritte) {
 			System.out.println(k.toString());
 		}
-	}
-	
-	
-	
-	
-
-
-	
-	
+	}	
 
 	
 }
