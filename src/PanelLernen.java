@@ -1,3 +1,5 @@
+import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.LayoutManager;
 
@@ -6,6 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.border.Border;
 
 public class PanelLernen extends JPanel {
 	private JPanel jp2;
@@ -36,15 +39,25 @@ public class PanelLernen extends JPanel {
 		lSpracheZwei = new JLabel("Englisch:");
 		tSpracheZweiAntwort = new JTextField();
 		lLoesung = new JLabel("Richtig/Flasch");
-		
-		pLernen.setLayout(new GridLayout(2, 3));
+		//initiere Layout von den Panles
+		pLernen.setLayout(new GridLayout(4, 1));
+		pSpracheZwei.setLayout(new GridLayout(1, 2));
+		pPruefen.setLayout(new BorderLayout());
+		pAuswertung.setLayout(new BorderLayout());
 
+		//Adding Components
 		pSpracheEins.add(lSpracheEins);
 		pSpracheEins.add(lSpracheEinsFrage);
 		pSpracheZwei.add(lSpracheZwei);
 		pSpracheZwei.add(tSpracheZweiAntwort);
+		pPruefen.add(bPruefen, BorderLayout.CENTER);
+		pAuswertung.add(lLoesung, BorderLayout.EAST);
+		
+		
 		pLernen.add(pSpracheEins);
 		pLernen.add(pSpracheZwei);
+		pLernen.add(pPruefen);
+		pLernen.add(pAuswertung);
 		add(pLernen);
 	}
 
