@@ -291,7 +291,7 @@ public class mainFrame {
        // handle exception
     }
     catch (IllegalAccessException e) {
-       // handle exceptiond
+       // handle exceptiondd
     }
 		
 		gui1.paint();
