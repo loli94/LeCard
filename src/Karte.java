@@ -9,23 +9,19 @@ public class Karte{
 	private UUID id;
 	private String wortA;
 	private String wortB;
-	private Sprache sprache;
+	private String sprache;
 	
 	public Karte() {
 		
 	}
 	
-	public Karte(Sprache sp, String wa, String wb) {
+	public Karte(String sp, String wa, String wb) {
 		this.wortA = wa;
 		this.wortB = wb;
 		this.id = UUID.randomUUID();
 		this.sprache = sp;
 	}
 	
-	public String getSprache() {
-		String sp = sprache.getSprachPaar();
-		return sp;
-	}
 
 	public String getWortA() {
 		return wortA;
@@ -49,6 +45,15 @@ public class Karte{
 
 	public void setId(UUID id) {
 		this.id = id;
+	}
+	
+
+	public String getSprache() {
+		return sprache;
+	}
+
+	public void setSprache(String sprache) {
+		this.sprache = sprache;
 	}
 
 	@Override

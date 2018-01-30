@@ -41,8 +41,14 @@ public class BenutzerListe {
 		return null;
 	}
 	
-	public void benutzerHinzufuegen(Benutzer b) {
-		benutzerListe.add(b);
+	public void benutzerHinzufuegen(Benutzer bneu) {
+		for (Benutzer b : benutzerListe) {
+			if (b.getBenutzername().equals(bneu.getBenutzername())) {
+				System.out.println("Benutzer existiert bereits");
+				return;				
+			}
+		}
+		benutzerListe.add(bneu);
 	}
 	
 	public void benutzerLoeschen(Benutzer b) {
@@ -69,7 +75,6 @@ public class BenutzerListe {
 				for (Benutzer b : imp.getBenutzerListe()) {
 					//System.out.println("Importiere Karte:" + k.toString());
 					benutzerListe.add(b);
-					System.out.println(b);
 				}
 
 
@@ -91,7 +96,7 @@ public class BenutzerListe {
 	    jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 	     
 	    //Marshal the card list in console
-	    jaxbMarshaller.marshal(this, System.out);
+	    //jaxbMarshaller.marshal(this, System.out);
 	     
 	    //Marshal the card list in file
 	    jaxbMarshaller.marshal(this, new File(pfad));

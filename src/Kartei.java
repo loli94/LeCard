@@ -32,17 +32,22 @@ public class Kartei {
 	}
 	
 	
-	public void karteHinzufuegen(Karte k) {
-		kartei.add(k);
+	public void karteHinzufuegen(Karte k1) {		
+		for (Karte k2 : kartei) {
+			if (k1.getWortA().equalsIgnoreCase(k2.getWortA()) && k2.getWortB().equalsIgnoreCase(k1.getWortB())){
+				System.out.println("Wortkombination bereits vorhanden");
+				return;
+			}
+		}
+		
+		kartei.add(k1);
+		
 	}
 	
 	public void karteLoeschen(Karte k) {
 		kartei.remove(k);
 	}
-	
-	
-	
-	
+			
 	public ArrayList<Karte> getLernkartei() {
 		return kartei;
 	}

@@ -5,10 +5,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 
 
 @XmlRootElement(name = "Benutzer")
 @XmlType(propOrder = { "benutzername", "lernfortschritte" })
+@XmlAccessorType(XmlAccessType.FIELD)
 
 public class Benutzer {
 		
@@ -34,9 +37,12 @@ public class Benutzer {
 		this.benutzername = benutzername;
 	}
 
-	
 	public ArrayList<KartenStatus> getLernfortschritte() {
 		return lernfortschritte;
+	}
+	
+	public void setLernfortschritte(ArrayList<KartenStatus> lf) {
+		this.lernfortschritte = lf;
 	}
 
 	@Override
