@@ -1,5 +1,8 @@
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -34,6 +37,7 @@ public class PanelKartei extends JPanel {
 
 		karteiBearbeiten = new JButton("Kartei wechseln/hinzufügen");
 		lernen = new JButton("Jetzt lernen");
+		lernen.addActionListener(new ButtonListenerKarteiJetztLernen());
 
 		mainFrame.setSize(700, 500);
 		mainFrame.setLayout(new GridLayout(3, 1));
@@ -54,8 +58,15 @@ public class PanelKartei extends JPanel {
 		mainFrame.add(stat);
 		mainFrame.add(start);
 
-		add(mainFrame); 
+		add(mainFrame);
 
 	}
 
+	class ButtonListenerKarteiJetztLernen implements ActionListener {
+
+		public void actionPerformed(ActionEvent e) {
+
+		}
+
+	}
 }
