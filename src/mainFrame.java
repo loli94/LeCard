@@ -3,6 +3,7 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -32,13 +33,15 @@ public class mainFrame {
 	private JLabel lBenutzer;
 	private JLabel lAngBenutzer;
 	private JLabel lKarten;
-	private Locale locale;
+	private static Locale locale;
 	private String country;
 	private String language;
 	private JPanel statPanel;
 	// muss noch geändert werden
 	private PanelLernen p1;
-	private PanelKartei k1; 
+	private PanelKartei k1;
+
+	private ArrayList<String> kartenMenuBox;
 	// -------------
 	private JPanel karteiPanel;
 	private JPanel menuPanel;
@@ -56,11 +59,15 @@ public class mainFrame {
 		initComponents();
 		bindListener();
 	}
+	
+	public static Locale getLokale() {
+		return locale;
+	}
 
 	private void initComponents() {
 		statPanel = new JPanel();
 		p1 = new PanelLernen();
-		k1 = new PanelKartei(); 
+		k1 = new PanelKartei();
 		kartei1 = new JButton("1");
 		kartei2 = new JButton("2");
 		kartei3 = new JButton("3");
@@ -75,13 +82,23 @@ public class mainFrame {
 		String spracheBox[] = { "Deutsch", "English", "Francaise", "Italiano" };
 		sprachenMenu = new JComboBox(spracheBox);
 		// Dropdown Karteimenu
-		String kartenMenuBox[] = { "bearbeiten", "löschen" };
-		kartenMenu = new JComboBox(kartenMenuBox);
+		kartenMenuBox = new ArrayList<String>();
+
+		kartenMenuBox.add(ResourceBundle.getBundle("Bundle", locale).getString("loeschen"));
+		kartenMenuBox.add(ResourceBundle.getBundle("Bundle", locale).getString("bearbeiten"));
+		kartenMenuBox.add(ResourceBundle.getBundle("Bundle", locale).getString("hinzufuegen"));
+
+		kartenMenu = new JComboBox();
+
+		for (int i = 0; i < kartenMenuBox.size(); i++) {
+			kartenMenu.addItem(kartenMenuBox.get(i));
+		}
 
 	}
 
 	public void bindListener() {
 		sprachenMenu.addActionListener(new DropDownListenerSprache());
+		kartenMenu.addActionListener(new DropDownListenerKarten());
 		home.addActionListener(new ButtonListenerKartei());
 		kartei1.addActionListener(new ButtonListenerKartei());
 		kartei2.addActionListener(new ButtonListenerKartei());
@@ -97,17 +114,17 @@ public class mainFrame {
 		menuPanel.setLayout(new GridLayout(1, 3));
 		// menuPanel.setLayout(new GridLayout(2,1));
 		mainFrame.add(karteiPanel, BorderLayout.WEST);
-		
+
 		// statPanel.add(p1);
-		statPanel.add(k1); 
-		
+		statPanel.add(k1);
+
 		karteiPanel.add(home);
 		karteiPanel.add(kartei1);
 		karteiPanel.add(kartei2);
 		karteiPanel.add(kartei3);
 		karteiPanel.add(kartei4);
 		karteiPanel.add(kartei5);
-		
+
 		home.setBackground(Color.CYAN);
 		kartei1.setBackground(Color.lightGray);
 		kartei2.setBackground(Color.lightGray);
@@ -133,62 +150,79 @@ public class mainFrame {
 
 		public void actionPerformed(ActionEvent e) {
 			JComboBox cb = (JComboBox) e.getSource();
-			String msg = (String) cb.getSelectedItem();
+			int msg = cb.getSelectedIndex();
 			System.out.println(msg);
 
 			switch (msg) {
-			case "Deutsch":
+			case 0:
 				country = new String("DE");
 				language = new String("de");
 				break;
-			case "English":
+			case 1:
 				country = new String("EN");
 				language = new String("en");
 				break;
-			case "Francaise":
+			case 2:
 				country = new String("FR");
 				language = new String("fr");
 				break;
-			case "Italiano":
+			case 3:
 				country = new String("IT");
 				language = new String("it");
 				break;
 
 			}
-
+			// Sprache der Labels ändern
 			locale = new Locale(language, country);
 			lBenutzer.setText(ResourceBundle.getBundle("Bundle", locale).getString("Benutzer"));
 			lKarten.setText(ResourceBundle.getBundle("Bundle", locale).getString("Karten"));
 			lSprache.setText(ResourceBundle.getBundle("Bundle", locale).getString("Sprache"));
 			home.setText(ResourceBundle.getBundle("Bundle", locale).getString("ButtonKartei"));
+		
+			//Locale mk = mainFrame.getLocale();
+			System.out.println(locale);
+			// Dropdown KartenMenu
+			kartenMenuBox.clear();
+			kartenMenuBox.add(ResourceBundle.getBundle("Bundle", locale).getString("loeschen"));
+			kartenMenuBox.add(ResourceBundle.getBundle("Bundle", locale).getString("bearbeiten"));
+			kartenMenuBox.add(ResourceBundle.getBundle("Bundle", locale).getString("hinzufuegen"));
+			kartenMenu.removeAllItems();
+
+			for (int i = 0; i < kartenMenuBox.size(); i++) {
+
+				kartenMenu.addItem(kartenMenuBox.get(i));
+			}
 
 		}
 
 	}
-	
+
 	class DropDownListenerKarten implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
 			JComboBox cb = (JComboBox) e.getSource();
-			String msg = (String) cb.getSelectedItem();
+			int msg = cb.getSelectedIndex();
 			System.out.println(msg);
 
 			switch (msg) {
-			case "bearbeiten":
-				//Methode bearbeiten
-				//Muss erst gemacht werden
+			case 0:
+				// Methode bearbeiten
+				// Muss erst gemacht werden
 				break;
-			case "löschen":
-				//Methode löschen
-				//Muss erst gemacht werden
+			case 1:
+				// löschen
+				break;
+
+			case 2:
+				PanelHinzufuegen gui1 = new PanelHinzufuegen();
+				gui1.paint();
 				break;
 			}
-
 
 		}
 
 	}
-	
+
 	class ButtonListenerKartei implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
@@ -206,8 +240,8 @@ public class mainFrame {
 				statPanel.add(k1);
 				statPanel.validate();
 				statPanel.repaint();
-				
-			break;
+
+				break;
 			case "Index":
 				home.setBackground(Color.CYAN);
 				kartei1.setBackground(Color.lightGray);
@@ -219,7 +253,7 @@ public class mainFrame {
 				statPanel.add(k1);
 				statPanel.validate();
 				statPanel.repaint();
-			break;
+				break;
 			case "1":
 				home.setBackground(Color.lightGray);
 				kartei1.setBackground(Color.CYAN);
@@ -265,35 +299,27 @@ public class mainFrame {
 				kartei5.setBackground(Color.CYAN);
 				break;
 			}
-			
-			
-			
 
 		}
 
 	}
 
 	public static void main(String[] args) {
-	   
+	
 		mainFrame gui1 = new mainFrame();
 		try {
-            // Set cross-platform Java L&F (also called "Metal")
-        UIManager.setLookAndFeel(
-            UIManager.getSystemLookAndFeelClassName());
-    } 
-    catch (UnsupportedLookAndFeelException e) {
-       // handle exception
-    }
-    catch (ClassNotFoundException e) {
-       // handle exception
-    }
-    catch (InstantiationException e) {
-       // handle exception
-    }
-    catch (IllegalAccessException e) {
-       // handle exceptiondd
-    }
-		
+			// Set cross-platform Java L&F (also called "Metal")
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		} catch (UnsupportedLookAndFeelException e) {
+			// handle exception
+		} catch (ClassNotFoundException e) {
+			// handle exception
+		} catch (InstantiationException e) {
+			// handle exception
+		} catch (IllegalAccessException e) {
+			// handle exceptiondd
+		}
+
 		gui1.paint();
 	}
 }
