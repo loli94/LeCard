@@ -13,7 +13,7 @@ import javax.swing.JTextField;
 
 public class PanelHinzufuegen {
 
-	private JFrame mainFrame;
+	private JFrame mainFrame_1;
 	private JPanel hinzufuegenPanelText;
 	private JPanel hinzufuegenPanelButton; 
 	private JLabel lSprache1;
@@ -21,28 +21,27 @@ public class PanelHinzufuegen {
 	private JTextField tSprache1;
 	private JTextField tSprache2;
 	private JButton hinzufuegenButton;
-	private Locale locale;
+	
 	
 
 	public PanelHinzufuegen() {
 
 		initComponents();
 		bindListener();
-		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 	}
 
 	private void initComponents() {
 		
-		mainFrame m = new mainFrame();
-		Locale locale = m.getLokale();		
-		mainFrame = new JFrame(ResourceBundle.getBundle("Bundle", locale).getString("hinzufuegen"));
+		
+		mainFrame_1 = new JFrame(ResourceBundle.getBundle("Bundle", mainFrame.locale).getString("hinzufuegen"));
 		lSprache1 = new JLabel("Sprache 1");
 		lSprache2 = new JLabel("Sprache 2");
 		tSprache1 = new JTextField();
 		tSprache2 = new JTextField();
 		hinzufuegenPanelText = new JPanel();
 		hinzufuegenPanelButton = new JPanel(); 
-		hinzufuegenButton = new JButton("hinzufügen"); 
+		hinzufuegenButton = new JButton(ResourceBundle.getBundle("Bundle", mainFrame.locale).getString("hinzufuegen")); 
 	}
 
 	private void bindListener() {
@@ -50,7 +49,7 @@ public class PanelHinzufuegen {
 	}
 	
 	public void paint() {
-		mainFrame.setSize(800, 450);
+		mainFrame_1.setSize(800, 450);
 		hinzufuegenPanelText.setLayout(new GridLayout(2, 2));
 		hinzufuegenPanelText.add(lSprache1);
 		hinzufuegenPanelText.add(tSprache1);
@@ -58,10 +57,10 @@ public class PanelHinzufuegen {
 		hinzufuegenPanelText.add(tSprache2);
 		hinzufuegenPanelButton.add(hinzufuegenButton); 
 		
-		mainFrame.add(hinzufuegenPanelText, BorderLayout.CENTER);
-		mainFrame.add(hinzufuegenPanelButton, BorderLayout.SOUTH); 
+		mainFrame_1.add(hinzufuegenPanelText, BorderLayout.CENTER);
+		mainFrame_1.add(hinzufuegenPanelButton, BorderLayout.SOUTH); 
 		
-		mainFrame.setVisible(true);
+		mainFrame_1.setVisible(true);
 	}
 	
 	class ButtonListenerHinzufuegen implements ActionListener {

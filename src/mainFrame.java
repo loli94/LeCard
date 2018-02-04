@@ -19,6 +19,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javafx.scene.control.ComboBox;
 
 public class mainFrame {
+	public static Locale locale;
 
 	private JFrame mainFrame;
 	private JLabel lSprache;
@@ -33,7 +34,6 @@ public class mainFrame {
 	private JLabel lBenutzer;
 	private JLabel lAngBenutzer;
 	private JLabel lKarten;
-	private static Locale locale;
 	private String country;
 	private String language;
 	private JPanel statPanel;
@@ -58,10 +58,6 @@ public class mainFrame {
 		JComponent jc = (JComponent) mainFrame.getContentPane();
 		initComponents();
 		bindListener();
-	}
-	
-	public static Locale getLokale() {
-		return locale;
 	}
 
 	private void initComponents() {
