@@ -39,7 +39,7 @@ public class mainFrame {
 	// muss noch geändert werden
 	private PanelLernen p1;
 	private PanelKartei k1; 
-	// ------------
+	// -------------
 	private JPanel karteiPanel;
 	private JPanel menuPanel;
 

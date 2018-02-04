@@ -39,7 +39,7 @@ public class PanelLernen extends JPanel {
 		lSpracheZwei = new JLabel("Englisch:");
 		tSpracheZweiAntwort = new JTextField();
 		lLoesung = new JLabel("Richtig/Flasch");
-		//initiere Layout von den Panles
+		//initiiere Layout von den Panles
 		pLernen.setLayout(new GridLayout(4, 1));
 		pSpracheZwei.setLayout(new GridLayout(1, 2));
 		pPruefen.setLayout(new BorderLayout());
