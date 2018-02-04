@@ -2,6 +2,8 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -18,7 +20,9 @@ public class PanelHinzufuegen {
 	private JLabel lSprache2;
 	private JTextField tSprache1;
 	private JTextField tSprache2;
-	private JButton hinzufuegenButton; 
+	private JButton hinzufuegenButton;
+	private Locale locale;
+	
 
 	public PanelHinzufuegen() {
 
@@ -28,7 +32,10 @@ public class PanelHinzufuegen {
 	}
 
 	private void initComponents() {
-		mainFrame = new JFrame("Karte hinzufügen");
+		
+		mainFrame m = new mainFrame();
+		Locale locale = m.getLokale();		
+		mainFrame = new JFrame(ResourceBundle.getBundle("Bundle", locale).getString("hinzufuegen"));
 		lSprache1 = new JLabel("Sprache 1");
 		lSprache2 = new JLabel("Sprache 2");
 		tSprache1 = new JTextField();
@@ -41,7 +48,7 @@ public class PanelHinzufuegen {
 	private void bindListener() {
 		hinzufuegenButton.addActionListener(new ButtonListenerHinzufuegen());
 	}
-
+	
 	public void paint() {
 		mainFrame.setSize(800, 450);
 		hinzufuegenPanelText.setLayout(new GridLayout(2, 2));
