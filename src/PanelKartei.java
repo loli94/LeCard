@@ -21,16 +21,24 @@ public class PanelKartei extends JPanel {
 	private JButton karteiBearbeiten;
 	private JButton lernen;
 	private JPanel grafischeStat;
-	private JPanel statistik;
+	private JPanel datenStatistik;
 	private JLabel ausgewaehlteKartei;
+	private JLabel richtigeAntwort; 
+	private JLabel falscheAntwort; 
+	private JLabel total; 
+	
+	
 
 	public PanelKartei() {
 		mainFrame = new JPanel();
 		grafischeStat = new JPanel();
-		statistik = new JPanel();
+		datenStatistik = new JPanel();
 		kartei = new JPanel();
 		stat = new JPanel();
 		start = new JPanel();
+		richtigeAntwort = new JLabel("richtige Antworten: "); 
+		falscheAntwort = new JLabel("falsche Antworten: "); 
+		total = new JLabel("Total: "); 
 
 		aktuelleKartei = new JLabel("Aktuelle Kartei");
 		ausgewaehlteKartei = new JLabel("!!!!!!!!!!!!!!!");
@@ -39,7 +47,11 @@ public class PanelKartei extends JPanel {
 		lernen = new JButton("Jetzt lernen");
 		lernen.addActionListener(new ButtonListenerKarteiJetztLernen());
 
-		mainFrame.setSize(700, 500);
+		datenStatistik.setLayout(new GridLayout(3, 2));
+		datenStatistik.add(richtigeAntwort); 
+		datenStatistik.add(falscheAntwort);
+		datenStatistik.add(total);
+		
 		mainFrame.setLayout(new GridLayout(3, 1));
 
 		kartei.setLayout(new GridLayout(1, 3));
@@ -50,7 +62,7 @@ public class PanelKartei extends JPanel {
 		kartei.add(karteiBearbeiten, BorderLayout.EAST);
 
 		stat.add(grafischeStat);
-		stat.add(statistik);
+		stat.add(datenStatistik);
 
 		start.add(lernen, BorderLayout.CENTER);
 
