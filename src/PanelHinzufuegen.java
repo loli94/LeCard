@@ -34,14 +34,14 @@ public class PanelHinzufuegen {
 	private void initComponents() {
 		
 		
-		mainFrame_1 = new JFrame(ResourceBundle.getBundle("Bundle", mainFrame.locale).getString("hinzufuegen"));
+		mainFrame_1 = new JFrame(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("hinzufuegen"));
 		lSprache1 = new JLabel("Sprache 1");
 		lSprache2 = new JLabel("Sprache 2");
 		tSprache1 = new JTextField();
 		tSprache2 = new JTextField();
 		hinzufuegenPanelText = new JPanel();
 		hinzufuegenPanelButton = new JPanel(); 
-		hinzufuegenButton = new JButton(ResourceBundle.getBundle("Bundle", mainFrame.locale).getString("hinzufuegen")); 
+		hinzufuegenButton = new JButton(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("hinzufuegen")); 
 	}
 
 	private void bindListener() {

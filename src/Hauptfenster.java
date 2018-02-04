@@ -18,7 +18,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 import javafx.scene.control.ComboBox;
 
-public class mainFrame {
+public class Hauptfenster {
 	public static Locale locale;
 
 	private JFrame mainFrame;
@@ -46,7 +46,7 @@ public class mainFrame {
 	private JPanel karteiPanel;
 	private JPanel menuPanel;
 
-	public mainFrame() {
+	public Hauptfenster() {
 		this.language = "de";
 		this.country = "DE";
 		this.locale = new Locale(language, country);
@@ -302,7 +302,7 @@ public class mainFrame {
 
 	public static void main(String[] args) {
 	
-		mainFrame gui1 = new mainFrame();
+		Hauptfenster gui1 = new Hauptfenster();
 		try {
 			// Set cross-platform Java L&F (also called "Metal")
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
