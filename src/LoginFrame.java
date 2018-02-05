@@ -128,8 +128,9 @@ public class LoginFrame {
 			System.out.println(tUser.getText());
 			System.out.println(pPasswort.getPassword());
 
-			Hauptfenster gui1 = new Hauptfenster();
+			Hauptfenster gui1 = new Hauptfenster(locale);
 			gui1.paint();
+			((JFrame)b.getParent().getParent().getParent().getParent().getParent()).setVisible(false);
 		}
 	}
 

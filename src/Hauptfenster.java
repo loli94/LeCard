@@ -46,10 +46,8 @@ public class Hauptfenster {
 	private JPanel karteiPanel;
 	private JPanel menuPanel;
 
-	public Hauptfenster() {
-		this.language = "de";
-		this.country = "DE";
-		this.locale = new Locale(language, country);
+	public Hauptfenster(Locale lokal) {
+		this.locale = lokal;
 		mainFrame = new JFrame("LeCard");
 		karteiPanel = new JPanel();
 		menuPanel = new JPanel();
@@ -302,7 +300,7 @@ public class Hauptfenster {
 
 	public static void main(String[] args) {
 	
-		Hauptfenster gui1 = new Hauptfenster();
+		Hauptfenster gui1 = new Hauptfenster(locale);
 		try {
 			// Set cross-platform Java L&F (also called "Metal")
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
