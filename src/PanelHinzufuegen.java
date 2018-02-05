@@ -25,15 +25,12 @@ public class PanelHinzufuegen {
 	
 
 	public PanelHinzufuegen() {
-
 		initComponents();
 		bindListener();
 		
 	}
 
 	private void initComponents() {
-		
-		
 		mainFrame_1 = new JFrame(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("hinzufuegen"));
 		lSprache1 = new JLabel("Sprache 1");
 		lSprache2 = new JLabel("Sprache 2");
