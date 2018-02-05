@@ -172,7 +172,8 @@ public class Hauptfenster {
 			lKarten.setText(ResourceBundle.getBundle("Bundle", locale).getString("Karten"));
 			lSprache.setText(ResourceBundle.getBundle("Bundle", locale).getString("Sprache"));
 			home.setText(ResourceBundle.getBundle("Bundle", locale).getString("ButtonKartei"));
-		
+			k1.validate();
+			k1.repaint();
 			//Locale mk = mainFrame.getLocale();
 			System.out.println(locale); 
 			// Dropdown KartenMenu
