@@ -174,7 +174,7 @@ public class Hauptfenster {
 			home.setText(ResourceBundle.getBundle("Bundle", locale).getString("ButtonKartei"));
 		
 			//Locale mk = mainFrame.getLocale();
-			System.out.println(locale);
+			System.out.println(locale); 
 			// Dropdown KartenMenu
 			kartenMenuBox.clear();
 			kartenMenuBox.add(ResourceBundle.getBundle("Bundle", locale).getString("loeschen"));
