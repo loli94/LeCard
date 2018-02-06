@@ -31,7 +31,6 @@ public class Test {
 		
 		lk2.lernkarteiSpeichern("c:\\temp\\lernkartei_kombiniert.xml");
 		
-
 			
 	}
 	
