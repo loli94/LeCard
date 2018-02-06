@@ -2,6 +2,9 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.LayoutManager;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ResourceBundle;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -27,38 +30,72 @@ public class PanelLernen extends JPanel {
 	private JLabel lLoesung;
 
 	public PanelLernen() {
+		initComponents();
+		bindListener();
+		paint();
+
+	}
+
+	public void repaint() {
+		initComponents();
+		bindListener();
+		// paint();
+	}
+
+	private void initComponents() {
 		pLernen = new JPanel();
 		pSpracheEins = new JPanel();
 		pSpracheZwei = new JPanel();
 		pPruefen = new JPanel();
 		pAuswertung = new JPanel();
-		bPruefen = new JButton("Prüfen");
+		bPruefen = new JButton(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("pruefen"));
 		bWechsel = new JButton("<->");
 		lSpracheEins = new JLabel("Deutsch:");
 		lSpracheEinsFrage = new JLabel("Schlange");
 		lSpracheZwei = new JLabel("Englisch:");
 		tSpracheZweiAntwort = new JTextField();
 		lLoesung = new JLabel("Richtig/Flasch");
-		//initiiere Layout von den Panles
+		// initiiere Layout von den Panles
 		pLernen.setLayout(new GridLayout(4, 1));
 		pSpracheZwei.setLayout(new GridLayout(1, 2));
 		pPruefen.setLayout(new BorderLayout());
 		pAuswertung.setLayout(new BorderLayout());
+	}
 
-		//Adding Components
+	private void bindListener() {
+		bWechsel.addActionListener(new ButtonListenerSpracheWechseln());
+		bPruefen.addActionListener(new ButtonListenerPruefen());
+			
+	}
+
+	public void paint() {
+		// Adding Components
 		pSpracheEins.add(lSpracheEins);
 		pSpracheEins.add(lSpracheEinsFrage);
 		pSpracheZwei.add(lSpracheZwei);
 		pSpracheZwei.add(tSpracheZweiAntwort);
 		pPruefen.add(bPruefen, BorderLayout.CENTER);
 		pAuswertung.add(lLoesung, BorderLayout.EAST);
-		
-		
+
 		pLernen.add(pSpracheEins);
 		pLernen.add(pSpracheZwei);
 		pLernen.add(pPruefen);
 		pLernen.add(pAuswertung);
 		add(pLernen);
+	}
+	
+	class ButtonListenerSpracheWechseln implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			System.out.println("Sprache wird gewechselt");
+
+		}
+	}
+	
+	class ButtonListenerPruefen implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			System.out.println("Antwort wird geprüft.");
+
+		}
 	}
 
 }
