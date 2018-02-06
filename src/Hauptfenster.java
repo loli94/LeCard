@@ -87,6 +87,7 @@ public class Hauptfenster {
 		for (int i = 0; i < kartenMenuBox.size(); i++) {
 			kartenMenu.addItem(kartenMenuBox.get(i));
 		}
+		
 
 	}
 
