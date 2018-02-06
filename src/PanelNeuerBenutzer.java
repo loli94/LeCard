@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 public class PanelNeuerBenutzer {
@@ -20,7 +21,7 @@ public class PanelNeuerBenutzer {
 	private JLabel lBenutzer;
 	private JLabel lPasswort;
 	private JTextField tBenutzer;
-	private JTextField tPasswort;
+	private JPasswordField tPasswort;
 	private JButton bErstellen;
 	private Locale locale;
 
@@ -37,7 +38,7 @@ public class PanelNeuerBenutzer {
 		lPasswort = new JLabel(ResourceBundle.getBundle("Bundle", locale).getString("Passwort"));
 
 		tBenutzer = new JTextField();
-		tPasswort = new JTextField();
+		tPasswort = new JPasswordField();
 		pBenutzer = new JPanel();
 		pPasswort = new JPanel();
 		pErstellen = new JPanel();
@@ -66,10 +67,18 @@ public class PanelNeuerBenutzer {
 
 		mainFrame_1.setVisible(true);
 	}
+	
+	public void verify() {
+		
+	}
 
 	class ButtonListenerBenutzerErstellen implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			System.out.println("Benutzer wurde eingerichtet");
+			mainFrame_1.dispose();
+			Hauptfenster gui1 = new Hauptfenster(locale);
+			gui1.paint();
+			
 		}
 
 	}
