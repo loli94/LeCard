@@ -87,6 +87,7 @@ public class PanelKartei extends JPanel {
 
 		stat.add(grafischeStat);
 		stat.add(datenStatistik);
+		
 
 		start.add(lernen, BorderLayout.CENTER);
 
