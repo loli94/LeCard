@@ -66,7 +66,12 @@ public class LoadCsv {
 
 	// übergibt die Wörter an die Logik
 	
+	
 	private void uploadData() {
-		Kartei.(wortA, wortB, sprache);
+		/*Kartei.(wortA, wortB, sprache);
+	
 	}
+	
+	*/
+}
 }
