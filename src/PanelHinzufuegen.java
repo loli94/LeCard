@@ -1,4 +1,5 @@
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -35,6 +36,7 @@ public class PanelHinzufuegen {
 		lSprache1 = new JLabel("Sprache 1");
 		lSprache2 = new JLabel("Sprache 2");
 		tSprache1 = new JTextField();
+		
 		tSprache2 = new JTextField();
 		hinzufuegenPanelText = new JPanel();
 		hinzufuegenPanelButton = new JPanel(); 
@@ -47,12 +49,15 @@ public class PanelHinzufuegen {
 	
 	public void paint() {
 		mainFrame_1.setSize(800, 450);
-		hinzufuegenPanelText.setLayout(new GridLayout(2, 2));
+		hinzufuegenPanelText.setLayout(new GridLayout(2, 1));
+		
 		hinzufuegenPanelText.add(lSprache1);
 		hinzufuegenPanelText.add(tSprache1);
 		hinzufuegenPanelText.add(lSprache2);
 		hinzufuegenPanelText.add(tSprache2);
 		hinzufuegenPanelButton.add(hinzufuegenButton); 
+		
+		
 		
 		mainFrame_1.add(hinzufuegenPanelText, BorderLayout.CENTER);
 		mainFrame_1.add(hinzufuegenPanelButton, BorderLayout.SOUTH); 
@@ -64,8 +69,8 @@ public class PanelHinzufuegen {
 		public void actionPerformed(ActionEvent e) {
 			System.out.println("Karte wurde in die Kartei 1 hinzugefügt");
 	}
-	
-	}
+		
+}
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub

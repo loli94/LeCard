@@ -37,7 +37,7 @@ public class PanelKartei extends JPanel {
 	public void repaint() {
 		initComponents();
 		bindListener();
-		// paint();
+		
 	}
 
 	public void initComponents() {
