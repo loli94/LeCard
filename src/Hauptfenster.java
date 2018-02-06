@@ -87,6 +87,7 @@ public class Hauptfenster {
 		for (int i = 0; i < kartenMenuBox.size(); i++) {
 			kartenMenu.addItem(kartenMenuBox.get(i));
 		}
+		
 
 	}
 
@@ -155,6 +156,7 @@ public class Hauptfenster {
 			case 1:
 				country = new String("EN");
 				language = new String("en");
+				
 				break;
 			case 2:
 				country = new String("FR");
@@ -172,10 +174,13 @@ public class Hauptfenster {
 			lKarten.setText(ResourceBundle.getBundle("Bundle", locale).getString("Karten"));
 			lSprache.setText(ResourceBundle.getBundle("Bundle", locale).getString("Sprache"));
 			home.setText(ResourceBundle.getBundle("Bundle", locale).getString("ButtonKartei"));
-			k1.validate();
+			//KarteiPanel aktualisieren auf neue Sprache
+			k1.removeAll(); 
 			k1.repaint();
-			//Locale mk = mainFrame.getLocale();
-			System.out.println(locale); 
+			k1.paint(); 
+			
+			// Locale mk = mainFrame.getLocale();
+			System.out.println(locale);
 			// Dropdown KartenMenu
 			kartenMenuBox.clear();
 			kartenMenuBox.add(ResourceBundle.getBundle("Bundle", locale).getString("loeschen"));
@@ -300,7 +305,7 @@ public class Hauptfenster {
 	}
 
 	public static void main(String[] args) {
-	
+
 		Hauptfenster gui1 = new Hauptfenster(locale);
 		try {
 			// Set cross-platform Java L&F (also called "Metal")

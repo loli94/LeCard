@@ -29,29 +29,47 @@ public class PanelKartei extends JPanel {
 	private JLabel total;
 
 	public PanelKartei() {
-		initComponents();		
+		initComponents();
 		bindListener();
-		paint(); 
+		paint();
 	}
-	
-	private void initComponents() {
+
+	public void repaint() {
+		initComponents();
+		bindListener();
+		// paint();
+	}
+
+	public void initComponents() {
 		mainFrame = new JPanel();
 		grafischeStat = new JPanel();
 		datenStatistik = new JPanel();
 		kartei = new JPanel();
 		stat = new JPanel();
 		start = new JPanel();
-		richtigeAntwort = new JLabel(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("richtigeAntworten"));
-		falscheAntwort = new JLabel("falsche Antworten: ");
+		richtigeAntwort = new JLabel(
+				ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("richtigeAntworten"));
+		falscheAntwort = new JLabel(
+				ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("falscheAntworten"));
 		total = new JLabel("Total: ");
 
-		aktuelleKartei = new JLabel("Aktuelle Kartei");
+		aktuelleKartei = new JLabel(
+				ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("aktuelleKartei"));
 		ausgewaehlteKartei = new JLabel("!!!!!!!!!!!!!!!");
 
-		karteiBearbeiten = new JButton(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("karteiBearbeiten"));
-		lernen = new JButton("Jetzt lernen");
+		karteiBearbeiten = new JButton(
+				ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("karteiBearbeiten"));
+		lernen = new JButton(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("jetztLernen"));
+
 	}
-	
+
+	private void bindListener() {
+
+		lernen.addActionListener(new ButtonListenerKarteiJetztLernen());
+		karteiBearbeiten.addActionListener(new ButtonListenerKarteiBearbeiten());
+
+	}
+
 	public void paint() {
 		datenStatistik.setLayout(new GridLayout(3, 2));
 		datenStatistik.add(richtigeAntwort);
@@ -77,13 +95,6 @@ public class PanelKartei extends JPanel {
 		mainFrame.add(start);
 
 		add(mainFrame);
-		
-	}
-
-	private void bindListener() {
-
-		lernen.addActionListener(new ButtonListenerKarteiJetztLernen());
-		karteiBearbeiten.addActionListener(new ButtonListenerKarteiBearbeiten());
 
 	}
 
