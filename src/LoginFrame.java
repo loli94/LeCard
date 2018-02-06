@@ -28,8 +28,8 @@ public class LoginFrame {
 	private String language;
 	private JTextField tUser;
 	private JPasswordField pPasswort;
-	public JLabel lBenutzerlogin;
-
+	private JLabel lBenutzerlogin;
+	private Kartei daten;
 	private JLabel lPasswort;
 
 	public LoginFrame() {
@@ -46,6 +46,12 @@ public class LoginFrame {
 		mainFrame = new JFrame("Login");
 		loginPanel = new JPanel();
 		buttonPanel = new JPanel();
+		try {
+			daten = new Kartei("C:\\temp\\lernkartei_kombiniert.xml");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		login = new JButton("Login");
 		this.language = "de";
 		this.country = "DE";
@@ -126,22 +132,23 @@ public class LoginFrame {
 
 		public void actionPerformed(ActionEvent e) {
 			JButton b = (JButton) e.getSource();
-			System.out.println(tUser.getText());
-			System.out.println(pPasswort.getPassword());
+			//System.out.println(tUser.getText());
+			//System.out.println(pPasswort.getPassword());
+			daten.benutzerLaden(tUser.getText(), pPasswort.getText());
 
 			Hauptfenster gui1 = new Hauptfenster(locale);
 			gui1.paint();
-			((JFrame)b.getParent().getParent().getParent().getParent().getParent()).setVisible(false);
+			((JFrame) b.getParent().getParent().getParent().getParent().getParent()).setVisible(false);
 		}
 	}
-	
+
 	class ButtonListenerNeuerBenutzer implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
 			JButton b = (JButton) e.getSource();
 			PanelNeuerBenutzer h1 = new PanelNeuerBenutzer(locale);
 			h1.paint();
-			((JFrame)b.getParent().getParent().getParent().getParent().getParent()).setVisible(false);
+			((JFrame) b.getParent().getParent().getParent().getParent().getParent()).setVisible(false);
 		}
 	}
 
