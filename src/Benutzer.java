@@ -10,12 +10,13 @@ import javax.xml.bind.annotation.XmlAccessorType;
 
 
 @XmlRootElement(name = "Benutzer")
-@XmlType(propOrder = { "benutzername", "lernfortschritte" })
+@XmlType(propOrder = { "benutzername", "passwort", "lernfortschritte" })
 @XmlAccessorType(XmlAccessType.FIELD)
 
 public class Benutzer {
 		
 		private String benutzername;
+		private String passwort;
 		
 		@XmlElement(name = "KartenStatus")
 		private ArrayList<KartenStatus> lernfortschritte;
@@ -24,8 +25,9 @@ public class Benutzer {
 		
 	}
 	
-	public Benutzer(String name) {
+	public Benutzer(String name, String passwort) {
 		this.benutzername = name;
+		this.passwort = passwort;
 		lernfortschritte = new ArrayList<KartenStatus>();
 	}
 
@@ -64,7 +66,17 @@ public class Benutzer {
 		for (KartenStatus k : lernfortschritte) {
 			System.out.println(k.toString());
 		}
-	}	
+	}
+
+	public void setPasswort(String passwort) {
+		this.passwort = passwort;
+	}
+
+	public String getPasswort() {
+		return passwort;
+	}
+	
+
 
 	
 }

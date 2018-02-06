@@ -1,5 +1,8 @@
 import java.io.File;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.Formatter;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -30,14 +33,6 @@ public class Kartei {
 		
 	}
 	
-	public Kartei(Benutzer b) {
-		this.kartei = new ArrayList<Karte>();
-		this.sprachen = new ArrayList<Sprache>();
-		this.benutzerListe = new ArrayList<Benutzer>();
-		this.fach = new Fach[5];
-		this.benutzer = b;
-	}
-	
 	public Kartei(String pfad) throws Exception {
 		this.kartei = new ArrayList<Karte>();
 		this.sprachen = new ArrayList<Sprache>();
@@ -46,14 +41,7 @@ public class Kartei {
 		karteiEinlesen(pfad);
 	}
 
-	public ArrayList<Karte> kartenAusgeben(){
-		return kartei;
-	}
-	
-	public void kartenLaden(ArrayList<Karte> karten) {
-		this.kartei = karten;
-	}
-	
+
 	public void karteHinzufuegen(Karte k1) {		
 		for (Karte k2 : kartei) {
 			if (k1.getWortA().equalsIgnoreCase(k2.getWortA()) && k2.getWortB().equalsIgnoreCase(k1.getWortB())){
@@ -149,24 +137,32 @@ public class Kartei {
 		return false;
 	}
 	
-	public void benutzerLaden(String benutzername) {
+	public void benutzerLaden(String benutzername, String passwort) {
 		for (Benutzer b : benutzerListe) {
 			System.out.println(b);
 			if (b.getBenutzername().equals(benutzername)) {
-				this.benutzer = b;
+				if (b.getPasswort().equals(getMD5Hash(passwort))) {
+					//passwort korrekt
+					this.benutzer = b;
+				}
+				else {
+					//falsche passwort
+					System.out.println("Passwort falsch");
+				}
+				
 			}
 		}
 	}
 	
-	public void benutzerHinzufuegen(Benutzer bneu) {
+	public void benutzerHinzufuegen(String benutzername, String passwort) {
 		System.out.println(benutzerListe.size());
 		for (Benutzer b : benutzerListe) {
-			if (b.getBenutzername().equals(bneu.getBenutzername())) {
+			if (b.getBenutzername().equals(benutzername)) {
 				System.out.println("Benutzer existiert bereits");
 				return;				
 			}
 		}
-		benutzerListe.add(bneu);
+		benutzerListe.add(new Benutzer(benutzername, getMD5Hash(passwort)));
 	}
 	
 	public void benutzerLoeschen(Benutzer b) {
@@ -267,8 +263,7 @@ public void karteVerschieben(Karte k, int altesFach, int neuesFach) {
 	else {
 		System.out.println("Verschieben nicht möglich. Keine Karte.");
 	}
-	
-	
+		
 }
 
 public Benutzer getBenutzer() {
@@ -279,6 +274,21 @@ public void setBenutzer(Benutzer benutzer) {
 	this.benutzer = benutzer;
 }
 
+public static String getMD5Hash(String str) {
+    StringBuilder sb = new StringBuilder(32);
+    try {
+       MessageDigest md5 = MessageDigest.getInstance("MD5");
+       md5.update(str.getBytes());
+       Formatter f = new Formatter(sb);
+       for (byte b : md5.digest()) {
+          f.format("%02x", b);
+       }
+    }
+    catch (NoSuchAlgorithmException ex) {
+       ex.printStackTrace();
+    }
+    return sb.toString();
+ }
 
 }
 	
