@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class LoadCsv {
 	private File f;
 	private String separator;
-	private ArrayList<String> deutsch, englisch;
+	private ArrayList<String> wort, englisch;
 
 	public LoadCsv(String csvfile, String separator) throws FileNotFoundException, IOException {
 		f = new File(csvfile);
@@ -64,6 +64,6 @@ public class LoadCsv {
 
 	// übergibt die Wörter an die Logik
 	private void uploadData() {
-		Kartei.receive(deutsch, englisch);
+		Kartei.(deutsch, englisch);
 	}
 }
