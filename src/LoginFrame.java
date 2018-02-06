@@ -63,6 +63,7 @@ public class LoginFrame {
 	public void bindListener() {
 		sprachenMenu.addActionListener(new DropDownListenerSprache());
 		login.addActionListener(new ButtonListenerLogin());
+		neuerUser.addActionListener(new ButtonListenerNeuerBenutzer());
 	}
 
 	public void paint() {
@@ -131,6 +132,14 @@ public class LoginFrame {
 			Hauptfenster gui1 = new Hauptfenster(locale);
 			gui1.paint();
 			((JFrame)b.getParent().getParent().getParent().getParent().getParent()).setVisible(false);
+		}
+	}
+	
+	class ButtonListenerNeuerBenutzer implements ActionListener {
+
+		public void actionPerformed(ActionEvent e) {
+			PanelNeuerBenutzer h1 = new PanelNeuerBenutzer(locale);
+			h1.paint();
 		}
 	}
 
