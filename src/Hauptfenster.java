@@ -178,6 +178,10 @@ public class Hauptfenster {
 			k1.removeAll(); 
 			k1.repaint();
 			k1.paint(); 
+			//PanelLernen aktualisieren auf neue Sprache
+			p1.removeAll();
+			p1.repaint();
+			p1.paint();
 			
 			// Locale mk = mainFrame.getLocale();
 			System.out.println(locale);
