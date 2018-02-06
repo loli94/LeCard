@@ -81,14 +81,15 @@ public final class Hash1 {
 		}
 	}
 
-	@Deprecated
+	/*
 	public String hash(String password) {
 		return hash(password.toCharArray());
 	}
 
-	@Deprecated
+	
 	public boolean authenticate(String password, String token) {
 		return authenticate(password.toCharArray(), token);
 	}
+	*/
 
 }

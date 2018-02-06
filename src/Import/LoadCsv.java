@@ -10,13 +10,14 @@ import java.util.Scanner;
 public class LoadCsv {
 	private File f;
 	private String separator;
-	private ArrayList<String> wort, englisch;
+	private ArrayList<String> wortA, wortB, sprache;
 
 	public LoadCsv(String csvfile, String separator) throws FileNotFoundException, IOException {
 		f = new File(csvfile);
 		this.separator = separator;
-		deutsch = new ArrayList<>();
-		englisch = new ArrayList<>();
+		wortA = new ArrayList<>();
+		wortB = new ArrayList<>();
+		sprache= new ArrayList<>();
 
 		readCsv();
 		uploadData();
@@ -58,12 +59,13 @@ public class LoadCsv {
 
 	// speichert die Wörter ins Array
 	private void saveInList(String[] col) {
-		deutsch.add(col[0]);
-		englisch.add(col[1]);
+		wortA.add(col[0]);
+		wortB.add(col[1]);
+		sprache.add(col[2]);
 	}
 
 	// übergibt die Wörter an die Logik
 	private void uploadData() {
-		Kartei.(deutsch, englisch);
+		Kartei.(wortA, wortB, sprache);
 	}
 }

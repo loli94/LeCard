@@ -2,7 +2,7 @@ package Import;
 
 import java.util.Scanner;
 
-public class LoginMain {
+public class LoginLogic {
 
 public static void main(String[] args) {
 
