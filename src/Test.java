@@ -9,35 +9,27 @@ public class Test {
 
 		// Sprache s1 = new Sprache("de", "en");
 		
-		Kartei lk2 = new Kartei("C:\\temp\\lernkartei.xml");
+		Kartei lk2 = new Kartei("C:\\temp\\lernkartei_kombiniert.xml");
+				
+		lk2.karteHinzufuegen(new Karte("de-en", "Haus", "House"));
 		
-		Karte k3 = new Karte("de-en", "Bild", "Picture");
+		Benutzer b1 = new Benutzer("Hubert");
 		
-		lk2.karteHinzufuegen(k3);
-
-		BenutzerListe bl1 = new BenutzerListe();
-
-		bl1.benutzerListeLaden("C:\\temp\\benutzerliste.xml");
-
-		Benutzer akutellerBenutzer = bl1.benutzerLaden("Franz");
+		lk2.benutzerHinzufuegen(b1);
 		
-		KartenBox fl1 = new KartenBox(akutellerBenutzer);
+		lk2.benutzerLaden("Hubert");
+				
+		lk2.faecherBefuellen();
 		
-		fl1.faecherBefuellen(lk2);
+		int aktFach = 2;
 		
-		System.out.println("Lernfortschritt B3:" + akutellerBenutzer.getLernfortschritte());
-
-		lk2.lernkarteiSpeichern("c:\\temp\\lernkartei.xml");
-		
-		Karte k4 = fl1.gibNaechsteKarte(1, "de-en");
+		Karte k4 = lk2.gibNaechsteKarte(aktFach, "de-en");
 		
 		System.out.println("aktuelle Karte" + k4);	
 		
-		fl1.karteVerschieben(k4, 1, 2);
+		lk2.karteVerschieben(k4, aktFach, aktFach+1);
 		
-		
-		bl1.benutzerlisteSpeichern("C:\\temp\\benutzerliste.xml");
-		
+		lk2.lernkarteiSpeichern("c:\\temp\\lernkartei_kombiniert2.xml");
 		
 		
 				

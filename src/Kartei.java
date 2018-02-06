@@ -13,13 +13,36 @@ public class Kartei {
 	
 	@XmlElement(name = "Karte")
 	private ArrayList<Karte> kartei;
+	
+	@XmlElement(name = "Sprache")
+	private ArrayList<Sprache> sprachen;
+	
+	@XmlElement(name = "Benutzer")
+	private ArrayList<Benutzer> benutzerListe;
+	
+	@XmlTransient
+	private Fach[] fach;
+	
+	@XmlTransient
+	private Benutzer benutzer;
 
 	public Kartei() {
+		
+	}
+	
+	public Kartei(Benutzer b) {
 		this.kartei = new ArrayList<Karte>();
+		this.sprachen = new ArrayList<Sprache>();
+		this.benutzerListe = new ArrayList<Benutzer>();
+		this.fach = new Fach[5];
+		this.benutzer = b;
 	}
 	
 	public Kartei(String pfad) throws Exception {
 		this.kartei = new ArrayList<Karte>();
+		this.sprachen = new ArrayList<Sprache>();
+		this.benutzerListe = new ArrayList<Benutzer>();
+		this.fach = new Fach[5];
 		karteiEinlesen(pfad);
 	}
 
@@ -30,7 +53,6 @@ public class Kartei {
 	public void kartenLaden(ArrayList<Karte> karten) {
 		this.kartei = karten;
 	}
-	
 	
 	public void karteHinzufuegen(Karte k1) {		
 		for (Karte k2 : kartei) {
@@ -50,6 +72,10 @@ public class Kartei {
 			
 	public ArrayList<Karte> getLernkartei() {
 		return kartei;
+	}
+	
+	public ArrayList<Benutzer> getBenutzeriste() {
+		return benutzerListe;
 	}
 
 	public void setLernkartei(ArrayList<Karte> lernkartei) {
@@ -94,6 +120,11 @@ public class Kartei {
 					//System.out.println("Importiere Karte:" + k.toString());
 					kartei.add(k);
 				}
+				
+				for (Benutzer b : imp.getBenutzerListe()) {
+					benutzerListe.add(b);
+					
+				}
 			
 		      } catch (JAXBException e) {
 			e.printStackTrace();
@@ -106,11 +137,150 @@ public class Kartei {
 			System.out.println(k.toString());
 	}
 	
-	
-		
-		
-		
+			
 	}
+	
+	public boolean benutzerExistiert(String benutzername) {
+		for (Benutzer b : benutzerListe) {
+			if (b.getBenutzername().equals(benutzername)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public void benutzerLaden(String benutzername) {
+		for (Benutzer b : benutzerListe) {
+			System.out.println(b);
+			if (b.getBenutzername().equals(benutzername)) {
+				this.benutzer = b;
+			}
+		}
+	}
+	
+	public void benutzerHinzufuegen(Benutzer bneu) {
+		System.out.println(benutzerListe.size());
+		for (Benutzer b : benutzerListe) {
+			if (b.getBenutzername().equals(bneu.getBenutzername())) {
+				System.out.println("Benutzer existiert bereits");
+				return;				
+			}
+		}
+		benutzerListe.add(bneu);
+	}
+	
+	public void benutzerLoeschen(Benutzer b) {
+		benutzerListe.remove(b);
+	}
+		
+	public ArrayList<Benutzer> getBenutzerListe() {
+		return benutzerListe;
+	}
+	
+	public void faecherBefuellen() {
+		
+		
+		if (benutzer.getLernfortschritte() == (null)){
+			benutzer.setLernfortschritte(new ArrayList<KartenStatus>());			
+		}
+		
+		ArrayList<KartenStatus> alleStatus = benutzer.getLernfortschritte();
+		
+		
+		// Faecher 1-5 erstellen und gegebenenfalls bereits vorhandene Faecher löschen
+		for(int i=1; i<6; i++) {
+			fach[i-1] = new Fach(i-1);
+			
+		}
+						
+			// Karten aus der Kartei in Fach laden, dazugehörigen Benutzerstatus prüfen und ins jeweilige Fach ablegen.
+				
+			for (Karte k : kartei) {
+				
+				boolean found = false;
+				
+				// System.out.println(k);
+				// System.out.println(alleStatus);
+				
+				for (KartenStatus st : alleStatus){
+					if (k.getId().equals(st.getUid())){
+						fach[st.getFach()-1].karteHinzufuegen(k);
+						found = true;
+						break;
+					}
+				}
+				
+				if (found == false) {
+					System.out.println("Kartenstatus nicht gefunden");
+					alleStatus.add(new KartenStatus(k.getId(), 1));
+					fach[0].karteHinzufuegen(k);
+				}
+				
+			}
+			
+								
+				}			
+	
+public Karte gibNaechsteKarte(int fachnr, String sprache) {
+	
+	//Nächste Karte aus diesem Fach in der entsprechenden Sprache ausgeben
+	for (Karte k : fach[fachnr-1].gibKarten()) {
+		if (k.getSprache().equals(sprache)) {
+			return k;
+		}
+	}
+	
+	return null;
+}
+
+public void karteVerschieben(Karte k, int altesFach, int neuesFach) {
+	
+	if (k != null) {
+	
+	//Zuerst Benutzerstatus anpassen
+
+	boolean found = false;
+	
+	for (KartenStatus ks : benutzer.getLernfortschritte()) {
+		if (k.getId().equals(ks.getUid())) {
+			ks.setFach(neuesFach);
+			found = true;		
+			break;
+		}
+	}
+
+	if (found == false) {
+		benutzer.getLernfortschritte().add(new KartenStatus(k.getId(), neuesFach));
+	}
+	
+	//.. dann Karte in Fach verschieben
+	
+	//System.out.println("entfernen");
+	fach[altesFach-1].karteEnfernen(k);
+	
+	//System.out.println("hinzufuegen");
+	fach[neuesFach-1].karteHinzufuegen(k);
+	
+	
+	}
+	
+	else {
+		System.out.println("Verschieben nicht möglich. Keine Karte.");
+	}
+	
+	
+}
+
+public Benutzer getBenutzer() {
+	return benutzer;
+}
+
+public void setBenutzer(Benutzer benutzer) {
+	this.benutzer = benutzer;
+}
+
+
+
 }
 	
 	
