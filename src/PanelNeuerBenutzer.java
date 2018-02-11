@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -74,10 +75,23 @@ public class PanelNeuerBenutzer {
 
 	class ButtonListenerBenutzerErstellen implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			System.out.println("Benutzer wurde eingerichtet");
-			mainFrame_1.dispose();
-			Hauptfenster gui1 = new Hauptfenster(locale);
-			gui1.paint();
+			if (main.daten1.benutzerExistiert(tBenutzer.getText()) == false){
+				main.daten1.benutzerHinzufuegen(tBenutzer.getText(), tPasswort.getText());
+				JOptionPane.showMessageDialog(mainFrame_1, ResourceBundle.getBundle("Bundle", locale).getString("Benutzererstellt"));
+				
+				mainFrame_1.dispose();
+				Hauptfenster gui1 = new Hauptfenster(locale);
+				gui1.paint();
+				
+			}
+			else {
+				JOptionPane.showMessageDialog(mainFrame_1, ResourceBundle.getBundle("Bundle", locale).getString("Benutzerexistiert"));
+				
+			}
+			
+
+			
+
 			
 		}
 

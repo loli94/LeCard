@@ -71,7 +71,7 @@ public class Hauptfenster {
 		kartei3 = new JButton("3");
 		kartei4 = new JButton("4");
 		kartei5 = new JButton("5");
-		lAngBenutzer = new JLabel("Roman");
+		lAngBenutzer = new JLabel(main.daten1.getBenutzer().getBenutzername());
 		home = new JButton(ResourceBundle.getBundle("Bundle", locale).getString("ButtonKartei"));
 		lBenutzer = new JLabel(ResourceBundle.getBundle("Bundle", locale).getString("Benutzer"));
 		lKarten = new JLabel(ResourceBundle.getBundle("Bundle", locale).getString("Karten"));

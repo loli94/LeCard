@@ -30,7 +30,6 @@ public class LoginFrame {
 	private JTextField tUser;
 	private JPasswordField pPasswort;
 	private JLabel lBenutzerlogin;
-	private Kartei daten;
 	private JLabel lPasswort;
 
 	public LoginFrame() {
@@ -47,12 +46,6 @@ public class LoginFrame {
 		mainFrame = new JFrame("Login");
 		loginPanel = new JPanel();
 		buttonPanel = new JPanel();
-		try {
-			daten = new Kartei("C:\\temp\\lernkartei_kombiniert.xml");
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		login = new JButton("Login");
 		this.language = "de";
 		this.country = "DE";
@@ -135,9 +128,9 @@ public class LoginFrame {
 			JButton b = (JButton) e.getSource();
 			// System.out.println(tUser.getText());
 			// System.out.println(pPasswort.getPassword());
-			Boolean test = daten.benutzerLaden(tUser.getText(), pPasswort.getText());
-
-			if (test = true) {
+			Boolean userExist = main.daten1.benutzerLaden(tUser.getText(), pPasswort.getText());
+		
+			if (userExist == true) {
 
 				Hauptfenster gui1 = new Hauptfenster(locale);
 				gui1.paint();
@@ -159,11 +152,5 @@ public class LoginFrame {
 		}
 	}
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		LoginFrame l1 = new LoginFrame();
-		l1.paint();
-
-	}
 
 }
