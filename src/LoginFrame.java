@@ -10,6 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -132,13 +133,19 @@ public class LoginFrame {
 
 		public void actionPerformed(ActionEvent e) {
 			JButton b = (JButton) e.getSource();
-			//System.out.println(tUser.getText());
-			//System.out.println(pPasswort.getPassword());
-			daten.benutzerLaden(tUser.getText(), pPasswort.getText());
+			// System.out.println(tUser.getText());
+			// System.out.println(pPasswort.getPassword());
+			Boolean test = daten.benutzerLaden(tUser.getText(), pPasswort.getText());
 
-			Hauptfenster gui1 = new Hauptfenster(locale);
-			gui1.paint();
-			((JFrame) b.getParent().getParent().getParent().getParent().getParent()).setVisible(false);
+			if (test = true) {
+
+				Hauptfenster gui1 = new Hauptfenster(locale);
+				gui1.paint();
+				((JFrame) b.getParent().getParent().getParent().getParent().getParent()).setVisible(false);
+			} else {
+				JOptionPane.showMessageDialog(mainFrame, ResourceBundle.getBundle("Bundle", locale).getString("falschesPasswort"));
+
+			}
 		}
 	}
 
