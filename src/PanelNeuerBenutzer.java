@@ -80,8 +80,9 @@ public class PanelNeuerBenutzer {
 				JOptionPane.showMessageDialog(mainFrame_1, ResourceBundle.getBundle("Bundle", locale).getString("Benutzererstellt"));
 				
 				mainFrame_1.dispose();
-				Hauptfenster gui1 = new Hauptfenster(locale);
+				LoginFrame gui1 = new LoginFrame();
 				gui1.paint();
+				
 				
 			}
 			else {
