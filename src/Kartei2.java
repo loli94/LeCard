@@ -12,9 +12,7 @@ import javax.xml.bind.annotation.*;
 
 @XmlRootElement(name = "Kartei")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class Kartei {
-	
-	private static Kartei instance;
+public class Kartei2 {
 	
 	@XmlElement(name = "Karte")
 	private ArrayList<Karte> kartei;
@@ -29,20 +27,16 @@ public class Kartei {
 	private Fach[] fach;
 	
 	@XmlTransient
-	private Benutzer benutzer;
+	private Benutzer aktuellerBenutzer;
+	
+	@XmlTransient
+	private Sprache aktuelleSprache;
 
-	private Kartei() {
+	public Kartei2() {
 		
 	}
 	
-	public static Kartei getInstance() {
-		if (instance == null) {
-			instance = new Kartei();
-		}
-		return instance;
-	}
-	
-	public Kartei(String pfad) throws Exception {
+	public Kartei2(String pfad) throws Exception {
 		this.kartei = new ArrayList<Karte>();
 		this.sprachen = new ArrayList<Sprache>();
 		this.benutzerListe = new ArrayList<Benutzer>();
@@ -83,7 +77,7 @@ public class Kartei {
 	    
 		try {
     		
-		JAXBContext jaxbContext = JAXBContext.newInstance(Kartei.class);
+		JAXBContext jaxbContext = JAXBContext.newInstance(Kartei2.class);
 	    Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
 	 
 	    jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
@@ -107,11 +101,11 @@ public class Kartei {
 		
 	try {
     		
-			JAXBContext context = JAXBContext.newInstance(Kartei.class);
+			JAXBContext context = JAXBContext.newInstance(Kartei2.class);
 			
 			Unmarshaller unmarshaller = context.createUnmarshaller();
 			
-			Kartei imp =  (Kartei) unmarshaller.unmarshal(new File(pfad));
+			Kartei2 imp =  (Kartei2) unmarshaller.unmarshal(new File(pfad));
 			
 				for (Karte k : imp.getLernkartei()) {
 					//System.out.println("Importiere Karte:" + k.toString());
@@ -146,27 +140,25 @@ public class Kartei {
 		return false;
 	}
 	
-	public boolean benutzerLaden(String benutzername, String passwort) {
+	public void benutzerLaden(String benutzername, String passwort) {
 		for (Benutzer b : benutzerListe) {
+			System.out.println(b);
 			if (b.getBenutzername().equals(benutzername)) {
 				if (b.getPasswort().equals(getMD5Hash(passwort))) {
-					this.benutzer = b;
-					this.faecherBefuellen();					
-					return true;
-					
+					//passwort korrekt
+					this.aktuellerBenutzer = b;
 				}
 				else {
-					//falsches passwort
+					//falsche passwort
 					System.out.println("Passwort falsch");
-					return false;
 				}
+				
 			}
 		}
-			System.out.println("Benutzer nicht gefunden");
-			return false;
 	}
 	
 	public void benutzerHinzufuegen(String benutzername, String passwort) {
+		System.out.println(benutzerListe.size());
 		for (Benutzer b : benutzerListe) {
 			if (b.getBenutzername().equals(benutzername)) {
 				System.out.println("Benutzer existiert bereits");
@@ -187,11 +179,11 @@ public class Kartei {
 	public void faecherBefuellen() {
 		
 		
-		if (benutzer.getLernfortschritte() == (null)){
-			benutzer.setLernfortschritte(new ArrayList<KartenStatus>());			
+		if (aktuellerBenutzer.getLernfortschritte() == (null)){
+			aktuellerBenutzer.setLernfortschritte(new ArrayList<KartenStatus>());			
 		}
 		
-		ArrayList<KartenStatus> alleStatus = benutzer.getLernfortschritte();
+		ArrayList<KartenStatus> alleStatus = aktuellerBenutzer.getLernfortschritte();
 		
 		
 		// Faecher 1-5 erstellen und gegebenenfalls bereits vorhandene Faecher löschen
@@ -205,10 +197,7 @@ public class Kartei {
 			for (Karte k : kartei) {
 				
 				boolean found = false;
-				
-				// System.out.println(k);
-				// System.out.println(alleStatus);
-				
+
 				for (KartenStatus st : alleStatus){
 					if (k.getId().equals(st.getUid())){
 						fach[st.getFach()-1].karteHinzufuegen(k);
@@ -218,7 +207,6 @@ public class Kartei {
 				}
 				
 				if (found == false) {
-					System.out.println("Kartenstatus nicht gefunden");
 					alleStatus.add(new KartenStatus(k.getId(), 1));
 					fach[0].karteHinzufuegen(k);
 				}
@@ -248,7 +236,7 @@ public void karteVerschieben(Karte k, int altesFach, int neuesFach) {
 
 	boolean found = false;
 	
-	for (KartenStatus ks : benutzer.getLernfortschritte()) {
+	for (KartenStatus ks : aktuellerBenutzer.getLernfortschritte()) {
 		if (k.getId().equals(ks.getUid())) {
 			ks.setFach(neuesFach);
 			found = true;		
@@ -257,7 +245,7 @@ public void karteVerschieben(Karte k, int altesFach, int neuesFach) {
 	}
 
 	if (found == false) {
-		benutzer.getLernfortschritte().add(new KartenStatus(k.getId(), neuesFach));
+		aktuellerBenutzer.getLernfortschritte().add(new KartenStatus(k.getId(), neuesFach));
 	}
 	
 	//.. dann Karte in Fach verschieben
@@ -278,13 +266,14 @@ public void karteVerschieben(Karte k, int altesFach, int neuesFach) {
 }
 
 public Benutzer getBenutzer() {
-	return benutzer;
+	return aktuellerBenutzer;
 }
 
 public void setBenutzer(Benutzer benutzer) {
-	this.benutzer = benutzer;
+	this.aktuellerBenutzer = benutzer;
 }
 
+// Methode zur verschlüsselung des Passworts. 
 public static String getMD5Hash(String str) {
     StringBuilder sb = new StringBuilder(32);
     try {
@@ -317,6 +306,8 @@ public boolean spracheHinzugfuegen(String ab, String a, String b) {
 	
 	return true;
 }
+
+
 
 } 
 	

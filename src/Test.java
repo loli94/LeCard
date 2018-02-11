@@ -13,7 +13,7 @@ public class Test {
 				
 		lk2.benutzerHinzufuegen("Lars", "1234");
 		
-		lk2.benutzerLaden("Heinz", "1234");
+		System.out.println(lk2.benutzerLaden("Heinz", "1234"));
 				
 		lk2.faecherBefuellen();
 		
@@ -29,7 +29,11 @@ public class Test {
 		
 		lk2.karteHinzufuegen(new Karte("de-en", "Haus", "House"));
 		
-		lk2.lernkarteiSpeichern("c:\\temp\\lernkartei_kombiniert.xml");
+		lk2.spracheHinzugfuegen("en-fr", "English", "Francais");
+		
+		lk2.spracheHinzugfuegen("en-fr", "francais", "english");		
+		
+		lk2.lernkarteiSpeichern("c:\\temp\\lernkartei_kombiniert2.xml");
 		
 			
 	}

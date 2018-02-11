@@ -78,7 +78,7 @@ public class PanelNeuerBenutzer {
 			if (main.daten1.benutzerExistiert(tBenutzer.getText()) == false){
 				main.daten1.benutzerHinzufuegen(tBenutzer.getText(), tPasswort.getText());
 				JOptionPane.showMessageDialog(mainFrame_1, ResourceBundle.getBundle("Bundle", locale).getString("Benutzererstellt"));
-				
+				main.daten1.lernkarteiSpeichern(main.pfad);
 				mainFrame_1.dispose();
 				LoginFrame gui1 = new LoginFrame();
 				gui1.paint();
