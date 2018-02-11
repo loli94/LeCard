@@ -55,7 +55,7 @@ public class PanelKartei extends JPanel {
 
 		aktuelleKartei = new JLabel(
 				ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("aktuelleKartei"));
-		ausgewaehlteKartei = new JLabel("!!!!!!!!!!!!!!!");
+		ausgewaehlteKartei = new JLabel("Fach: 1    "+main.daten1.getFach(5).gibAnzahlKarten());
 
 		karteiBearbeiten = new JButton(
 				ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("karteiBearbeiten"));

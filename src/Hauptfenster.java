@@ -66,13 +66,13 @@ public class Hauptfenster {
 		statPanel = new JPanel();
 		p1 = new PanelLernen();
 		k1 = new PanelKartei();
-		kartei1 = new JButton("1");
-		kartei2 = new JButton("2");
-		kartei3 = new JButton("3");
-		kartei4 = new JButton("4");
-		kartei5 = new JButton("5");
+		kartei1 = new JButton(ResourceBundle.getBundle("Bundle", locale).getString("Fach")+" 1");
+		kartei2 = new JButton(ResourceBundle.getBundle("Bundle", locale).getString("Fach")+" 2");
+		kartei3 = new JButton(ResourceBundle.getBundle("Bundle", locale).getString("Fach")+" 3");
+		kartei4 = new JButton(ResourceBundle.getBundle("Bundle", locale).getString("Fach")+" 4");
+		kartei5 = new JButton(ResourceBundle.getBundle("Bundle", locale).getString("Fach")+" 5");
 		lAngBenutzer = new JLabel(main.daten1.getBenutzer().getBenutzername());
-		home = new JButton(ResourceBundle.getBundle("Bundle", locale).getString("ButtonKartei"));
+		home = new JButton("Home"); 
 		lBenutzer = new JLabel(ResourceBundle.getBundle("Bundle", locale).getString("Benutzer"));
 		lKarten = new JLabel(ResourceBundle.getBundle("Bundle", locale).getString("Karten"));
 		lSprache = new JLabel(ResourceBundle.getBundle("Bundle", locale).getString("Sprache"));
@@ -197,6 +197,11 @@ public class Hauptfenster {
 			lKarten.setText(ResourceBundle.getBundle("Bundle", locale).getString("Karten"));
 			lSprache.setText(ResourceBundle.getBundle("Bundle", locale).getString("Sprache"));
 			home.setText(ResourceBundle.getBundle("Bundle", locale).getString("ButtonKartei"));
+			kartei1.setText(ResourceBundle.getBundle("Bundle", locale).getString("Fach")+" 1");
+			kartei2.setText(ResourceBundle.getBundle("Bundle", locale).getString("Fach")+" 2");
+			kartei3.setText(ResourceBundle.getBundle("Bundle", locale).getString("Fach")+" 3");
+			kartei4.setText(ResourceBundle.getBundle("Bundle", locale).getString("Fach")+" 4");
+			kartei5.setText(ResourceBundle.getBundle("Bundle", locale).getString("Fach")+" 5");
 			//KarteiPanel aktualisieren auf neue Sprache
 			k1.removeAll(); 
 			k1.repaint();
@@ -256,7 +261,7 @@ public class Hauptfenster {
 			JButton b = (JButton) e.getSource();
 			String msg = (String) b.getText();
 			switch (msg) {
-			case "Kartei":
+			case "Home":
 				home.setBackground(Color.CYAN);
 				kartei1.setBackground(Color.lightGray);
 				kartei2.setBackground(Color.lightGray);
@@ -269,19 +274,7 @@ public class Hauptfenster {
 				statPanel.repaint();
 
 				break;
-			case "Index":
-				home.setBackground(Color.CYAN);
-				kartei1.setBackground(Color.lightGray);
-				kartei2.setBackground(Color.lightGray);
-				kartei3.setBackground(Color.lightGray);
-				kartei4.setBackground(Color.lightGray);
-				kartei5.setBackground(Color.lightGray);
-				statPanel.removeAll();
-				statPanel.add(k1);
-				statPanel.validate();
-				statPanel.repaint();
-				break;
-			case "1":
+			case "Fach 1":
 				home.setBackground(Color.lightGray);
 				kartei1.setBackground(Color.CYAN);
 				kartei2.setBackground(Color.lightGray);
@@ -293,7 +286,7 @@ public class Hauptfenster {
 				statPanel.validate();
 				statPanel.repaint();
 				break;
-			case "2":
+			case "Fach 2":
 				home.setBackground(Color.lightGray);
 				kartei1.setBackground(Color.lightGray);
 				kartei2.setBackground(Color.CYAN);
@@ -301,7 +294,7 @@ public class Hauptfenster {
 				kartei4.setBackground(Color.lightGray);
 				kartei5.setBackground(Color.lightGray);
 				break;
-			case "3":
+			case "Fach 3":
 				home.setBackground(Color.lightGray);
 				kartei1.setBackground(Color.lightGray);
 				kartei2.setBackground(Color.lightGray);
@@ -309,7 +302,7 @@ public class Hauptfenster {
 				kartei4.setBackground(Color.lightGray);
 				kartei5.setBackground(Color.lightGray);
 				break;
-			case "4":
+			case "Fach 4":
 				home.setBackground(Color.lightGray);
 				kartei1.setBackground(Color.lightGray);
 				kartei2.setBackground(Color.lightGray);
@@ -317,7 +310,7 @@ public class Hauptfenster {
 				kartei4.setBackground(Color.CYAN);
 				kartei5.setBackground(Color.lightGray);
 				break;
-			case "5":
+			case "Fach 5":
 				home.setBackground(Color.lightGray);
 				kartei1.setBackground(Color.lightGray);
 				kartei2.setBackground(Color.lightGray);
