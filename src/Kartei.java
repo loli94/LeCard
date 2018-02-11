@@ -32,7 +32,13 @@ public class Kartei {
 	private Benutzer benutzer;
 	
 	@XmlTransient
-	public String aktuelleSprache; 
+	private String aktuelleSprache; 
+	
+	@XmlTransient
+	private int aktuellesFach;
+	
+	@XmlTransient
+	private Karte aktuelleKarte;
 
 	private Kartei() {
 
@@ -52,6 +58,7 @@ public class Kartei {
 		this.fach = new Fach[5];
 		karteiEinlesen(pfad);
 		this.aktuelleSprache = "de-en";
+		this.aktuellesFach=1;
 	}
 
 	public String getAktuelleSprache() {
@@ -237,19 +244,21 @@ public class Kartei {
 		return fach[x-1]; 
 	}
 
-	public Karte gibNaechsteKarte(int fachnr) {
+	public boolean gibNaechsteKarte() {
 
 		// Nächste Karte aus diesem Fach in der entsprechenden Sprache ausgeben
-		for (Karte k : fach[fachnr - 1].gibKarten()) {
+		for (Karte k : fach[aktuellesFach - 1].gibKarten()) {
 			if (k.getSprache().equals(aktuelleSprache)) {
-				return k;
+				this.aktuelleKarte= k;
+				
+				return true;
 			}
 		}
 
-		return null;
+		return false;
 	}
 
-	public void karteVerschieben(Karte k, int altesFach, int neuesFach) {
+	public void karteVerschieben(Karte k, int neuesFach) {
 
 		if (k != null) {
 
@@ -272,7 +281,7 @@ public class Kartei {
 			// .. dann Karte in Fach verschieben
 
 			// System.out.println("entfernen");
-			fach[altesFach - 1].karteEnfernen(k);
+			fach[aktuellesFach - 1].karteEnfernen(k);
 
 			// System.out.println("hinzufuegen");
 			fach[neuesFach - 1].karteHinzufuegen(k);
@@ -324,5 +333,25 @@ public class Kartei {
 
 		return true;
 	}
+
+	public int getAktuellesFach() {
+		return aktuellesFach;
+	}
+
+	public void setAktuellesFach(int aktuellesFach) {
+		this.aktuellesFach = aktuellesFach;
+	}
+
+	public Karte getAktuelleKarte() {
+		return aktuelleKarte;
+	}
+
+	public void setAktuelleKarte(Karte aktuelleKarte) {
+		this.aktuelleKarte = aktuelleKarte;
+	}
+	
+	
+	
+	
 
 }

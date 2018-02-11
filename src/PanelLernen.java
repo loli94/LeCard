@@ -50,9 +50,9 @@ public class PanelLernen extends JPanel {
 		pAuswertung = new JPanel();
 		bPruefen = new JButton(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("pruefen"));
 		bWechsel = new JButton("<->");
-		lSpracheEins = new JLabel("Deutsch:");
-		lSpracheEinsFrage = new JLabel("Schlange");
-		lSpracheZwei = new JLabel("Englisch:");
+		lSpracheEins = new JLabel(main.daten1.getAktuelleSprache());
+		lSpracheEinsFrage = new JLabel(main.daten1.getAktuelleKarte().getWortA());
+		lSpracheZwei = new JLabel(main.daten1.getAktuelleSprache());
 		tSpracheZweiAntwort = new JTextField();
 		lLoesung = new JLabel("Richtig/Flasch");
 		// initiiere Layout von den Panles
@@ -65,7 +65,8 @@ public class PanelLernen extends JPanel {
 	private void bindListener() {
 		bWechsel.addActionListener(new ButtonListenerSpracheWechseln());
 		bPruefen.addActionListener(new ButtonListenerPruefen());
-			
+		tSpracheZweiAntwort.addActionListener(new JTextFieldListener());
+
 	}
 
 	public void paint() {
@@ -83,19 +84,40 @@ public class PanelLernen extends JPanel {
 		pLernen.add(pAuswertung);
 		add(pLernen);
 	}
-	
+
 	class ButtonListenerSpracheWechseln implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			System.out.println("Sprache wird gewechselt");
 
 		}
 	}
-	
+
 	class ButtonListenerPruefen implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			System.out.println("Antwort wird geprüft.");
+			System.out.println(main.daten1.getAktuelleKarte().getWortB());
+			System.out.println(tSpracheZweiAntwort.getText());
 
+			if (main.daten1.getAktuelleKarte().getWortB().equalsIgnoreCase(tSpracheZweiAntwort.getText())) {
+
+				System.out.println("Korrekt");
+				main.daten1.gibNaechsteKarte();
+
+			}
+
+			else {
+				System.out.println("Falsch");
+
+			}
 		}
+	}
+
+	class JTextFieldListener implements ActionListener {
+
+		public void actionPerformed(ActionEvent e) {
+
+			System.out.println(tSpracheZweiAntwort.getText());
+		}
+
 	}
 
 }
