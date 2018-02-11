@@ -304,6 +304,23 @@ public static String getMD5Hash(String str) {
     return sb.toString();
  }
 
+public boolean spracheHinzugfuegen(String ab, String a, String b) {
+	for (Sprache s : sprachen) {
+		if (s.getSpracheA().equalsIgnoreCase(a) && s.getSpracheB().equalsIgnoreCase(b)) {
+			System.out.println("Sprachpaar existiert bereits");
+			return false;
+		}
+				if (s.getSpracheA().equalsIgnoreCase(b) && s.getSpracheB().equalsIgnoreCase(a)) {
+			System.out.println("Sprachpaar existiert bereits");
+			return false;
+		}
+	}
+	
+	sprachen.add(new Sprache(ab, a, b));
+	
+	return true;
+}
+
 } 
 	
 	

@@ -10,10 +10,10 @@ public class Sprache {
 	}
 
 
-	public Sprache(String spA, String spB) {
+	public Sprache(String spPaar, String spA, String spB) {
 		this.spracheA = spA;
 		this.spracheB = spB;
-		sprachPaar = spA + "-" + spB;
+		this.sprachPaar = spPaar;
 	}
 
 	
