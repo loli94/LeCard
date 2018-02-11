@@ -1,4 +1,3 @@
-package Import;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -11,13 +10,18 @@ public class LoadCsv {
 	private File f;
 	private String separator;
 	private ArrayList<String> wortA, wortB, sprache;
+	private Kartei kartei;
 
 	public LoadCsv(String csvfile, String separator) throws FileNotFoundException, IOException {
+		System.out.println(csvfile);
+		System.out.println(separator);
+		
 		f = new File(csvfile);
 		this.separator = separator;
 		wortA = new ArrayList<>();
 		wortB = new ArrayList<>();
 		sprache= new ArrayList<>();
+		kartei = Kartei.getInstance();
 
 		readCsv();
 		uploadData();
@@ -27,22 +31,23 @@ public class LoadCsv {
 		// prüfen, ob Datei existiert
 		if (f.exists() && f.isFile()) {
 			FileInputStream in = null;
+			in = new FileInputStream(f);
 			Scanner s = new Scanner(in);
 
 			try {
-				in = new FileInputStream(f);
+				
 
 				// solange Zeilen in der Datei vorhanden sind
 				while (s.hasNext()) {
 					// Zeilen anhand des Separators aufsplitten
 					String line = s.nextLine();
+					if (line.endsWith(";")) {
+				//	substring
+					}
 					String[] col = line.split(separator);
 					saveInList(col);
 				}
 				// Falls kein File vorhanden
-			} catch (FileNotFoundException e) {
-				System.out.println("File nicht gefunden");
-				e.printStackTrace();
 			} finally {
 				if (s != null) {
 					s.close();
@@ -66,12 +71,18 @@ public class LoadCsv {
 
 	// übergibt die Wörter an die Logik
 	
-	
-	private void uploadData() {
-		/*Kartei.(wortA, wortB, sprache);
+	public void uploadData() {
+		for (int i = 0; i < wortA.size(); i++) {
+			System.out.println("Karte hinzufuegen: " + sprache.get(i) + "; " + wortA.get(i) + "; " + wortB.get(i) );
+			kartei.karteHinzufuegen(new Karte(sprache.get(i),wortA.get(i),wortB.get(i)));
+		}
 	
 	}
+
+	private void Kartei(ArrayList<String> wortA2, ArrayList<String> wortB2, ArrayList<String> sprache2) {
+		// TODO Auto-generated method stub
+		
+	}
 	
-	*/
-}
+	
 }

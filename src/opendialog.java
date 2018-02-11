@@ -1,4 +1,4 @@
-package Import;
+
 
 
 import java.io.File;
@@ -17,7 +17,11 @@ public class opendialog
      // initialisiert den Pfad mit null
     // 	return= ausgewähltes File
    
-    public File showDialog(String initialpath)
+    public opendialog() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public File showDialog(String initialpath)
     {
         if ((initialpath == null) || (initialpath.length() == 0))
         {

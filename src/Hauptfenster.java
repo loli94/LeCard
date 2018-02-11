@@ -3,6 +3,8 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -46,6 +48,8 @@ public class Hauptfenster {
 	private JPanel karteiPanel;
 	private JPanel menuPanel;
 
+	private JButton importButton;
+
 	public Hauptfenster(Locale lokal) {
 		this.locale = lokal;
 		mainFrame = new JFrame("LeCard");
@@ -83,6 +87,8 @@ public class Hauptfenster {
 		kartenMenuBox.add(ResourceBundle.getBundle("Bundle", locale).getString("hinzufuegen"));
 
 		kartenMenu = new JComboBox();
+		
+		importButton = new JButton("Import");
 
 		for (int i = 0; i < kartenMenuBox.size(); i++) {
 			kartenMenu.addItem(kartenMenuBox.get(i));
@@ -100,6 +106,22 @@ public class Hauptfenster {
 		kartei3.addActionListener(new ButtonListenerKartei());
 		kartei4.addActionListener(new ButtonListenerKartei());
 		kartei5.addActionListener(new ButtonListenerKartei());
+		importButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+//				open filechooser & import data
+				opendialog dialog = new opendialog();
+				File f = dialog.showDialog(("C:"));
+				try {
+					new LoadCsv(f.getAbsolutePath(),";");
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+		});
 	}
 
 	public void paint() {
@@ -119,6 +141,7 @@ public class Hauptfenster {
 		karteiPanel.add(kartei3);
 		karteiPanel.add(kartei4);
 		karteiPanel.add(kartei5);
+		karteiPanel.add(importButton);
 
 		home.setBackground(Color.CYAN);
 		kartei1.setBackground(Color.lightGray);

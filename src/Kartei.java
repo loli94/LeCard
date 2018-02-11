@@ -14,6 +14,8 @@ import javax.xml.bind.annotation.*;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Kartei {
 	
+	private static Kartei instance;
+	
 	@XmlElement(name = "Karte")
 	private ArrayList<Karte> kartei;
 	
@@ -29,8 +31,15 @@ public class Kartei {
 	@XmlTransient
 	private Benutzer benutzer;
 
-	public Kartei() {
+	private Kartei() {
 		
+	}
+	
+	public static Kartei getInstance() {
+		if (instance == null) {
+			instance = new Kartei();
+		}
+		return instance;
 	}
 	
 	public Kartei(String pfad) throws Exception {
@@ -137,21 +146,26 @@ public class Kartei {
 		return false;
 	}
 	
-	public void benutzerLaden(String benutzername, String passwort) {
+	public boolean benutzerLaden(String benutzername, String passwort) {
 		for (Benutzer b : benutzerListe) {
 			System.out.println(b);
 			if (b.getBenutzername().equals(benutzername)) {
 				if (b.getPasswort().equals(getMD5Hash(passwort))) {
 					//passwort korrekt
 					this.benutzer = b;
+					
+					return true;
+					
 				}
 				else {
-					//falsche passwort
+					//falsches passwort
 					System.out.println("Passwort falsch");
+					return false;
 				}
-				
 			}
 		}
+			System.out.println("Benutzer nicht gefunden");
+			return false;
 	}
 	
 	public void benutzerHinzufuegen(String benutzername, String passwort) {
