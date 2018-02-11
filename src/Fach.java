@@ -27,4 +27,12 @@ public class Fach {
 		return "Fach [fachNummer=" + fachNummer + ", faecher=" + karten + "]";
 	}
 	
+	public int gibAnzahlKarten() {
+		int counter = 0;
+		for (Karte k : karten) {
+			counter++;
+		}
+		return counter;
+	}
+	
 }
