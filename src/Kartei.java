@@ -163,7 +163,7 @@ public class Kartei {
 
 	public boolean benutzerLaden(String benutzername, String passwort) {
 		for (Benutzer b : benutzerListe) {
-			if (b.getBenutzername().equals(benutzername)) {
+			if (b.getBenutzername().equals(benutzername) || b.getBenutzername().toLowerCase().equals(benutzername)) {
 				if (b.getPasswort().equals(getMD5Hash(passwort))) {
 					this.benutzer = b;
 					this.faecherBefuellen();

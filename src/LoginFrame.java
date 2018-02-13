@@ -1,4 +1,5 @@
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.TextField;
 import java.awt.event.ActionEvent;
@@ -38,6 +39,8 @@ public class LoginFrame {
 		initComponents();
 		bindListener();
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		final Dimension d = mainFrame.getToolkit().getScreenSize(); 
+		mainFrame.setLocation((int) ((d.getWidth() - mainFrame.getWidth()) / 2.6), (int) ((d.getHeight() - mainFrame.getHeight()) / 2.6));
 	}
 
 	public JLabel getlBenutzerlogin() {
@@ -45,7 +48,7 @@ public class LoginFrame {
 	}
 
 	private void initComponents() {
-		mainFrame = new JFrame("Login");
+		mainFrame = new JFrame("Login", null);
 		loginPanel = new JPanel();
 		buttonPanel = new JPanel();
 		login = new JButton("Login");

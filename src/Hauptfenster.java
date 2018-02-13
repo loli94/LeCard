@@ -1,5 +1,6 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -52,11 +53,13 @@ public class Hauptfenster {
 
 	public Hauptfenster(Locale lokal) {
 		this.locale = lokal;
-		mainFrame = new JFrame("LeCard");
+		mainFrame = new JFrame("LeCard", null);
 		karteiPanel = new JPanel();
 		menuPanel = new JPanel();
 
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		final Dimension d = mainFrame.getToolkit().getScreenSize(); 
+		mainFrame.setLocation((int) ((d.getWidth() - mainFrame.getWidth()) / 3.8), (int) ((d.getHeight() - mainFrame.getHeight()) / 3.8));
 		JComponent jc = (JComponent) mainFrame.getContentPane();
 		initComponents();
 		bindListener();
@@ -79,6 +82,7 @@ public class Hauptfenster {
 		// Dropdown Sprachenmenu
 		String spracheBox[] = { "Deutsch", "English", "Francaise", "Italiano" };
 		sprachenMenu = new JComboBox(spracheBox);
+		
 		// Dropdown Karteimenu
 		kartenMenuBox = new ArrayList<String>();
 
@@ -94,6 +98,14 @@ public class Hauptfenster {
 			kartenMenu.addItem(kartenMenuBox.get(i));
 		}
 		
+		System.out.println(ResourceBundle.getBundle("Bundle", locale).getLocale().getLanguage());
+		switch (ResourceBundle.getBundle("Bundle", locale).getLocale().getLanguage()) {
+			case "de": sprachenMenu.setSelectedIndex(0); break;
+			case "en": sprachenMenu.setSelectedIndex(1); break;
+			case "fr": sprachenMenu.setSelectedIndex(2); break;
+			case "it": sprachenMenu.setSelectedIndex(3); break;
+			default: break;
+		}
 
 	}
 

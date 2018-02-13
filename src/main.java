@@ -10,7 +10,7 @@ public class main {
 				
 		try {
 			daten1 = new Kartei(pfad);
-		} catch (Exception e) {
+		} catch (Exception e) {		
 			e.printStackTrace();
 		}
 		LoginFrame l1 = new LoginFrame();
@@ -19,4 +19,4 @@ public class main {
 	}
 	
 	
-}
+}	
