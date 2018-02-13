@@ -3,6 +3,8 @@ import java.awt.GridLayout;
 import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -54,6 +56,23 @@ public class LoginFrame {
 		sprachenMenu = new JComboBox(spracheBox);
 		tUser = new JTextField();
 		pPasswort = new JPasswordField();
+		pPasswort.addKeyListener(new KeyListener() {
+			
+			@Override
+			public void keyTyped(KeyEvent e) {
+			}
+			
+			@Override
+			public void keyReleased(KeyEvent e) {
+			}
+			
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode()==KeyEvent.VK_ENTER){
+					login.doClick();
+				}
+			}
+		});
 		lBenutzerlogin = new JLabel(ResourceBundle.getBundle("Bundle", locale).getString("Benutzer"));
 		lPasswort = new JLabel(ResourceBundle.getBundle("Bundle", locale).getString("Passwort"));
 		neuerUser = new JButton(ResourceBundle.getBundle("Bundle", locale).getString("neuerUser"));

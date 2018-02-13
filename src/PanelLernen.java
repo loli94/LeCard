@@ -1,4 +1,5 @@
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.LayoutManager;
@@ -32,14 +33,14 @@ public class PanelLernen extends JPanel {
 	public PanelLernen() {
 		initComponents();
 		bindListener();
+		init();
 		paint();
-
+		repaint();
 	}
 
-	public void repaint() {
+	public void init() {
 		initComponents();
 		bindListener();
-		// paint();
 	}
 
 	private void initComponents() {
@@ -53,7 +54,9 @@ public class PanelLernen extends JPanel {
 		lSpracheEins = new JLabel(main.daten1.getAktuelleSprache());
 		lSpracheEinsFrage = new JLabel(main.daten1.getAktuelleKarte().getWortA());
 		lSpracheZwei = new JLabel(main.daten1.getAktuelleSprache());
+		lSpracheEins.setPreferredSize(new Dimension(250, 22));
 		tSpracheZweiAntwort = new JTextField();
+		tSpracheZweiAntwort.setPreferredSize(new Dimension(250, 22));
 		lLoesung = new JLabel("Richtig/Flasch");
 		// initiiere Layout von den Panles
 		pLernen.setLayout(new GridLayout(4, 1));
@@ -64,6 +67,7 @@ public class PanelLernen extends JPanel {
 
 	private void bindListener() {
 		bWechsel.addActionListener(new ButtonListenerSpracheWechseln());
+		bPruefen.addActionListener(e -> verifyAnswer());
 		bPruefen.addActionListener(new ButtonListenerPruefen());
 		tSpracheZweiAntwort.addActionListener(new JTextFieldListener());
 
@@ -75,6 +79,7 @@ public class PanelLernen extends JPanel {
 		pSpracheEins.add(lSpracheEinsFrage);
 		pSpracheZwei.add(lSpracheZwei);
 		pSpracheZwei.add(tSpracheZweiAntwort);
+		
 		pPruefen.add(bPruefen, BorderLayout.CENTER);
 		pAuswertung.add(lLoesung, BorderLayout.EAST);
 
@@ -91,11 +96,12 @@ public class PanelLernen extends JPanel {
 
 		}
 	}
+	
+	public void verifyAnswer() {
+	}
 
 	class ButtonListenerPruefen implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			System.out.println(main.daten1.getAktuelleKarte().getWortB());
-			System.out.println(tSpracheZweiAntwort.getText());
 
 			if (main.daten1.getAktuelleKarte().getWortB().equalsIgnoreCase(tSpracheZweiAntwort.getText())) {
 
