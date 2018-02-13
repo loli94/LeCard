@@ -5,6 +5,8 @@ import java.awt.GridLayout;
 import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.ResourceBundle;
 
 import javax.swing.JButton;
@@ -56,6 +58,30 @@ public class PanelLernen extends JPanel {
 		lSpracheZwei = new JLabel(main.daten1.getAktuelleSprache());
 		lSpracheEins.setPreferredSize(new Dimension(250, 22));
 		tSpracheZweiAntwort = new JTextField();
+		tSpracheZweiAntwort.addKeyListener(new KeyListener() {
+			
+			@Override
+			public void keyTyped(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void keyReleased(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode()==KeyEvent.VK_ENTER){
+					bPruefen.doClick();
+				}
+				
+			}
+		});
+		
+		
 		tSpracheZweiAntwort.setPreferredSize(new Dimension(250, 22));
 		lLoesung = new JLabel("Richtig/Flasch");
 		// initiiere Layout von den Panles
@@ -96,6 +122,8 @@ public class PanelLernen extends JPanel {
 
 		}
 	}
+	
+	
 	
 	public void verifyAnswer() {
 	}
