@@ -67,7 +67,6 @@ public class Hauptfenster {
 
 	private void initComponents() {
 		statPanel = new JPanel();
-
 		k1 = new PanelKartei();
 		kartei1 = new JButton(ResourceBundle.getBundle("Bundle", locale).getString("Fach")+" 1");
 		kartei2 = new JButton(ResourceBundle.getBundle("Bundle", locale).getString("Fach")+" 2");
@@ -153,7 +152,7 @@ public class Hauptfenster {
 		karteiPanel.add(kartei3);
 		karteiPanel.add(kartei4);
 		karteiPanel.add(kartei5);
-		karteiPanel.add(importButton);
+		// karteiPanel.add(importButton);
 
 		home.setBackground(Color.CYAN);
 		kartei1.setBackground(Color.lightGray);

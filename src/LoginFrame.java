@@ -1,4 +1,5 @@
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.TextField;
@@ -51,6 +52,8 @@ public class LoginFrame {
 		mainFrame = new JFrame("Login", null);
 		loginPanel = new JPanel();
 		buttonPanel = new JPanel();
+		loginPanel.setBackground(Color.white);
+		buttonPanel.setBackground(Color.white);
 		login = new JButton("Login");
 		this.language = "de";
 		this.country = "DE";
