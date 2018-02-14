@@ -136,11 +136,13 @@ public class PanelLernen extends JPanel {
 
 				System.out.println("Korrekt");
 				main.daten1.gibNaechsteKarte();
+				lLoesung.setForeground(Color.GREEN);
 
 			}
 
 			else {
 				System.out.println("Falsch");
+				lLoesung.setForeground(Color.RED);
 
 			}
 		}
