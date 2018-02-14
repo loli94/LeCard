@@ -101,7 +101,7 @@ public class PanelLernen extends JPanel {
 	}
 
 	public void paint() {
-		// Adding Components
+		// Adding Componentsf
 		pSpracheEins.add(lSpracheEins);
 		pSpracheEins.add(lSpracheEinsFrage);
 		pSpracheZwei.add(lSpracheZwei);
