@@ -98,7 +98,7 @@ public class PanelKartei extends JPanel {
 		add(mainFrame);
 
 	}
-
+	
 	class ButtonListenerKarteiJetztLernen implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
