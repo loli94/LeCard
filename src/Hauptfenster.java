@@ -304,28 +304,24 @@ public class Hauptfenster {
 		public void actionPerformed(ActionEvent e) {
 			JButton b = (JButton) e.getSource();
 			String msg = (String) b.getText();
+			home.setBackground(Color.lightGray);
+			kartei1.setBackground(Color.lightGray);
+			kartei2.setBackground(Color.lightGray);
+			kartei3.setBackground(Color.lightGray);
+			kartei4.setBackground(Color.lightGray);
+			kartei5.setBackground(Color.lightGray);
 			String str = msg.replaceAll("\\D+","");
 			System.out.println(str);
 			switch (str) {
 			case "":
 				home.setBackground(Color.CYAN);
-				kartei1.setBackground(Color.lightGray);
-				kartei2.setBackground(Color.lightGray);
-				kartei3.setBackground(Color.lightGray);
-				kartei4.setBackground(Color.lightGray);
-				kartei5.setBackground(Color.lightGray);
 				statPanel.removeAll();
 				statPanel.add(k1);
 				statPanel.validate();
 				statPanel.repaint();
 				break;
 			case "1":
-				home.setBackground(Color.lightGray);
 				kartei1.setBackground(Color.CYAN);
-				kartei2.setBackground(Color.lightGray);
-				kartei3.setBackground(Color.lightGray);
-				kartei4.setBackground(Color.lightGray);
-				kartei5.setBackground(Color.lightGray);
 				main.daten1.setAktuellesFach(1);
 				main.daten1.gibNaechsteKarte();
 				statPanel.removeAll();
@@ -334,12 +330,7 @@ public class Hauptfenster {
 				statPanel.repaint();
 				break;
 			case "2":
-				home.setBackground(Color.lightGray);
-				kartei1.setBackground(Color.lightGray);
 				kartei2.setBackground(Color.CYAN);
-				kartei3.setBackground(Color.lightGray);
-				kartei4.setBackground(Color.lightGray);
-				kartei5.setBackground(Color.lightGray);
 				main.daten1.setAktuellesFach(2);
 				main.daten1.gibNaechsteKarte();
 				statPanel.removeAll();
@@ -348,12 +339,7 @@ public class Hauptfenster {
 				statPanel.repaint();
 				break;
 			case "3":
-				home.setBackground(Color.lightGray);
-				kartei1.setBackground(Color.lightGray);
-				kartei2.setBackground(Color.lightGray);
 				kartei3.setBackground(Color.CYAN);
-				kartei4.setBackground(Color.lightGray);
-				kartei5.setBackground(Color.lightGray);
 				main.daten1.setAktuellesFach(3);
 				main.daten1.gibNaechsteKarte();
 				statPanel.removeAll();
@@ -362,12 +348,7 @@ public class Hauptfenster {
 				statPanel.repaint();
 				break;
 			case "4":
-				home.setBackground(Color.lightGray);
-				kartei1.setBackground(Color.lightGray);
-				kartei2.setBackground(Color.lightGray);
-				kartei3.setBackground(Color.lightGray);
 				kartei4.setBackground(Color.CYAN);
-				kartei5.setBackground(Color.lightGray);
 				main.daten1.setAktuellesFach(4);
 				main.daten1.gibNaechsteKarte();
 				statPanel.removeAll();
@@ -376,11 +357,6 @@ public class Hauptfenster {
 				statPanel.repaint();
 				break;
 			case "5":
-				home.setBackground(Color.lightGray);
-				kartei1.setBackground(Color.lightGray);
-				kartei2.setBackground(Color.lightGray);
-				kartei3.setBackground(Color.lightGray);
-				kartei4.setBackground(Color.lightGray);
 				kartei5.setBackground(Color.CYAN);
 				main.daten1.setAktuellesFach(5);
 				main.daten1.gibNaechsteKarte();
