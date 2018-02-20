@@ -392,7 +392,7 @@ public class Hauptfenster {
 
 		Hauptfenster gui1 = new Hauptfenster(locale);
 		try {
-			// Set cross-platform Java L&F (also called "Metal")
+			// Set cross-platform Java L&F (also called o"Metal")
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		} catch (UnsupportedLookAndFeelException e) {
 			// handle exception
