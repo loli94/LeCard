@@ -34,6 +34,7 @@ public class Hauptfenster {
 	private JButton kartei5;
 	private JComboBox kartenMenu;
 	private JComboBox sprachenMenu;
+	private JComboBox lernSprachenMenu;
 	private JLabel lBenutzer;
 	private JLabel lAngBenutzer;
 	private JLabel lKarten;
@@ -49,6 +50,7 @@ public class Hauptfenster {
 	private PanelKartei k1;
 
 	private ArrayList<String> kartenMenuBox;
+	private ArrayList<String> lernSprachenMenuBox;
 	// -------------
 	private JPanel karteiPanel;
 	private JPanel menuPanel;
@@ -119,6 +121,12 @@ public class Hauptfenster {
 		default:
 			break;
 		}
+		
+		//Dropdown SpracheLernen
+		lernSprachenMenuBox = new ArrayList<String>();
+		lernSprachenMenu = new JComboBox();
+		
+		
 
 	}
 
