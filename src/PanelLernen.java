@@ -12,6 +12,7 @@ import java.util.ResourceBundle;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
@@ -153,8 +154,19 @@ public class PanelLernen extends JPanel {
 				lLoesung.setForeground(Color.RED);
 
 			}
-			main.daten1.gibNaechsteKarte();
-			loadCard();
+			main.daten1.lernkarteiSpeichern(main.pfad);
+			if(main.daten1.gibNaechsteKarte()== true) {
+				loadCard();
+			}
+			
+			else {
+				JOptionPane.showMessageDialog(pLernen, "Keine weitere Karten vorhanden");
+				tSpracheZweiAntwort.setText("-");
+				lSpracheEinsFrage.setText("-");
+			}
+					
+			
+			
 		}
 	}
 
