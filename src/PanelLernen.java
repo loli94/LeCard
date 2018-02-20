@@ -42,6 +42,7 @@ public class PanelLernen extends JPanel {
 
 	public void init() {
 		initComponents();
+		loadCard();
 		bindListener();
 	}
 
@@ -54,7 +55,7 @@ public class PanelLernen extends JPanel {
 		bPruefen = new JButton(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("pruefen"));
 		bWechsel = new JButton("<->");
 		lSpracheEins = new JLabel(main.daten1.getAktuelleSprache());
-		lSpracheEinsFrage = new JLabel(main.daten1.getAktuelleKarte().getWortA());
+		lSpracheEinsFrage = new JLabel();
 		lSpracheZwei = new JLabel(main.daten1.getAktuelleSprache());
 		lSpracheEins.setPreferredSize(new Dimension(250, 22));
 		tSpracheZweiAntwort = new JTextField();
@@ -90,6 +91,10 @@ public class PanelLernen extends JPanel {
 		pSpracheZwei.setLayout(new GridLayout(1, 2));
 		pPruefen.setLayout(new BorderLayout());
 		pAuswertung.setLayout(new BorderLayout());
+	}
+	
+	private void loadCard() {
+		lSpracheEinsFrage.setText(main.daten1.getAktuelleKarte().getWortA());
 	}
 
 	private void bindListener() {
@@ -135,7 +140,7 @@ public class PanelLernen extends JPanel {
 			if (main.daten1.getAktuelleKarte().getWortB().equalsIgnoreCase(tSpracheZweiAntwort.getText())) {
 
 				System.out.println("Korrekt");
-				main.daten1.gibNaechsteKarte();
+				main.daten1.karteVerschieben(main.daten1.getAktuelleKarte(), main.daten1.getAktuellesFach()+1);
 				lLoesung.setText("Richtig");
 				lLoesung.setForeground(Color.GREEN);
 
@@ -143,10 +148,13 @@ public class PanelLernen extends JPanel {
 
 			else {
 				System.out.println("Falsch");
+				main.daten1.karteVerschieben(main.daten1.getAktuelleKarte(), 1);
 				lLoesung.setText("Falsch");
 				lLoesung.setForeground(Color.RED);
 
 			}
+			main.daten1.gibNaechsteKarte();
+			loadCard();
 		}
 	}
 
