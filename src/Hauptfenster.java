@@ -84,6 +84,13 @@ public class Hauptfenster {
 		lBenutzer = new JLabel(ResourceBundle.getBundle("Bundle", locale).getString("Benutzer"));
 		lKarten = new JLabel(ResourceBundle.getBundle("Bundle", locale).getString("Karten"));
 		lSprache = new JLabel(ResourceBundle.getBundle("Bundle", locale).getString("Sprache"));
+		//Panel initiieren
+		p1 = new PanelLernen();
+		p2 = new PanelLernen();
+		p3 = new PanelLernen();
+		p4= new PanelLernen();
+		p5 = new PanelLernen();
+
 		// Dropdown Sprachenmenu
 		String spracheBox[] = { "Deutsch", "English", "Francaise", "Italiano" };
 		sprachenMenu = new JComboBox(spracheBox);
@@ -297,8 +304,10 @@ public class Hauptfenster {
 		public void actionPerformed(ActionEvent e) {
 			JButton b = (JButton) e.getSource();
 			String msg = (String) b.getText();
-			switch (msg) {
-			case "Home":
+			String str = msg.replaceAll("\\D+","");
+			System.out.println(str);
+			switch (str) {
+			case "":
 				home.setBackground(Color.CYAN);
 				kartei1.setBackground(Color.lightGray);
 				kartei2.setBackground(Color.lightGray);
@@ -309,9 +318,8 @@ public class Hauptfenster {
 				statPanel.add(k1);
 				statPanel.validate();
 				statPanel.repaint();
-
 				break;
-			case "Fach 1":
+			case "1":
 				home.setBackground(Color.lightGray);
 				kartei1.setBackground(Color.CYAN);
 				kartei2.setBackground(Color.lightGray);
@@ -320,13 +328,12 @@ public class Hauptfenster {
 				kartei5.setBackground(Color.lightGray);
 				main.daten1.setAktuellesFach(1);
 				main.daten1.gibNaechsteKarte();
-				p1 = new PanelLernen();
 				statPanel.removeAll();
 				statPanel.add(p1);
 				statPanel.validate();
 				statPanel.repaint();
 				break;
-			case "Fach 2":
+			case "2":
 				home.setBackground(Color.lightGray);
 				kartei1.setBackground(Color.lightGray);
 				kartei2.setBackground(Color.CYAN);
@@ -335,13 +342,12 @@ public class Hauptfenster {
 				kartei5.setBackground(Color.lightGray);
 				main.daten1.setAktuellesFach(2);
 				main.daten1.gibNaechsteKarte();
-				p2 = new PanelLernen();
 				statPanel.removeAll();
 				statPanel.add(p2);
 				statPanel.validate();
 				statPanel.repaint();
 				break;
-			case "Fach 3":
+			case "3":
 				home.setBackground(Color.lightGray);
 				kartei1.setBackground(Color.lightGray);
 				kartei2.setBackground(Color.lightGray);
@@ -350,13 +356,12 @@ public class Hauptfenster {
 				kartei5.setBackground(Color.lightGray);
 				main.daten1.setAktuellesFach(3);
 				main.daten1.gibNaechsteKarte();
-				p3 = new PanelLernen();
 				statPanel.removeAll();
 				statPanel.add(p3);
 				statPanel.validate();
 				statPanel.repaint();
 				break;
-			case "Fach 4":
+			case "4":
 				home.setBackground(Color.lightGray);
 				kartei1.setBackground(Color.lightGray);
 				kartei2.setBackground(Color.lightGray);
@@ -365,13 +370,12 @@ public class Hauptfenster {
 				kartei5.setBackground(Color.lightGray);
 				main.daten1.setAktuellesFach(4);
 				main.daten1.gibNaechsteKarte();
-				p4 = new PanelLernen();
 				statPanel.removeAll();
 				statPanel.add(p4);
 				statPanel.validate();
 				statPanel.repaint();
 				break;
-			case "Fach 5":
+			case "5":
 				home.setBackground(Color.lightGray);
 				kartei1.setBackground(Color.lightGray);
 				kartei2.setBackground(Color.lightGray);
@@ -380,7 +384,6 @@ public class Hauptfenster {
 				kartei5.setBackground(Color.CYAN);
 				main.daten1.setAktuellesFach(5);
 				main.daten1.gibNaechsteKarte();
-				p5 = new PanelLernen();
 				statPanel.removeAll();
 				statPanel.add(p5);
 				statPanel.validate();
