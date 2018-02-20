@@ -355,9 +355,7 @@ public class Kartei {
 	public ArrayList<Sprache> getSprachen() {
 		return sprachen;
 	}
-	
-	
-	
+		
 	
 
 }
