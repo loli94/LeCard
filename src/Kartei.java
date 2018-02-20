@@ -32,7 +32,10 @@ public class Kartei {
 	private Benutzer benutzer;
 	
 	@XmlTransient
-	private String aktuelleSprache; 
+	private String aktuellesSprachpaar;
+	
+	@XmlTransient
+	private Sprache aktuelleSprache;
 	
 	@XmlTransient
 	private int aktuellesFach;
@@ -57,16 +60,16 @@ public class Kartei {
 		this.benutzerListe = new ArrayList<Benutzer>();
 		this.fach = new Fach[5];
 		karteiEinlesen(pfad);
-		this.aktuelleSprache = "de-en";
+		this.aktuellesSprachpaar = "de-en";
 		this.aktuellesFach=1;
 	}
 
 	public String getAktuelleSprache() {
-		return aktuelleSprache;
+		return aktuellesSprachpaar;
 	}
 
 	public void setAktuelleSprache(String aktuelleSprache) {
-		this.aktuelleSprache = aktuelleSprache;
+		this.aktuellesSprachpaar = aktuelleSprache;
 	}
 
 	public void karteHinzufuegen(Karte k1) {
@@ -245,53 +248,43 @@ public class Kartei {
 
 		// Nächste Karte aus diesem Fach in der entsprechenden Sprache ausgeben
 		for (Karte k : fach[aktuellesFach - 1].gibKarten()) {
-			if (k.getSprache().equals(aktuelleSprache)) {
+			if (k.getSprache().equals(aktuellesSprachpaar)) {
 				this.aktuelleKarte= k;
 				
 				return true;
 			}
 		}
 		
-		Karte k = new Karte(aktuelleSprache, "-----", "-----");
-		this.aktuelleKarte = k;
-		
+		this.aktuelleKarte = null;
 		return false;
 	}
 
-	public void karteVerschieben(Karte k, int neuesFach) {
+	public boolean karteVerschieben(Karte k, int neuesFach) {
 
-		if (k != null) {
+		if (k != null && neuesFach<6 && neuesFach > 0) {
 
-			// Zuerst Benutzerstatus anpassen
 
-			boolean found = false;
-
-			// Falls Kartenstatus vorhanden, dann verschieben inneues Fach
+			// Falls Kartenstatus für Benutzer in XML bereits vorhanden, dann verschieben in neues Fach
 			for (KartenStatus ks : benutzer.getLernfortschritte()) {
 				if (k.getId().equals(ks.getUid())) {
 					ks.setFach(neuesFach);
-					found = true;
-					break;
+					fach[aktuellesFach - 1].karteEnfernen(k);
+					fach[neuesFach - 1].karteHinzufuegen(k);
+					return true;
 				}
 			}
 
-			// Wenn Kartenstatus für diesen Benutzer noch nicht vorhanden, dann Status erstellen
-			if (found == false) {
-				benutzer.getLernfortschritte().add(new KartenStatus(k.getId(), neuesFach));
-			}
-
-			// .. dann Karte in Fach verschieben
-
-			// System.out.println("entfernen");
+			// Wenn Kartenstatus in XML für diesen Benutzer noch nicht vorhanden, dann Status erstellen und Karte verschieben
+			benutzer.getLernfortschritte().add(new KartenStatus(k.getId(), neuesFach));
 			fach[aktuellesFach - 1].karteEnfernen(k);
-
-			// System.out.println("hinzufuegen");
 			fach[neuesFach - 1].karteHinzufuegen(k);
+
+			return true;
 
 		}
 
 		else {
-			System.out.println("Verschieben nicht möglich. Keine Karte.");
+			return false;
 		}
 
 	}
@@ -352,10 +345,27 @@ public class Kartei {
 		this.aktuelleKarte = aktuelleKarte;
 	}
 
-	public ArrayList<Sprache> getSprachen() {
-		return sprachen;
+	public ArrayList<String> getSprachen() {
+		ArrayList<String> sprachenListe = new ArrayList<String>();
+		for (Sprache s : sprachen) {
+			String sp = s.getSprachPaar();
+			sprachenListe.add(sp);
+		}
+		return sprachenListe;
 	}
-		
 	
-
+	private boolean spracheWaehlen(String sprachpaar) {
+		
+		for (Sprache s : sprachen) {
+			if (s.getSprachPaar().equals(sprachpaar)){
+				aktuelleSprache = s;
+				aktuellesSprachpaar = s.getSprachPaar();
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
+	
 }
