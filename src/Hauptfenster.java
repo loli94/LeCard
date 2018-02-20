@@ -397,7 +397,7 @@ public class Hauptfenster {
 		} catch (UnsupportedLookAndFeelException e) {
 			// handle exception
 		} catch (ClassNotFoundException e) {
-			// handle exception
+			// handle ii
 		} catch (InstantiationException e) {
 			// handle exception
 		} catch (IllegalAccessException e) {
