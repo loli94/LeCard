@@ -220,9 +220,6 @@ public class Kartei {
 
 			boolean found = false;
 
-			// System.out.println(k);
-			// System.out.println(alleStatus);
-
 			for (KartenStatus st : alleStatus) {
 				if (k.getId().equals(st.getUid())) {
 					fach[st.getFach() - 1].karteHinzufuegen(k);
@@ -232,7 +229,6 @@ public class Kartei {
 			}
 
 			if (found == false) {
-				System.out.println("Kartenstatus nicht gefunden");
 				alleStatus.add(new KartenStatus(k.getId(), 1));
 				fach[0].karteHinzufuegen(k);
 			}
@@ -255,7 +251,10 @@ public class Kartei {
 				return true;
 			}
 		}
-
+		
+		Karte k = new Karte(aktuelleSprache, "-----", "-----");
+		this.aktuelleKarte = k;
+		
 		return false;
 	}
 
@@ -267,6 +266,7 @@ public class Kartei {
 
 			boolean found = false;
 
+			// Falls Kartenstatus vorhanden, dann verschieben inneues Fach
 			for (KartenStatus ks : benutzer.getLernfortschritte()) {
 				if (k.getId().equals(ks.getUid())) {
 					ks.setFach(neuesFach);
@@ -275,6 +275,7 @@ public class Kartei {
 				}
 			}
 
+			// Wenn Kartenstatus für diesen Benutzer noch nicht vorhanden, dann Status erstellen
 			if (found == false) {
 				benutzer.getLernfortschritte().add(new KartenStatus(k.getId(), neuesFach));
 			}
@@ -349,6 +350,10 @@ public class Kartei {
 
 	public void setAktuelleKarte(Karte aktuelleKarte) {
 		this.aktuelleKarte = aktuelleKarte;
+	}
+
+	public ArrayList<Sprache> getSprachen() {
+		return sprachen;
 	}
 	
 	
