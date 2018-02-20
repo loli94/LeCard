@@ -367,5 +367,4 @@ public class Kartei {
 		return false;
 	}
 	
-
 }
