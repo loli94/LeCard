@@ -135,11 +135,12 @@ public class PanelLernen extends JPanel {
 
 	class ButtonListenerPruefen implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-
+	
 			if (main.daten1.getAktuelleKarte().getWortB().equalsIgnoreCase(tSpracheZweiAntwort.getText())) {
 
 				System.out.println("Korrekt");
 				main.daten1.karteVerschieben(main.daten1.getAktuelleKarte(), main.daten1.getAktuellesFach() + 1);
+				tSpracheZweiAntwort.setText("");
 				lLoesung.setText("Richtig");
 				lLoesung.setForeground(Color.GREEN);
 
