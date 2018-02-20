@@ -61,30 +61,29 @@ public class PanelLernen extends JPanel {
 		lSpracheEins.setPreferredSize(new Dimension(250, 22));
 		tSpracheZweiAntwort = new JTextField();
 		tSpracheZweiAntwort.addKeyListener(new KeyListener() {
-			
+
 			@Override
 			public void keyTyped(KeyEvent e) {
 				// TODO Auto-generated method stub
-				
+
 			}
-			
+
 			@Override
 			public void keyReleased(KeyEvent e) {
 				// TODO Auto-generated method stub
-				
+
 			}
-			
+
 			@Override
 			public void keyPressed(KeyEvent e) {
-				if (e.getKeyCode()==KeyEvent.VK_ENTER){
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 					bPruefen.doClick();
 				}
-				
+
 			}
-			
+
 		});
-		
-		
+
 		tSpracheZweiAntwort.setPreferredSize(new Dimension(250, 22));
 		lLoesung = new JLabel("Richtig/Flasch");
 		// initiiere Layout von den Panles
@@ -93,7 +92,7 @@ public class PanelLernen extends JPanel {
 		pPruefen.setLayout(new BorderLayout());
 		pAuswertung.setLayout(new BorderLayout());
 	}
-	
+
 	private void loadCard() {
 		lSpracheEinsFrage.setText(main.daten1.getAktuelleKarte().getWortA());
 	}
@@ -112,8 +111,9 @@ public class PanelLernen extends JPanel {
 		pSpracheEins.add(lSpracheEinsFrage);
 		pSpracheZwei.add(lSpracheZwei);
 		pSpracheZwei.add(tSpracheZweiAntwort);
-		
+
 		pPruefen.add(bPruefen, BorderLayout.CENTER);
+		pPruefen.add(bWechsel, BorderLayout.WEST);
 		pAuswertung.add(lLoesung, BorderLayout.EAST);
 
 		pLernen.add(pSpracheEins);
@@ -129,9 +129,7 @@ public class PanelLernen extends JPanel {
 
 		}
 	}
-	
-	
-	
+
 	public void verifyAnswer() {
 	}
 
@@ -141,7 +139,7 @@ public class PanelLernen extends JPanel {
 			if (main.daten1.getAktuelleKarte().getWortB().equalsIgnoreCase(tSpracheZweiAntwort.getText())) {
 
 				System.out.println("Korrekt");
-				main.daten1.karteVerschieben(main.daten1.getAktuelleKarte(), main.daten1.getAktuellesFach()+1);
+				main.daten1.karteVerschieben(main.daten1.getAktuelleKarte(), main.daten1.getAktuellesFach() + 1);
 				lLoesung.setText("Richtig");
 				lLoesung.setForeground(Color.GREEN);
 
@@ -155,18 +153,16 @@ public class PanelLernen extends JPanel {
 
 			}
 			main.daten1.lernkarteiSpeichern(main.pfad);
-			if(main.daten1.gibNaechsteKarte()== true) {
+			if (main.daten1.gibNaechsteKarte() == true) {
 				loadCard();
 			}
-			
+
 			else {
 				JOptionPane.showMessageDialog(pLernen, "Keine weitere Karten vorhanden");
 				tSpracheZweiAntwort.setText("-");
 				lSpracheEinsFrage.setText("-");
 			}
-					
-			
-			
+
 		}
 	}
 
