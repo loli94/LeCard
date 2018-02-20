@@ -161,6 +161,8 @@ public class PanelLernen extends JPanel {
 				JOptionPane.showMessageDialog(pLernen, "Keine weitere Karten vorhanden");
 				tSpracheZweiAntwort.setText("-");
 				lSpracheEinsFrage.setText("-");
+				pPruefen.setVisible(false);
+				
 			}
 
 		}
