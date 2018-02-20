@@ -91,8 +91,9 @@ public class PanelLernen extends JPanel {
 		// initiiere Layout von den Panles
 		pLernen.setLayout(new GridLayout(4, 1));
 		pSpracheZwei.setLayout(new GridLayout(1, 2));
-		pPruefen.setLayout(new BorderLayout());
-		pAuswertung.setLayout(new BorderLayout());
+		pAuswertung.setLayout(new GridLayout(1, 2));
+		pPruefen.setLayout(new  GridLayout(0, 2));
+		
 	}
 
 	private void loadCard() {
@@ -114,8 +115,9 @@ public class PanelLernen extends JPanel {
 		pSpracheZwei.add(lSpracheZwei);
 		pSpracheZwei.add(tSpracheZweiAntwort);
 
-		pPruefen.add(bPruefen, BorderLayout.CENTER);
+		
 		pPruefen.add(bWechsel, BorderLayout.WEST);
+		pPruefen.add(bPruefen, BorderLayout.EAST);
 		pAuswertung.add(lLoesung, BorderLayout.EAST);
 
 		pLernen.add(pSpracheEins);
