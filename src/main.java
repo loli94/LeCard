@@ -15,6 +15,15 @@ public class main {
 		}
 		LoginFrame l1 = new LoginFrame();
 		l1.paint();
+		
+		daten1.spracheHinzugfuegen("de-fr", "Deutsch", "Francaise");
+		daten1.spracheHinzugfuegen("de-en", "Deutsch", "English");
+		
+		System.out.println("test" + daten1.getSprachen());
+		
+		daten1.lernkarteiSpeichern(pfad);
+		
+		
 
 	}
 	
