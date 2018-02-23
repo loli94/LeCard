@@ -43,7 +43,7 @@ public class PanelLernen extends JPanel {
 
 	public void init() {
 		initComponents();
-		checkPruefenButton();
+		loadCard();
 		bindListener();
 	}
 
@@ -96,8 +96,19 @@ public class PanelLernen extends JPanel {
 		
 	}
 
-	private void loadCard() {
-		lSpracheEinsFrage.setText(main.daten1.getAktuelleKarte().getWortA());
+	public void loadCard() {
+		if (main.daten1.gibNaechsteKarte() == true) {
+			lSpracheEinsFrage.setText(main.daten1.getAktuelleKarte().getWortA());
+		}
+	
+	//Dialog keine Karte vorhanden und "Prüfen Button" ausblenden
+		else {
+			JOptionPane.showMessageDialog(pLernen, "Keine weitere Karten vorhanden");
+			tSpracheZweiAntwort.setText("-");
+			lSpracheEinsFrage.setText("-");
+			pPruefen.setVisible(false);
+		}
+
 	}
 
 	private void bindListener() {
@@ -136,21 +147,7 @@ public class PanelLernen extends JPanel {
 
 
 	//Prueft ob der"Prüfen Button" angezeigt wird
-	public void checkPruefenButton() {
-		
-		if (main.daten1.gibNaechsteKarte() == true) {
-			loadCard();
-		}
-	
-	//Dialog keine Karte vorhanden und "Prüfen Button" ausblenden
-		else {
-			JOptionPane.showMessageDialog(pLernen, "Keine weitere Karten vorhanden");
-			tSpracheZweiAntwort.setText("-");
-			lSpracheEinsFrage.setText("-");
-			pPruefen.setVisible(false);
-			
-		}
-	}
+
 	public void verifyAnswer() {
 		
 	}
@@ -177,7 +174,7 @@ public class PanelLernen extends JPanel {
 			}
 			main.daten1.lernkarteiSpeichern(main.pfad);
 			
-			checkPruefenButton();
+			loadCard();
 
 		}
 		

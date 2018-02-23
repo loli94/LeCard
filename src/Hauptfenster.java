@@ -26,12 +26,7 @@ public class Hauptfenster {
 
 	private JFrame mainFrame;
 	private JLabel lSprache;
-	private JButton home;
-	private JButton kartei1;
-	private JButton kartei2;
-	private JButton kartei3;
-	private JButton kartei4;
-	private JButton kartei5;
+	private JButton[] boxAuswahl;
 	private JComboBox kartenMenu;
 	private JComboBox sprachenMenu;
 	private JComboBox lernSprachenMenu;
@@ -43,10 +38,6 @@ public class Hauptfenster {
 	private JPanel statPanel;
 	// muss noch geändert werden
 	private PanelLernen p1;
-	private PanelLernen p2;
-	private PanelLernen p3;
-	private PanelLernen p4;
-	private PanelLernen p5;
 	private PanelKartei k1;
 
 	private ArrayList<String> kartenMenuBox;
@@ -66,7 +57,6 @@ public class Hauptfenster {
 		final Dimension d = mainFrame.getToolkit().getScreenSize();
 		mainFrame.setLocation((int) ((d.getWidth() - mainFrame.getWidth()) / 3.8),
 				(int) ((d.getHeight() - mainFrame.getHeight()) / 3.8));
-		JComponent jc = (JComponent) mainFrame.getContentPane();
 		initComponents();
 		bindListener();
 	}
@@ -74,22 +64,19 @@ public class Hauptfenster {
 	private void initComponents() {
 		statPanel = new JPanel();
 		k1 = new PanelKartei();
-		kartei1 = new JButton(ResourceBundle.getBundle("Bundle", locale).getString("Fach") + " 1");
-		kartei2 = new JButton(ResourceBundle.getBundle("Bundle", locale).getString("Fach") + " 2");
-		kartei3 = new JButton(ResourceBundle.getBundle("Bundle", locale).getString("Fach") + " 3");
-		kartei4 = new JButton(ResourceBundle.getBundle("Bundle", locale).getString("Fach") + " 4");
-		kartei5 = new JButton(ResourceBundle.getBundle("Bundle", locale).getString("Fach") + " 5");
+		boxAuswahl = new JButton[6];
+		boxAuswahl[0] = new JButton("Home");
+		boxAuswahl[1] = new JButton(ResourceBundle.getBundle("Bundle", locale).getString("Fach") + " 1");
+		boxAuswahl[2] = new JButton(ResourceBundle.getBundle("Bundle", locale).getString("Fach") + " 2");
+		boxAuswahl[3] = new JButton(ResourceBundle.getBundle("Bundle", locale).getString("Fach") + " 3");
+		boxAuswahl[4] = new JButton(ResourceBundle.getBundle("Bundle", locale).getString("Fach") + " 4");
+		boxAuswahl[5] = new JButton(ResourceBundle.getBundle("Bundle", locale).getString("Fach") + " 5");
 		lAngBenutzer = new JLabel(main.daten1.getBenutzer().getBenutzername());
-		home = new JButton("Home");
 		lBenutzer = new JLabel(ResourceBundle.getBundle("Bundle", locale).getString("Benutzer"));
 		lKarten = new JLabel(ResourceBundle.getBundle("Bundle", locale).getString("Karten"));
 		lSprache = new JLabel(ResourceBundle.getBundle("Bundle", locale).getString("Sprache"));
 		//Panel initiieren
 		p1 = new PanelLernen();
-		p2 = new PanelLernen();
-		p3 = new PanelLernen();
-		p4= new PanelLernen();
-		p5 = new PanelLernen();
 
 		// Dropdown Sprachenmenu
 		String spracheBox[] = { "Deutsch", "English", "Francaise", "Italiano" };
@@ -143,12 +130,12 @@ public class Hauptfenster {
 	public void bindListener() {
 		sprachenMenu.addActionListener(new DropDownListenerSprache());
 		kartenMenu.addActionListener(new DropDownListenerKarten());
-		home.addActionListener(new ButtonListenerKartei());
-		kartei1.addActionListener(new ButtonListenerKartei());
-		kartei2.addActionListener(new ButtonListenerKartei());
-		kartei3.addActionListener(new ButtonListenerKartei());
-		kartei4.addActionListener(new ButtonListenerKartei());
-		kartei5.addActionListener(new ButtonListenerKartei());
+		boxAuswahl[0].addActionListener(new ButtonListenerKartei());
+		boxAuswahl[1].addActionListener(new ButtonListenerKartei());
+		boxAuswahl[2].addActionListener(new ButtonListenerKartei());
+		boxAuswahl[3].addActionListener(new ButtonListenerKartei());
+		boxAuswahl[4].addActionListener(new ButtonListenerKartei());
+		boxAuswahl[5].addActionListener(new ButtonListenerKartei());
 		importButton.addActionListener(new ActionListener() {
 
 			@Override
@@ -175,23 +162,21 @@ public class Hauptfenster {
 		// menuPanel.setLayout(new GridLayout(2,1));
 		mainFrame.add(karteiPanel, BorderLayout.WEST);
 
-		// statPanel.add(p1);
 		statPanel.add(k1);
 
-		karteiPanel.add(home);
-		karteiPanel.add(kartei1);
-		karteiPanel.add(kartei2);
-		karteiPanel.add(kartei3);
-		karteiPanel.add(kartei4);
-		karteiPanel.add(kartei5);
-		// karteiPanel.add(importButton);
+		karteiPanel.add(boxAuswahl[0]);
+		karteiPanel.add(boxAuswahl[1]);
+		karteiPanel.add(boxAuswahl[2]);
+		karteiPanel.add(boxAuswahl[3]);
+		karteiPanel.add(boxAuswahl[4]);
+		karteiPanel.add(boxAuswahl[5]);
 
-		home.setBackground(Color.CYAN);
-		kartei1.setBackground(Color.lightGray);
-		kartei2.setBackground(Color.lightGray);
-		kartei3.setBackground(Color.lightGray);
-		kartei4.setBackground(Color.lightGray);
-		kartei5.setBackground(Color.lightGray);
+		boxAuswahl[0].setBackground(Color.CYAN);
+		boxAuswahl[1].setBackground(Color.lightGray);
+		boxAuswahl[2].setBackground(Color.lightGray);
+		boxAuswahl[3].setBackground(Color.lightGray);
+		boxAuswahl[4].setBackground(Color.lightGray);
+		boxAuswahl[5].setBackground(Color.lightGray);
 
 		menuPanel.add(lBenutzer);
 		menuPanel.add(lAngBenutzer);
@@ -240,12 +225,12 @@ public class Hauptfenster {
 			lBenutzer.setText(ResourceBundle.getBundle("Bundle", locale).getString("Benutzer"));
 			lKarten.setText(ResourceBundle.getBundle("Bundle", locale).getString("Karten"));
 			lSprache.setText(ResourceBundle.getBundle("Bundle", locale).getString("Sprache"));
-			home.setText(ResourceBundle.getBundle("Bundle", locale).getString("ButtonKartei"));
-			kartei1.setText(ResourceBundle.getBundle("Bundle", locale).getString("Fach") + " 1");
-			kartei2.setText(ResourceBundle.getBundle("Bundle", locale).getString("Fach") + " 2");
-			kartei3.setText(ResourceBundle.getBundle("Bundle", locale).getString("Fach") + " 3");
-			kartei4.setText(ResourceBundle.getBundle("Bundle", locale).getString("Fach") + " 4");
-			kartei5.setText(ResourceBundle.getBundle("Bundle", locale).getString("Fach") + " 5");
+			boxAuswahl[0].setText(ResourceBundle.getBundle("Bundle", locale).getString("ButtonKartei"));
+			boxAuswahl[1].setText(ResourceBundle.getBundle("Bundle", locale).getString("Fach") + " 1");
+			boxAuswahl[2].setText(ResourceBundle.getBundle("Bundle", locale).getString("Fach") + " 2");
+			boxAuswahl[3].setText(ResourceBundle.getBundle("Bundle", locale).getString("Fach") + " 3");
+			boxAuswahl[4].setText(ResourceBundle.getBundle("Bundle", locale).getString("Fach") + " 4");
+			boxAuswahl[5].setText(ResourceBundle.getBundle("Bundle", locale).getString("Fach") + " 5");
 			// KarteiPanel aktualisieren auf neue Sprache
 			k1.removeAll();
 			k1.repaint();
@@ -303,90 +288,35 @@ public class Hauptfenster {
 
 		public void actionPerformed(ActionEvent e) {
 			JButton b = (JButton) e.getSource();
-			String msg = (String) b.getText();
-			home.setBackground(Color.lightGray);
-			kartei1.setBackground(Color.lightGray);
-			kartei2.setBackground(Color.lightGray);
-			kartei3.setBackground(Color.lightGray);
-			kartei4.setBackground(Color.lightGray);
-			kartei5.setBackground(Color.lightGray);
-			String str = msg.replaceAll("\\D+","");
-			System.out.println(str);
-			switch (str) {
-			case "":
-				home.setBackground(Color.CYAN);
+			boxAuswahl[0].setBackground(Color.lightGray);
+			boxAuswahl[1].setBackground(Color.lightGray);
+			boxAuswahl[2].setBackground(Color.lightGray);
+			boxAuswahl[3].setBackground(Color.lightGray);
+			boxAuswahl[4].setBackground(Color.lightGray);
+			boxAuswahl[5].setBackground(Color.lightGray);
+			int str = Integer.parseInt(0 + b.getText().replaceAll("\\D+",""));
+			if (str == 0) {
+				boxAuswahl[0].setBackground(Color.CYAN);
 				statPanel.removeAll();
 				statPanel.add(k1);
 				statPanel.validate();
 				statPanel.repaint();
-				break;
-			case "1":
-				kartei1.setBackground(Color.CYAN);
-				main.daten1.setAktuellesFach(1);
+			}
+			else {
+				boxAuswahl[str].setBackground(Color.CYAN);
+				main.daten1.setAktuellesFach(str);
 				main.daten1.gibNaechsteKarte();
+				System.out.println(main.daten1.getAktuelleKarte());
+				p1.loadCard();
 				statPanel.removeAll();
 				statPanel.add(p1);
 				statPanel.validate();
 				statPanel.repaint();
-				break;
-			case "2":
-				kartei2.setBackground(Color.CYAN);
-				main.daten1.setAktuellesFach(2);
-				main.daten1.gibNaechsteKarte();
-				statPanel.removeAll();
-				statPanel.add(p2);
-				statPanel.validate();
-				statPanel.repaint();
-				break;
-			case "3":
-				kartei3.setBackground(Color.CYAN);
-				main.daten1.setAktuellesFach(3);
-				main.daten1.gibNaechsteKarte();
-				statPanel.removeAll();
-				statPanel.add(p3);
-				statPanel.validate();
-				statPanel.repaint();
-				break;
-			case "4":
-				kartei4.setBackground(Color.CYAN);
-				main.daten1.setAktuellesFach(4);
-				main.daten1.gibNaechsteKarte();
-				statPanel.removeAll();
-				statPanel.add(p4);
-				statPanel.validate();
-				statPanel.repaint();
-				break;
-			case "5":
-				kartei5.setBackground(Color.CYAN);
-				main.daten1.setAktuellesFach(5);
-				main.daten1.gibNaechsteKarte();
-				statPanel.removeAll();
-				statPanel.add(p5);
-				statPanel.validate();
-				statPanel.repaint();
-				break;
 			}
 
+			
 		}
 
 	}
 
-	public static void main(String[] args) {
-
-		Hauptfenster gui1 = new Hauptfenster(locale);
-		try {
-			// Set cross-platform Java L&F (also called o"Metal")
-			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-		} catch (UnsupportedLookAndFeelException e) {
-			// handle exception
-		} catch (ClassNotFoundException e) {
-			// handle ii
-		} catch (InstantiationException e) {
-			// handle exception
-		} catch (IllegalAccessException e) {
-			// handle exceptiondd
-		}
-
-		gui1.paint();
-	}
 }
