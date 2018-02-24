@@ -67,8 +67,8 @@ public class Kartei {
 		this.aktuellesFach=1;
 	}
 
-	public String getAktuelleSprache() {
-		return aktuellesSprachpaar;
+	public Sprache getAktuelleSprache() {
+		return aktuelleSprache;
 	}
 
 	public void setAktuelleSprache(String aktuelleSprache) {
@@ -309,6 +309,7 @@ public class Kartei {
 			for (byte b : md5.digest()) {
 				f.format("%02x", b);
 			}
+			f.close();
 		} catch (NoSuchAlgorithmException ex) {
 			ex.printStackTrace();
 		}
@@ -347,28 +348,25 @@ public class Kartei {
 	public void setAktuelleKarte(Karte aktuelleKarte) {
 		this.aktuelleKarte = aktuelleKarte;
 	}
-
-	public ArrayList<String> getSprachen() {
-		ArrayList<String> sprachenListe = new ArrayList<String>();
-		for (Sprache s : sprachen) {
-			String sp = s.getSprachPaar();
-			sprachenListe.add(sp);
-		}
-		return sprachenListe;
-	}
 	
-	private boolean spracheWaehlen(String sprachpaar) {
+	public boolean spracheWaehlen(String sprachpaar) {
 		
 		for (Sprache s : sprachen) {
 			if (s.getSprachPaar().equals(sprachpaar)){
 				aktuelleSprache = s;
 				aktuellesSprachpaar = s.getSprachPaar();
+				aktuelleSprache = s;
 				return true;
 			}
 		}
 		
 		return false;
 	}
+
+	public ArrayList<Sprache> getSprachen() {
+		return sprachen;
+	}
+	
 	
 	
 }

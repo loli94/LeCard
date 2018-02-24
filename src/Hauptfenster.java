@@ -13,18 +13,9 @@ import java.util.ResourceBundle;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
-
-import javafx.scene.control.ComboBox;
-/* @autor Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
- * @version 2.4
- * Datum:24.02.2018
- */
 
 public class Hauptfenster {
 	public static Locale locale;
@@ -32,16 +23,15 @@ public class Hauptfenster {
 	private JFrame mainFrame;
 	private JLabel lSprache;
 	private JButton[] boxAuswahl;
-	private JComboBox kartenMenu;
-	private JComboBox sprachenMenu;
-	private JComboBox lernSprachenMenu;
+	private JComboBox<String>  kartenMenu;
+	private JComboBox<String>  anzeigeSprachenMenu;
+	private JComboBox<String>  lernSprachenMenu;
 	private JLabel lBenutzer;
 	private JLabel lAngBenutzer;
 	private JLabel lKarten;
 	private String country;
 	private String language;
 	private JPanel statPanel;
-	// muss noch geändert werden
 	private PanelLernen p1;
 	private PanelKartei k1;
 
@@ -53,7 +43,7 @@ public class Hauptfenster {
 	private JButton importButton;
 
 	public Hauptfenster(Locale lokal) {
-		this.locale = lokal;
+		Hauptfenster.locale = lokal;
 		mainFrame = new JFrame("LeCard", null);
 		karteiPanel = new JPanel();
 		menuPanel = new JPanel();
@@ -80,12 +70,13 @@ public class Hauptfenster {
 		lBenutzer = new JLabel(ResourceBundle.getBundle("Bundle", locale).getString("Benutzer"));
 		lKarten = new JLabel(ResourceBundle.getBundle("Bundle", locale).getString("Karten"));
 		lSprache = new JLabel(ResourceBundle.getBundle("Bundle", locale).getString("Sprache"));
+		
 		//Panel initiieren
 		p1 = new PanelLernen();
 
 		// Dropdown Sprachenmenu
 		String spracheBox[] = { "Deutsch", "English", "Francaise", "Italiano" };
-		sprachenMenu = new JComboBox(spracheBox);
+		anzeigeSprachenMenu = new JComboBox<String>(spracheBox);
 
 		// Dropdown Karteimenu
 		kartenMenuBox = new ArrayList<String>();
@@ -94,7 +85,8 @@ public class Hauptfenster {
 		kartenMenuBox.add(ResourceBundle.getBundle("Bundle", locale).getString("bearbeiten"));
 		kartenMenuBox.add(ResourceBundle.getBundle("Bundle", locale).getString("hinzufuegen"));
 
-		kartenMenu = new JComboBox();
+		
+		kartenMenu = new JComboBox<String>();
 
 		importButton = new JButton("Import");
 
@@ -102,30 +94,29 @@ public class Hauptfenster {
 			kartenMenu.addItem(kartenMenuBox.get(i));
 		}
 
-		System.out.println(ResourceBundle.getBundle("Bundle", locale).getLocale().getLanguage());
 		switch (ResourceBundle.getBundle("Bundle", locale).getLocale().getLanguage()) {
 		case "de":
-			sprachenMenu.setSelectedIndex(0);
+			anzeigeSprachenMenu.setSelectedIndex(0);
 			break;
 		case "en":
-			sprachenMenu.setSelectedIndex(1);
+			anzeigeSprachenMenu.setSelectedIndex(1);
 			break;
 		case "fr":
-			sprachenMenu.setSelectedIndex(2);
+			anzeigeSprachenMenu.setSelectedIndex(2);
 			break;
 		case "it":
-			sprachenMenu.setSelectedIndex(3);
+			anzeigeSprachenMenu.setSelectedIndex(3);
 			break;
 		default:
 			break;
 		}
 		
-		//Dropdown SpracheLernen
-		lernSprachenMenu = new JComboBox();
+		//Dropdown Lernsprachen
 		
-		for(String s : main.daten1.getSprachen()) {
-			lernSprachenMenu.addItem(s);
-			System.out.println(s);
+		lernSprachenMenu = new JComboBox<String>();
+		
+		for(Sprache s : main.daten1.getSprachen()) {
+			lernSprachenMenu.addItem(s.getSprachPaar());
 		}
 		
 		
@@ -133,7 +124,8 @@ public class Hauptfenster {
 	}
 
 	public void bindListener() {
-		sprachenMenu.addActionListener(new DropDownListenerSprache());
+		anzeigeSprachenMenu.addActionListener(new DropDownListenerAnzeigeSprache());
+		lernSprachenMenu.addActionListener(new DropDownListenerLernSprache());
 		kartenMenu.addActionListener(new DropDownListenerKarten());
 		
 		for (int i=0; i <=5; i++ ) {
@@ -160,10 +152,8 @@ public class Hauptfenster {
 
 	public void paint() {
 		mainFrame.setSize(1000, 500);
-		// mainFrame.setLayout(new GridLayout(1,2));
 		karteiPanel.setLayout(new GridLayout(6, 1));
 		menuPanel.setLayout(new GridLayout(1, 3));
-		// menuPanel.setLayout(new GridLayout(2,1));
 		mainFrame.add(karteiPanel, BorderLayout.WEST);
 
 		statPanel.add(k1);
@@ -178,9 +168,9 @@ public class Hauptfenster {
 		menuPanel.add(lAngBenutzer);
 		menuPanel.add(lernSprachenMenu);
 		menuPanel.add(lKarten);
-		menuPanel.add(this.kartenMenu);
+		menuPanel.add(kartenMenu);
 		menuPanel.add(lSprache);
-		menuPanel.add(this.sprachenMenu);
+		menuPanel.add(anzeigeSprachenMenu);
 
 		mainFrame.add(statPanel, BorderLayout.CENTER);
 		mainFrame.add(menuPanel, BorderLayout.NORTH);
@@ -189,7 +179,7 @@ public class Hauptfenster {
 
 	}
 
-	class DropDownListenerSprache implements ActionListener {
+	class DropDownListenerAnzeigeSprache implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
 			JComboBox cb = (JComboBox) e.getSource();
@@ -247,6 +237,19 @@ public class Hauptfenster {
 
 				kartenMenu.addItem(kartenMenuBox.get(i));
 			}
+
+		}
+
+	}
+	
+	class DropDownListenerLernSprache implements ActionListener {
+
+		public void actionPerformed(ActionEvent e) {
+			JComboBox<String> cb = (JComboBox<String>) e.getSource();
+			String selection = (String) cb.getSelectedItem();
+			main.daten1.spracheWaehlen(selection);
+			System.out.println(selection);
+			
 
 		}
 
