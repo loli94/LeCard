@@ -2,7 +2,10 @@ import java.util.UUID;
 
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlElement;
-
+/* @autor Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
+ * @version 0.3
+ * Datum:24.02.2018
+ */
 @XmlRootElement (name = "KartenStatus")
 public class KartenStatus {
 	

@@ -16,7 +16,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
-
+/* @autor Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
+ * @version 0.4
+ * Datum:24.02.2018
+ */
 public class PanelLernen extends JPanel {
 	private JPanel jp2;
 	private JButton b2;

@@ -1,5 +1,9 @@
 import java.util.ArrayList;
 
+/* @autor Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
+ * @version 1.6
+ * Datum:24.02.2018
+ */
 public class Fach {
 	
 	private int fachNummer;

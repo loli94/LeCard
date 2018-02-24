@@ -11,7 +11,10 @@ import javax.swing.JEditorPane;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
+/* @autor Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
+ * @version 0.8
+ * Datum:24.02.2018
+ */
 public class PanelKartei extends JPanel {
 
 	private JPanel mainFrame;

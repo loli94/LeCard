@@ -12,7 +12,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-
+/* @autor Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
+ * @version 0.2
+ * Datum:24.02.2018
+ */
 public class PanelNeuerBenutzer {
 
 	private JFrame mainFrame_1;

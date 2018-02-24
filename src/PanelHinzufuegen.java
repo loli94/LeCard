@@ -11,7 +11,10 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-
+/* @autor Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
+ * @version 0.6
+ * Datum:24.02.2018
+ */
 public class PanelHinzufuegen {
 
 	private JFrame mainFrame_1;

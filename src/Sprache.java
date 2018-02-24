@@ -1,4 +1,7 @@
-
+/* @autor Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
+ * @version 0.2
+ * Datum:24.02.2018
+ */
 public class Sprache {
 	
 	private String sprachPaar;

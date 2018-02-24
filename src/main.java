@@ -1,4 +1,7 @@
-
+/* @autor Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
+ * @version 1.2
+ * Datum:24.02.2018
+ */
 public class main {
 	
 	public static Kartei daten1;

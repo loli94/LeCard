@@ -6,7 +6,10 @@ import java.util.ArrayList;
 
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
-
+/* @autor Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
+ * @version 0.1
+ * Datum:24.02.2018
+ */
 //zeigt einen Öffnen Dialog
 public class opendialog
 {

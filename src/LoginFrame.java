@@ -19,7 +19,10 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.event.CaretListener;
-
+/* @autor Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
+ * @version 0.3
+ * Datum:24.02.2018
+ */
 public class LoginFrame {
 
 	private JFrame mainFrame;

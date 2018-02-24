@@ -9,7 +9,10 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
-
+/* @autor Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
+ * @version 0.3
+ * Datum:24.02.2018
+ */
 @XmlRootElement(name = "Kartei")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Kartei {

@@ -1,6 +1,10 @@
 import java.util.*;
 import javax.xml.bind.annotation.*;
 
+/* @autor Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
+ * @version 1.7
+ * Datum:24.02.2018
+ */
 @XmlRootElement(name = "Karte")
 @XmlAccessorType(XmlAccessType.FIELD)
 

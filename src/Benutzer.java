@@ -8,6 +8,9 @@ import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 
+/* @autor Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
+ * @version 0.3
+ */
 
 @XmlRootElement(name = "Benutzer")
 @XmlType(propOrder = { "benutzername", "passwort", "lernfortschritte" })
