@@ -60,7 +60,7 @@ public class PanelLernen extends JPanel {
 		lSpracheEins.setForeground(Color.orange);
 		lSpracheEins.setPreferredSize(new Dimension(220, 22));
 		lSpracheEinsFrage = new JLabel();
-		lSpracheEinsFrage.setPreferredSize(new Dimension(50,22));
+		lSpracheEinsFrage.setPreferredSize(new Dimension(220,22));
 		lSpracheZwei = new JLabel(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("Fremdsprache"));
 		lSpracheZwei.setPreferredSize(new Dimension(220, 22));
 		lSpracheZwei.setForeground(Color.blue);
@@ -94,11 +94,11 @@ public class PanelLernen extends JPanel {
 		
 		lLoesung = new JLabel("");
 		// initiiere Layout von den Panles
-		lLoesung.setLayout(new BorderLayout(20,20));
 		pLernen.setLayout(new GridLayout(4, 1));
+		pSpracheEins.setLayout(new GridLayout(1, 2));
 		pSpracheZwei.setLayout(new GridLayout(1, 2));
 		pAuswertung.setLayout(new GridLayout(1, 2));
-		pPruefen.setLayout(new  GridLayout(0, 2));
+		pPruefen.setLayout(new  GridLayout(1, 2));
 		
 	}
 	
@@ -112,7 +112,7 @@ public class PanelLernen extends JPanel {
 	
 	//Dialog keine Karte vorhanden und "Prüfen Button" ausblenden
 		else {
-			JOptionPane.showMessageDialog(pLernen, "Keine weitere Karten vorhanden");
+			JOptionPane.showMessageDialog(pLernen, "Keine weiteren Karten vorhanden");
 			tSpracheZweiAntwort.setText("");
 			lSpracheEinsFrage.setText("-");
 			pPruefen.setVisible(false);
@@ -130,15 +130,17 @@ public class PanelLernen extends JPanel {
 
 	public void paint() {
 		// Adding Components
-		pSpracheEins.add(lSpracheEins);
-		pSpracheEins.add(lSpracheEinsFrage);
-		pSpracheZwei.add(lSpracheZwei);
-		pSpracheZwei.add(tSpracheZweiAntwort);
 
 		pSpracheEins.add(lSpracheEinsFrage,BorderLayout.CENTER);
-		pAuswertung.add(lLoesung, BorderLayout.EAST);
+		
+	    pAuswertung.add(lLoesung, BorderLayout.EAST);
+		pSpracheEins.add(lSpracheEins,BorderLayout.CENTER);
+		pSpracheEins.add(lSpracheEinsFrage,BorderLayout.CENTER);
+		pSpracheZwei.add(lSpracheZwei,BorderLayout.EAST);
+		pSpracheZwei.add(tSpracheZweiAntwort,BorderLayout.EAST);
 		pPruefen.add(bWechsel, BorderLayout.WEST);
-		pPruefen.add(bPruefen, BorderLayout.EAST);
+		pPruefen.add(bPruefen, BorderLayout.EAST); 
+		
 		
 
 		pLernen.add(pSpracheEins);
