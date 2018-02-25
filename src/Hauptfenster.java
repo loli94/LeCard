@@ -13,6 +13,10 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.border.Border;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EmptyBorder;
 
 public class Hauptfenster {
 	public static Locale locale;
@@ -20,7 +24,7 @@ public class Hauptfenster {
 	private JFrame mainFrame;
 	private JButton[] boxAuswahl;
 	private JComboBox<String>  lernSprachenMenu;
-	private JLabel lBenutzer, lAngBenutzer, lLernSprache;
+	private JLabel lBenutzer, lLernSprache;
 	private JPanel statPanel, karteiPanel, menuPanel;
 	private PanelLernen panelLernen;
 	private PanelKartei panelKartei;
@@ -51,9 +55,9 @@ public class Hauptfenster {
 			boxAuswahl[i] = new JButton(ResourceBundle.getBundle("Bundle", locale).getString("Fach") + " " + i);
 		}
 
-		lAngBenutzer = new JLabel(main.daten1.getBenutzer().getBenutzername());
-		lBenutzer = new JLabel(ResourceBundle.getBundle("Bundle", locale).getString("Benutzer"));
-		lLernSprache = new JLabel(ResourceBundle.getBundle("Bundle", locale).getString("Lernsprache"));
+		lBenutzer = new JLabel(ResourceBundle.getBundle("Bundle", locale).getString("Benutzer") + ": "+ main.daten1.getBenutzer().getBenutzername());
+		lLernSprache = new JLabel(ResourceBundle.getBundle("Bundle", locale).getString("Lernsprache") + ": ");
+		lLernSprache.setHorizontalAlignment(JTextField.RIGHT);
 		
 		//Panel initiieren
 		panelLernen = new PanelLernen();
@@ -82,8 +86,15 @@ public class Hauptfenster {
 		mainFrame.setSize(1000, 500);
 		mainFrame.setIconImage(icon.getImage());
 		
-		karteiPanel.setLayout(new GridLayout(6, 1));
-		menuPanel.setLayout(new GridLayout(1, 3));
+		
+		karteiPanel.setLayout(new GridLayout(6, 1, 5, 5));
+		Border border = karteiPanel.getBorder();
+		Border margin = new EmptyBorder(10,10,10,10);
+		karteiPanel.setBorder(new CompoundBorder(border, margin));
+		
+		menuPanel.setLayout(new GridLayout(1, 2));
+		menuPanel.setBorder(new CompoundBorder(border, margin));
+		
 		mainFrame.add(karteiPanel, BorderLayout.WEST);
 
 		statPanel.add(panelKartei);
@@ -94,12 +105,9 @@ public class Hauptfenster {
 		}
 		boxAuswahl[0].setBackground(Color.CYAN);
 
-		menuPanel.add(lBenutzer);
-		menuPanel.add(lAngBenutzer);
-		
+		menuPanel.add(lBenutzer);		
 		menuPanel.add(lLernSprache);
 		menuPanel.add(lernSprachenMenu);
-
 
 		mainFrame.add(statPanel, BorderLayout.CENTER);
 		mainFrame.add(menuPanel, BorderLayout.NORTH);
