@@ -35,11 +35,8 @@ public class PanelKartei extends JPanel {
 	private JLabel richtigeAntwort;
 	private JLabel falscheAntwort;
 	private JLabel total;
-<<<<<<< HEAD
 	private JPanel statistik;
-=======
 	private PanelKarteiVerwalten panelKarteiVerwalten; 
->>>>>>> branch 'master' of https://github.com/loli94/LeCard.git
 
 	public PanelKartei() {
 		initComponents();
