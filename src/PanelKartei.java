@@ -1,16 +1,21 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ResourceBundle;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JEditorPane;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import sun.security.provider.VerificationProvider;
 /* @autor Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
  * @version 0.8
  * Datum:24.02.2018
@@ -30,6 +35,7 @@ public class PanelKartei extends JPanel {
 	private JLabel richtigeAntwort;
 	private JLabel falscheAntwort;
 	private JLabel total;
+	private JPanel statistik;
 
 	public PanelKartei() {
 		initComponents();
@@ -45,7 +51,10 @@ public class PanelKartei extends JPanel {
 
 	public void initComponents() {
 		mainFrame = new JPanel();
-		grafischeStat = new JPanel();
+		statistik = new StatistikPanel();
+		grafischeStat = statistik;
+		grafischeStat.setPreferredSize(new Dimension(400, 400));
+		
 		datenStatistik = new JPanel();
 		kartei = new JPanel();
 		stat = new JPanel();
@@ -79,14 +88,17 @@ public class PanelKartei extends JPanel {
 		datenStatistik.add(falscheAntwort);
 		datenStatistik.add(total);
 
-		mainFrame.setLayout(new GridLayout(3, 1));
+		//mainFrame.setLayout(new GridLayout(3, 1));
+		mainFrame.setLayout(new BoxLayout(mainFrame, BoxLayout.PAGE_AXIS));
 
-		kartei.setLayout(new GridLayout(1, 3));
-		stat.setLayout(new GridLayout(1, 2));
-
-		kartei.add(aktuelleKartei, BorderLayout.WEST);
-		kartei.add(ausgewaehlteKartei, BorderLayout.CENTER);
-		kartei.add(karteiBearbeiten, BorderLayout.EAST);
+		//kartei.setLayout(new GridLayout(1, 3));
+		kartei.setLayout(new FlowLayout());
+		//stat.setLayout(new GridLayout(1, 2));
+		stat.setLayout(new FlowLayout());
+		
+		kartei.add(aktuelleKartei);
+		kartei.add(ausgewaehlteKartei);
+		kartei.add(karteiBearbeiten);
 
 		stat.add(grafischeStat);
 		stat.add(datenStatistik);
