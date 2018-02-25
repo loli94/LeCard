@@ -30,6 +30,7 @@ public class PanelKartei extends JPanel {
 	private JLabel richtigeAntwort;
 	private JLabel falscheAntwort;
 	private JLabel total;
+	private PanelKarteiVerwalten panelKarteiVerwalten; 
 
 	public PanelKartei() {
 		initComponents();
@@ -112,7 +113,9 @@ public class PanelKartei extends JPanel {
 
 	class ButtonListenerKarteiBearbeiten implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			System.out.println("wechseln");
+			PanelKarteiVerwalten gui1 = new PanelKarteiVerwalten();
+			gui1.paint();
+			
 
 		}
 	}
