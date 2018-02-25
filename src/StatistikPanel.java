@@ -50,7 +50,47 @@ public class StatistikPanel extends JPanel {
 		g.fillRect(kart5_X, kart5_Y, kart5_WIDTH, kart5_Height);
 		g.drawString(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("Kartei5"), 10, 285);
 	}
+
+	public int getKart1_WIDTH() {
+		return Kart1_WIDTH;
+	}
+
+	public void setKart1_WIDTH(int kart1_WIDTH) {
+		Kart1_WIDTH = kart1_WIDTH;
+	}
+
+	public int getKart2_WIDTH() {
+		return kart2_WIDTH;
+	}
+
+	public void setKart2_WIDTH(int kart2_WIDTH) {
+		this.kart2_WIDTH = kart2_WIDTH;
+	}
+
+	public int getKart3_WIDTH() {
+		return kart3_WIDTH;
+	}
+
+	public void setKart3_WIDTH(int kart3_WIDTH) {
+		this.kart3_WIDTH = kart3_WIDTH;
+	}
+
+	public int getKart4_WIDTH() {
+		return kart4_WIDTH;
+	}
+
+	public void setKart4_WIDTH(int kart4_WIDTH) {
+		this.kart4_WIDTH = kart4_WIDTH;
+	}
+
+	public int getKart5_WIDTH() {
+		return kart5_WIDTH;
+	}
+
+	public void setKart5_WIDTH(int kart5_WIDTH) {
+		this.kart5_WIDTH = kart5_WIDTH;
+	}
 	
-	//Getter und setter
+	
 
 }
