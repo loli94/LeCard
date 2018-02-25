@@ -5,6 +5,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import sun.text.resources.CollationData;
 /* @autor Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
  * @version 0.3
  * Datum:24.02.2018
@@ -13,7 +15,6 @@ public class LoadCsv {
 	private File f;
 	private String separator;
 	private ArrayList<String> wortA, wortB, sprache;
-	private Kartei kartei;
 
 	public LoadCsv(String csvfile, String separator) throws FileNotFoundException, IOException {
 		System.out.println(csvfile);
@@ -24,7 +25,6 @@ public class LoadCsv {
 		wortA = new ArrayList<>();
 		wortB = new ArrayList<>();
 		sprache= new ArrayList<>();
-		kartei = Kartei.getInstance();
 
 		readCsv();
 		uploadData();
@@ -68,24 +68,23 @@ public class LoadCsv {
 	// speichert die Wörter ins Array
 	private void saveInList(String[] col) {
 		wortA.add(col[0]);
+		System.out.println(wortA);
 		wortB.add(col[1]);
+		System.out.println(wortB);
 		sprache.add(col[2]);
+		System.out.println(sprache);
 	}
 
-	// übergibt die Wörter an die Logik
+	// übergibt die Wörter an die Kartei
 	
 	public void uploadData() {
 		for (int i = 0; i < wortA.size(); i++) {
 			System.out.println("Karte hinzufuegen: " + sprache.get(i) + "; " + wortA.get(i) + "; " + wortB.get(i) );
-			kartei.karteHinzufuegen(new Karte(sprache.get(i),wortA.get(i),wortB.get(i)));
+			main.daten1.karteHinzufuegen(new Karte(sprache.get(i),wortA.get(i),wortB.get(i)));
 		}
 	
 	}
 
-	private void Kartei(ArrayList<String> wortA2, ArrayList<String> wortB2, ArrayList<String> sprache2) {
-		// TODO Auto-generated method stub
-		
-	}
 	
 	
 }

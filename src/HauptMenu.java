@@ -27,7 +27,7 @@ public class HauptMenu  extends JMenuBar{
     			dateiMenu = new JMenu(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("Datei"));
     			
     			menuItem = new JMenuItem(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("Importieren"));
-    			menuItem.addActionListener(new ListenerDateiMenu());
+    			menuItem.addActionListener(new ListenerImportMenu());
     			dateiMenu.add(menuItem);
     			
     			menuItem = new JMenuItem(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("Beenden"));
@@ -41,15 +41,15 @@ public class HauptMenu  extends JMenuBar{
     			kartenMenu = new JMenu(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("Karte"));
     			
     			menuItem = new JMenuItem(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("hinzufuegen"));
-    			menuItem.addActionListener(new ListenerDateiMenu());
+    			menuItem.addActionListener(new ListenerKartenMenu());
     			kartenMenu.add(menuItem);
 
     			menuItem = new JMenuItem(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("bearbeiten"));
-    			menuItem.addActionListener(new ListenerDateiMenu());
+    			menuItem.addActionListener(new ListenerKartenMenu());
     			kartenMenu.add(menuItem);
     			
     			menuItem = new JMenuItem(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("loeschen"));
-    			menuItem.addActionListener(new ListenerDateiMenu());
+    			menuItem.addActionListener(new ListenerKartenMenu());
     			kartenMenu.add(menuItem);
     			
     			this.add(kartenMenu);
@@ -135,4 +135,41 @@ public class HauptMenu  extends JMenuBar{
 
 	}
 	
+	class ListenerKartenMenu implements ActionListener {
+
+		public void actionPerformed(ActionEvent e) {
+			JMenuItem menuitem = (JMenuItem) e.getSource();
+			String msg = menuitem.getText();
+			System.out.println(msg);
+			
+			if (ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("hinzufuegen").equals(msg)){
+				System.out.println(msg);
+				PanelHinzufuegen ph = new PanelHinzufuegen();
+				ph.paint();
+			}
+			
+			if (ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("loeschen").equals(msg)){
+				main.hauptFenster.karteLoeschen();
+				System.out.println(msg);
+			}
+			
+			if (ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("bearbeiten").equals(msg)){
+				System.out.println(msg);
+			}
+			
+
+		}
+		
+		
+	}
+	
+	class ListenerImportMenu implements ActionListener {
+
+		public void actionPerformed(ActionEvent e) {
+			panelImport imp = new panelImport();
+			main.daten1.lernkarteiSpeichern(main.pfad);
+			main.daten1.faecherBefuellen();
+		}
+
+}
 }
