@@ -108,6 +108,7 @@ public class PanelKartei extends JPanel {
 		public void actionPerformed(ActionEvent e) {
 			System.out.println("Lernen");
 		}
+		
 
 	}
 

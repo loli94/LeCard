@@ -22,6 +22,7 @@ public class PanelKarteiVerwalten {
 	private JPanel hauptPanel;
 	private JPanel vorhandeneKartei;
 	private JPanel hinzufuegenKartei;
+	
 
 	private JPanel inhaltKarteiVorhanden;
 	private JPanel buttonPanelVorhanden;
