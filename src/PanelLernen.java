@@ -157,6 +157,7 @@ public class PanelLernen extends JPanel {
 		public void actionPerformed(ActionEvent e) {
 			System.out.println("Sprache wird gewechselt");
 
+			
 		}
 	}
 

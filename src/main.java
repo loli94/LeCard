@@ -6,6 +6,7 @@ public class main {
 	
 	public static Kartei daten1;
 	public static String pfad;
+	public static Hauptfenster hauptFenster;
 
 	public static void main(String[] args) {
 		
