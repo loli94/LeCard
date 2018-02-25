@@ -1,20 +1,17 @@
 import java.awt.BorderLayout;
-
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
 public class Hauptfenster {
@@ -24,10 +21,10 @@ public class Hauptfenster {
 	private JButton[] boxAuswahl;
 	private JComboBox<String>  lernSprachenMenu;
 	private JLabel lBenutzer, lAngBenutzer, lLernSprache;
-	private String country, language;
 	private JPanel statPanel, karteiPanel, menuPanel;
 	private PanelLernen panelLernen;
 	private PanelKartei panelKartei;
+	private ImageIcon icon;
 	
 	public Hauptfenster(Locale lokal) {
 		Hauptfenster.locale = lokal;
@@ -46,6 +43,7 @@ public class Hauptfenster {
 	private void initComponents() {
 		statPanel = new JPanel();
 		panelKartei = new PanelKartei();
+		icon = new ImageIcon(this.getClass().getResource("LeCard.png"));
 		
 		boxAuswahl = new JButton[6];
 		boxAuswahl[0] = new JButton("Home");
@@ -82,6 +80,8 @@ public class Hauptfenster {
 
 	public void paint() {
 		mainFrame.setSize(1000, 500);
+		mainFrame.setIconImage(icon.getImage());
+		
 		karteiPanel.setLayout(new GridLayout(6, 1));
 		menuPanel.setLayout(new GridLayout(1, 3));
 		mainFrame.add(karteiPanel, BorderLayout.WEST);
@@ -121,32 +121,6 @@ public class Hauptfenster {
 
 	}
 
-	class DropDownListenerKarten implements ActionListener {
-
-		public void actionPerformed(ActionEvent e) {
-			JComboBox cb = (JComboBox) e.getSource();
-			int msg = cb.getSelectedIndex();
-			System.out.println(msg);
-
-			switch (msg) {
-			case 0:
-				// Methode bearbeiten
-				// Muss erst gemacht werden
-				break;
-			case 1:
-				// löschen
-				break;
-
-			case 2:
-				PanelHinzufuegen gui1 = new PanelHinzufuegen();
-				gui1.paint();
-				break;
-			}
-
-		}
-
-	}
-
 	class ButtonListenerKartei implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
@@ -174,28 +148,9 @@ public class Hauptfenster {
 				statPanel.validate();
 				statPanel.repaint();
 			}
-
-			
 		}
-
 	}
 	
-	class ListenerDateiMenu implements ActionListener {
-
-		public void actionPerformed(ActionEvent e) {
-			JMenuItem menuitem = (JMenuItem) e.getSource();
-			String msg = menuitem.getText();
-			System.out.println(msg);
-
-			switch (msg) {
-			case "Beenden":
-				break;
-			case "Import":
-				break;
-			}
-		}
-
-	}
 
 	public void spracheWechseln() {
 		
@@ -221,5 +176,18 @@ public class Hauptfenster {
 		
 		
 	}
+
+	public void karteLoeschen() {
+		Karte kl = main.daten1.getAktuelleKarte();
+		System.out.println(main.daten1.getAktuelleKarte());
+		main.daten1.karteLoeschen(kl);
+		main.daten1.gibNaechsteKarte();
+		System.out.println(main.daten1.getAktuelleKarte());	
+		panelLernen.loadCard();
+		System.out.println(main.daten1.getAktuelleKarte());	
+		main.daten1.lernkarteiSpeichern(main.pfad);
+	}
+	
+	
 
 }
