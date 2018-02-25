@@ -89,6 +89,7 @@ public class Kartei {
 
 	public void karteLoeschen(Karte k) {
 		kartei.remove(k);
+		fach[aktuellesFach].karteEnfernen(k);
 	}
 
 	public ArrayList<Karte> getLernkartei() {
@@ -365,6 +366,11 @@ public class Kartei {
 
 	public ArrayList<Sprache> getSprachen() {
 		return sprachen;
+	}
+	
+	public int getFachGroesse(int fachnummer) {
+		int fg = fach[fachnummer].gibAnzahlKarten();
+		return fg;
 	}
 	
 	
