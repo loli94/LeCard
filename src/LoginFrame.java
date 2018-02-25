@@ -160,8 +160,8 @@ public class LoginFrame {
 			
 			if (userExist == true) {
 
-				Hauptfenster gui1 = new Hauptfenster(locale);
-				gui1.paint();
+				main.hauptFenster = new Hauptfenster(locale);
+				main.hauptFenster.paint();
 				((JFrame) b.getParent().getParent().getParent().getParent().getParent()).setVisible(false);
 			} else {
 				JOptionPane.showMessageDialog(mainFrame, ResourceBundle.getBundle("Bundle", locale).getString("falschesPasswort"));
