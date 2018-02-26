@@ -115,7 +115,7 @@ public class PanelLernen extends JPanel {
 	
 	//Dialog keine Karte vorhanden und "Prüfen Button" ausblenden
 		else {
-			JOptionPane.showMessageDialog(pLernen, "Keine weiteren Karten vorhanden");
+			JOptionPane.showMessageDialog(pLernen, ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("keinKarteVorhanden"));
 			tSpracheZweiAntwort.setText("");
 			lSpracheEinsFrage.setText("-");
 			pPruefen.setVisible(false);
