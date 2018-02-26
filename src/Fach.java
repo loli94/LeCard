@@ -32,11 +32,7 @@ public class Fach {
 	}
 	
 	public int gibAnzahlKarten() {
-		int counter = 0;
-		for (Karte k : karten) {
-			counter++;
-		}
-		return counter;
+		return karten.size();
 	}
 	
 }

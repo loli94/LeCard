@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
@@ -187,14 +188,18 @@ public class Hauptfenster {
 	}
 
 	public void karteLoeschen() {
-		Karte kl = main.daten1.getAktuelleKarte();
-		System.out.println(main.daten1.getAktuelleKarte());
-		main.daten1.karteLoeschen(kl);
-		main.daten1.gibNaechsteKarte();
-		System.out.println(main.daten1.getAktuelleKarte());	
-		panelLernen.loadCard();
-		System.out.println(main.daten1.getAktuelleKarte());	
-		main.daten1.lernkarteiSpeichern(main.pfad);
+		
+		int result = JOptionPane.showConfirmDialog(null, "Delete this Card?", "Confirm", JOptionPane.YES_NO_OPTION);
+		if (result == JOptionPane.YES_OPTION) {
+			Karte kl = main.daten1.getAktuelleKarte();
+			main.daten1.karteLoeschen(kl);
+			panelLernen.loadCard();
+		} else if (result == JOptionPane.NO_OPTION) {
+		    System.exit(0);
+		} 
+		
+
+		
 	}
 	
 	

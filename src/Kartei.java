@@ -89,7 +89,7 @@ public class Kartei {
 
 	public void karteLoeschen(Karte k) {
 		kartei.remove(k);
-		fach[aktuellesFach].karteEnfernen(k);
+		fach[aktuellesFach-1].karteEnfernen(k);
 	}
 
 	public ArrayList<Karte> getLernkartei() {
@@ -254,6 +254,8 @@ public class Kartei {
 		for (Karte k : fach[aktuellesFach - 1].gibKarten()) {
 			if (k.getSprache().equals(aktuellesSprachpaar)) {
 				this.aktuelleKarte= k;
+				
+				System.out.println(k);
 				
 				return true;
 			}
