@@ -8,8 +8,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
-
-public class HauptMenu extends JMenuBar{
+public class HauptMenu extends JMenuBar {
 
 	private static final long serialVersionUID = 1L;
 	private JMenu dateiMenu, sprachMenu, anzeigeMenu, kartenMenu;
@@ -17,10 +16,10 @@ public class HauptMenu extends JMenuBar{
 
 	public HauptMenu() {
 
-		//Dateimenu erstellen.
+		// Dateimenu erstellen.
 		dateiMenu = new JMenu(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("Datei"));
-		
-		menuItem = new JMenuItem(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("Importieren")) ;
+
+		menuItem = new JMenuItem(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("Importieren"));
 		menuItem.addActionListener(new ListenerHauptMenu());
 		menuItem.setName("importieren");
 		dateiMenu.add(menuItem);
@@ -32,8 +31,7 @@ public class HauptMenu extends JMenuBar{
 
 		this.add(dateiMenu);
 
-
-		//Menu für Kartenbearbeitenung
+		// Menu für Kartenbearbeitenung
 		kartenMenu = new JMenu(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("Karte"));
 
 		menuItem = new JMenuItem(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("hinzufuegen"));
@@ -53,11 +51,10 @@ public class HauptMenu extends JMenuBar{
 
 		this.add(kartenMenu);
 
-
-		//Menu für Anzeige.
+		// Menu für Anzeige.
 		anzeigeMenu = new JMenu(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("Anzeige"));
 
-		//Submenu für Spracheinstellung		
+		// Submenu für Spracheinstellung
 		sprachMenu = new JMenu(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("Sprache"));
 
 		menuItem = new JMenuItem("Deutsch");
@@ -81,10 +78,9 @@ public class HauptMenu extends JMenuBar{
 		sprachMenu.add(menuItem);
 
 		anzeigeMenu.add(sprachMenu);
-		this.add(anzeigeMenu);		
+		this.add(anzeigeMenu);
 
 	}
-
 
 	class ListenerHauptMenu implements ActionListener {
 
@@ -92,13 +88,12 @@ public class HauptMenu extends JMenuBar{
 			JMenuItem menuitem = (JMenuItem) e.getSource();
 			String selection = menuitem.getName();
 			System.out.println(selection);
-			
-			
+
 			switch (selection) {
 			case "beenden":
 				break;
 			case "importieren":
-				@SuppressWarnings("unused") 
+				@SuppressWarnings("unused")
 				panelImport imp = new panelImport();
 				main.daten1.lernkarteiSpeichern(main.pfad);
 				main.daten1.faecherBefuellen();
@@ -119,11 +114,10 @@ public class HauptMenu extends JMenuBar{
 				Hauptfenster.locale = new Locale(selection.toLowerCase(), selection);
 				main.hauptFenster.spracheWechseln();
 				break;
-				
+
 			}
 		}
 
-
 	}
-	
+
 }

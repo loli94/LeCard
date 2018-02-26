@@ -10,28 +10,22 @@ import javax.swing.JFrame;
 public class panelImport {
 
 	public panelImport() {
-		this.paint();
+		this.importFile();
 	}
 	
-	public void paint() {
+	public void importFile() {
 		FileDialog fd = new FileDialog(new JFrame(), "Choose a file", FileDialog.LOAD);
 		fd.setDirectory("C:\\");
 		fd.setFile("*.csv");
 		fd.setVisible(true);
 		String filename = fd.getDirectory() + fd.getFile();
-		if (filename == null)
-		  System.out.println("Abbruch");
-		else {
-			this.importFile(filename);
-		}
-	}
-	
-	public void importFile(String filename) {
-		try {
-			LoadCsv loader = new LoadCsv(filename, ";");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if (filename != null) {
+			try {
+				LoadCsv loader = new LoadCsv(filename, ";");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 
