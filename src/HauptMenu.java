@@ -1,6 +1,4 @@
 
-import java.awt.Dimension;
-import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Locale;
@@ -9,32 +7,27 @@ import java.util.ResourceBundle;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JPopupMenu;
 
 
-public class HauptMenu  extends JMenuBar{
+public class HauptMenu extends JMenuBar{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private JMenu dateiMenu, sprachMenu, anzeigeMenu, kartenMenu;
 	private JMenuItem menuItem;
-	private String country, language;
 
 	public HauptMenu() {
-
-		//Hauptmenu erstellen
 
 		//Dateimenu erstellen.
 		dateiMenu = new JMenu(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("Datei"));
 		
 		menuItem = new JMenuItem(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("Importieren")) ;
-		menuItem.addActionListener(new ListenerImportMenu());
+		menuItem.addActionListener(new ListenerHauptMenu());
+		menuItem.setName("importieren");
 		dateiMenu.add(menuItem);
 
 		menuItem = new JMenuItem(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("Beenden"));
-		menuItem.addActionListener(new ListenerDateiMenu());
+		menuItem.addActionListener(new ListenerHauptMenu());
+		menuItem.setName("beenden");
 		dateiMenu.add(menuItem);
 
 		this.add(dateiMenu);
@@ -44,15 +37,18 @@ public class HauptMenu  extends JMenuBar{
 		kartenMenu = new JMenu(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("Karte"));
 
 		menuItem = new JMenuItem(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("hinzufuegen"));
-		menuItem.addActionListener(new ListenerKartenMenu());
+		menuItem.setName("hinzufuegen");
+		menuItem.addActionListener(new ListenerHauptMenu());
 		kartenMenu.add(menuItem);
 
 		menuItem = new JMenuItem(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("bearbeiten"));
-		menuItem.addActionListener(new ListenerKartenMenu());
+		menuItem.setName("bearbeiten");
+		menuItem.addActionListener(new ListenerHauptMenu());
 		kartenMenu.add(menuItem);
 
 		menuItem = new JMenuItem(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("loeschen"));
-		menuItem.addActionListener(new ListenerKartenMenu());
+		menuItem.setName("loeschen");
+		menuItem.addActionListener(new ListenerHauptMenu());
 		kartenMenu.add(menuItem);
 
 		this.add(kartenMenu);
@@ -65,114 +61,68 @@ public class HauptMenu  extends JMenuBar{
 		sprachMenu = new JMenu(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("Sprache"));
 
 		menuItem = new JMenuItem("Deutsch");
-		menuItem.addActionListener(new ListenerSprachMenu());
+		menuItem.addActionListener(new ListenerHauptMenu());
+		menuItem.setName("DE");
 		sprachMenu.add(menuItem);
 
 		menuItem = new JMenuItem("English");
-		menuItem.addActionListener(new ListenerSprachMenu());
+		menuItem.addActionListener(new ListenerHauptMenu());
+		menuItem.setName("EN");
 		sprachMenu.add(menuItem);
 
 		menuItem = new JMenuItem("Francaise");
-		menuItem.addActionListener(new ListenerSprachMenu());
+		menuItem.addActionListener(new ListenerHauptMenu());
+		menuItem.setName("FR");
 		sprachMenu.add(menuItem);
 
 		menuItem = new JMenuItem("Italiano");
-		menuItem.addActionListener(new ListenerSprachMenu());
+		menuItem.addActionListener(new ListenerHauptMenu());
+		menuItem.setName("IT");
 		sprachMenu.add(menuItem);
 
 		anzeigeMenu.add(sprachMenu);
-		this.add(anzeigeMenu);
-		
+		this.add(anzeigeMenu);		
 
 	}
 
-	class ListenerDateiMenu implements ActionListener {
+
+	class ListenerHauptMenu implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
 			JMenuItem menuitem = (JMenuItem) e.getSource();
-			String msg = menuitem.getText();
-			System.out.println(msg);
-
-			switch (msg) {
-			case "Beenden":
+			String selection = menuitem.getName();
+			System.out.println(selection);
+			
+			
+			switch (selection) {
+			case "beenden":
 				break;
-			case "Import":
+			case "importieren":
+				@SuppressWarnings("unused") 
+				panelImport imp = new panelImport();
+				main.daten1.lernkarteiSpeichern(main.pfad);
+				main.daten1.faecherBefuellen();
 				break;
-			}
-		}
-
-	}
-
-	class ListenerSprachMenu implements ActionListener {
-
-		public void actionPerformed(ActionEvent e) {
-			JMenuItem menuitem = (JMenuItem) e.getSource();
-			String msg = menuitem.getText();
-			System.out.println(msg);
-
-			switch (msg) {
-			case "Deutsch":
-				country = new String("DE");
-				language = new String("de");
-				break;
-			case "English":
-				country = new String("EN");
-				language = new String("en");
-				break;
-			case "Francaise":
-				country = new String("FR");
-				language = new String("fr");
-				break;
-			case "Italiano":
-				country = new String("IT");
-				language = new String("it");
-				break;
-
-			}
-
-			Hauptfenster.locale = new Locale(language, country);
-			main.hauptFenster.spracheWechseln();
-
-
-		}
-
-	}
-
-	class ListenerKartenMenu implements ActionListener {
-
-		public void actionPerformed(ActionEvent e) {
-			JMenuItem menuitem = (JMenuItem) e.getSource();
-			String msg = menuitem.getText();
-			System.out.println(msg);
-
-			if (ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("hinzufuegen").equals(msg)){
-				System.out.println(msg);
+			case "hinzufuegen":
 				PanelHinzufuegen ph = new PanelHinzufuegen();
 				ph.paint();
-			}
-
-			if (ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("loeschen").equals(msg)){
+				break;
+			case "loeschen":
 				main.hauptFenster.karteLoeschen();
-				System.out.println(msg);
+				break;
+			case "bearbeiten":
+				break;
+			case "DE":
+			case "EN":
+			case "IT":
+			case "FR":
+				Hauptfenster.locale = new Locale(selection.toLowerCase(), selection);
+				main.hauptFenster.spracheWechseln();
+				break;
+				
 			}
-
-			if (ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("bearbeiten").equals(msg)){
-				System.out.println(msg);
-			}
-
-
 		}
 
-
-	}
-
-	class ListenerImportMenu implements ActionListener {
-
-		public void actionPerformed(ActionEvent e) {
-			panelImport imp = new panelImport();
-			main.daten1.lernkarteiSpeichern(main.pfad);
-			main.daten1.faecherBefuellen();
-		}
 
 	}
 	
