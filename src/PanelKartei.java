@@ -29,7 +29,7 @@ public class PanelKartei extends JPanel {
 	private JLabel aktuelleKartei;
 	private JButton karteiBearbeiten;
 	private JButton lernen;
-	private JPanel grafischeStat;
+	private StatistikPanel grafischeStat;
 	private JPanel datenStatistik;
 	private JLabel ausgewaehlteKartei;
 	private JLabel richtigeAntwort;
@@ -52,9 +52,16 @@ public class PanelKartei extends JPanel {
 
 	public void initComponents() {
 		mainFrame = new JPanel();
-		statistik = new StatistikPanel();
-		grafischeStat = statistik;
+		 
+		grafischeStat = new StatistikPanel();
 		grafischeStat.setPreferredSize(new Dimension(400, 400));
+		
+		//Setzen von Barwidth
+		grafischeStat.setKart1_WIDTH(main.daten1.getFachGroesse(0));
+		grafischeStat.setKart2_WIDTH(main.daten1.getFachGroesse(1));
+		grafischeStat.setKart3_WIDTH(main.daten1.getFachGroesse(2));
+		grafischeStat.setKart4_WIDTH(main.daten1.getFachGroesse(3));
+		grafischeStat.setKart5_WIDTH(main.daten1.getFachGroesse(4));
 		
 		datenStatistik = new JPanel();
 		kartei = new JPanel();
@@ -103,6 +110,7 @@ public class PanelKartei extends JPanel {
 
 		stat.add(grafischeStat);
 		stat.add(datenStatistik);
+		
 		
 
 		start.add(lernen, BorderLayout.CENTER);

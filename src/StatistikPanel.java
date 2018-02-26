@@ -56,7 +56,7 @@ public class StatistikPanel extends JPanel {
 	}
 
 	public void setKart1_WIDTH(int kart1_WIDTH) {
-		Kart1_WIDTH = kart1_WIDTH;
+		Kart1_WIDTH = kart1_WIDTH * 10;
 	}
 
 	public int getKart2_WIDTH() {
@@ -64,7 +64,7 @@ public class StatistikPanel extends JPanel {
 	}
 
 	public void setKart2_WIDTH(int kart2_WIDTH) {
-		this.kart2_WIDTH = kart2_WIDTH;
+		this.kart2_WIDTH = kart2_WIDTH * 10;
 	}
 
 	public int getKart3_WIDTH() {
@@ -72,7 +72,7 @@ public class StatistikPanel extends JPanel {
 	}
 
 	public void setKart3_WIDTH(int kart3_WIDTH) {
-		this.kart3_WIDTH = kart3_WIDTH;
+		this.kart3_WIDTH = kart3_WIDTH * 10;
 	}
 
 	public int getKart4_WIDTH() {
@@ -80,7 +80,7 @@ public class StatistikPanel extends JPanel {
 	}
 
 	public void setKart4_WIDTH(int kart4_WIDTH) {
-		this.kart4_WIDTH = kart4_WIDTH;
+		this.kart4_WIDTH = kart4_WIDTH * 10;
 	}
 
 	public int getKart5_WIDTH() {
@@ -88,9 +88,7 @@ public class StatistikPanel extends JPanel {
 	}
 
 	public void setKart5_WIDTH(int kart5_WIDTH) {
-		this.kart5_WIDTH = kart5_WIDTH;
+		this.kart5_WIDTH = kart5_WIDTH * 10;
 	}
-	
-	
 
 }
