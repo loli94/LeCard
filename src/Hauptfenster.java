@@ -141,6 +141,7 @@ public class Hauptfenster {
 			if (str == 0) {
 				boxAuswahl[0].setBackground(Color.CYAN);
 				statPanel.removeAll();
+				panelKartei.setBalkendiagramm();
 				statPanel.add(panelKartei);
 				statPanel.validate();
 				statPanel.repaint();
