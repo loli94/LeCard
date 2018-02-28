@@ -47,6 +47,10 @@ public class Kartei {
 	@XmlTransient
 	private Karte aktuelleKarte;
 
+	private int richtigeAntwort;
+
+	private int falscheAntwort;
+
 	private Kartei() {
 
 	}
@@ -66,6 +70,8 @@ public class Kartei {
 		karteiEinlesen(pfad);
 		this.aktuellesSprachpaar = "de-en";
 		this.aktuellesFach = 0;
+		this.richtigeAntwort = 0;
+		this.falscheAntwort = 0;
 	}
 
 	public Sprache getAktuelleSprache() {
@@ -103,6 +109,22 @@ public class Kartei {
 
 	public void setLernkartei(ArrayList<Karte> lernkartei) {
 		this.kartei = lernkartei;
+	}
+
+	public int getRichtigeAntwort() {
+		return richtigeAntwort;
+	}
+
+	public void setRichtigeAntwort(int richtigeAntwort) {
+		this.richtigeAntwort = richtigeAntwort;
+	}
+
+	public int getFalscheAntwort() {
+		return falscheAntwort;
+	}
+
+	public void setFalscheAntwort(int falscheAntwort) {
+		this.falscheAntwort = falscheAntwort;
 	}
 
 	public void lernkarteiSpeichern(String pfad) {
