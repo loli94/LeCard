@@ -23,7 +23,7 @@ public class LoadCsv {
 		f = new File(csvfile);
 		this.separator = separator;
 		wortA = new ArrayList<>();
-		wortB = new ArrayList<>();
+		wortB = new ArrayList<>(); 
 		sprache= new ArrayList<>();
 
 		readCsv();
@@ -56,7 +56,7 @@ public class LoadCsv {
 					s.close();
 				}
 
-				if (in != null) {
+				if (in != null) { 
 					in.close();
 				}
 			}
