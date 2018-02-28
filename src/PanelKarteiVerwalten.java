@@ -20,24 +20,25 @@ public class PanelKarteiVerwalten {
 
 	private JFrame mainFrame;
 	private JPanel hauptPanel;
-	private JPanel vorhandeneKartei;
-	private JPanel hinzufuegenKartei;
 	
+	private JPanel hinzufuegenKartei;
 
-	private JPanel inhaltKarteiVorhanden;
-	private JPanel buttonPanelVorhanden;
-	private JLabel vorhandeneKarteien;
-
-	private JButton wechseln;
-	private JComboBox<String> lernSprachenMenu;
-
-	private JPanel inhaltKarteiHinzufuegen;
+	
+	private JPanel sprachen; 
+	private JPanel zweiBuchstaben; 
+	private JPanel spracheAusgeschrieben; 
+	private JLabel strich; 
+	
 	private JPanel buttonPanelHinzufuegen;
+	private JLabel info1;
+	private JLabel info2; 
 	private JButton hinzufuegen;
 	private JLabel sprache1;
-	private JTextField sprache1hinzufuegen;
+	private JTextField sprache1hinzufuegenZweiBuchstaben;
+	private JTextField sprache1hinzufuegenAusgeschrieben; 
 	private JLabel sprache2;
-	private JTextField sprache2hinzufuegen;
+	private JTextField sprache2hinzufuegenZweiBuchstaben;
+	private JTextField sprache2hinzufuegenAusgeschrieben; 
 
 	public PanelKarteiVerwalten() {
 		initComponents();
@@ -51,58 +52,72 @@ public class PanelKarteiVerwalten {
 
 	private void initComponents() {
 		// TODO Auto-generated method stub
-		mainFrame = new JFrame("Bearbeiten");
+		mainFrame = new JFrame(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("hinzufuegen"));
 		hauptPanel = new JPanel();
-		vorhandeneKartei = new JPanel();
 		hinzufuegenKartei = new JPanel();
-		inhaltKarteiVorhanden = new JPanel();
-		buttonPanelVorhanden = new JPanel();
-		inhaltKarteiHinzufuegen = new JPanel();
+		strich = new JLabel("-"); 
+		
 		buttonPanelHinzufuegen = new JPanel();
-		wechseln = new JButton(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("wechseln"));
-		wechseln.setLocation(100, 120);
-		wechseln.setSize(220, 30);
+		info1 = new JLabel(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("info1"));
+		info2 = new JLabel(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("info2")); 
 		hinzufuegen = new JButton(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("hinzufuegen"));
-		hinzufuegen.setLocation(100, 120);
+		hinzufuegen.setLocation(200, 20);
 		hinzufuegen.setSize(220, 30);
-		vorhandeneKarteien = new JLabel();
 
 		sprache1 = new JLabel(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("sprache1"));
 		sprache1.setPreferredSize(new Dimension(220, 22));
 		sprache2 = new JLabel(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("sprache2"));
 		sprache2.setPreferredSize(new Dimension(220, 22));
-		sprache1hinzufuegen = new JTextField();
-		sprache2hinzufuegen = new JTextField();
+		sprache1hinzufuegenZweiBuchstaben = new JTextField();
+		sprache1hinzufuegenZweiBuchstaben.setPreferredSize(new Dimension(80, 22)); 
+		sprache1hinzufuegenAusgeschrieben = new JTextField(); 
+		sprache1hinzufuegenAusgeschrieben.setPreferredSize(new Dimension(220, 22)); 
+		
+		sprache2hinzufuegenZweiBuchstaben = new JTextField();
+		sprache2hinzufuegenZweiBuchstaben.setPreferredSize(new Dimension(80, 22)); 
+		sprache2hinzufuegenAusgeschrieben = new JTextField(); 
+		sprache2hinzufuegenAusgeschrieben.setPreferredSize(new Dimension(220,22));
 
-		lernSprachenMenu = new JComboBox<String>();
+		sprachen = new JPanel(); 
+		zweiBuchstaben = new JPanel(); 
+		spracheAusgeschrieben = new JPanel(); 
+		
 
-		for (Sprache s : Main.daten1.getSprachen()) {
-			lernSprachenMenu.addItem(s.getSprachPaar());
-		}
 	}
 
 	public void paint() {
-		mainFrame.setSize(750, 530);
-		hauptPanel.setLayout(new GridLayout(2, 1));
-		vorhandeneKartei.setLayout(new GridLayout(1, 2));
-		vorhandeneKartei.add(lernSprachenMenu);
-		buttonPanelVorhanden.setLayout(null);
-		buttonPanelVorhanden.add(wechseln);
-		vorhandeneKartei.add(buttonPanelVorhanden);
+		mainFrame.setSize(650, 430);
+		hauptPanel.setLayout(new GridLayout(6, 1));
+
 
 		hinzufuegenKartei.setLayout(new GridLayout(1, 2));
-		inhaltKarteiHinzufuegen.setLayout(new GridLayout(2, 2));
+
+		
 		buttonPanelHinzufuegen.add(hinzufuegen);
 		buttonPanelHinzufuegen.setLayout(null);
-		inhaltKarteiHinzufuegen.add(sprache1);
-		inhaltKarteiHinzufuegen.add(sprache2);
-		inhaltKarteiHinzufuegen.add(sprache1hinzufuegen);
-		inhaltKarteiHinzufuegen.add(sprache2hinzufuegen);
-		hinzufuegenKartei.add(inhaltKarteiHinzufuegen);
-		hinzufuegenKartei.add(buttonPanelHinzufuegen);
-
-		hauptPanel.add(vorhandeneKartei);
-		hauptPanel.add(hinzufuegenKartei);
+		
+		sprachen.add(sprache1); 
+		sprachen.add(strich); 
+		sprachen.add(sprache2); 
+		zweiBuchstaben.add(sprache1hinzufuegenZweiBuchstaben); 
+		zweiBuchstaben.add(strich); 
+		zweiBuchstaben.add(sprache2hinzufuegenZweiBuchstaben); 
+		spracheAusgeschrieben.add(sprache1hinzufuegenAusgeschrieben);
+		spracheAusgeschrieben.add(strich); 
+		spracheAusgeschrieben.add(sprache2hinzufuegenAusgeschrieben); 
+		
+		
+		
+		
+		hauptPanel.add(sprachen);
+		hauptPanel.add(info1); 
+		hauptPanel.add(zweiBuchstaben);
+		hauptPanel.add(info2); 
+		hauptPanel.add(spracheAusgeschrieben); 
+		hauptPanel.add(buttonPanelHinzufuegen); 
+		
+		
+		
 
 		mainFrame.add(hauptPanel);
 		mainFrame.setVisible(true);
