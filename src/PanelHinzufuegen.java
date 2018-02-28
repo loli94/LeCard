@@ -70,7 +70,12 @@ public class PanelHinzufuegen {
 	
 	class ButtonListenerHinzufuegen implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			System.out.println("Karte wurde in die Kartei 1 hinzugefügt");
+			
+			Karte k1 = new Karte(Main.daten1.getAktuellesSprachpaar(), tSprache1.getText(), tSprache2.getText());
+			
+			Main.daten1.karteHinzufuegen(k1);
+			
+			System.out.println("" + k1);
 	}
 		
 }
