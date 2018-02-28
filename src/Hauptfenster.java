@@ -38,6 +38,7 @@ public class Hauptfenster {
 		menuPanel = new JPanel();
 
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//mainFrame.setResizable(false);
 		final Dimension d = mainFrame.getToolkit().getScreenSize();
 		mainFrame.setLocation((int) ((d.getWidth() - mainFrame.getWidth()) / 3.8),
 				(int) ((d.getHeight() - mainFrame.getHeight()) / 3.8));
