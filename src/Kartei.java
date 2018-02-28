@@ -46,9 +46,9 @@ public class Kartei {
 
 	@XmlTransient
 	private Karte aktuelleKarte;
-
+	@XmlTransient
 	private int richtigeAntwort;
-
+	@XmlTransient
 	private int falscheAntwort;
 
 	private Kartei() {
@@ -115,16 +115,18 @@ public class Kartei {
 		return richtigeAntwort;
 	}
 
-	public void setRichtigeAntwort(int richtigeAntwort) {
-		this.richtigeAntwort = richtigeAntwort;
+	public void setRichtigeAntwort() {
+		this.richtigeAntwort++;
+		System.out.println("" + richtigeAntwort);
 	}
 
 	public int getFalscheAntwort() {
 		return falscheAntwort;
 	}
 
-	public void setFalscheAntwort(int falscheAntwort) {
-		this.falscheAntwort = falscheAntwort;
+	public void setFalscheAntwort() {
+		this.falscheAntwort++;
+		System.out.println("" + falscheAntwort);
 	}
 
 	public void lernkarteiSpeichern(String pfad) {
