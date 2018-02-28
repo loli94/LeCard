@@ -56,7 +56,7 @@ public class LoadCsv {
 					s.close();
 				}
 
-				if (in != null) {
+				if (in != null) { 
 					in.close();
 				}
 			}
