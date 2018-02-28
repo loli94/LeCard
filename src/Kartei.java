@@ -73,9 +73,15 @@ public class Kartei {
 		this.richtigeAntwort = 0;
 		this.falscheAntwort = 0;
 	}
-
+	
+	
+	
 	public Sprache getAktuelleSprache() {
 		return aktuelleSprache;
+	}
+	
+	public String getAktuellesSprachpaar() {
+		return aktuellesSprachpaar;
 	}
 
 	public void setAktuelleSprache(String aktuelleSprache) {

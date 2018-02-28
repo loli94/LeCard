@@ -29,13 +29,11 @@ public class PanelKartei extends JPanel {
 	private JPanel start;
 	private JLabel aktuelleKartei;
 	private JButton karteiBearbeiten;
-	private JButton lernen;
 	private StatistikPanel grafischeStat;
 	private JPanel datenStatistik;
 	private JLabel ausgewaehlteKartei;
 	private JLabel richtigeAntwort;
 	private JLabel falscheAntwort;
-	private JLabel total;
 	private PanelKarteiVerwalten panelKarteiVerwalten;
 
 	public PanelKartei() {
@@ -66,7 +64,6 @@ public class PanelKartei extends JPanel {
 				ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("richtigeAntworten") + " " + Main.daten1.getRichtigeAntwort());
 		falscheAntwort = new JLabel(
 				ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("falscheAntworten") + " " + Main.daten1.getFalscheAntwort());
-		total = new JLabel("Total: ");
 
 		aktuelleKartei = new JLabel(
 				ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("aktuelleKartei"));
@@ -74,13 +71,11 @@ public class PanelKartei extends JPanel {
 
 		karteiBearbeiten = new JButton(
 				ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("karteiBearbeiten"));
-		lernen = new JButton(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("jetztLernen"));
 
 	}
 
 	private void bindListener() {
 
-		lernen.addActionListener(new ButtonListenerKarteiJetztLernen());
 		karteiBearbeiten.addActionListener(new ButtonListenerKarteiBearbeiten());
 
 	}
@@ -89,7 +84,6 @@ public class PanelKartei extends JPanel {
 		datenStatistik.setLayout(new GridLayout(3, 2));
 		datenStatistik.add(richtigeAntwort);
 		datenStatistik.add(falscheAntwort);
-		datenStatistik.add(total);
 
 		// mainFrame.setLayout(new GridLayout(3, 1));
 		mainFrame.setLayout(new BoxLayout(mainFrame, BoxLayout.PAGE_AXIS));
@@ -106,7 +100,7 @@ public class PanelKartei extends JPanel {
 		stat.add(grafischeStat);
 		stat.add(datenStatistik);
 
-		start.add(lernen, BorderLayout.CENTER);
+
 
 		mainFrame.add(kartei);
 		mainFrame.add(stat);
@@ -123,6 +117,9 @@ public class PanelKartei extends JPanel {
 		grafischeStat.setKart3_WIDTH(Main.daten1.getFachGroesse(2));
 		grafischeStat.setKart4_WIDTH(Main.daten1.getFachGroesse(3));
 		grafischeStat.setKart5_WIDTH(Main.daten1.getFachGroesse(4));
+		richtigeAntwort.setText(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("richtigeAntworten") + " " + Main.daten1.getRichtigeAntwort());
+		falscheAntwort.setText(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("falscheAntworten") + " " + Main.daten1.getFalscheAntwort());
+
 	}
 
 	class ButtonListenerKarteiJetztLernen implements ActionListener {
