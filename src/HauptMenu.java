@@ -11,7 +11,7 @@ import javax.swing.JMenuItem;
 public class HauptMenu extends JMenuBar {
 
 	private static final long serialVersionUID = 1L;
-	private JMenu dateiMenu, sprachMenu, anzeigeMenu, kartenMenu;
+	private JMenu dateiMenu, lernsprachMenu, anzeigeMenu, kartenMenu, karteiMenu, lernsprachenMenu;
 	private JMenuItem menuItem;
 
 	public HauptMenu() {
@@ -31,53 +31,65 @@ public class HauptMenu extends JMenuBar {
 
 		this.add(dateiMenu);
 
-		// Menu für Kartenbearbeitenung
+		// Menu für Karteibearbeitenung
+		karteiMenu = new JMenu(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("Lernkartei"));
+		
 		kartenMenu = new JMenu(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("Karte"));
-
+		
 		menuItem = new JMenuItem(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("hinzufuegen"));
-		menuItem.setName("hinzufuegen");
+		menuItem.setName("karteHinzufuegen");
 		menuItem.addActionListener(new ListenerHauptMenu());
 		kartenMenu.add(menuItem);
 
 		menuItem = new JMenuItem(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("bearbeiten"));
-		menuItem.setName("bearbeiten");
+		menuItem.setName("karteBearbeiten");
 		menuItem.addActionListener(new ListenerHauptMenu());
 		kartenMenu.add(menuItem);
 
 		menuItem = new JMenuItem(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("loeschen"));
-		menuItem.setName("loeschen");
+		menuItem.setName("karteLoeschen");
 		menuItem.addActionListener(new ListenerHauptMenu());
 		kartenMenu.add(menuItem);
-
-		this.add(kartenMenu);
+			
+		karteiMenu.add(kartenMenu);
+		
+		lernsprachenMenu = new JMenu(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("Lernsprache"));
+		menuItem = new JMenuItem(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("hinzufuegen"));
+		menuItem.setName("spracheHinzufuegen");
+		menuItem.addActionListener(new ListenerHauptMenu());
+		lernsprachenMenu.add(menuItem);
+		
+		karteiMenu.add(lernsprachenMenu);
+		
+		this.add(karteiMenu);
 
 		// Menu für Anzeige.
 		anzeigeMenu = new JMenu(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("Anzeige"));
 
 		// Submenu für Spracheinstellung
-		sprachMenu = new JMenu(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("Sprache"));
+		lernsprachMenu = new JMenu(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("Sprache"));
 
 		menuItem = new JMenuItem("Deutsch");
 		menuItem.addActionListener(new ListenerHauptMenu());
 		menuItem.setName("DE");
-		sprachMenu.add(menuItem);
+		lernsprachMenu.add(menuItem);
 
 		menuItem = new JMenuItem("English");
 		menuItem.addActionListener(new ListenerHauptMenu());
 		menuItem.setName("EN");
-		sprachMenu.add(menuItem);
+		lernsprachMenu.add(menuItem);
 
 		menuItem = new JMenuItem("Francaise");
 		menuItem.addActionListener(new ListenerHauptMenu());
 		menuItem.setName("FR");
-		sprachMenu.add(menuItem);
+		lernsprachMenu.add(menuItem);
 
 		menuItem = new JMenuItem("Italiano");
 		menuItem.addActionListener(new ListenerHauptMenu());
 		menuItem.setName("IT");
-		sprachMenu.add(menuItem);
+		lernsprachMenu.add(menuItem);
 
-		anzeigeMenu.add(sprachMenu);
+		anzeigeMenu.add(lernsprachMenu);
 		this.add(anzeigeMenu);
 
 	}
@@ -98,14 +110,16 @@ public class HauptMenu extends JMenuBar {
 				Main.daten1.lernkarteiSpeichern(Main.pfad);
 				Main.daten1.faecherBefuellen();
 				break;
-			case "hinzufuegen":
+			case "karteHinzufuegen":
 				PanelHinzufuegen ph = new PanelHinzufuegen();
 				ph.paint();
 				break;
-			case "loeschen":
+			case "karteLoeschen":
 				Main.hauptFenster.karteLoeschen();
 				break;
-			case "bearbeiten":
+			case "karteBearbeiten":
+				PanelBearbeiten pb = new PanelBearbeiten();
+				pb.paint();
 				break;
 			case "DE":
 			case "EN":
@@ -113,6 +127,9 @@ public class HauptMenu extends JMenuBar {
 			case "FR":
 				Hauptfenster.locale = new Locale(selection.toLowerCase(), selection);
 				Main.hauptFenster.spracheWechseln();
+				break;
+			case "spracheHinzufuegen":
+				
 				break;
 
 			}
