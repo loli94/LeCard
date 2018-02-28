@@ -33,22 +33,29 @@ public class StatistikPanel extends JPanel {
 		g.setColor(Color.BLUE);
 		g.fillRect(Kart1_X, Kart1_Y, Kart1_WIDTH, Kart1_HEIGHT);
 		g.drawString(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("Fach") + " 1", 10, 50);
+		g.drawString("" + Main.daten1.getFachGroesse(0), 80, 50);
 
 		g.setColor(Color.RED);
 		g.fillRect(Kart2_X, kart2_Y, kart2_WIDTH, kart2_Height);
 		g.drawString(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("Fach") + " 2", 10, 110);
-
+		g.drawString("" + Main.daten1.getFachGroesse(1), 80, 110);
+		
+		
 		g.setColor(Color.CYAN);
 		g.fillRect(kart3_X, kart3_Y, kart3_WIDTH, kart3_Height);
 		g.drawString(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("Fach") + " 3", 10, 175);
-
+		g.drawString("" + Main.daten1.getFachGroesse(2), 80, 175);
+		
 		g.setColor(Color.GREEN);
 		g.fillRect(kart4_X, kart4_Y, kart4_WIDTH, kart4_Height);
 		g.drawString(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("Fach") + " 4", 10, 225);
-
+		g.drawString("" + Main.daten1.getFachGroesse(3), 80, 225);
+		
+		
 		g.setColor(Color.LIGHT_GRAY);
 		g.fillRect(kart5_X, kart5_Y, kart5_WIDTH, kart5_Height);
 		g.drawString(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("Fach") + " 5", 10, 285);
+		g.drawString("" + Main.daten1.getFachGroesse(4), 80, 285);
 	}
 
 	public int getKart1_WIDTH() {

@@ -16,6 +16,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
+
 /* @autor Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
  * @version 0.4
  * Datum:24.02.2018
@@ -58,12 +59,12 @@ public class PanelLernen extends JPanel {
 		pAuswertung = new JPanel();
 		bPruefen = new JButton(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("pruefen"));
 		bWechsel = new JButton("<->");
-		bWechsel.setPreferredSize(new Dimension(220,22));
+		bWechsel.setPreferredSize(new Dimension(220, 22));
 		lSpracheEins = new JLabel(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("Hauptsprache"));
 		lSpracheEins.setForeground(Color.orange);
 		lSpracheEins.setPreferredSize(new Dimension(220, 22));
 		lSpracheEinsFrage = new JLabel();
-		lSpracheEinsFrage.setPreferredSize(new Dimension(220,22));
+		lSpracheEinsFrage.setPreferredSize(new Dimension(220, 22));
 		lSpracheZwei = new JLabel(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("Fremdsprache"));
 		lSpracheZwei.setPreferredSize(new Dimension(220, 22));
 		lSpracheZwei.setForeground(Color.blue);
@@ -94,31 +95,33 @@ public class PanelLernen extends JPanel {
 
 		});
 
-		
 		lLoesung = new JLabel("");
 		// initiiere Layout von den Panles
 		pLernen.setLayout(new GridLayout(4, 1));
 		pSpracheEins.setLayout(new GridLayout(1, 2));
 		pSpracheZwei.setLayout(new GridLayout(1, 2));
 		pAuswertung.setLayout(new GridLayout(1, 2));
-		pPruefen.setLayout(new  GridLayout(1, 2));
-		
+		pPruefen.setLayout(new GridLayout(1, 2));
+
 	}
-	
-	//Prüft die Antwort und gibt die entsprechende Karte aus
+
+	// Prüft die Antwort und gibt die entsprechende Karte aus
 	public void loadCard() {
 		if (Main.daten1.gibNaechsteKarte() == true) {
 			lSpracheEinsFrage.setText(Main.daten1.getAktuelleKarte().getWortA());
 			lSpracheEinsFrage.setForeground(Color.orange);
 			pPruefen.setVisible(true);
 		}
-	
-	//Dialog keine Karte vorhanden und "Prüfen Button" ausblenden
+
+		// Dialog keine Karte vorhanden und "Prüfen Button" ausblenden
 		else {
-			JOptionPane.showMessageDialog(pLernen, ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("keinKarteVorhanden"));
-			tSpracheZweiAntwort.setText("");
-			lSpracheEinsFrage.setText("-");
-			pPruefen.setVisible(false);
+			if (Main.daten1.getAktuellesFach() != 0) {
+				JOptionPane.showMessageDialog(pLernen,
+						ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("keinKarteVorhanden"));
+				tSpracheZweiAntwort.setText("");
+				lSpracheEinsFrage.setText("-");
+				pPruefen.setVisible(false);
+			}
 		}
 
 	}
@@ -134,17 +137,15 @@ public class PanelLernen extends JPanel {
 	public void paint() {
 		// Adding Components
 
-		pSpracheEins.add(lSpracheEinsFrage,BorderLayout.CENTER);
-		
-	    pAuswertung.add(lLoesung, BorderLayout.EAST);
-		pSpracheEins.add(lSpracheEins,BorderLayout.CENTER);
-		pSpracheEins.add(lSpracheEinsFrage,BorderLayout.CENTER);
-		pSpracheZwei.add(lSpracheZwei,BorderLayout.EAST);
-		pSpracheZwei.add(tSpracheZweiAntwort,BorderLayout.EAST);
+		pSpracheEins.add(lSpracheEinsFrage, BorderLayout.CENTER);
+
+		pAuswertung.add(lLoesung, BorderLayout.EAST);
+		pSpracheEins.add(lSpracheEins, BorderLayout.CENTER);
+		pSpracheEins.add(lSpracheEinsFrage, BorderLayout.CENTER);
+		pSpracheZwei.add(lSpracheZwei, BorderLayout.EAST);
+		pSpracheZwei.add(tSpracheZweiAntwort, BorderLayout.EAST);
 		pPruefen.add(bWechsel, BorderLayout.WEST);
-		pPruefen.add(bPruefen, BorderLayout.EAST); 
-		
-		
+		pPruefen.add(bPruefen, BorderLayout.EAST);
 
 		pLernen.add(pSpracheEins);
 		pLernen.add(pSpracheZwei);
@@ -157,20 +158,20 @@ public class PanelLernen extends JPanel {
 		public void actionPerformed(ActionEvent e) {
 			System.out.println("Sprache wird gewechselt");
 
-			
 		}
 	}
 
-
-	//Prueft ob der"Prüfen Button" angezeigt wird oder nicht
+	// Prueft ob der"Prüfen Button" angezeigt wird oder nicht
 
 	public void verifyAnswer() {
-		
+
 	}
 
 	class ButtonListenerPruefen implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-	
+			int r = 1;
+			int f = 1;
+
 			if (Main.daten1.getAktuelleKarte().getWortB().equalsIgnoreCase(tSpracheZweiAntwort.getText())) {
 
 				System.out.println("Korrekt");
@@ -178,25 +179,24 @@ public class PanelLernen extends JPanel {
 				tSpracheZweiAntwort.setText("");
 				lLoesung.setText("Richtig");
 				lLoesung.setForeground(Color.GREEN);
+				Main.daten1.setRichtigeAntwort();
 
 			}
 
 			else {
 				System.out.println("Falsch");
-				Main.daten1.karteVerschieben(Main.daten1.getAktuelleKarte(), Main.daten1.getAktuellesFach()-1);
+				Main.daten1.karteVerschieben(Main.daten1.getAktuelleKarte(), 1); 
 				lLoesung.setText("Falsch");
 				lLoesung.setForeground(Color.RED);
+				Main.daten1.setFalscheAntwort();
 
 			}
 			Main.daten1.lernkarteiSpeichern(Main.pfad);
-			
+
 			loadCard();
 
 		}
-		
-		
-		
-		
+
 	}
 
 	class JTextFieldListener implements ActionListener {

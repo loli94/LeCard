@@ -142,6 +142,7 @@ public class Hauptfenster {
 			int str = Integer.parseInt(0 + b.getText().replaceAll("\\D+",""));
 			if (str == 0) {
 				boxAuswahl[0].setBackground(Color.CYAN);
+				Main.daten1.setAktuellesFach(str);
 				statPanel.removeAll();
 				panelKartei.setBalkendiagramm();
 				statPanel.add(panelKartei);

@@ -25,7 +25,6 @@ public class Main {
 		
 		daten1.lernkarteiSpeichern(pfad);
 		
-		
 
 	}
 	

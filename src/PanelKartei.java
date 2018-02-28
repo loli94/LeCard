@@ -63,9 +63,9 @@ public class PanelKartei extends JPanel {
 		stat = new JPanel();
 		start = new JPanel();
 		richtigeAntwort = new JLabel(
-				ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("richtigeAntworten"));
+				ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("richtigeAntworten") + " " + Main.daten1.getRichtigeAntwort());
 		falscheAntwort = new JLabel(
-				ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("falscheAntworten"));
+				ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("falscheAntworten") + " " + Main.daten1.getFalscheAntwort());
 		total = new JLabel("Total: ");
 
 		aktuelleKartei = new JLabel(

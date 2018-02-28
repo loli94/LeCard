@@ -9,6 +9,7 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
+
 /* @autor Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
  * @version 0.3
  * Datum:24.02.2018
@@ -33,18 +34,22 @@ public class Kartei {
 
 	@XmlTransient
 	private Benutzer benutzer;
-	
+
 	@XmlTransient
 	private String aktuellesSprachpaar;
-	
+
 	@XmlTransient
 	private Sprache aktuelleSprache;
-	
+
 	@XmlTransient
 	private int aktuellesFach;
-	
+
 	@XmlTransient
 	private Karte aktuelleKarte;
+	@XmlTransient
+	private int richtigeAntwort;
+	@XmlTransient
+	private int falscheAntwort;
 
 	private Kartei() {
 
@@ -64,7 +69,9 @@ public class Kartei {
 		this.fach = new Fach[5];
 		karteiEinlesen(pfad);
 		this.aktuellesSprachpaar = "de-en";
-		this.aktuellesFach=1;
+		this.aktuellesFach = 0;
+		this.richtigeAntwort = 0;
+		this.falscheAntwort = 0;
 	}
 
 	public Sprache getAktuelleSprache() {
@@ -89,7 +96,7 @@ public class Kartei {
 
 	public void karteLoeschen(Karte k) {
 		kartei.remove(k);
-		fach[aktuellesFach-1].karteEnfernen(k);
+		fach[aktuellesFach - 1].karteEnfernen(k);
 	}
 
 	public ArrayList<Karte> getLernkartei() {
@@ -102,6 +109,24 @@ public class Kartei {
 
 	public void setLernkartei(ArrayList<Karte> lernkartei) {
 		this.kartei = lernkartei;
+	}
+
+	public int getRichtigeAntwort() {
+		return richtigeAntwort;
+	}
+
+	public void setRichtigeAntwort() {
+		this.richtigeAntwort++;
+		System.out.println("" + richtigeAntwort);
+	}
+
+	public int getFalscheAntwort() {
+		return falscheAntwort;
+	}
+
+	public void setFalscheAntwort() {
+		this.falscheAntwort++;
+		System.out.println("" + falscheAntwort);
 	}
 
 	public void lernkarteiSpeichern(String pfad) {
@@ -167,7 +192,6 @@ public class Kartei {
 		}
 		return false;
 	}
-	
 
 	public boolean benutzerLaden(String benutzername, String passwort) {
 		for (Benutzer b : benutzerListe) {
@@ -245,32 +269,34 @@ public class Kartei {
 	}
 
 	public Fach getFach(int x) {
-		return fach[x-1]; 
+		return fach[x - 1];
 	}
 
 	public boolean gibNaechsteKarte() {
 
 		// Nächste Karte aus diesem Fach in der entsprechenden Sprache ausgeben
-		for (Karte k : fach[aktuellesFach - 1].gibKarten()) {
-			if (k.getSprache().equals(aktuellesSprachpaar)) {
-				this.aktuelleKarte= k;
-				
-				System.out.println(k);
-				
-				return true;
+		if (aktuellesFach > 0) {
+			for (Karte k : fach[aktuellesFach - 1].gibKarten()) {
+				if (k.getSprache().equals(aktuellesSprachpaar)) {
+					this.aktuelleKarte = k;
+
+					System.out.println(k);
+
+					return true;
+				}
 			}
 		}
-		
+
 		this.aktuelleKarte = null;
 		return false;
 	}
 
 	public boolean karteVerschieben(Karte k, int neuesFach) {
 
-		if (k != null && neuesFach<6 && neuesFach > 0) {
+		if (k != null && neuesFach < 6 && neuesFach > 0) {
 
-
-			// Falls Kartenstatus für Benutzer in XML bereits vorhanden, dann verschieben in neues Fach
+			// Falls Kartenstatus für Benutzer in XML bereits vorhanden, dann verschieben in
+			// neues Fach
 			for (KartenStatus ks : benutzer.getLernfortschritte()) {
 				if (k.getId().equals(ks.getUid())) {
 					ks.setFach(neuesFach);
@@ -280,7 +306,8 @@ public class Kartei {
 				}
 			}
 
-			// Wenn Kartenstatus in XML für diesen Benutzer noch nicht vorhanden, dann Status erstellen und Karte verschieben
+			// Wenn Kartenstatus in XML für diesen Benutzer noch nicht vorhanden, dann
+			// Status erstellen und Karte verschieben
 			benutzer.getLernfortschritte().add(new KartenStatus(k.getId(), neuesFach));
 			fach[aktuellesFach - 1].karteEnfernen(k);
 			fach[neuesFach - 1].karteHinzufuegen(k);
@@ -351,30 +378,28 @@ public class Kartei {
 	public void setAktuelleKarte(Karte aktuelleKarte) {
 		this.aktuelleKarte = aktuelleKarte;
 	}
-	
+
 	public boolean spracheWaehlen(String sprachpaar) {
-		
+
 		for (Sprache s : sprachen) {
-			if (s.getSprachPaar().equals(sprachpaar)){
+			if (s.getSprachPaar().equals(sprachpaar)) {
 				aktuelleSprache = s;
 				aktuellesSprachpaar = s.getSprachPaar();
 				aktuelleSprache = s;
 				return true;
 			}
 		}
-		
+
 		return false;
 	}
 
 	public ArrayList<Sprache> getSprachen() {
 		return sprachen;
 	}
-	
+
 	public int getFachGroesse(int fachnummer) {
 		int fg = fach[fachnummer].gibAnzahlKarten();
 		return fg;
 	}
-	
-	
-	
+
 }
