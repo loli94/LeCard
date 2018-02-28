@@ -16,7 +16,7 @@ public class panelImport {
 	public void importFile() {
 		FileDialog fd = new FileDialog(new JFrame(), "File auswählen", FileDialog.LOAD);
 		fd.setDirectory("C:\\");
-		fd.setFile("*.csv");
+		fd.setFile("*.csv"); 
 		fd.setVisible(true);
 		String filename = fd.getDirectory() + fd.getFile();
 		if (filename != null) {
