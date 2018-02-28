@@ -134,7 +134,7 @@ public class HauptMenu extends JMenuBar {
 
 			}
 		}
-
+		
 	}
 
 }
