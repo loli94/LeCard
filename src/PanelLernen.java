@@ -169,6 +169,8 @@ public class PanelLernen extends JPanel {
 
 	class ButtonListenerPruefen implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
+			int r = 1;
+			int f = 1;
 
 			if (Main.daten1.getAktuelleKarte().getWortB().equalsIgnoreCase(tSpracheZweiAntwort.getText())) {
 
@@ -177,7 +179,7 @@ public class PanelLernen extends JPanel {
 				tSpracheZweiAntwort.setText("");
 				lLoesung.setText("Richtig");
 				lLoesung.setForeground(Color.GREEN);
-				Main.daten1.setRichtigeAntwort(1);
+				Main.daten1.setRichtigeAntwort();
 
 			}
 
@@ -186,7 +188,7 @@ public class PanelLernen extends JPanel {
 				Main.daten1.karteVerschieben(Main.daten1.getAktuelleKarte(), 1); 
 				lLoesung.setText("Falsch");
 				lLoesung.setForeground(Color.RED);
-				Main.daten1.setFalscheAntwort(1);
+				Main.daten1.setFalscheAntwort();
 
 			}
 			Main.daten1.lernkarteiSpeichern(Main.pfad);
