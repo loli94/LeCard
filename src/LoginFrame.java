@@ -156,12 +156,12 @@ public class LoginFrame {
 			JButton b = (JButton) e.getSource();
 			// System.out.println(tUser.getText());
 			// System.out.println(pPasswort.getPassword());
-			Boolean userExist = main.daten1.benutzerLaden(tUser.getText(), pPasswort.getText());
+			Boolean userExist = Main.daten1.benutzerLaden(tUser.getText(), pPasswort.getText());
 			
 			if (userExist == true) {
 
-				main.hauptFenster = new Hauptfenster(locale);
-				main.hauptFenster.paint();
+				Main.hauptFenster = new Hauptfenster(locale);
+				Main.hauptFenster.paint();
 				((JFrame) b.getParent().getParent().getParent().getParent().getParent()).setVisible(false);
 			} else {
 				JOptionPane.showMessageDialog(mainFrame, ResourceBundle.getBundle("Bundle", locale).getString("falschesPasswort"));

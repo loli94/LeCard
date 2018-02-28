@@ -76,7 +76,7 @@ public class PanelKarteiVerwalten {
 
 		lernSprachenMenu = new JComboBox<String>();
 
-		for (Sprache s : main.daten1.getSprachen()) {
+		for (Sprache s : Main.daten1.getSprachen()) {
 			lernSprachenMenu.addItem(s.getSprachPaar());
 		}
 	}

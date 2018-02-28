@@ -70,7 +70,7 @@ public class PanelKartei extends JPanel {
 
 		aktuelleKartei = new JLabel(
 				ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("aktuelleKartei"));
-		ausgewaehlteKartei = new JLabel("Fach: 1    " + main.daten1.getFach(5).gibAnzahlKarten());
+		ausgewaehlteKartei = new JLabel("Fach: 1    " + Main.daten1.getFach(5).gibAnzahlKarten());
 
 		karteiBearbeiten = new JButton(
 				ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("karteiBearbeiten"));
@@ -118,11 +118,11 @@ public class PanelKartei extends JPanel {
 	
 	public void setBalkendiagramm() {
 		//Setzen von Barwidth
-		grafischeStat.setKart1_WIDTH(main.daten1.getFachGroesse(0));
-		grafischeStat.setKart2_WIDTH(main.daten1.getFachGroesse(1));
-		grafischeStat.setKart3_WIDTH(main.daten1.getFachGroesse(2));
-		grafischeStat.setKart4_WIDTH(main.daten1.getFachGroesse(3));
-		grafischeStat.setKart5_WIDTH(main.daten1.getFachGroesse(4));
+		grafischeStat.setKart1_WIDTH(Main.daten1.getFachGroesse(0));
+		grafischeStat.setKart2_WIDTH(Main.daten1.getFachGroesse(1));
+		grafischeStat.setKart3_WIDTH(Main.daten1.getFachGroesse(2));
+		grafischeStat.setKart4_WIDTH(Main.daten1.getFachGroesse(3));
+		grafischeStat.setKart5_WIDTH(Main.daten1.getFachGroesse(4));
 	}
 
 	class ButtonListenerKarteiJetztLernen implements ActionListener {

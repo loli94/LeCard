@@ -57,7 +57,7 @@ public class Hauptfenster {
 			boxAuswahl[i] = new JButton(ResourceBundle.getBundle("Bundle", locale).getString("Fach") + " " + i);
 		}
 
-		lBenutzer = new JLabel(ResourceBundle.getBundle("Bundle", locale).getString("Benutzer") + ": "+ main.daten1.getBenutzer().getBenutzername());
+		lBenutzer = new JLabel(ResourceBundle.getBundle("Bundle", locale).getString("Benutzer") + ": "+ Main.daten1.getBenutzer().getBenutzername());
 		lLernSprache = new JLabel(ResourceBundle.getBundle("Bundle", locale).getString("Lernsprache") + ": ");
 		lLernSprache.setHorizontalAlignment(JTextField.RIGHT);
 		
@@ -68,7 +68,7 @@ public class Hauptfenster {
 		//Dropdown Lernsprachen
 		lernSprachenMenu = new JComboBox<String>();
 		
-		for(Sprache s : main.daten1.getSprachen()) {
+		for(Sprache s : Main.daten1.getSprachen()) {
 			lernSprachenMenu.addItem(s.getSprachPaar());
 		}
 		
@@ -125,7 +125,7 @@ public class Hauptfenster {
 		public void actionPerformed(ActionEvent e) {
 			JComboBox<String> cb = (JComboBox<String>) e.getSource();
 			String selection = (String) cb.getSelectedItem();
-			main.daten1.spracheWaehlen(selection);
+			Main.daten1.spracheWaehlen(selection);
 			System.out.println(selection);
 		}
 
@@ -150,9 +150,9 @@ public class Hauptfenster {
 			}
 			else {
 				boxAuswahl[str].setBackground(Color.CYAN);
-				main.daten1.setAktuellesFach(str);
-				main.daten1.gibNaechsteKarte();
-				System.out.println(main.daten1.getAktuelleKarte());
+				Main.daten1.setAktuellesFach(str);
+				Main.daten1.gibNaechsteKarte();
+				System.out.println(Main.daten1.getAktuelleKarte());
 				panelLernen.loadCard();
 				statPanel.removeAll();
 				statPanel.add(panelLernen);
@@ -192,8 +192,8 @@ public class Hauptfenster {
 		
 		int result = JOptionPane.showConfirmDialog(null, "Delete this Card?", "Confirm", JOptionPane.YES_NO_OPTION);
 		if (result == JOptionPane.YES_OPTION) {
-			Karte kl = main.daten1.getAktuelleKarte();
-			main.daten1.karteLoeschen(kl);
+			Karte kl = Main.daten1.getAktuelleKarte();
+			Main.daten1.karteLoeschen(kl);
 			panelLernen.loadCard();
 		} else if (result == JOptionPane.NO_OPTION) {
 		    System.exit(0);

@@ -80,7 +80,7 @@ public class LoadCsv {
 	public void uploadData() {
 		for (int i = 0; i < wortA.size(); i++) {
 			System.out.println("Karte hinzufuegen: " + sprache.get(i) + "; " + wortA.get(i) + "; " + wortB.get(i) );
-			main.daten1.karteHinzufuegen(new Karte(sprache.get(i),wortA.get(i),wortB.get(i)));
+			Main.daten1.karteHinzufuegen(new Karte(sprache.get(i),wortA.get(i),wortB.get(i)));
 		}
 	
 	}

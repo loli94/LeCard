@@ -107,8 +107,8 @@ public class PanelLernen extends JPanel {
 	
 	//Prüft die Antwort und gibt die entsprechende Karte aus
 	public void loadCard() {
-		if (main.daten1.gibNaechsteKarte() == true) {
-			lSpracheEinsFrage.setText(main.daten1.getAktuelleKarte().getWortA());
+		if (Main.daten1.gibNaechsteKarte() == true) {
+			lSpracheEinsFrage.setText(Main.daten1.getAktuelleKarte().getWortA());
 			lSpracheEinsFrage.setForeground(Color.orange);
 			pPruefen.setVisible(true);
 		}
@@ -171,10 +171,10 @@ public class PanelLernen extends JPanel {
 	class ButtonListenerPruefen implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 	
-			if (main.daten1.getAktuelleKarte().getWortB().equalsIgnoreCase(tSpracheZweiAntwort.getText())) {
+			if (Main.daten1.getAktuelleKarte().getWortB().equalsIgnoreCase(tSpracheZweiAntwort.getText())) {
 
 				System.out.println("Korrekt");
-				main.daten1.karteVerschieben(main.daten1.getAktuelleKarte(), main.daten1.getAktuellesFach() + 1);
+				Main.daten1.karteVerschieben(Main.daten1.getAktuelleKarte(), Main.daten1.getAktuellesFach() + 1);
 				tSpracheZweiAntwort.setText("");
 				lLoesung.setText("Richtig");
 				lLoesung.setForeground(Color.GREEN);
@@ -183,12 +183,12 @@ public class PanelLernen extends JPanel {
 
 			else {
 				System.out.println("Falsch");
-				main.daten1.karteVerschieben(main.daten1.getAktuelleKarte(), main.daten1.getAktuellesFach()-1);
+				Main.daten1.karteVerschieben(Main.daten1.getAktuelleKarte(), Main.daten1.getAktuellesFach()-1);
 				lLoesung.setText("Falsch");
 				lLoesung.setForeground(Color.RED);
 
 			}
-			main.daten1.lernkarteiSpeichern(main.pfad);
+			Main.daten1.lernkarteiSpeichern(Main.pfad);
 			
 			loadCard();
 

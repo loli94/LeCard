@@ -78,10 +78,10 @@ public class PanelNeuerBenutzer {
 
 	class ButtonListenerBenutzerErstellen implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			if (main.daten1.benutzerExistiert(tBenutzer.getText()) == false){
-				main.daten1.benutzerHinzufuegen(tBenutzer.getText(), tPasswort.getText());
+			if (Main.daten1.benutzerExistiert(tBenutzer.getText()) == false){
+				Main.daten1.benutzerHinzufuegen(tBenutzer.getText(), tPasswort.getText());
 				JOptionPane.showMessageDialog(mainFrame_1, ResourceBundle.getBundle("Bundle", locale).getString("Benutzererstellt"));
-				main.daten1.lernkarteiSpeichern(main.pfad);
+				Main.daten1.lernkarteiSpeichern(Main.pfad);
 				mainFrame_1.dispose();
 				LoginFrame gui1 = new LoginFrame();
 				gui1.paint();
@@ -101,7 +101,7 @@ public class PanelNeuerBenutzer {
 
 	}
 
-	/*public static void main(String[] args) {
+	/*public static void Main(String[] args) {
 		// TODO 
 		 String country = "DE";
 		 String language = "de";

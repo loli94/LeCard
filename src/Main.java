@@ -2,7 +2,7 @@
  * @version 1.2
  * Datum:24.02.2018
  */
-public class main {
+public class Main {
 	
 	public static Kartei daten1;
 	public static String pfad;

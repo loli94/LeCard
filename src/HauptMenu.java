@@ -95,15 +95,15 @@ public class HauptMenu extends JMenuBar {
 			case "importieren":
 				@SuppressWarnings("unused")
 				panelImport imp = new panelImport();
-				main.daten1.lernkarteiSpeichern(main.pfad);
-				main.daten1.faecherBefuellen();
+				Main.daten1.lernkarteiSpeichern(Main.pfad);
+				Main.daten1.faecherBefuellen();
 				break;
 			case "hinzufuegen":
 				PanelHinzufuegen ph = new PanelHinzufuegen();
 				ph.paint();
 				break;
 			case "loeschen":
-				main.hauptFenster.karteLoeschen();
+				Main.hauptFenster.karteLoeschen();
 				break;
 			case "bearbeiten":
 				break;
@@ -112,7 +112,7 @@ public class HauptMenu extends JMenuBar {
 			case "IT":
 			case "FR":
 				Hauptfenster.locale = new Locale(selection.toLowerCase(), selection);
-				main.hauptFenster.spracheWechseln();
+				Main.hauptFenster.spracheWechseln();
 				break;
 
 			}
