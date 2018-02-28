@@ -177,6 +177,7 @@ public class PanelLernen extends JPanel {
 				tSpracheZweiAntwort.setText("");
 				lLoesung.setText("Richtig");
 				lLoesung.setForeground(Color.GREEN);
+				Main.daten1.setRichtigeAntwort(1);
 
 			}
 
@@ -184,7 +185,8 @@ public class PanelLernen extends JPanel {
 				System.out.println("Falsch");
 				Main.daten1.karteVerschieben(Main.daten1.getAktuelleKarte(), 1); 
 				lLoesung.setText("Falsch");
-				lLoesung.setForeground(Color.RED);   
+				lLoesung.setForeground(Color.RED);
+				Main.daten1.setFalscheAntwort(1);
 
 			}
 			Main.daten1.lernkarteiSpeichern(Main.pfad);
