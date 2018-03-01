@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 
 public class HauptMenu extends JMenuBar {
 
@@ -115,7 +116,14 @@ public class HauptMenu extends JMenuBar {
 				ph.paint();
 				break;
 			case "karteLoeschen":
-				Main.hauptFenster.karteLoeschen();
+					int result = JOptionPane.showConfirmDialog(null, "Delete this Card?", "Confirm", JOptionPane.YES_NO_OPTION);
+					if (result == JOptionPane.YES_OPTION) {
+						Karte kl = Main.daten1.getAktuelleKarte();
+						Main.daten1.karteLoeschen(kl);
+						Main.hauptFenster.getPanelLernen().loadCard();
+					} else if (result == JOptionPane.NO_OPTION) {
+						System.exit(0);
+					}
 				break;
 			case "karteBearbeiten":
 				PanelBearbeiten pb = new PanelBearbeiten();

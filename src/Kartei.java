@@ -18,8 +18,6 @@ import javax.xml.bind.annotation.*;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Kartei {
 
-	private static Kartei instance;
-
 	@XmlElement(name = "Karte")
 	private ArrayList<Karte> kartei;
 
@@ -31,19 +29,14 @@ public class Kartei {
 
 	@XmlTransient
 	private Fach[] fach;
-
 	@XmlTransient
 	private Benutzer benutzer;
-
 	@XmlTransient
 	private String aktuellesSprachpaar;
-
 	@XmlTransient
 	private Sprache aktuelleSprache;
-
 	@XmlTransient
 	private int aktuellesFach;
-
 	@XmlTransient
 	private Karte aktuelleKarte;
 	@XmlTransient
@@ -51,17 +44,10 @@ public class Kartei {
 	@XmlTransient
 	private int falscheAntwort;
 
-	private Kartei() {
-
+	public Kartei() {
+		
 	}
-
-	public static Kartei getInstance() {
-		if (instance == null) {
-			instance = new Kartei();
-		}
-		return instance;
-	}
-
+	
 	public Kartei(String pfad) throws Exception {
 		this.kartei = new ArrayList<Karte>();
 		this.sprachen = new ArrayList<Sprache>();

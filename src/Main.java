@@ -19,12 +19,6 @@ public class Main {
 		}
 		LoginFrame l1 = new LoginFrame();
 		l1.paint();
-		
-		daten1.spracheHinzugfuegen("de-fr", "Deutsch", "Francaise");
-		daten1.spracheHinzugfuegen("de-en", "Deutsch", "English");
-		
-		daten1.lernkarteiSpeichern(pfad);
-		
 
 	}
 	
