@@ -20,13 +20,10 @@ public class Kartei {
 
 	@XmlElement(name = "Karte")
 	private ArrayList<Karte> kartei;
-
 	@XmlElement(name = "Sprache")
 	private ArrayList<Sprache> sprachen;
-
 	@XmlElement(name = "Benutzer")
 	private ArrayList<Benutzer> benutzerListe;
-
 	@XmlTransient
 	private Fach[] fach;
 	@XmlTransient
@@ -59,8 +56,7 @@ public class Kartei {
 		this.richtigeAntwort = 0;
 		this.falscheAntwort = 0;
 	}
-	
-	
+		
 	
 	public Sprache getAktuelleSprache() {
 		return aktuelleSprache;
@@ -87,8 +83,10 @@ public class Kartei {
 	}
 
 	public void karteLoeschen(Karte k) {
-		kartei.remove(k);
-		fach[aktuellesFach - 1].karteEnfernen(k);
+		if (aktuellesFach > 0) {
+			fach[aktuellesFach - 1].karteEnfernen(k);
+			kartei.remove(k);
+		}
 	}
 
 	public ArrayList<Karte> getLernkartei() {
@@ -121,6 +119,9 @@ public class Kartei {
 		System.out.println("" + falscheAntwort);
 	}
 
+	/*
+	 * Arraylists mit Sprachen, Benutzern und Karten in XML File exportieren.
+	 */
 	public void lernkarteiSpeichern(String pfad) {
 
 		try {
@@ -129,39 +130,27 @@ public class Kartei {
 			Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
 
 			jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-
-			// Marshal the card list in console
-			// jaxbMarshaller.marshal(this, System.out);
-
-			// Marshal the card list in file
 			jaxbMarshaller.marshal(this, new File(pfad));
+			
 		} catch (JAXBException e) {
 			e.printStackTrace();
 		}
 	}
 
+	/*
+	 * XML File einlesen und die enthaltenen Elemente zu Objekten umwandeln
+	 */
 	public void karteiEinlesen(String pfad) throws Exception {
-		/*
-		 * XML File einlesen und die enthaltenen Elemente zu Objekten (Karte) umwandeln
-		 */
-
+		
 		try {
 
 			JAXBContext context = JAXBContext.newInstance(Kartei.class);
-
 			Unmarshaller unmarshaller = context.createUnmarshaller();
-
 			Kartei imp = (Kartei) unmarshaller.unmarshal(new File(pfad));
-
-			for (Karte k : imp.getLernkartei()) {
-				// System.out.println("Importiere Karte:" + k.toString());
-				kartei.add(k);
-			}
-
-			for (Benutzer b : imp.getBenutzerListe()) {
-				benutzerListe.add(b);
-
-			}
+	
+			this.kartei = imp.getLernkartei();
+			this.benutzerListe = imp.getBenutzerListe();
+			this.sprachen = imp.getSprachen();
 
 		} catch (JAXBException e) {
 			e.printStackTrace();
