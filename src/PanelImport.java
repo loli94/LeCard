@@ -7,9 +7,9 @@ import javax.swing.JFrame;
  * @version 0.6
  * Datum:24.02.2018
  */
-public class panelImport {
+public class PanelImport {
 
-	public panelImport() {
+	public PanelImport() {
 		this.importFile();
 	}
 	

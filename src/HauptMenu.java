@@ -107,7 +107,7 @@ public class HauptMenu extends JMenuBar {
 				break;
 			case "importieren":
 				@SuppressWarnings("unused")
-				panelImport imp = new panelImport();
+				PanelImport imp = new PanelImport();
 				Main.daten1.lernkarteiSpeichern(Main.pfad);
 				Main.daten1.faecherBefuellen();
 				break;
