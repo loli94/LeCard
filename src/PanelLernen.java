@@ -27,7 +27,7 @@ public class PanelLernen extends JPanel {
 	private JPanel pLernen;
 	private JPanel pSpracheEins;
 	private JPanel pSpracheZwei;
-	private JPanel pPruefen;
+	private JPanel pPruefen; 
 	private JPanel pAuswertung;
 	private JButton bWechsel;
 	private JButton bPruefen;
@@ -156,6 +156,8 @@ public class PanelLernen extends JPanel {
 
 	class ButtonListenerSpracheWechseln implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
+			
+		
 			System.out.println("Sprache wird gewechselt");
 
 		}
@@ -186,7 +188,7 @@ public class PanelLernen extends JPanel {
 			else {
 				System.out.println("Falsch");
 				Main.daten1.karteVerschieben(Main.daten1.getAktuelleKarte(), 1); 
-				lLoesung.setText("Falsch");
+				lLoesung.setText("Falsch"+ "  "+ Main.daten1.getAktuelleKarte().getWortB());
 				lLoesung.setForeground(Color.RED);
 				Main.daten1.setFalscheAntwort();
 
