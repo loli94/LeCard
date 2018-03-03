@@ -24,20 +24,19 @@ public class Hauptfenster extends JFrame {
 		Hauptfenster.locale = lokal;
 		panelSidebar = new PanelSidebar();
 		panelUserMenu = new PanelUserMenu();
-
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		final Dimension d = this.getToolkit().getScreenSize();
-		this.setLocation((int) ((d.getWidth() - this.getWidth()) / 3.8),
-				(int) ((d.getHeight() - this.getHeight()) / 3.8));
-		initComponents();
-	}
-
-	private void initComponents() {
 		statPanel = new JPanel();
 		panelKartei = new PanelKartei();
 		icon = new ImageIcon(this.getClass().getResource("LeCard.png"));
 		panelLernen = new PanelLernen();
+		initComponents();
+	}
 
+	private void initComponents() {
+		this.setTitle("LeCard");
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		final Dimension d = this.getToolkit().getScreenSize();
+		this.setLocation((int) ((d.getWidth() - this.getWidth()) / 3.8),
+				(int) ((d.getHeight() - this.getHeight()) / 3.8));
 	}
 
 	public void paint() {
