@@ -3,6 +3,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Formatter;
+import java.util.Random;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -257,18 +258,17 @@ public class Kartei {
 	public boolean gibNaechsteKarte() {
 
 		// Nächste Karte aus diesem Fach in der entsprechenden Sprache ausgeben
-		if (aktuellesFach > 0) {
-			for (Karte k : fach[aktuellesFach - 1].gibKarten()) {
-				if (k.getSprache().equalsIgnoreCase(aktuellesSprachpaar)) {
-					this.aktuelleKarte = k;
-					
-					return true;
-				}
-			}
+	
+		if (aktuellesFach > 0 && fach[aktuellesFach - 1].gibKarten().size() > 0 ) {
+			Random rnd = new Random();
+			int index = rnd.nextInt(fach[aktuellesFach - 1].gibKarten().size());
+			this.aktuelleKarte = fach[aktuellesFach - 1].gibKarten().get(index);
+			return true;
 		}
-
-		this.aktuelleKarte = null;
-		return false;
+		else {
+			this.aktuelleKarte = null;
+			return false;	
+		}
 	}
 
 	public boolean karteVerschieben(Karte k, int neuesFach) {
