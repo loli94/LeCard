@@ -51,7 +51,7 @@ public class Kartei {
 		this.benutzerListe = new ArrayList<Benutzer>();
 		this.fach = new Fach[5];
 		karteiEinlesen(pfad);
-		this.aktuellesSprachpaar = "de-en";
+		this.aktuellesSprachpaar = "DE-EN";
 		this.aktuellesFach = 0;
 		this.richtigeAntwort = 0;
 		this.falscheAntwort = 0;
@@ -231,20 +231,21 @@ public class Kartei {
 		for (Karte k : kartei) {
 
 			boolean found = false;
+			
+			if (k.getSprache().equalsIgnoreCase(aktuellesSprachpaar)) {
+				for (KartenStatus st : alleStatus) {
+					if (k.getId().equals(st.getUid())) {
+						fach[st.getFach() - 1].karteHinzufuegen(k);
+						found = true;
+						break;
+					}
+				}
 
-			for (KartenStatus st : alleStatus) {
-				if (k.getId().equals(st.getUid())) {
-					fach[st.getFach() - 1].karteHinzufuegen(k);
-					found = true;
-					break;
+				if (found == false) {
+					alleStatus.add(new KartenStatus(k.getId(), 1));
+					fach[0].karteHinzufuegen(k);
 				}
 			}
-
-			if (found == false) {
-				alleStatus.add(new KartenStatus(k.getId(), 1));
-				fach[0].karteHinzufuegen(k);
-			}
-
 		}
 
 	}
@@ -258,11 +259,9 @@ public class Kartei {
 		// Nächste Karte aus diesem Fach in der entsprechenden Sprache ausgeben
 		if (aktuellesFach > 0) {
 			for (Karte k : fach[aktuellesFach - 1].gibKarten()) {
-				if (k.getSprache().equals(aktuellesSprachpaar)) {
+				if (k.getSprache().equalsIgnoreCase(aktuellesSprachpaar)) {
 					this.aktuelleKarte = k;
-
-					System.out.println(k);
-
+					
 					return true;
 				}
 			}
@@ -363,7 +362,7 @@ public class Kartei {
 	public boolean spracheWaehlen(String sprachpaar) {
 
 		for (Sprache s : sprachen) {
-			if (s.getSprachPaar().equals(sprachpaar)) {
+			if (s.getSprachPaar().equalsIgnoreCase(sprachpaar)) {
 				aktuelleSprache = s;
 				aktuellesSprachpaar = s.getSprachPaar();
 				aktuelleSprache = s;

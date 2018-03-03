@@ -1,8 +1,5 @@
 import java.awt.BorderLayout;
-import java.awt.Dimension;import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.image.ImageObserver;
-import java.awt.image.ImageProducer;
+import java.awt.Dimension;
 import java.util.Locale;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -80,7 +77,6 @@ public class Hauptfenster extends JFrame {
 	}
 
 	public void paintPanelStat() {
-
 		statPanel.removeAll();
 		panelKartei.setBalkendiagramm();
 		statPanel.add(new PanelKartei());

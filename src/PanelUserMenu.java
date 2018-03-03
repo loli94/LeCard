@@ -34,9 +34,9 @@ public class PanelUserMenu extends JPanel{
 		
 		lernSprachenMenu = new JComboBox<String>();
 		for(Sprache s : Main.daten1.getSprachen()) {
-			System.out.println(s);
-			lernSprachenMenu.addItem(s.getSprachPaar());
+			lernSprachenMenu.addItem(s.getSprachPaar().toUpperCase());
 		}
+		lernSprachenMenu.setSelectedItem(Main.daten1.getAktuellesSprachpaar().toUpperCase());
 	}
 
 	public void bindListener() {
@@ -66,9 +66,17 @@ public class PanelUserMenu extends JPanel{
 	class DropDownListenerLernSprache implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
-			JComboBox<String> cb = (JComboBox<String>) e.getSource();
-			String selection = (String) cb.getSelectedItem();
+			String selection = (String) lernSprachenMenu.getSelectedItem();
 			Main.daten1.spracheWaehlen(selection);
+			Main.daten1.faecherBefuellen();
+			Main.hauptFenster.getPanelLernen().loadCard();
+			
+			if (Main.daten1.getAktuellesFach()>0) {
+				Main.hauptFenster.paintPanelLernen();
+			}
+			if (Main.daten1.getAktuellesFach() == 0) {
+				Main.hauptFenster.paintPanelStat();
+			}
 		}
 
 	}
