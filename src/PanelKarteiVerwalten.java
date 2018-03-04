@@ -25,14 +25,11 @@ public class PanelKarteiVerwalten {
 
 	private JFrame mainFrame;
 	private JPanel hauptPanel;
-
 	private JPanel hinzufuegenKartei;
-
 	private JPanel sprachen;
 	private JPanel zweiBuchstaben;
 	private JPanel spracheAusgeschrieben;
 	private JLabel strich;
-
 	private JPanel buttonPanelHinzufuegen;
 	private JLabel info1;
 	private JLabel info2;
@@ -75,12 +72,12 @@ public class PanelKarteiVerwalten {
 		sprache1.setPreferredSize(new Dimension(220, 22));
 		sprache2 = new JLabel(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("sprache2"));
 		sprache2.setPreferredSize(new Dimension(220, 22));
-		sprache1hinzufuegenZweiBuchstaben = new JTextField(new MaxSizeDocument(50), "", 0);
+		sprache1hinzufuegenZweiBuchstaben = new JTextField(new MaxGroesseTextfeld(), "", 0);
 		sprache1hinzufuegenZweiBuchstaben.setPreferredSize(new Dimension(80, 22));
 		sprache1hinzufuegenAusgeschrieben = new JTextField();
 		sprache1hinzufuegenAusgeschrieben.setPreferredSize(new Dimension(220, 22));
 
-		sprache2hinzufuegenZweiBuchstaben = new JTextField(new MaxSizeDocument(50), "", 0);
+		sprache2hinzufuegenZweiBuchstaben = new JTextField(new MaxGroesseTextfeld(), "", 0);
 		sprache2hinzufuegenZweiBuchstaben.setPreferredSize(new Dimension(80, 22));
 		sprache2hinzufuegenAusgeschrieben = new JTextField();
 		sprache2hinzufuegenAusgeschrieben.setPreferredSize(new Dimension(220, 22));
@@ -180,10 +177,10 @@ public class PanelKarteiVerwalten {
 		}
 	}
 
-	class MaxSizeDocument extends PlainDocument {
+	class MaxGroesseTextfeld extends PlainDocument {
 		int maxSize;
 
-		public MaxSizeDocument(int maxSize) {
+		public MaxGroesseTextfeld() {
 			this.maxSize = 2;
 		}
 
