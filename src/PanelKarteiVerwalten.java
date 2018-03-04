@@ -1,18 +1,20 @@
-import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.util.ResourceBundle;
-
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-
-import com.sun.corba.se.impl.protocol.BootstrapServerRequestDispatcher;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.PlainDocument;
 
 /* @autor Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
  * @version 1.0
@@ -41,6 +43,7 @@ public class PanelKarteiVerwalten {
 	private JLabel sprache2;
 	private JTextField sprache2hinzufuegenZweiBuchstaben;
 	private JTextField sprache2hinzufuegenAusgeschrieben;
+	
 
 	public PanelKarteiVerwalten() {
 		initComponents();
@@ -52,8 +55,8 @@ public class PanelKarteiVerwalten {
 
 	}
 
-	// Comonents initieren
-	
+	// Components initieren
+
 	private void initComponents() {
 		// TODO Auto-generated method stub
 		mainFrame = new JFrame(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("hinzufuegen"));
@@ -72,12 +75,12 @@ public class PanelKarteiVerwalten {
 		sprache1.setPreferredSize(new Dimension(220, 22));
 		sprache2 = new JLabel(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("sprache2"));
 		sprache2.setPreferredSize(new Dimension(220, 22));
-		sprache1hinzufuegenZweiBuchstaben = new JTextField();
+		sprache1hinzufuegenZweiBuchstaben = new JTextField(new MaxSizeDocument(50), "", 0);
 		sprache1hinzufuegenZweiBuchstaben.setPreferredSize(new Dimension(80, 22));
 		sprache1hinzufuegenAusgeschrieben = new JTextField();
 		sprache1hinzufuegenAusgeschrieben.setPreferredSize(new Dimension(220, 22));
 
-		sprache2hinzufuegenZweiBuchstaben = new JTextField();
+		sprache2hinzufuegenZweiBuchstaben = new JTextField(new MaxSizeDocument(50), "", 0);
 		sprache2hinzufuegenZweiBuchstaben.setPreferredSize(new Dimension(80, 22));
 		sprache2hinzufuegenAusgeschrieben = new JTextField();
 		sprache2hinzufuegenAusgeschrieben.setPreferredSize(new Dimension(220, 22));
@@ -121,8 +124,8 @@ public class PanelKarteiVerwalten {
 
 	private void bindListener() {
 		hinzufuegen.addActionListener(new ButtonListenerHinzufuegen());
-
-
+		sprache1hinzufuegenZweiBuchstaben.addFocusListener(new KeyListenerSprache1());
+		sprache2hinzufuegenZweiBuchstaben.addFocusListener(new KeyListenerSprache2());
 		// TODO Auto-generated method stub
 
 	}
@@ -131,10 +134,72 @@ public class PanelKarteiVerwalten {
 		public void actionPerformed(ActionEvent e) {
 			String c = sprache1hinzufuegenZweiBuchstaben.getText() + "-" + sprache2hinzufuegenZweiBuchstaben.getText();
 			System.out.println(c);
-			Main.daten1.spracheHinzugfuegen(c, sprache1hinzufuegenAusgeschrieben.getText(), sprache2hinzufuegenAusgeschrieben.getText());
-		
+			Main.daten1.spracheHinzugfuegen(c, sprache1hinzufuegenAusgeschrieben.getText(),
+					sprache2hinzufuegenAusgeschrieben.getText());
+
 		}
 
 	}
-	
+
+	class KeyListenerSprache1 implements FocusListener {
+
+		public void focusGained(FocusEvent arg0) {
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void focusLost(FocusEvent arg0) {
+			// TODO Auto-generated method stub
+
+			if (sprache1hinzufuegenZweiBuchstaben.getText().length() < 2) {
+				JOptionPane.showMessageDialog(mainFrame, ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("info3"));
+
+			} else
+				System.out.println("ok");
+
+		}
+	}
+
+	class KeyListenerSprache2 implements FocusListener {
+
+		public void focusGained(FocusEvent arg0) {
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void focusLost(FocusEvent arg0) {
+
+			if (sprache2hinzufuegenZweiBuchstaben.getText().length() < 2) {
+				JOptionPane.showMessageDialog(mainFrame, ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("info3"));
+
+			} else
+				System.out.println("ok");
+
+		}
+	}
+
+	class MaxSizeDocument extends PlainDocument {
+		int maxSize;
+
+		public MaxSizeDocument(int maxSize) {
+			this.maxSize = 2;
+		}
+
+		public void insertString(final int offset, final String text, final AttributeSet attributeSet)
+				throws BadLocationException {
+			if (laengeUeberpruefen(text))
+				super.insertString(offset, text, attributeSet);
+			else
+				Toolkit.getDefaultToolkit().beep();
+		}
+
+		protected boolean laengeUeberpruefen(final String text) {
+			if (getLength() + text.length() <= maxSize) 
+				return true;
+			return false;
+		}
+	}
+
 }
