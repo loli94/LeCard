@@ -91,6 +91,12 @@ public class Hauptfenster extends JFrame {
 		return panelKartei;
 	}
 
+	public PanelUserMenu getPanelUserMenu() {
+		return panelUserMenu;
+	}
+	
+
+
 
 	
 

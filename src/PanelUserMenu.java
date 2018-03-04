@@ -61,8 +61,16 @@ public class PanelUserMenu extends JPanel{
 		lBenutzer.setText(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("Benutzer"));
 		lLernSprache.setText(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("Lernsprache"));
 	}
-
 	
+		
+	public JComboBox<String> getLernSprachenMenu() {
+		return lernSprachenMenu;
+	}
+
+
+
+
+
 	class DropDownListenerLernSprache implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {

@@ -24,22 +24,10 @@ import javax.swing.text.PlainDocument;
 public class PanelKarteiVerwalten {
 
 	private JFrame mainFrame;
-	private JPanel hauptPanel;
-	private JPanel hinzufuegenKartei;
-	private JPanel sprachen;
-	private JPanel zweiBuchstaben;
-	private JPanel spracheAusgeschrieben;
-	private JLabel strich;
-	private JPanel buttonPanelHinzufuegen;
-	private JLabel info1;
-	private JLabel info2;
+	private JPanel hauptPanel, hinzufuegenKartei, sprachen, zweiBuchstaben, spracheAusgeschrieben, buttonPanelHinzufuegen;
+	private JLabel strich, info1, info2, sprache1, sprache2;
 	private JButton hinzufuegen;
-	private JLabel sprache1;
-	private JTextField sprache1hinzufuegenZweiBuchstaben;
-	private JTextField sprache1hinzufuegenAusgeschrieben;
-	private JLabel sprache2;
-	private JTextField sprache2hinzufuegenZweiBuchstaben;
-	private JTextField sprache2hinzufuegenAusgeschrieben;
+	private JTextField sprache1hinzufuegenZweiBuchstaben, sprache1hinzufuegenAusgeschrieben, sprache2hinzufuegenZweiBuchstaben, sprache2hinzufuegenAusgeschrieben;
 	
 
 	public PanelKarteiVerwalten() {
@@ -133,7 +121,9 @@ public class PanelKarteiVerwalten {
 			System.out.println(c);
 			Main.daten1.spracheHinzugfuegen(c, sprache1hinzufuegenAusgeschrieben.getText(),
 					sprache2hinzufuegenAusgeschrieben.getText());
-			Main.hauptFenster.repaint();	
+			
+			Main.daten1.lernkarteiSpeichern(Main.pfad);
+			Main.hauptFenster.getPanelUserMenu().getLernSprachenMenu().addItem(c);			
 		}
 
 	}
