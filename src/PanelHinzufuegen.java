@@ -82,13 +82,13 @@ public class PanelHinzufuegen {
 					Karte k1 = new Karte(Main.daten1.getAktuellesSprachpaar(), tSprache1.getText(),
 							tSprache2.getText());
 					Main.daten1.karteHinzufuegen(k1);
-					JOptionPane.showMessageDialog(mainFrame_1, "" + tSprache1.getText() + " wurde hinzugefügt.");
+					JOptionPane.showMessageDialog(mainFrame_1, "" + tSprache1.getText() + " " + ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("infoTextBearbeiten1"));
 				} else {
-					lmeldunghinzufuegen.setText("Es dürfen keine Zahlen verwendet werden");
+					JOptionPane.showMessageDialog(mainFrame_1,ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("infoTextBearbeiten2"));
 				}
 
 			} else {
-				JOptionPane.showMessageDialog(mainFrame_1,"Beide Felder müssen befüllt sein.");
+				JOptionPane.showMessageDialog(mainFrame_1,ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("infoTextBearbeiten3"));
 			}
 
 		}
