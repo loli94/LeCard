@@ -154,8 +154,6 @@ public class LoginFrame {
 
 		public void actionPerformed(ActionEvent e) {
 			JButton b = (JButton) e.getSource();
-			// System.out.println(tUser.getText());
-			// System.out.println(pPasswort.getPassword());
 			Boolean userExist = Main.daten1.benutzerLaden(tUser.getText(), pPasswort.getText());
 			
 			if (userExist == true) {

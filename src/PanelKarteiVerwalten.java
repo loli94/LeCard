@@ -5,6 +5,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.ResourceBundle;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -24,11 +26,12 @@ import javax.swing.text.PlainDocument;
 public class PanelKarteiVerwalten {
 
 	private JFrame mainFrame;
-	private JPanel hauptPanel, hinzufuegenKartei, sprachen, zweiBuchstaben, spracheAusgeschrieben, buttonPanelHinzufuegen;
+	private JPanel hauptPanel, hinzufuegenKartei, sprachen, zweiBuchstaben, spracheAusgeschrieben,
+			buttonPanelHinzufuegen;
 	private JLabel strich, info1, info2, sprache1, sprache2;
 	private JButton hinzufuegen;
-	private JTextField sprache1hinzufuegenZweiBuchstaben, sprache1hinzufuegenAusgeschrieben, sprache2hinzufuegenZweiBuchstaben, sprache2hinzufuegenAusgeschrieben;
-	
+	private JTextField sprache1hinzufuegenZweiBuchstaben, sprache1hinzufuegenAusgeschrieben,
+			sprache2hinzufuegenZweiBuchstaben, sprache2hinzufuegenAusgeschrieben;
 
 	public PanelKarteiVerwalten() {
 		initComponents();
@@ -69,12 +72,30 @@ public class PanelKarteiVerwalten {
 		sprache2hinzufuegenZweiBuchstaben.setPreferredSize(new Dimension(80, 22));
 		sprache2hinzufuegenAusgeschrieben = new JTextField();
 		sprache2hinzufuegenAusgeschrieben.setPreferredSize(new Dimension(220, 22));
+		sprache2hinzufuegenAusgeschrieben.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+			}
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+			}
+
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+					hinzufuegen.doClick();
+				}
+			}
+		});
 
 		sprachen = new JPanel();
 		zweiBuchstaben = new JPanel();
 		spracheAusgeschrieben = new JPanel();
 
 	}
+
+	// Paint von dem MainFrame
 
 	public void paint() {
 		mainFrame.setSize(650, 430);
@@ -106,28 +127,55 @@ public class PanelKarteiVerwalten {
 		mainFrame.setVisible(true);
 
 	}
+	/*
+	 * Bind von den Listener zu den Buttons und JTextFields. FocusListener sodass
+	 * sofort abgefangen wird ob es weniger als zwei Buchstaben sind
+	 */
 
 	private void bindListener() {
 		hinzufuegen.addActionListener(new ButtonListenerHinzufuegen());
 		sprache1hinzufuegenZweiBuchstaben.addFocusListener(new KeyListenerSprache1());
 		sprache2hinzufuegenZweiBuchstaben.addFocusListener(new KeyListenerSprache2());
-		// TODO Auto-generated method stub
 
 	}
 
+	/*
+	 * ButtonListener für die Sprachhinzufügung. JTextFiels werden nach dem Anlegen
+	 * wieder clear gemacht. Es wird auch überprüft ob das Sprachpaar bereits
+	 * angelegt ist.
+	 */
 	class ButtonListenerHinzufuegen implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			String c = sprache1hinzufuegenZweiBuchstaben.getText() + "-" + sprache2hinzufuegenZweiBuchstaben.getText();
-			System.out.println(c);
-			Main.daten1.spracheHinzugfuegen(c, sprache1hinzufuegenAusgeschrieben.getText(),
-					sprache2hinzufuegenAusgeschrieben.getText());
-			
-			Main.daten1.lernkarteiSpeichern(Main.pfad);
-			Main.hauptFenster.getPanelUserMenu().getLernSprachenMenu().addItem(c);			
+			String c = sprache1hinzufuegenZweiBuchstaben.getText().toUpperCase() + "-"
+					+ sprache2hinzufuegenZweiBuchstaben.getText().toUpperCase();
+			String d = sprache1hinzufuegenAusgeschrieben.getText();
+			String f = sprache2hinzufuegenAusgeschrieben.getText();
+
+			if (Main.daten1.spracheHinzugfuegen(c, d, f) == true) {
+				Main.daten1.spracheHinzugfuegen(c, sprache1hinzufuegenAusgeschrieben.getText(),
+						sprache2hinzufuegenAusgeschrieben.getText());
+				JOptionPane.showMessageDialog(mainFrame,
+						ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("info4"));
+				Main.daten1.lernkarteiSpeichern(Main.pfad);
+				Main.hauptFenster.getPanelUserMenu().getLernSprachenMenu().addItem(c);
+				sprache1hinzufuegenZweiBuchstaben.setText("");
+				sprache2hinzufuegenZweiBuchstaben.setText("");
+				sprache1hinzufuegenAusgeschrieben.setText("");
+				sprache2hinzufuegenAusgeschrieben.setText("");
+			} else if (Main.daten1.spracheHinzugfuegen(c, d, f) == false) {
+				JOptionPane.showMessageDialog(mainFrame,
+						ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("info5"));
+				sprache1hinzufuegenZweiBuchstaben.setText("");
+				sprache2hinzufuegenZweiBuchstaben.setText("");
+				sprache1hinzufuegenAusgeschrieben.setText("");
+				sprache2hinzufuegenAusgeschrieben.setText("");
+			}
 		}
 
 	}
-
+	/*
+	 * FocusListener für Abfrage ob es sicher zwei Buchstaben sind
+	 */
 	class KeyListenerSprache1 implements FocusListener {
 
 		public void focusGained(FocusEvent arg0) {
@@ -140,14 +188,16 @@ public class PanelKarteiVerwalten {
 			// TODO Auto-generated method stub
 
 			if (sprache1hinzufuegenZweiBuchstaben.getText().length() < 2) {
-				JOptionPane.showMessageDialog(mainFrame, ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("info3"));
+				JOptionPane.showMessageDialog(mainFrame,
+						ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("info3"));
 
-			} else
-				System.out.println("ok");
+			}
 
 		}
 	}
-
+	/*
+	 * FocusListener für Abfrage ob es sicher zwei Buchstaben sind
+	 */
 	class KeyListenerSprache2 implements FocusListener {
 
 		public void focusGained(FocusEvent arg0) {
@@ -159,14 +209,17 @@ public class PanelKarteiVerwalten {
 		public void focusLost(FocusEvent arg0) {
 
 			if (sprache2hinzufuegenZweiBuchstaben.getText().length() < 2) {
-				JOptionPane.showMessageDialog(mainFrame, ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("info3"));
+				JOptionPane.showMessageDialog(mainFrame,
+						ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("info3"));
 
 			} else
 				System.out.println("ok");
 
 		}
 	}
-
+	/*
+	 * Klasse um die Felderbeschränkung auf 2 Zeichen zu setzen
+	 */
 	class MaxGroesseTextfeld extends PlainDocument {
 		int maxSize;
 
@@ -183,7 +236,7 @@ public class PanelKarteiVerwalten {
 		}
 
 		protected boolean laengeUeberpruefen(final String text) {
-			if (getLength() + text.length() <= maxSize) 
+			if (getLength() + text.length() <= maxSize)
 				return true;
 			return false;
 		}
