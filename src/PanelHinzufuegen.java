@@ -9,6 +9,7 @@ import java.util.ResourceBundle;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -44,7 +45,6 @@ public class PanelHinzufuegen {
 		lSprache2 = new JLabel("2");
 		tSprache1 = new JTextField();
 		tSprache2 = new JTextField();
-		lmeldunghinzufuegen = new JLabel();
 
 	
 		hinzufuegenPanelText = new JPanel();
@@ -66,7 +66,6 @@ public class PanelHinzufuegen {
 		hinzufuegenPanelText.add(lSprache2);
 		hinzufuegenPanelText.add(tSprache2);
 		hinzufuegenPanelButton.add(hinzufuegenButton);
-		hinzufuegenPanelButton.add(lmeldunghinzufuegen);
 
 		mainFrame_1.add(hinzufuegenPanelText, BorderLayout.CENTER);
 		mainFrame_1.add(hinzufuegenPanelButton, BorderLayout.SOUTH);
@@ -83,14 +82,13 @@ public class PanelHinzufuegen {
 					Karte k1 = new Karte(Main.daten1.getAktuellesSprachpaar(), tSprache1.getText(),
 							tSprache2.getText());
 					Main.daten1.karteHinzufuegen(k1);
-					lmeldunghinzufuegen.setText("" + tSprache1.getText() + " wurde hinzugefügt.");
-					System.out.println("" + k1);
+					JOptionPane.showMessageDialog(mainFrame_1, "" + tSprache1.getText() + " wurde hinzugefügt.");
 				} else {
 					lmeldunghinzufuegen.setText("Es dürfen keine Zahlen verwendet werden");
 				}
 
 			} else {
-				lmeldunghinzufuegen.setText("Beide Felder müssen befüllt sein.");
+				JOptionPane.showMessageDialog(mainFrame_1,"Beide Felder müssen befüllt sein.");
 			}
 
 		}
