@@ -9,6 +9,7 @@ import java.util.ResourceBundle;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 /* @autor Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
@@ -36,8 +37,8 @@ public class PanelBearbeiten {
 
 	private void initComponents() {
 		mainFrame_1 = new JFrame(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("hinzufuegen"));
-		lSprache1 = new JLabel("Sprache 1");
-		lSprache2 = new JLabel("Sprache 2");
+		lSprache1 = new JLabel(Main.daten1.getAktuelleKarte().getWortA());
+		lSprache2 = new JLabel(Main.daten1.getAktuelleKarte().getWortB());
 		tSprache1 = new JTextField();
 		
 		tSprache2 = new JTextField();
@@ -70,10 +71,25 @@ public class PanelBearbeiten {
 	
 	class ButtonListenerHinzufuegen implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			System.out.println("Karte wurde in die Kartei 1 hinzugefügt");
+
+			if ( !tSprache1.getText().isEmpty() || !tSprache2.getText().isEmpty()) {
+
+				if (tSprache1.getText().matches("[a-zA-Z]+") && tSprache2.getText().matches("[a-zA-Z]+")) {
+					Karte k1 = new Karte(Main.daten1.getAktuellesSprachpaar(), tSprache1.getText(),
+							tSprache2.getText());
+					Main.daten1.karteHinzufuegen(k1);
+					JOptionPane.showMessageDialog(mainFrame_1, "" + tSprache1.getText() + ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("infoTextBearbeiten1"));
+				} else {
+					JOptionPane.showMessageDialog(mainFrame_1,ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("infoTextBearbeiten2"));
+				}
+
+			} else {
+				JOptionPane.showMessageDialog(mainFrame_1,ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("infoTextBearbeiten3"));
+			}
+
+		}
+
 	}
-		
-}
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
