@@ -133,7 +133,7 @@ public class PanelKarteiVerwalten {
 			System.out.println(c);
 			Main.daten1.spracheHinzugfuegen(c, sprache1hinzufuegenAusgeschrieben.getText(),
 					sprache2hinzufuegenAusgeschrieben.getText());
-
+			Main.hauptFenster.repaint();	
 		}
 
 	}
