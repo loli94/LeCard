@@ -36,7 +36,7 @@ public class PanelBearbeiten {
 	}
 
 	private void initComponents() {
-		mainFrame_1 = new JFrame(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("hinzufuegen"));
+		mainFrame_1 = new JFrame(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("bearbeiten"));
 		lSprache1 = new JLabel(Main.daten1.getAktuelleKarte().getWortA());
 		lSprache2 = new JLabel(Main.daten1.getAktuelleKarte().getWortB());
 		tSprache1 = new JTextField();
