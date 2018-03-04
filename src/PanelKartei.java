@@ -27,14 +27,10 @@ public class PanelKartei extends JPanel {
 	private JPanel kartei;
 	private JPanel stat;
 	private JPanel start;
-	private JLabel aktuelleKartei;
-	private JButton karteiBearbeiten;
 	private StatistikPanel grafischeStat;
 	private JPanel datenStatistik;
-	private JLabel ausgewaehlteKartei;
 	private JLabel richtigeAntwort;
 	private JLabel falscheAntwort;
-	private PanelKarteiVerwalten panelKarteiVerwalten;
 
 	public PanelKartei() {
 		initComponents();
@@ -61,22 +57,15 @@ public class PanelKartei extends JPanel {
 		stat = new JPanel();
 		start = new JPanel();
 		richtigeAntwort = new JLabel(
-				ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("richtigeAntworten") + " " + Main.daten1.getRichtigeAntwort());
+				ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("richtigeAntworten") + " "
+						+ Main.daten1.getRichtigeAntwort());
 		falscheAntwort = new JLabel(
-				ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("falscheAntworten") + " " + Main.daten1.getFalscheAntwort());
-
-		aktuelleKartei = new JLabel(
-				ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("aktuelleKartei"));
-		ausgewaehlteKartei = new JLabel("Fach: 1    " + Main.daten1.getFach(5).gibAnzahlKarten());
-
-		karteiBearbeiten = new JButton(
-				ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("karteiBearbeiten"));
+				ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("falscheAntworten") + " "
+						+ Main.daten1.getFalscheAntwort());
 
 	}
 
 	private void bindListener() {
-
-		karteiBearbeiten.addActionListener(new ButtonListenerKarteiBearbeiten());
 
 	}
 
@@ -93,48 +82,28 @@ public class PanelKartei extends JPanel {
 		// stat.setLayout(new GridLayout(1, 2));
 		stat.setLayout(new FlowLayout());
 
-		kartei.add(aktuelleKartei);
-		kartei.add(ausgewaehlteKartei);
-		kartei.add(karteiBearbeiten);
-
 		stat.add(grafischeStat);
 		stat.add(datenStatistik);
 
-
-
-		mainFrame.add(kartei);
 		mainFrame.add(stat);
 		mainFrame.add(start);
 
 		add(mainFrame);
 
 	}
-	
+
 	public void setBalkendiagramm() {
-		//Setzen von Barwidth
+		// Setzen von Barwidth
 		grafischeStat.setKart1_WIDTH(Main.daten1.getFachGroesse(0));
 		grafischeStat.setKart2_WIDTH(Main.daten1.getFachGroesse(1));
 		grafischeStat.setKart3_WIDTH(Main.daten1.getFachGroesse(2));
 		grafischeStat.setKart4_WIDTH(Main.daten1.getFachGroesse(3));
 		grafischeStat.setKart5_WIDTH(Main.daten1.getFachGroesse(4));
-		richtigeAntwort.setText(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("richtigeAntworten") + " " + Main.daten1.getRichtigeAntwort());
-		falscheAntwort.setText(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("falscheAntworten") + " " + Main.daten1.getFalscheAntwort());
+		richtigeAntwort.setText(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("richtigeAntworten")
+				+ " " + Main.daten1.getRichtigeAntwort());
+		falscheAntwort.setText(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("falscheAntworten")
+				+ " " + Main.daten1.getFalscheAntwort());
 
 	}
 
-	class ButtonListenerKarteiJetztLernen implements ActionListener {
-
-		public void actionPerformed(ActionEvent e) {
-			System.out.println("Lernen");
-		}
-
-	}
-
-	class ButtonListenerKarteiBearbeiten implements ActionListener {
-		public void actionPerformed(ActionEvent e) {
-			PanelKarteiVerwalten gui1 = new PanelKarteiVerwalten();
-			gui1.paint();
-
-		}
-	}
 }

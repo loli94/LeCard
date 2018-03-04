@@ -137,7 +137,8 @@ public class HauptMenu extends JMenuBar {
 				Main.hauptFenster.spracheWechseln();
 				break;
 			case "spracheHinzufuegen":
-				
+				PanelKarteiVerwalten gui1 = new PanelKarteiVerwalten();
+				gui1.paint();
 				break;
 
 			}
