@@ -85,6 +85,7 @@ public class PanelLernen extends JPanel {
 			}
 
 		});
+		
 
 		lLoesung = new JLabel("");
 		// initiiere Layout von den Panles
