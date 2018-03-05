@@ -62,6 +62,7 @@ public class PanelLernen extends JPanel {
 		tSpracheZweiAntwort.setPreferredSize(new Dimension(220, 22));
 		//tSpracheZweiAntwort.setForeground(Color.blue);
 		tSpracheZweiAntwort.addKeyListener(new KeyListener() {
+			
 
 			@Override
 			public void keyTyped(KeyEvent e) {
