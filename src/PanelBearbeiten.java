@@ -112,7 +112,7 @@ public class PanelBearbeiten {
 							+ ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("infoTextBearbeiten1"));
 					tSprache1.setText("");
 					tSprache2.setText("");
-					//Main.daten1.lernkarteiSpeichern(Main.pfad);
+					Main.daten1.lernkarteiSpeichern(Main.pfad);
 					tSprache1.requestFocus();
 				} else {
 					JOptionPane.showMessageDialog(mainFrame,
