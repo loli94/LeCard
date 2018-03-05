@@ -1,3 +1,4 @@
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
@@ -26,8 +27,7 @@ import javax.swing.text.PlainDocument;
 public class PanelKarteiVerwalten {
 
 	private JFrame mainFrame;
-	private JPanel hauptPanel, hinzufuegenKartei, sprachen, zweiBuchstaben, spracheAusgeschrieben,
-			buttonPanelHinzufuegen;
+	private JPanel hauptPanel, sprachen, zweiBuchstaben, spracheAusgeschrieben, buttonPanelHinzufuegen;
 	private JLabel strich, info1, info2, sprache1, sprache2;
 	private JButton hinzufuegen;
 	private JTextField sprache1hinzufuegenZweiBuchstaben, sprache1hinzufuegenAusgeschrieben,
@@ -49,20 +49,19 @@ public class PanelKarteiVerwalten {
 		// TODO Auto-generated method stub
 		mainFrame = new JFrame(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("hinzufuegen"));
 		hauptPanel = new JPanel();
-		hinzufuegenKartei = new JPanel();
 		strich = new JLabel("-");
-
 		buttonPanelHinzufuegen = new JPanel();
 		info1 = new JLabel(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("info1"));
 		info2 = new JLabel(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("info2"));
 		hinzufuegen = new JButton(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("hinzufuegen"));
 		hinzufuegen.setLocation(200, 20);
 		hinzufuegen.setSize(220, 30);
-
 		sprache1 = new JLabel(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("sprache1"));
 		sprache1.setPreferredSize(new Dimension(220, 22));
+		sprache1.setBounds(235, 35, 220, 30);
 		sprache2 = new JLabel(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("sprache2"));
 		sprache2.setPreferredSize(new Dimension(220, 22));
+		sprache2.setBounds(330, 35, 220, 30);
 		sprache1hinzufuegenZweiBuchstaben = new JTextField(new MaxGroesseTextfeld(), "", 0);
 		sprache1hinzufuegenZweiBuchstaben.setPreferredSize(new Dimension(80, 22));
 		sprache1hinzufuegenAusgeschrieben = new JTextField();
@@ -89,19 +88,16 @@ public class PanelKarteiVerwalten {
 			}
 		});
 
-		sprachen = new JPanel();
+		sprachen = new JPanel(null);
 		zweiBuchstaben = new JPanel();
 		spracheAusgeschrieben = new JPanel();
 
 	}
 
 	// Paint von dem MainFrame
-
 	public void paint() {
 		mainFrame.setSize(650, 430);
 		hauptPanel.setLayout(new GridLayout(6, 1));
-
-		hinzufuegenKartei.setLayout(new GridLayout(1, 2));
 
 		buttonPanelHinzufuegen.add(hinzufuegen);
 		buttonPanelHinzufuegen.setLayout(null);
@@ -127,6 +123,7 @@ public class PanelKarteiVerwalten {
 		mainFrame.setVisible(true);
 
 	}
+
 	/*
 	 * Bind von den Listener zu den Buttons und JTextFields. FocusListener sodass
 	 * sofort abgefangen wird ob es weniger als zwei Buchstaben sind
@@ -173,6 +170,7 @@ public class PanelKarteiVerwalten {
 		}
 
 	}
+
 	/*
 	 * FocusListener für Abfrage ob es sicher zwei Buchstaben sind
 	 */
@@ -195,6 +193,7 @@ public class PanelKarteiVerwalten {
 
 		}
 	}
+
 	/*
 	 * FocusListener für Abfrage ob es sicher zwei Buchstaben sind
 	 */
@@ -217,6 +216,7 @@ public class PanelKarteiVerwalten {
 
 		}
 	}
+
 	/*
 	 * Klasse um die Felderbeschränkung auf 2 Zeichen zu setzen
 	 */

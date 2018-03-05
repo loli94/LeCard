@@ -123,11 +123,4 @@ public class PanelHinzufuegen {
 
 	}
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		PanelHinzufuegen h1 = new PanelHinzufuegen();
-		h1.paint();
-
-	}
-
 }

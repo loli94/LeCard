@@ -35,6 +35,7 @@ public class PanelBearbeiten {
 				(int) ((d.getHeight() - mainFrame.getHeight()) / 2.6));
 
 	}
+
 	/*
 	 * Komponenten werden iniziert
 	 */
@@ -43,7 +44,7 @@ public class PanelBearbeiten {
 		lSprache1 = new JLabel(Main.daten1.getAktuelleSprache().getSpracheA());
 		lSprache2 = new JLabel(Main.daten1.getAktuelleSprache().getSpracheB());
 		tSprache1 = new JTextField(Main.daten1.getAktuelleKarte().getWortA());
-		tSprache1.setPreferredSize(new Dimension(220, 22)); 
+		tSprache1.setPreferredSize(new Dimension(220, 22));
 		tSprache2 = new JTextField(Main.daten1.getAktuelleKarte().getWortB());
 		tSprache2.setPreferredSize(new Dimension(220, 22));
 		tSprache2.addKeyListener(new KeyListener() {
@@ -62,14 +63,15 @@ public class PanelBearbeiten {
 				}
 			}
 		});
-		
+
 		hauptsprache = new JPanel();
-		fremdsprache = new JPanel(); 
+		fremdsprache = new JPanel();
 		fremdsprache.setLocation(100, 100);
 		hinzufuegenPanelButton = new JPanel();
 		hinzufuegenButton = new JButton(
 				ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("bearbeiten"));
 	}
+
 	/*
 	 * ActionListener werden zusammen gefügt
 	 */
@@ -82,9 +84,9 @@ public class PanelBearbeiten {
 	 */
 	public void paint() {
 		mainFrame.setSize(400, 200);
-		hauptsprache.add(lSprache1); 
+		hauptsprache.add(lSprache1);
 		hauptsprache.add(tSprache1);
-		fremdsprache.add(lSprache2); 
+		fremdsprache.add(lSprache2);
 		fremdsprache.add(tSprache2);
 		hinzufuegenPanelButton.add(hinzufuegenButton);
 
@@ -113,7 +115,8 @@ public class PanelBearbeiten {
 					tSprache1.setText("");
 					tSprache2.setText("");
 					Main.daten1.lernkarteiSpeichern(Main.pfad);
-					tSprache1.requestFocus();
+					JButton b = (JButton) e.getSource();
+					((JFrame) b.getParent().getParent().getParent().getParent().getParent()).setVisible(false);
 				} else {
 					JOptionPane.showMessageDialog(mainFrame,
 							ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("infoTextHinzufügen2"));
