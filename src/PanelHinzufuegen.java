@@ -39,8 +39,6 @@ public class PanelHinzufuegen {
 
 	private void initComponents() {
 		mainFrame = new JFrame(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("hinzufuegen"));
-		// lSprache1 = new JLabel(Main.daten1.getAktuelleSprache().getSpracheA());
-		// lSprache2 = new JLabel(Main.daten1.getAktuelleSprache().getSpracheB());
 		lSprache1 = new JLabel(Main.daten1.getAktuelleSprache().getSpracheA());
 		lSprache2 = new JLabel(Main.daten1.getAktuelleSprache().getSpracheB());
 		tSprache1 = new JTextField();
