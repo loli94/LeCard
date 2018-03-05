@@ -22,20 +22,10 @@ import javax.swing.border.Border;
  * Datum:24.02.2018
  */
 public class PanelLernen extends JPanel {
-	private JPanel jp2;
-	private JButton b2;
-	private JPanel pLernen;
-	private JPanel pSpracheEins;
-	private JPanel pSpracheZwei;
-	private JPanel pPruefen; 
-	private JPanel pAuswertung;
-	private JButton bWechsel;
-	private JButton bPruefen;
-	private JLabel lSpracheEins;
-	private JLabel lSpracheEinsFrage;
-	private JLabel lSpracheZwei;
+	private JButton bWechsel, bPruefen;
+	private JPanel pLernen, pSpracheEins, pSpracheZwei, pPruefen, pAuswertung;
+	private JLabel lSpracheEins, lSpracheEinsFrage, lSpracheZwei, lLoesung;
 	private JTextField tSpracheZweiAntwort;
-	private JLabel lLoesung;
 
 	public PanelLernen() {
 		initComponents();
@@ -60,17 +50,17 @@ public class PanelLernen extends JPanel {
 		bPruefen = new JButton(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("pruefen"));
 		bWechsel = new JButton("<->");
 		bWechsel.setPreferredSize(new Dimension(220, 22));
-		lSpracheEins = new JLabel(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("Hauptsprache"));
-		lSpracheEins.setForeground(Color.orange);
+		lSpracheEins = new JLabel(Main.daten1.getAktuelleSprache().getSpracheA());
+		//lSpracheEins.setForeground(Color.orange);
 		lSpracheEins.setPreferredSize(new Dimension(220, 22));
 		lSpracheEinsFrage = new JLabel();
 		lSpracheEinsFrage.setPreferredSize(new Dimension(220, 22));
-		lSpracheZwei = new JLabel(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("Fremdsprache"));
+		lSpracheZwei = new JLabel(Main.daten1.getAktuelleSprache().getSpracheB());
 		lSpracheZwei.setPreferredSize(new Dimension(220, 22));
-		lSpracheZwei.setForeground(Color.blue);
+		//lSpracheZwei.setForeground(Color.blue);
 		tSpracheZweiAntwort = new JTextField();
 		tSpracheZweiAntwort.setPreferredSize(new Dimension(220, 22));
-		tSpracheZweiAntwort.setForeground(Color.blue);
+		//tSpracheZweiAntwort.setForeground(Color.blue);
 		tSpracheZweiAntwort.addKeyListener(new KeyListener() {
 
 			@Override
@@ -100,7 +90,7 @@ public class PanelLernen extends JPanel {
 		pLernen.setLayout(new GridLayout(4, 1));
 		pSpracheEins.setLayout(new GridLayout(1, 2));
 		pSpracheZwei.setLayout(new GridLayout(1, 2));
-		pAuswertung.setLayout(new GridLayout(1, 2));
+		// pAuswertung.setLayout(new GridLayout(1, 2));
 		pPruefen.setLayout(new GridLayout(1, 2));
 
 	}
@@ -109,7 +99,7 @@ public class PanelLernen extends JPanel {
 	public void loadCard() {
 		if (Main.daten1.gibNaechsteKarte() == true) {
 			lSpracheEinsFrage.setText(Main.daten1.getAktuelleKarte().getWortA());
-			lSpracheEinsFrage.setForeground(Color.orange);
+			// lSpracheEinsFrage.setForeground(Color.orange);
 			pPruefen.setVisible(true);
 		}
 
@@ -139,7 +129,7 @@ public class PanelLernen extends JPanel {
 
 		pSpracheEins.add(lSpracheEinsFrage, BorderLayout.CENTER);
 
-		pAuswertung.add(lLoesung, BorderLayout.EAST);
+		pAuswertung.add(lLoesung);
 		pSpracheEins.add(lSpracheEins, BorderLayout.CENTER);
 		pSpracheEins.add(lSpracheEinsFrage, BorderLayout.CENTER);
 		pSpracheZwei.add(lSpracheZwei, BorderLayout.EAST);
@@ -180,6 +170,7 @@ public class PanelLernen extends JPanel {
 				Main.daten1.karteVerschieben(Main.daten1.getAktuelleKarte(), Main.daten1.getAktuellesFach() + 1);
 				tSpracheZweiAntwort.setText("");
 				lLoesung.setText("Richtig");
+				lLoesung.setFont(lLoesung.getFont().deriveFont(22f));
 				lLoesung.setForeground(Color.GREEN);
 				Main.daten1.setRichtigeAntwort();
 
@@ -190,6 +181,8 @@ public class PanelLernen extends JPanel {
 				Main.daten1.karteVerschieben(Main.daten1.getAktuelleKarte(), 1); 
 				lLoesung.setText("Falsch"+ "  "+ Main.daten1.getAktuelleKarte().getWortB());
 				lLoesung.setForeground(Color.RED);
+				lLoesung.setFont(lLoesung.getFont().deriveFont(22f));
+				tSpracheZweiAntwort.setText("");
 				Main.daten1.setFalscheAntwort();
 
 			}
