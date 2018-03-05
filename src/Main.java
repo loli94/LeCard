@@ -19,6 +19,8 @@ public class Main {
 		}
 		LoginFrame l1 = new LoginFrame();
 		l1.paint();
+		
+		daten1.spracheWaehlen("de-en");
 
 	}
 	
