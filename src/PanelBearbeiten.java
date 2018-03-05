@@ -3,6 +3,8 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -43,7 +45,23 @@ public class PanelBearbeiten {
 		tSprache1 = new JTextField(Main.daten1.getAktuelleKarte().getWortA());
 		tSprache1.setPreferredSize(new Dimension(220, 22)); 
 		tSprache2 = new JTextField(Main.daten1.getAktuelleKarte().getWortB());
-		tSprache2.setPreferredSize(new Dimension(220, 22)); 
+		tSprache2.setPreferredSize(new Dimension(220, 22));
+		tSprache2.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+			}
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+			}
+
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+					hinzufuegenButton.doClick();
+				}
+			}
+		});
 		
 		hauptsprache = new JPanel();
 		fremdsprache = new JPanel(); 
@@ -56,7 +74,7 @@ public class PanelBearbeiten {
 	 * ActionListener werden zusammen gefügt
 	 */
 	private void bindListener() {
-		hinzufuegenButton.addActionListener(new ButtonListenerHinzufuegen());
+		hinzufuegenButton.addActionListener(new ButtonListenerBearbeiten());
 	}
 
 	/*
@@ -80,25 +98,30 @@ public class PanelBearbeiten {
 	/*
 	 * ButtonListener für das hinzufügen von einer Karte
 	 */
-	class ButtonListenerHinzufuegen implements ActionListener {
+	class ButtonListenerBearbeiten implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			// Abfrage ob ein Feld leer ist
 			if (!tSprache1.getText().isEmpty() || !tSprache2.getText().isEmpty()) {
 				// Abfrage ob ein Feld Zahlen enthält
 				if (tSprache1.getText().matches("[a-zA-Z]+") && tSprache2.getText().matches("[a-zA-Z]+")) {
+					Main.daten1.karteLoeschen(Main.daten1.getAktuelleKarte());
 					Karte k1 = new Karte(Main.daten1.getAktuellesSprachpaar(), tSprache1.getText(),
 							tSprache2.getText());
 					Main.daten1.karteHinzufuegen(k1);
 					JOptionPane.showMessageDialog(mainFrame, "" + tSprache1.getText()
 							+ ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("infoTextBearbeiten1"));
+					tSprache1.setText("");
+					tSprache2.setText("");
+					//Main.daten1.lernkarteiSpeichern(Main.pfad);
+					tSprache1.requestFocus();
 				} else {
 					JOptionPane.showMessageDialog(mainFrame,
-							ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("infoTextBearbeiten2"));
+							ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("infoTextHinzufügen2"));
 				}
 
 			} else {
 				JOptionPane.showMessageDialog(mainFrame,
-						ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("infoTextBearbeiten3"));
+						ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("infoTextHinzufügen3"));
 			}
 
 		}

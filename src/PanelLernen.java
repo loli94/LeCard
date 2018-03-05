@@ -175,6 +175,7 @@ public class PanelLernen extends JPanel {
 				Main.daten1.setRichtigeAntwort();
 
 			}
+			
 
 			else {
 				System.out.println("Falsch");

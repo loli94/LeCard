@@ -3,6 +3,8 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -22,7 +24,7 @@ import javafx.scene.control.Label;
 public class PanelHinzufuegen {
 
 	private JFrame mainFrame;
-	private JPanel hauptsprache, fremdsprache,  hinzufuegenPanelButton;
+	private JPanel hauptsprache, fremdsprache, hinzufuegenPanelButton;
 	private JLabel lSprache1, lSprache2;
 	private JTextField tSprache1, tSprache2;
 	private JButton hinzufuegenButton;
@@ -45,12 +47,27 @@ public class PanelHinzufuegen {
 		tSprache1.setPreferredSize(new Dimension(220, 22));
 		tSprache1.setLocation(0, 15);
 		tSprache2 = new JTextField();
-		
+		tSprache2.addKeyListener(new KeyListener() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+			}
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+			}
+
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+					hinzufuegenButton.doClick();
+				}
+			}
+		});
+
 		tSprache2.setPreferredSize(new Dimension(220, 22));
 
-	
 		hauptsprache = new JPanel();
-		fremdsprache = new JPanel(); 
+		fremdsprache = new JPanel();
 		hinzufuegenPanelButton = new JPanel();
 		hinzufuegenButton = new JButton(
 				ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("hinzufuegen"));
@@ -62,7 +79,7 @@ public class PanelHinzufuegen {
 
 	public void paint() {
 		mainFrame.setSize(400, 200);
-		//hinzufuegenPanelText.setLayout(new GridLayout(2, 1));
+		// hinzufuegenPanelText.setLayout(new GridLayout(2, 1));
 
 		hauptsprache.add(lSprache1);
 		hauptsprache.add(tSprache1);
@@ -71,7 +88,7 @@ public class PanelHinzufuegen {
 		hinzufuegenPanelButton.add(hinzufuegenButton);
 
 		mainFrame.add(hauptsprache, BorderLayout.NORTH);
-		mainFrame.add(fremdsprache, BorderLayout.CENTER); 
+		mainFrame.add(fremdsprache, BorderLayout.CENTER);
 		mainFrame.add(hinzufuegenPanelButton, BorderLayout.SOUTH);
 
 		mainFrame.setVisible(true);
@@ -80,19 +97,28 @@ public class PanelHinzufuegen {
 	class ButtonListenerHinzufuegen implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 
-			if ( !tSprache1.getText().isEmpty() || !tSprache2.getText().isEmpty()) {
+			if (!tSprache1.getText().isEmpty() || !tSprache2.getText().isEmpty()) {
 
 				if (tSprache1.getText().matches("[a-zA-Z]+") && tSprache2.getText().matches("[a-zA-Z]+")) {
 					Karte k1 = new Karte(Main.daten1.getAktuellesSprachpaar(), tSprache1.getText(),
 							tSprache2.getText());
 					Main.daten1.karteHinzufuegen(k1);
-					JOptionPane.showMessageDialog(mainFrame, "" + tSprache1.getText() + " " + ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("infoTextBearbeiten1"));
+					JOptionPane.showMessageDialog(mainFrame, "" + tSprache1.getText() + " "
+							+ ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("infoTextHinzufügen1"));
+					tSprache1.setText("");
+					tSprache2.setText("");
+					Main.daten1.lernkarteiSpeichern(Main.pfad);
+					Main.hauptFenster.paintPanelStat();
+					tSprache1.requestFocus();
+
 				} else {
-					JOptionPane.showMessageDialog(mainFrame,ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("infoTextBearbeiten2"));
+					JOptionPane.showMessageDialog(mainFrame,
+							ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("infoTextHinzufügen2"));
 				}
 
 			} else {
-				JOptionPane.showMessageDialog(mainFrame,ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("infoTextBearbeiten3"));
+				JOptionPane.showMessageDialog(mainFrame,
+						ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("infoTextHinzufügen3"));
 			}
 
 		}
