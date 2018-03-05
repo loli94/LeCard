@@ -21,33 +21,36 @@ import javafx.scene.control.Label;
  */
 public class PanelHinzufuegen {
 
-	private JFrame mainFrame_1;
-	private JPanel hinzufuegenPanelText;
-	private JPanel hinzufuegenPanelButton;
-	private JLabel lSprache1;
-	private JLabel lSprache2;
-	private JLabel lmeldunghinzufuegen;
-	private JTextField tSprache1;
-	private JTextField tSprache2;
+	private JFrame mainFrame;
+	private JPanel hauptsprache, fremdsprache,  hinzufuegenPanelButton;
+	private JLabel lSprache1, lSprache2;
+	private JTextField tSprache1, tSprache2;
 	private JButton hinzufuegenButton;
 
 	public PanelHinzufuegen() {
 		initComponents();
 		bindListener();
-
+		final Dimension d = mainFrame.getToolkit().getScreenSize();
+		mainFrame.setLocation((int) ((d.getWidth() - mainFrame.getWidth()) / 2.6),
+				(int) ((d.getHeight() - mainFrame.getHeight()) / 2.6));
 	}
 
 	private void initComponents() {
-		mainFrame_1 = new JFrame(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("hinzufuegen"));
+		mainFrame = new JFrame(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("hinzufuegen"));
 		// lSprache1 = new JLabel(Main.daten1.getAktuelleSprache().getSpracheA());
 		// lSprache2 = new JLabel(Main.daten1.getAktuelleSprache().getSpracheB());
-		lSprache1 = new JLabel("1");
-		lSprache2 = new JLabel("2");
+		lSprache1 = new JLabel(Main.daten1.getAktuelleSprache().getSpracheA());
+		lSprache2 = new JLabel(Main.daten1.getAktuelleSprache().getSpracheB());
 		tSprache1 = new JTextField();
+		tSprache1.setPreferredSize(new Dimension(220, 22));
+		tSprache1.setLocation(0, 15);
 		tSprache2 = new JTextField();
+		
+		tSprache2.setPreferredSize(new Dimension(220, 22));
 
 	
-		hinzufuegenPanelText = new JPanel();
+		hauptsprache = new JPanel();
+		fremdsprache = new JPanel(); 
 		hinzufuegenPanelButton = new JPanel();
 		hinzufuegenButton = new JButton(
 				ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("hinzufuegen"));
@@ -58,19 +61,20 @@ public class PanelHinzufuegen {
 	}
 
 	public void paint() {
-		mainFrame_1.setSize(800, 450);
-		hinzufuegenPanelText.setLayout(new GridLayout(2, 1));
+		mainFrame.setSize(400, 200);
+		//hinzufuegenPanelText.setLayout(new GridLayout(2, 1));
 
-		hinzufuegenPanelText.add(lSprache1);
-		hinzufuegenPanelText.add(tSprache1);
-		hinzufuegenPanelText.add(lSprache2);
-		hinzufuegenPanelText.add(tSprache2);
+		hauptsprache.add(lSprache1);
+		hauptsprache.add(tSprache1);
+		fremdsprache.add(lSprache2);
+		fremdsprache.add(tSprache2);
 		hinzufuegenPanelButton.add(hinzufuegenButton);
 
-		mainFrame_1.add(hinzufuegenPanelText, BorderLayout.CENTER);
-		mainFrame_1.add(hinzufuegenPanelButton, BorderLayout.SOUTH);
+		mainFrame.add(hauptsprache, BorderLayout.NORTH);
+		mainFrame.add(fremdsprache, BorderLayout.CENTER); 
+		mainFrame.add(hinzufuegenPanelButton, BorderLayout.SOUTH);
 
-		mainFrame_1.setVisible(true);
+		mainFrame.setVisible(true);
 	}
 
 	class ButtonListenerHinzufuegen implements ActionListener {
@@ -82,13 +86,13 @@ public class PanelHinzufuegen {
 					Karte k1 = new Karte(Main.daten1.getAktuellesSprachpaar(), tSprache1.getText(),
 							tSprache2.getText());
 					Main.daten1.karteHinzufuegen(k1);
-					JOptionPane.showMessageDialog(mainFrame_1, "" + tSprache1.getText() + " " + ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("infoTextBearbeiten1"));
+					JOptionPane.showMessageDialog(mainFrame, "" + tSprache1.getText() + " " + ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("infoTextBearbeiten1"));
 				} else {
-					JOptionPane.showMessageDialog(mainFrame_1,ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("infoTextBearbeiten2"));
+					JOptionPane.showMessageDialog(mainFrame,ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("infoTextBearbeiten2"));
 				}
 
 			} else {
-				JOptionPane.showMessageDialog(mainFrame_1,ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("infoTextBearbeiten3"));
+				JOptionPane.showMessageDialog(mainFrame,ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("infoTextBearbeiten3"));
 			}
 
 		}
