@@ -33,7 +33,9 @@ public class PanelBearbeiten {
 				(int) ((d.getHeight() - mainFrame.getHeight()) / 2.6));
 
 	}
-
+	/*
+	 * Komponenten werden iniziert
+	 */
 	private void initComponents() {
 		mainFrame = new JFrame(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("bearbeiten"));
 		lSprache1 = new JLabel(Main.daten1.getAktuelleSprache().getSpracheA());
@@ -50,11 +52,16 @@ public class PanelBearbeiten {
 		hinzufuegenButton = new JButton(
 				ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("bearbeiten"));
 	}
-
+	/*
+	 * ActionListener werden zusammen gefügt
+	 */
 	private void bindListener() {
 		hinzufuegenButton.addActionListener(new ButtonListenerHinzufuegen());
 	}
 
+	/*
+	 * Paint von dem Fenster
+	 */
 	public void paint() {
 		mainFrame.setSize(400, 200);
 		hauptsprache.add(lSprache1); 
@@ -70,11 +77,14 @@ public class PanelBearbeiten {
 		mainFrame.setVisible(true);
 	}
 
+	/*
+	 * ButtonListener für das hinzufügen von einer Karte
+	 */
 	class ButtonListenerHinzufuegen implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-
+			// Abfrage ob ein Feld leer ist
 			if (!tSprache1.getText().isEmpty() || !tSprache2.getText().isEmpty()) {
-
+				// Abfrage ob ein Feld Zahlen enthält
 				if (tSprache1.getText().matches("[a-zA-Z]+") && tSprache2.getText().matches("[a-zA-Z]+")) {
 					Karte k1 = new Karte(Main.daten1.getAktuellesSprachpaar(), tSprache1.getText(),
 							tSprache2.getText());
