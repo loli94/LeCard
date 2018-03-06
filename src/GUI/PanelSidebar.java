@@ -1,4 +1,5 @@
 package GUI;
+
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -32,11 +33,12 @@ public class PanelSidebar extends JPanel {
 		boxAuswahl[0] = new JButton("Home");
 		for (int i = 1; i <= 5; i++) {
 			boxAuswahl[i] = new JButton(
-					ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("Fach") + " " + i);
+					ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("Fach")
+							+ " " + i);
 			boxAuswahl[i].addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					
+
 				}
 			});
 		}
@@ -56,18 +58,21 @@ public class PanelSidebar extends JPanel {
 			boxAuswahl[i].setBackground(Color.lightGray);
 		}
 		boxAuswahl[0].setBackground(Color.CYAN);
-		
+
 		this.setLayout(new GridLayout(6, 1, 5, 5));
 		Border border = this.getBorder();
-		Border margin = new EmptyBorder(10,10,10,10);
+		Border margin = new EmptyBorder(10, 10, 10, 10);
 		this.setBorder(new CompoundBorder(border, margin));
 
 	}
 
 	public void spracheWechseln() {
-		boxAuswahl[0].setText(ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("ButtonKartei"));
+		boxAuswahl[0].setText(ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale())
+				.getString("ButtonKartei"));
 		for (int i = 1; i <= 5; i++) {
-			boxAuswahl[i].setText(ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("Fach") + " " + i);
+			boxAuswahl[i].setText(
+					ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("Fach")
+							+ " " + i);
 		}
 	}
 
@@ -93,8 +98,8 @@ public class PanelSidebar extends JPanel {
 				Hauptfenster.getInstance().paintPanelLernen();
 			}
 		}
-	}	
-	
+	}
+
 	public JButton[] getBoxAuswahl() {
 		return boxAuswahl;
 	}
