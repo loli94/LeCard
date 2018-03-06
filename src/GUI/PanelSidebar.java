@@ -33,6 +33,12 @@ public class PanelSidebar extends JPanel {
 		for (int i = 1; i <= 5; i++) {
 			boxAuswahl[i] = new JButton(
 					ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("Fach") + " " + i);
+			boxAuswahl[i].addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					
+				}
+			});
 		}
 	}
 
@@ -87,6 +93,9 @@ public class PanelSidebar extends JPanel {
 				Hauptfenster.getInstance().paintPanelLernen();
 			}
 		}
+	}	
+	
+	public JButton[] getBoxAuswahl() {
+		return boxAuswahl;
 	}
-
 }

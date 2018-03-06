@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.Timer;
 
 import Logik.Kartei;
 
@@ -31,6 +32,8 @@ public class PanelLernen extends JPanel {
 	private JLabel lSpracheA, lSpracheB, lLoesung;
 	private JTextField tSpracheA, tSpracheB;
 	private boolean learnReverse;
+	private Timer timer;
+	private int x;
 
 	public PanelLernen() {
 		initComponents();
@@ -54,17 +57,17 @@ public class PanelLernen extends JPanel {
 		pAuswertung = new JPanel();
 		bPruefen = new JButton(ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("pruefen"));
 		bWechsel = new JButton("<->");
-		bWechsel.setPreferredSize(new Dimension(220, 22));
+		bWechsel.setPreferredSize(new Dimension(300, 30));
 		lSpracheA = new JLabel(Kartei.getInstance().getAktuelleSprache().getSpracheA());
-		lSpracheA.setPreferredSize(new Dimension(220, 22));
+		lSpracheA.setPreferredSize(new Dimension(300, 30));
 		tSpracheA = new JTextField();
-		tSpracheA.setPreferredSize(new Dimension(220, 22));
+		tSpracheA.setPreferredSize(new Dimension(300, 30));
 		tSpracheA.setEditable(false);
 		tSpracheA.setBorder(javax.swing.BorderFactory.createEmptyBorder());
 		lSpracheB = new JLabel(Kartei.getInstance().getAktuelleSprache().getSpracheB());
-		lSpracheB.setPreferredSize(new Dimension(220, 22));
+		lSpracheB.setPreferredSize(new Dimension(300, 30));
 		tSpracheB = new JTextField();
-		tSpracheB.setPreferredSize(new Dimension(220, 22));
+		tSpracheB.setPreferredSize(new Dimension(300, 30));
 		tSpracheB.addKeyListener(new textfeldListener());
 		tSpracheB.setBorder(javax.swing.BorderFactory.createEmptyBorder());
 		lLoesung = new JLabel("");
@@ -186,7 +189,6 @@ public class PanelLernen extends JPanel {
 			
 			if (frage.equalsIgnoreCase(antwort)) {
 
-				System.out.println("Korrekt");
 				Kartei.getInstance().karteVerschieben(Kartei.getInstance().getAktuelleKarte(), Kartei.getInstance().getAktuellesFach() + 1);
 				if (learnReverse == false) {
 					tSpracheB.setText("");
@@ -195,9 +197,9 @@ public class PanelLernen extends JPanel {
 					tSpracheA.setText("");
 				}
 								
-				lLoesung.setText("Richtig");
-				lLoesung.setFont(lLoesung.getFont().deriveFont(22f));
+				lLoesung.setText(ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("richtigeAntwort"));
 				lLoesung.setForeground(Color.GREEN);
+				textAusblenden(0, 255, 0, 5, lLoesung);
 				Kartei.getInstance().setRichtigeAntwort();
 
 			}
@@ -206,16 +208,15 @@ public class PanelLernen extends JPanel {
 			else {
 				System.out.println("Falsch");
 				Kartei.getInstance().karteVerschieben(Kartei.getInstance().getAktuelleKarte(), 1); 
-				lLoesung.setText("Falsch"+ "  "+ Kartei.getInstance().getAktuelleKarte().getWortB());
+				lLoesung.setText(ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("falscheAntwort") +" :" + Kartei.getInstance().getAktuelleKarte().getWortB());
 				lLoesung.setForeground(Color.RED);
-				lLoesung.setFont(lLoesung.getFont().deriveFont(22f));
 				tSpracheB.setText("");
+				textAusblenden(255, 0, 0, 5, lLoesung);
 				Kartei.getInstance().setFalscheAntwort();
 
 			}
 			
 			Kartei.getInstance().lernkarteiSpeichern();
-
 			loadCard();
 
 		}
@@ -250,6 +251,24 @@ public class PanelLernen extends JPanel {
 
 		}
 		
+		
+	}
+	
+	private void textAusblenden(int re, int gr, int bl, int speed, JLabel label) {
+		
+		x = 0;
+		
+        timer = new Timer(speed,new ActionListener(){
+        	
+            public void actionPerformed(ActionEvent ae)
+            {
+                label.setForeground(new Color(re,gr,bl,255-x++));
+                if(x==255) timer.stop();
+            }
+        });
+
+        timer.setInitialDelay(2000);
+        timer.start();
 	}
 	
 
