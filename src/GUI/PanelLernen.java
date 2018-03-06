@@ -121,7 +121,6 @@ public class PanelLernen extends JPanel {
 	private void bindListener() {
 		bWechsel.addActionListener(new ButtonListenerSpracheWechseln());
 		bPruefen.addActionListener(new ButtonListenerPruefen());
-		tSpracheB.addActionListener(new JTextFieldListener());
 
 	}
 
@@ -163,7 +162,6 @@ public class PanelLernen extends JPanel {
 			}
 			
 			loadCard();
-
 
 		}
 	}
@@ -224,14 +222,6 @@ public class PanelLernen extends JPanel {
 
 	}
 
-	class JTextFieldListener implements ActionListener {
-
-		public void actionPerformed(ActionEvent e) {
-
-			System.out.println(tSpracheB.getText());
-		}
-
-	}
 
 	public void spracheWechseln() {
 		bPruefen.setText(ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("pruefen"));
