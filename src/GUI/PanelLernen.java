@@ -27,17 +27,17 @@ public class PanelLernen extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JButton bWechsel, bPruefen;
-	private JPanel pLernen, pSpracheEins, pSpracheZwei, pPruefen, pAuswertung;
-	private JLabel lSpracheEins, lSpracheZwei, lLoesung;
-	JTextField lSpracheEinsFrage;
-	private JTextField tSpracheZweiAntwort;
+	private JPanel pLernen, pSpracheA, pSpracheB, pPruefen, pAuswertung;
+	private JLabel lSpracheA, lSpracheB, lLoesung;
+	private JTextField tSpracheA, tSpracheB;
+	private boolean learnReverse;
 
 	public PanelLernen() {
 		initComponents();
 		bindListener();
 		init();
 		paint();
-		repaint();
+		learnReverse = false;
 	}
 
 	public void init() {
@@ -48,55 +48,30 @@ public class PanelLernen extends JPanel {
 
 	private void initComponents() {
 		pLernen = new JPanel();
-		pSpracheEins = new JPanel();
-		pSpracheZwei = new JPanel();
+		pSpracheA = new JPanel();
+		pSpracheB = new JPanel();
 		pPruefen = new JPanel();
 		pAuswertung = new JPanel();
 		bPruefen = new JButton(ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("pruefen"));
 		bWechsel = new JButton("<->");
 		bWechsel.setPreferredSize(new Dimension(220, 22));
-		lSpracheEins = new JLabel(Kartei.getInstance().getAktuelleSprache().getSpracheA());
-		//lSpracheEins.setForeground(Color.orange);
-		lSpracheEins.setPreferredSize(new Dimension(220, 22));
-		lSpracheEinsFrage = new JTextField();
-		lSpracheEinsFrage.setPreferredSize(new Dimension(220, 22));
-		lSpracheZwei = new JLabel(Kartei.getInstance().getAktuelleSprache().getSpracheB());
-		lSpracheZwei.setPreferredSize(new Dimension(220, 22));
-		//lSpracheZwei.setForeground(Color.blue);
-		tSpracheZweiAntwort = new JTextField();
-		tSpracheZweiAntwort.setPreferredSize(new Dimension(220, 22));
-		//tSpracheZweiAntwort.setForeground(Color.blue);
-		tSpracheZweiAntwort.addKeyListener(new KeyListener() {
-			
-
-			@Override
-			public void keyTyped(KeyEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void keyReleased(KeyEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void keyPressed(KeyEvent e) {
-				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-					bPruefen.doClick();
-				}
-
-			}
-
-		});
-		
-
+		lSpracheA = new JLabel(Kartei.getInstance().getAktuelleSprache().getSpracheA());
+		lSpracheA.setPreferredSize(new Dimension(220, 22));
+		tSpracheA = new JTextField();
+		tSpracheA.setPreferredSize(new Dimension(220, 22));
+		tSpracheA.setEditable(false);
+		tSpracheA.setBorder(javax.swing.BorderFactory.createEmptyBorder());
+		lSpracheB = new JLabel(Kartei.getInstance().getAktuelleSprache().getSpracheB());
+		lSpracheB.setPreferredSize(new Dimension(220, 22));
+		tSpracheB = new JTextField();
+		tSpracheB.setPreferredSize(new Dimension(220, 22));
+		tSpracheB.addKeyListener(new textfeldListener());
+		tSpracheB.setBorder(javax.swing.BorderFactory.createEmptyBorder());
 		lLoesung = new JLabel("");
 		// initiiere Layout von den Panles
 		pLernen.setLayout(new GridLayout(4, 1));
-		pSpracheEins.setLayout(new GridLayout(1, 2));
-		pSpracheZwei.setLayout(new GridLayout(1, 2));
+		pSpracheA.setLayout(new GridLayout(1, 2));
+		pSpracheB.setLayout(new GridLayout(1, 2));
 		// pAuswertung.setLayout(new GridLayout(1, 2));
 		pPruefen.setLayout(new GridLayout(1, 2));
 
@@ -105,22 +80,39 @@ public class PanelLernen extends JPanel {
 	// Prüft die Antwort und gibt die entsprechende Karte aus
 	public void loadCard() {
 		if (Kartei.getInstance().gibNaechsteKarte() == true) {
-			lSpracheEinsFrage.setText(Kartei.getInstance().getAktuelleKarte().getWortA());
-			// lSpracheEinsFrage.setForeground(Color.orange);
-			pPruefen.setVisible(true);
-			lSpracheEinsFrage.setEditable(false);
-			lSpracheEinsFrage.setBorder(javax.swing.BorderFactory.createEmptyBorder());
+			if (learnReverse == false) {
+				tSpracheA.setText(Kartei.getInstance().getAktuelleKarte().getWortA());
+				pPruefen.setVisible(true);
+			}
+			else {
+				tSpracheB.setText(Kartei.getInstance().getAktuelleKarte().getWortB());
+				pPruefen.setVisible(true);
+				
+			}
 			
 		}
 
 		// Dialog keine Karte vorhanden und "Prüfen Button" ausblenden
 		else {
+			
+			if (learnReverse == false) {
 			if (Kartei.getInstance().getAktuellesFach() != 0) {
 				JOptionPane.showMessageDialog(pLernen,
 						ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("keinKarteVorhanden"));
-				tSpracheZweiAntwort.setText("");
-				lSpracheEinsFrage.setText("-");
+				tSpracheB.setText("");
+				tSpracheA.setText("-");
 				pPruefen.setVisible(false);
+			}
+			}
+			else {
+				if (Kartei.getInstance().getAktuellesFach() != 0) {
+					JOptionPane.showMessageDialog(pLernen,
+							ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("keinKarteVorhanden"));
+					tSpracheA.setText("");
+					tSpracheB.setText("-");
+					pPruefen.setVisible(false);
+				}
+				
 			}
 		}
 
@@ -130,25 +122,25 @@ public class PanelLernen extends JPanel {
 		bWechsel.addActionListener(new ButtonListenerSpracheWechseln());
 		bPruefen.addActionListener(e -> verifyAnswer());
 		bPruefen.addActionListener(new ButtonListenerPruefen());
-		tSpracheZweiAntwort.addActionListener(new JTextFieldListener());
+		tSpracheB.addActionListener(new JTextFieldListener());
 
 	}
 
 	public void paint() {
 		// Adding Components
 
-		pSpracheEins.add(lSpracheEinsFrage, BorderLayout.CENTER);
+		pSpracheA.add(tSpracheA, BorderLayout.CENTER);
 
 		pAuswertung.add(lLoesung);
-		pSpracheEins.add(lSpracheEins, BorderLayout.CENTER);
-		pSpracheEins.add(lSpracheEinsFrage, BorderLayout.CENTER);
-		pSpracheZwei.add(lSpracheZwei, BorderLayout.EAST);
-		pSpracheZwei.add(tSpracheZweiAntwort, BorderLayout.EAST);
+		pSpracheA.add(lSpracheA, BorderLayout.CENTER);
+		pSpracheA.add(tSpracheA, BorderLayout.CENTER);
+		pSpracheB.add(lSpracheB, BorderLayout.EAST);
+		pSpracheB.add(tSpracheB, BorderLayout.EAST);
 		pPruefen.add(bWechsel, BorderLayout.WEST);
 		pPruefen.add(bPruefen, BorderLayout.EAST);
 
-		pLernen.add(pSpracheEins);
-		pLernen.add(pSpracheZwei);
+		pLernen.add(pSpracheA);
+		pLernen.add(pSpracheB);
 		pLernen.add(pPruefen);
 		pLernen.add(pAuswertung);
 		add(pLernen);
@@ -157,8 +149,22 @@ public class PanelLernen extends JPanel {
 	class ButtonListenerSpracheWechseln implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			
+			if (learnReverse == false) {
+				
+				tSpracheA.setEditable(true);
+				tSpracheB.setEditable(false);
+				tSpracheA.setText("");
+				learnReverse = true;
+			}
+			else {
+				tSpracheA.setEditable(false);
+				tSpracheB.setEditable(true);
+				tSpracheB.setText("");
+				learnReverse = false;
+			}
 			
-			System.out.println("Sprache wird gewechselt");
+			loadCard();
+
 
 		}
 	}
@@ -168,14 +174,23 @@ public class PanelLernen extends JPanel {
 	public void verifyAnswer() {
 
 	}
+	
+	
 
 	class ButtonListenerPruefen implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			if (Kartei.getInstance().getAktuelleKarte().getWortB().equalsIgnoreCase(tSpracheZweiAntwort.getText())) {
+			if (Kartei.getInstance().getAktuelleKarte().getWortB().equalsIgnoreCase(tSpracheB.getText())) {
 
 				System.out.println("Korrekt");
 				Kartei.getInstance().karteVerschieben(Kartei.getInstance().getAktuelleKarte(), Kartei.getInstance().getAktuellesFach() + 1);
-				tSpracheZweiAntwort.setText("");
+				if (learnReverse == false) {
+					tSpracheB.setText("");
+				}
+				else {
+					tSpracheA.setText("");
+				}
+				
+				
 				lLoesung.setText("Richtig");
 				lLoesung.setFont(lLoesung.getFont().deriveFont(22f));
 				lLoesung.setForeground(Color.GREEN);
@@ -190,7 +205,7 @@ public class PanelLernen extends JPanel {
 				lLoesung.setText("Falsch"+ "  "+ Kartei.getInstance().getAktuelleKarte().getWortB());
 				lLoesung.setForeground(Color.RED);
 				lLoesung.setFont(lLoesung.getFont().deriveFont(22f));
-				tSpracheZweiAntwort.setText("");
+				tSpracheB.setText("");
 				Kartei.getInstance().setFalscheAntwort();
 
 			}
@@ -206,7 +221,7 @@ public class PanelLernen extends JPanel {
 
 		public void actionPerformed(ActionEvent e) {
 
-			System.out.println(tSpracheZweiAntwort.getText());
+			System.out.println(tSpracheB.getText());
 		}
 
 	}
@@ -215,6 +230,31 @@ public class PanelLernen extends JPanel {
 		bPruefen.setText(ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("pruefen"));
 		
 	}
+	
+	class textfeldListener implements KeyListener {
+		
+		@Override
+		public void keyTyped(KeyEvent e) {
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void keyReleased(KeyEvent e) {
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void keyPressed(KeyEvent e) {
+			if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+				bPruefen.doClick();
+			}
+
+		}
+		
+	}
+	
 
 
 }
