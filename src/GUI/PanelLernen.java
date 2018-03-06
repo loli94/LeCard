@@ -28,7 +28,8 @@ public class PanelLernen extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private JButton bWechsel, bPruefen;
 	private JPanel pLernen, pSpracheEins, pSpracheZwei, pPruefen, pAuswertung;
-	private JLabel lSpracheEins, lSpracheEinsFrage, lSpracheZwei, lLoesung;
+	private JLabel lSpracheEins, lSpracheZwei, lLoesung;
+	JTextField lSpracheEinsFrage;
 	private JTextField tSpracheZweiAntwort;
 
 	public PanelLernen() {
@@ -57,7 +58,7 @@ public class PanelLernen extends JPanel {
 		lSpracheEins = new JLabel(Kartei.getInstance().getAktuelleSprache().getSpracheA());
 		//lSpracheEins.setForeground(Color.orange);
 		lSpracheEins.setPreferredSize(new Dimension(220, 22));
-		lSpracheEinsFrage = new JLabel();
+		lSpracheEinsFrage = new JTextField();
 		lSpracheEinsFrage.setPreferredSize(new Dimension(220, 22));
 		lSpracheZwei = new JLabel(Kartei.getInstance().getAktuelleSprache().getSpracheB());
 		lSpracheZwei.setPreferredSize(new Dimension(220, 22));
@@ -107,6 +108,9 @@ public class PanelLernen extends JPanel {
 			lSpracheEinsFrage.setText(Kartei.getInstance().getAktuelleKarte().getWortA());
 			// lSpracheEinsFrage.setForeground(Color.orange);
 			pPruefen.setVisible(true);
+			lSpracheEinsFrage.setEditable(false);
+			lSpracheEinsFrage.setBorder(javax.swing.BorderFactory.createEmptyBorder());
+			
 		}
 
 		// Dialog keine Karte vorhanden und "Prüfen Button" ausblenden
@@ -153,7 +157,7 @@ public class PanelLernen extends JPanel {
 	class ButtonListenerSpracheWechseln implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			
-		
+			
 			System.out.println("Sprache wird gewechselt");
 
 		}
