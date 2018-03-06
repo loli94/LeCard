@@ -1,11 +1,10 @@
+package GUI;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.Locale;
 import java.util.ResourceBundle;
 
 import javax.swing.JButton;
@@ -15,13 +14,18 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import Logik.Kartei;
+
 /* @autor Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
  * @version 0.6
  * Datum:24.02.2018
  */
-public class PanelBearbeiten {
+public class PanelBearbeiten extends JFrame {
 
-	private JFrame mainFrame;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel hauptsprache, fremdsprache, hinzufuegenPanelButton;
 	private JLabel lSprache1, lSprache2;
 	private JTextField tSprache1, tSprache2;
@@ -30,9 +34,9 @@ public class PanelBearbeiten {
 	public PanelBearbeiten() {
 		initComponents();
 		bindListener();
-		final Dimension d = mainFrame.getToolkit().getScreenSize();
-		mainFrame.setLocation((int) ((d.getWidth() - mainFrame.getWidth()) / 2.6),
-				(int) ((d.getHeight() - mainFrame.getHeight()) / 2.6));
+		final Dimension d = this.getToolkit().getScreenSize();
+		this.setLocation((int) ((d.getWidth() - this.getWidth()) / 2.6),
+				(int) ((d.getHeight() - this.getHeight()) / 2.6));
 
 	}
 
@@ -40,12 +44,13 @@ public class PanelBearbeiten {
 	 * Komponenten werden iniziert
 	 */
 	private void initComponents() {
-		mainFrame = new JFrame(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("bearbeiten"));
-		lSprache1 = new JLabel(Main.daten1.getAktuelleSprache().getSpracheA());
-		lSprache2 = new JLabel(Main.daten1.getAktuelleSprache().getSpracheB());
-		tSprache1 = new JTextField(Main.daten1.getAktuelleKarte().getWortA());
+		this.setTitle(ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("bearbeiten"));
+		this.setIconImage(Hauptfenster.getInstance().getIcon().getImage());
+		lSprache1 = new JLabel(Kartei.getInstance().getAktuelleSprache().getSpracheA());
+		lSprache2 = new JLabel(Kartei.getInstance().getAktuelleSprache().getSpracheB());
+		tSprache1 = new JTextField(Kartei.getInstance().getAktuelleKarte().getWortA());
 		tSprache1.setPreferredSize(new Dimension(220, 22));
-		tSprache2 = new JTextField(Main.daten1.getAktuelleKarte().getWortB());
+		tSprache2 = new JTextField(Kartei.getInstance().getAktuelleKarte().getWortB());
 		tSprache2.setPreferredSize(new Dimension(220, 22));
 		tSprache2.addKeyListener(new KeyListener() {
 			@Override
@@ -69,7 +74,7 @@ public class PanelBearbeiten {
 		fremdsprache.setLocation(100, 100);
 		hinzufuegenPanelButton = new JPanel();
 		hinzufuegenButton = new JButton(
-				ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("bearbeiten"));
+				ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("bearbeiten"));
 	}
 
 	/*
@@ -83,18 +88,18 @@ public class PanelBearbeiten {
 	 * Paint von dem Fenster
 	 */
 	public void paint() {
-		mainFrame.setSize(400, 200);
+		this.setSize(400, 200);
 		hauptsprache.add(lSprache1);
 		hauptsprache.add(tSprache1);
 		fremdsprache.add(lSprache2);
 		fremdsprache.add(tSprache2);
 		hinzufuegenPanelButton.add(hinzufuegenButton);
 
-		mainFrame.add(hauptsprache, BorderLayout.NORTH);
-		mainFrame.add(fremdsprache, BorderLayout.CENTER);
-		mainFrame.add(hinzufuegenPanelButton, BorderLayout.SOUTH);
+		this.add(hauptsprache, BorderLayout.NORTH);
+		this.add(fremdsprache, BorderLayout.CENTER);
+		this.add(hinzufuegenPanelButton, BorderLayout.SOUTH);
 
-		mainFrame.setVisible(true);
+		this.setVisible(true);
 	}
 
 	/*
@@ -106,25 +111,23 @@ public class PanelBearbeiten {
 			if (!tSprache1.getText().isEmpty() || !tSprache2.getText().isEmpty()) {
 				// Abfrage ob ein Feld Zahlen enthält
 				if (tSprache1.getText().matches("[a-zA-Z]+") && tSprache2.getText().matches("[a-zA-Z]+")) {
-					Main.daten1.karteLoeschen(Main.daten1.getAktuelleKarte());
-					Karte k1 = new Karte(Main.daten1.getAktuellesSprachpaar(), tSprache1.getText(),
-							tSprache2.getText());
-					Main.daten1.karteHinzufuegen(k1);
-					JOptionPane.showMessageDialog(mainFrame, "" + tSprache1.getText()
-							+ ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("infoTextBearbeiten1"));
+					Kartei.getInstance().getAktuelleKarte().setWortA(tSprache1.getText());
+					Kartei.getInstance().getAktuelleKarte().setWortB(tSprache2.getText());
+					JOptionPane.showMessageDialog(null, "" + tSprache1.getText()
+							+ ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("infoTextBearbeiten1"));
 					tSprache1.setText("");
 					tSprache2.setText("");
-					Main.daten1.lernkarteiSpeichern(Main.pfad);
+					Kartei.getInstance().lernkarteiSpeichern();
 					JButton b = (JButton) e.getSource();
 					((JFrame) b.getParent().getParent().getParent().getParent().getParent()).setVisible(false);
 				} else {
-					JOptionPane.showMessageDialog(mainFrame,
-							ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("infoTextHinzufügen2"));
+					JOptionPane.showMessageDialog(null,
+							ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("infoTextHinzufügen2"));
 				}
 
 			} else {
-				JOptionPane.showMessageDialog(mainFrame,
-						ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("infoTextHinzufügen3"));
+				JOptionPane.showMessageDialog(null,
+						ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("infoTextHinzufügen3"));
 			}
 
 		}

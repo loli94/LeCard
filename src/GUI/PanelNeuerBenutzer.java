@@ -1,3 +1,4 @@
+package GUI;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -5,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -12,13 +14,18 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+
+import Logik.Kartei;
 /* @autor Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
  * @version 0.2
  * Datum:24.02.2018
  */
-public class PanelNeuerBenutzer {
+public class PanelNeuerBenutzer extends JFrame{
 
-	private JFrame mainFrame_1;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel pBenutzer;
 	private JPanel pPasswort;
 	private JPanel pErstellen;
@@ -37,16 +44,17 @@ public class PanelNeuerBenutzer {
 	}
 
 	private void initComponents() {
-		mainFrame_1 = new JFrame(ResourceBundle.getBundle("Bundle", locale).getString("neuerbenutzer"));
-		lBenutzer = new JLabel(ResourceBundle.getBundle("Bundle", locale).getString("Benutzer"));
-		lPasswort = new JLabel(ResourceBundle.getBundle("Bundle", locale).getString("Passwort"));
+		this.setTitle(ResourceBundle.getBundle("Bundles\\Bundle", locale).getString("neuerbenutzer"));
+		this.setIconImage(new ImageIcon(getClass().getClassLoader().getResource("Images\\LeCard.png")).getImage());
+		lBenutzer = new JLabel(ResourceBundle.getBundle("Bundles\\Bundle", locale).getString("Benutzer"));
+		lPasswort = new JLabel(ResourceBundle.getBundle("Bundles\\Bundle", locale).getString("Passwort"));
 
 		tBenutzer = new JTextField();
 		tPasswort = new JPasswordField();
 		pBenutzer = new JPanel();
 		pPasswort = new JPanel();
 		pErstellen = new JPanel();
-		bErstellen = new JButton(ResourceBundle.getBundle("Bundle", locale).getString("erstellen"));
+		bErstellen = new JButton(ResourceBundle.getBundle("Bundles\\Bundle", locale).getString("erstellen"));
 	}
 
 	private void bindListener() {
@@ -54,7 +62,7 @@ public class PanelNeuerBenutzer {
 	}
 
 	public void paint() {
-		mainFrame_1.setSize(400, 110);
+		this.setSize(400, 110);
 		pBenutzer.setLayout(new GridLayout(1, 2));
 		pPasswort.setLayout(new GridLayout(1, 2));
 		pErstellen.setLayout(new BorderLayout());
@@ -65,11 +73,11 @@ public class PanelNeuerBenutzer {
 		pPasswort.add(tPasswort);
 		pErstellen.add(bErstellen, BorderLayout.CENTER);
 
-		mainFrame_1.add(pBenutzer, BorderLayout.NORTH);
-		mainFrame_1.add(pPasswort, BorderLayout.CENTER);
-		mainFrame_1.add(pErstellen, BorderLayout.SOUTH);
+		this.add(pBenutzer, BorderLayout.NORTH);
+		this.add(pPasswort, BorderLayout.CENTER);
+		this.add(pErstellen, BorderLayout.SOUTH);
 
-		mainFrame_1.setVisible(true);
+		this.setVisible(true);
 	}
 	
 	public void verify() {
@@ -77,19 +85,20 @@ public class PanelNeuerBenutzer {
 	}
 
 	class ButtonListenerBenutzerErstellen implements ActionListener {
+		@SuppressWarnings("deprecation")
 		public void actionPerformed(ActionEvent e) {
-			if (Main.daten1.benutzerExistiert(tBenutzer.getText()) == false){
-				Main.daten1.benutzerHinzufuegen(tBenutzer.getText(), tPasswort.getText());
-				JOptionPane.showMessageDialog(mainFrame_1, ResourceBundle.getBundle("Bundle", locale).getString("Benutzererstellt"));
-				Main.daten1.lernkarteiSpeichern(Main.pfad);
-				mainFrame_1.dispose();
+			if (Kartei.getInstance().benutzerExistiert(tBenutzer.getText()) == false){
+				Kartei.getInstance().benutzerHinzufuegen(tBenutzer.getText(), tPasswort.getText());
+				JOptionPane.showMessageDialog(null, ResourceBundle.getBundle("Bundles\\Bundle", locale).getString("Benutzererstellt"));
+				Kartei.getInstance().lernkarteiSpeichern();
+				dispose();
 				LoginFrame gui1 = new LoginFrame();
 				gui1.paint();
 				
 				
 			}
 			else {
-				JOptionPane.showMessageDialog(mainFrame_1, ResourceBundle.getBundle("Bundle", locale).getString("Benutzerexistiert"));
+				JOptionPane.showMessageDialog(null, ResourceBundle.getBundle("Bundles\\Bundle", locale).getString("Benutzerexistiert"));
 				
 			}
 			
@@ -101,14 +110,4 @@ public class PanelNeuerBenutzer {
 
 	}
 
-	/*public static void Main(String[] args) {
-		// TODO 
-		 String country = "DE";
-		 String language = "de";
-		Locale locale = new Locale(language, country);
-		
-		PanelNeuerBenutzer h1 = new PanelNeuerBenutzer(locale);
-		h1.paint();
-
-	}*/
 }

@@ -1,3 +1,4 @@
+package GUI;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,6 +10,9 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
+import Logik.Karte;
+import Logik.Kartei;
+
 public class HauptMenu extends JMenuBar {
 
 	private static final long serialVersionUID = 1L;
@@ -18,14 +22,14 @@ public class HauptMenu extends JMenuBar {
 	public HauptMenu() {
 
 		// Dateimenu erstellen.
-		dateiMenu = new JMenu(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("Datei"));
+		dateiMenu = new JMenu(ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("Datei"));
 
-		menuItem = new JMenuItem(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("Importieren"));
+		menuItem = new JMenuItem(ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("Importieren"));
 		menuItem.addActionListener(new ListenerHauptMenu());
 		menuItem.setName("importieren");
 		dateiMenu.add(menuItem);
 
-		menuItem = new JMenuItem(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("Beenden"));
+		menuItem = new JMenuItem(ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("Beenden"));
 		menuItem.addActionListener(new ListenerHauptMenu());
 		menuItem.setName("beenden");
 		dateiMenu.add(menuItem);
@@ -33,29 +37,29 @@ public class HauptMenu extends JMenuBar {
 		this.add(dateiMenu);
 
 		// Menu für Karteibearbeitenung
-		karteiMenu = new JMenu(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("Lernkartei"));
+		karteiMenu = new JMenu(ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("Lernkartei"));
 		
-		kartenMenu = new JMenu(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("Karte"));
+		kartenMenu = new JMenu(ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("Karte"));
 		
-		menuItem = new JMenuItem(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("hinzufuegen"));
+		menuItem = new JMenuItem(ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("hinzufuegen"));
 		menuItem.setName("karteHinzufuegen");
 		menuItem.addActionListener(new ListenerHauptMenu());
 		kartenMenu.add(menuItem);
 
-		menuItem = new JMenuItem(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("bearbeiten"));
+		menuItem = new JMenuItem(ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("bearbeiten"));
 		menuItem.setName("karteBearbeiten");
 		menuItem.addActionListener(new ListenerHauptMenu());
 		kartenMenu.add(menuItem);
 
-		menuItem = new JMenuItem(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("loeschen"));
+		menuItem = new JMenuItem(ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("loeschen"));
 		menuItem.setName("karteLoeschen");
 		menuItem.addActionListener(new ListenerHauptMenu());
 		kartenMenu.add(menuItem);
 			
 		karteiMenu.add(kartenMenu);
 		
-		lernsprachenMenu = new JMenu(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("Lernsprache"));
-		menuItem = new JMenuItem(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("hinzufuegen"));
+		lernsprachenMenu = new JMenu(ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("Lernsprache"));
+		menuItem = new JMenuItem(ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("hinzufuegen"));
 		menuItem.setName("spracheHinzufuegen");
 		menuItem.addActionListener(new ListenerHauptMenu());
 		lernsprachenMenu.add(menuItem);
@@ -65,10 +69,10 @@ public class HauptMenu extends JMenuBar {
 		this.add(karteiMenu);
 
 		// Menu für Anzeige.
-		anzeigeMenu = new JMenu(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("Anzeige"));
+		anzeigeMenu = new JMenu(ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("Anzeige"));
 
 		// Submenu für Spracheinstellung
-		lernsprachMenu = new JMenu(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("Sprache"));
+		lernsprachMenu = new JMenu(ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("Sprache"));
 
 		menuItem = new JMenuItem("Deutsch");
 		menuItem.addActionListener(new ListenerHauptMenu());
@@ -108,8 +112,8 @@ public class HauptMenu extends JMenuBar {
 			case "importieren":
 				@SuppressWarnings("unused")
 				PanelImport imp = new PanelImport();
-				Main.daten1.lernkarteiSpeichern(Main.pfad);
-				Main.daten1.faecherBefuellen();
+				Kartei.getInstance().lernkarteiSpeichern();
+				Kartei.getInstance().faecherBefuellen();
 				break;
 			case "karteHinzufuegen":
 				PanelHinzufuegen ph = new PanelHinzufuegen();
@@ -118,9 +122,9 @@ public class HauptMenu extends JMenuBar {
 			case "karteLoeschen":
 					int result = JOptionPane.showConfirmDialog(null, "Delete this Card?", "Confirm", JOptionPane.YES_NO_OPTION);
 					if (result == JOptionPane.YES_OPTION) {
-						Karte kl = Main.daten1.getAktuelleKarte();
-						Main.daten1.karteLoeschen(kl);
-						Main.hauptFenster.getPanelLernen().loadCard();
+						Karte kl = Kartei.getInstance().getAktuelleKarte();
+						Kartei.getInstance().karteLoeschen(kl);
+						Hauptfenster.getInstance().getPanelLernen().loadCard();
 					} else if (result == JOptionPane.NO_OPTION) {
 						System.exit(0);
 					}
@@ -133,8 +137,8 @@ public class HauptMenu extends JMenuBar {
 			case "EN":
 			case "IT":
 			case "FR":
-				Hauptfenster.locale = new Locale(selection.toLowerCase(), selection);
-				Main.hauptFenster.spracheWechseln();
+				Kartei.getInstance().setLocale(new Locale(selection.toLowerCase(), selection));
+				Hauptfenster.getInstance().spracheWechseln();
 				break;
 			case "spracheHinzufuegen":
 				PanelKarteiVerwalten gui1 = new PanelKarteiVerwalten();

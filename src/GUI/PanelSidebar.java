@@ -1,3 +1,4 @@
+package GUI;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -8,6 +9,8 @@ import javax.swing.JPanel;
 import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
+
+import Logik.Kartei;
 
 public class PanelSidebar extends JPanel {
 
@@ -29,9 +32,10 @@ public class PanelSidebar extends JPanel {
 		boxAuswahl[0] = new JButton("Home");
 		for (int i = 1; i <= 5; i++) {
 			boxAuswahl[i] = new JButton(
-					ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("Fach") + " " + i);
+					ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("Fach") + " " + i);
 		}
 	}
+
 
 	public void bindListener() {
 
@@ -56,9 +60,9 @@ public class PanelSidebar extends JPanel {
 	}
 
 	public void spracheWechseln() {
-		boxAuswahl[0].setText(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("ButtonKartei"));
+		boxAuswahl[0].setText(ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("ButtonKartei"));
 		for (int i = 1; i <= 5; i++) {
-			boxAuswahl[i].setText(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("Fach") + " " + i);
+			boxAuswahl[i].setText(ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("Fach") + " " + i);
 		}
 	}
 
@@ -71,17 +75,17 @@ public class PanelSidebar extends JPanel {
 			}
 
 			int fach = Integer.parseInt(0 + b.getText().replaceAll("\\D+", ""));
-			Main.daten1.setAktuellesFach(fach);
+			Kartei.getInstance().setAktuellesFach(fach);
 
 			if (fach == 0) {
 				boxAuswahl[0].setBackground(Color.CYAN);
-				Main.hauptFenster.paintPanelStat();
+				Hauptfenster.getInstance().paintPanelStat();
 			}
 
 			else {
 				boxAuswahl[fach].setBackground(Color.CYAN);
-				Main.daten1.gibNaechsteKarte();
-				Main.hauptFenster.paintPanelLernen();
+				Kartei.getInstance().gibNaechsteKarte();
+				Hauptfenster.getInstance().paintPanelLernen();
 			}
 		}
 	}

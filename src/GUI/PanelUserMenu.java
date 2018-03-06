@@ -1,3 +1,4 @@
+package GUI;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,6 +11,9 @@ import javax.swing.JTextField;
 import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
+
+import Logik.Kartei;
+import Logik.Sprache;
 
 public class PanelUserMenu extends JPanel{
 	
@@ -28,15 +32,15 @@ public class PanelUserMenu extends JPanel{
 	
 	private void initComponents() {
 		
-		lBenutzer = new JLabel(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("Benutzer") + ": "+ Main.daten1.getBenutzer().getBenutzername());
-		lLernSprache = new JLabel(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("Lernsprache") + ": ");
+		lBenutzer = new JLabel(ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("Benutzer") + ": "+ Kartei.getInstance().getBenutzer().getBenutzername());
+		lLernSprache = new JLabel(ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("Lernsprache") + ": ");
 		lLernSprache.setHorizontalAlignment(JTextField.RIGHT);
 		
 		lernSprachenMenu = new JComboBox<String>();
-		for(Sprache s : Main.daten1.getSprachen()) {
+		for(Sprache s : Kartei.getInstance().getSprachen()) {
 			lernSprachenMenu.addItem(s.getSprachPaar().toUpperCase());
 		}
-		lernSprachenMenu.setSelectedItem(Main.daten1.getAktuellesSprachpaar().toUpperCase());
+		lernSprachenMenu.setSelectedItem(Kartei.getInstance().getAktuellesSprachpaar().toUpperCase());
 	}
 
 	public void bindListener() {
@@ -58,8 +62,8 @@ public class PanelUserMenu extends JPanel{
 	}
 	
 	public void spracheWechseln() {
-		lBenutzer.setText(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("Benutzer"));
-		lLernSprache.setText(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("Lernsprache"));
+		lBenutzer.setText(ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("Benutzer"));
+		lLernSprache.setText(ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("Lernsprache"));
 	}
 	
 		
@@ -75,15 +79,14 @@ public class PanelUserMenu extends JPanel{
 
 		public void actionPerformed(ActionEvent e) {
 			String selection = (String) lernSprachenMenu.getSelectedItem();
-			Main.daten1.spracheWaehlen(selection);
-			Main.daten1.faecherBefuellen();
-			Main.hauptFenster.getPanelLernen().loadCard();
+			Kartei.getInstance().spracheWaehlen(selection);
+			Kartei.getInstance().faecherBefuellen();
 			
-			if (Main.daten1.getAktuellesFach()>0) {
-				Main.hauptFenster.paintPanelLernen();
+			if (Kartei.getInstance().getAktuellesFach() > 0) {
+				Hauptfenster.getInstance().paintPanelLernen();
 			}
-			if (Main.daten1.getAktuellesFach() == 0) {
-				Main.hauptFenster.paintPanelStat();
+			if (Kartei.getInstance().getAktuellesFach() == 0) {
+				Hauptfenster.getInstance().paintPanelStat();
 			}
 		}
 

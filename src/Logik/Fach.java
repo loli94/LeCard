@@ -1,3 +1,4 @@
+package Logik;
 import java.util.ArrayList;
 
 /* @autor Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig

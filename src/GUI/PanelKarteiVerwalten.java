@@ -1,4 +1,4 @@
-import java.awt.BorderLayout;
+package GUI;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
@@ -18,6 +18,8 @@ import javax.swing.JTextField;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
+
+import Logik.Kartei;
 
 /* @autor Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
  * @version 1.0
@@ -47,19 +49,19 @@ public class PanelKarteiVerwalten {
 
 	private void initComponents() {
 		// TODO Auto-generated method stub
-		mainFrame = new JFrame(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("hinzufuegen"));
+		mainFrame = new JFrame(ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("hinzufuegen"));
 		hauptPanel = new JPanel();
 		strich = new JLabel("-");
 		buttonPanelHinzufuegen = new JPanel();
-		info1 = new JLabel(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("info1"));
-		info2 = new JLabel(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("info2"));
-		hinzufuegen = new JButton(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("hinzufuegen"));
+		info1 = new JLabel(ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("info1"));
+		info2 = new JLabel(ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("info2"));
+		hinzufuegen = new JButton(ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("hinzufuegen"));
 		hinzufuegen.setLocation(200, 20);
 		hinzufuegen.setSize(220, 30);
-		sprache1 = new JLabel(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("sprache1"));
+		sprache1 = new JLabel(ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("sprache1"));
 		sprache1.setPreferredSize(new Dimension(220, 22));
 		sprache1.setBounds(235, 35, 220, 30);
-		sprache2 = new JLabel(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("sprache2"));
+		sprache2 = new JLabel(ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("sprache2"));
 		sprache2.setPreferredSize(new Dimension(220, 22));
 		sprache2.setBounds(330, 35, 220, 30);
 		sprache1hinzufuegenZweiBuchstaben = new JTextField(new MaxGroesseTextfeld(), "", 0);
@@ -148,20 +150,20 @@ public class PanelKarteiVerwalten {
 			String d = sprache1hinzufuegenAusgeschrieben.getText();
 			String f = sprache2hinzufuegenAusgeschrieben.getText();
 
-			if (Main.daten1.spracheHinzugfuegen(c, d, f) == true) {
-				Main.daten1.spracheHinzugfuegen(c, sprache1hinzufuegenAusgeschrieben.getText(),
+			if (Kartei.getInstance().spracheHinzugfuegen(c, d, f) == true) {
+				Kartei.getInstance().spracheHinzugfuegen(c, sprache1hinzufuegenAusgeschrieben.getText(),
 						sprache2hinzufuegenAusgeschrieben.getText());
 				JOptionPane.showMessageDialog(mainFrame,
-						ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("info4"));
-				Main.daten1.lernkarteiSpeichern(Main.pfad);
-				Main.hauptFenster.getPanelUserMenu().getLernSprachenMenu().addItem(c);
+						ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("info4"));
+				Kartei.getInstance().lernkarteiSpeichern();
+				Hauptfenster.getInstance().getPanelUserMenu().getLernSprachenMenu().addItem(c);
 				sprache1hinzufuegenZweiBuchstaben.setText("");
 				sprache2hinzufuegenZweiBuchstaben.setText("");
 				sprache1hinzufuegenAusgeschrieben.setText("");
 				sprache2hinzufuegenAusgeschrieben.setText("");
-			} else if (Main.daten1.spracheHinzugfuegen(c, d, f) == false) {
+			} else if (Kartei.getInstance().spracheHinzugfuegen(c, d, f) == false) {
 				JOptionPane.showMessageDialog(mainFrame,
-						ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("info5"));
+						ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("info5"));
 				sprache1hinzufuegenZweiBuchstaben.setText("");
 				sprache2hinzufuegenZweiBuchstaben.setText("");
 				sprache1hinzufuegenAusgeschrieben.setText("");
@@ -176,21 +178,22 @@ public class PanelKarteiVerwalten {
 	 */
 	class KeyListenerSprache1 implements FocusListener {
 
-		public void focusGained(FocusEvent arg0) {
-			// TODO Auto-generated method stub
+
+		@Override
+		public void focusLost(FocusEvent arg0) {
+	
+			if (sprache1hinzufuegenZweiBuchstaben.getText().length() < 2) {
+				JOptionPane.showMessageDialog(mainFrame,
+						ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("info3"));
+
+			}
 
 		}
 
 		@Override
-		public void focusLost(FocusEvent arg0) {
+		public void focusGained(FocusEvent arg0) {
 			// TODO Auto-generated method stub
-
-			if (sprache1hinzufuegenZweiBuchstaben.getText().length() < 2) {
-				JOptionPane.showMessageDialog(mainFrame,
-						ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("info3"));
-
-			}
-
+			
 		}
 	}
 
@@ -209,7 +212,7 @@ public class PanelKarteiVerwalten {
 
 			if (sprache2hinzufuegenZweiBuchstaben.getText().length() < 2) {
 				JOptionPane.showMessageDialog(mainFrame,
-						ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("info3"));
+						ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("info3"));
 
 			} else
 				System.out.println("ok");
@@ -221,6 +224,10 @@ public class PanelKarteiVerwalten {
 	 * Klasse um die Felderbeschränkung auf 2 Zeichen zu setzen
 	 */
 	class MaxGroesseTextfeld extends PlainDocument {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
 		int maxSize;
 
 		public MaxGroesseTextfeld() {

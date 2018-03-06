@@ -1,8 +1,8 @@
+package GUI;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
-import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -10,6 +10,7 @@ import java.awt.event.KeyListener;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -18,20 +19,25 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import javax.swing.event.CaretListener;
+
+import Logik.Kartei;
+
 /* @autor Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
  * @version 0.3
  * Datum:24.02.2018
  */
-public class LoginFrame {
+public class LoginFrame extends JFrame {
 
-	private JFrame mainFrame;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel loginPanel;
 	private JPanel buttonPanel;
 	private JButton login;
 	private JButton neuerUser;
-	private JComboBox sprachenMenu;
-	private Locale locale;
+	private JComboBox<String> sprachenMenu;
+	private Locale lokal;
 	private String country;
 	private String language;
 	private JTextField tUser;
@@ -42,9 +48,9 @@ public class LoginFrame {
 	public LoginFrame() {
 		initComponents();
 		bindListener();
-		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		final Dimension d = mainFrame.getToolkit().getScreenSize(); 
-		mainFrame.setLocation((int) ((d.getWidth() - mainFrame.getWidth()) / 2.6), (int) ((d.getHeight() - mainFrame.getHeight()) / 2.6));
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		final Dimension d = this.getToolkit().getScreenSize(); 
+		this.setLocation((int) ((d.getWidth() - this.getWidth()) / 2.6), (int) ((d.getHeight() - this.getHeight()) / 2.6));
 	}
 
 	public JLabel getlBenutzerlogin() {
@@ -52,7 +58,7 @@ public class LoginFrame {
 	}
 
 	private void initComponents() {
-		mainFrame = new JFrame("Login", null);
+		this.setTitle("Login");
 		loginPanel = new JPanel();
 		buttonPanel = new JPanel();
 		loginPanel.setBackground(Color.white);
@@ -60,11 +66,13 @@ public class LoginFrame {
 		login = new JButton("Login");
 		this.language = "de";
 		this.country = "DE";
-		this.locale = new Locale(language, country);
+		this.lokal = new Locale("de", "DE");
 		String spracheBox[] = { "Deutsch", "English", "Francaise", "Italiano" };
-		sprachenMenu = new JComboBox(spracheBox);
+		sprachenMenu = new JComboBox<String>(spracheBox);
 		tUser = new JTextField();
 		pPasswort = new JPasswordField();
+		this.setIconImage(new ImageIcon(getClass().getClassLoader().getResource("Images\\LeCard.png")).getImage());
+		
 		pPasswort.addKeyListener(new KeyListener() {
 			
 			@Override
@@ -82,9 +90,9 @@ public class LoginFrame {
 				}
 			}
 		});
-		lBenutzerlogin = new JLabel(ResourceBundle.getBundle("Bundle", locale).getString("Benutzer"));
-		lPasswort = new JLabel(ResourceBundle.getBundle("Bundle", locale).getString("Passwort"));
-		neuerUser = new JButton(ResourceBundle.getBundle("Bundle", locale).getString("neuerUser"));
+		lBenutzerlogin = new JLabel(ResourceBundle.getBundle("Bundles\\Bundle", lokal).getString("Benutzer"));
+		lPasswort = new JLabel(ResourceBundle.getBundle("Bundles\\Bundle", lokal).getString("Passwort"));
+		neuerUser = new JButton(ResourceBundle.getBundle("Bundles\\Bundle", lokal).getString("neuerUser"));
 
 	}
 
@@ -95,7 +103,7 @@ public class LoginFrame {
 	}
 
 	public void paint() {
-		mainFrame.setSize(450, 130);
+		this.setSize(450, 130);
 
 		loginPanel.setLayout(new GridLayout(2, 2));
 		buttonPanel.setLayout(new GridLayout(1, 3));
@@ -109,20 +117,19 @@ public class LoginFrame {
 		buttonPanel.add(neuerUser);
 		buttonPanel.add(login);
 
-		mainFrame.add(loginPanel, BorderLayout.NORTH);
-		mainFrame.add(buttonPanel, BorderLayout.CENTER);
+		this.add(loginPanel, BorderLayout.NORTH);
+		this.add(buttonPanel, BorderLayout.CENTER);
 
-		mainFrame.setVisible(true);
+		this.setVisible(true);
 	}
 
 	class DropDownListenerSprache implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
-			JComboBox cb = (JComboBox) e.getSource();
-			String msg = (String) cb.getSelectedItem();
-			System.out.println(msg);
 
-			switch (msg) {
+			String selection = (String) sprachenMenu.getSelectedItem();
+
+			switch (selection) {
 			case "Deutsch":
 				country = new String("DE");
 				language = new String("de");
@@ -142,10 +149,10 @@ public class LoginFrame {
 
 			}
 
-			locale = new Locale(language, country);
-			lBenutzerlogin.setText(ResourceBundle.getBundle("Bundle", locale).getString("Benutzer"));
-			lPasswort.setText(ResourceBundle.getBundle("Bundle", locale).getString("Passwort"));
-			neuerUser.setText(ResourceBundle.getBundle("Bundle", locale).getString("neuerUser"));
+			lokal = new Locale(language, country);
+			lBenutzerlogin.setText(ResourceBundle.getBundle("Bundles\\Bundle", lokal).getString("Benutzer"));
+			lPasswort.setText(ResourceBundle.getBundle("Bundles\\Bundle", lokal).getString("Passwort"));
+			neuerUser.setText(ResourceBundle.getBundle("Bundles\\Bundle", lokal).getString("neuerUser"));
 		}
 
 	}
@@ -154,15 +161,16 @@ public class LoginFrame {
 
 		public void actionPerformed(ActionEvent e) {
 			JButton b = (JButton) e.getSource();
-			Boolean userExist = Main.daten1.benutzerLaden(tUser.getText(), pPasswort.getText());
+			@SuppressWarnings("deprecation")
+			Boolean userExist = Kartei.getInstance().benutzerLaden(tUser.getText(), pPasswort.getText());
 			
 			if (userExist == true) {
 
-				Main.hauptFenster = new Hauptfenster(locale);
-				Main.hauptFenster.paint();
+				Kartei.getInstance().setLocale(lokal);
+				Hauptfenster.getInstance().paint();
 				((JFrame) b.getParent().getParent().getParent().getParent().getParent()).setVisible(false);
 			} else {
-				JOptionPane.showMessageDialog(mainFrame, ResourceBundle.getBundle("Bundle", locale).getString("falschesPasswort"));
+				JOptionPane.showMessageDialog(null, ResourceBundle.getBundle("Bundles\\Bundle", lokal).getString("falschesPasswort"));
 
 			}
 		}
@@ -172,7 +180,7 @@ public class LoginFrame {
 
 		public void actionPerformed(ActionEvent e) {
 			JButton b = (JButton) e.getSource();
-			PanelNeuerBenutzer h1 = new PanelNeuerBenutzer(locale);
+			PanelNeuerBenutzer h1 = new PanelNeuerBenutzer(lokal);
 			h1.paint();
 			((JFrame) b.getParent().getParent().getParent().getParent().getParent()).setVisible(false);
 		}

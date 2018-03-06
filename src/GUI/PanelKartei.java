@@ -1,21 +1,14 @@
-import java.awt.BorderLayout;
-import java.awt.Color;
+package GUI;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ResourceBundle;
 
 import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JEditorPane;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import sun.security.provider.VerificationProvider;
+import Logik.Kartei;
 
 /* @autor Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
  * @version 0.8
@@ -23,11 +16,15 @@ import sun.security.provider.VerificationProvider;
  */
 public class PanelKartei extends JPanel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel mainFrame;
 	private JPanel kartei;
 	private JPanel stat;
 	private JPanel start;
-	private StatistikPanel grafischeStat;
+	private PanelStatistik grafischeStat;
 	private JPanel datenStatistik;
 	private JLabel richtigeAntwort;
 	private JLabel falscheAntwort;
@@ -49,7 +46,7 @@ public class PanelKartei extends JPanel {
 	public void initComponents() {
 		mainFrame = new JPanel();
 
-		grafischeStat = new StatistikPanel();
+		grafischeStat = new PanelStatistik();
 		grafischeStat.setPreferredSize(new Dimension(400, 400));
 
 		datenStatistik = new JPanel();
@@ -57,11 +54,11 @@ public class PanelKartei extends JPanel {
 		stat = new JPanel();
 		start = new JPanel();
 		richtigeAntwort = new JLabel(
-				ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("richtigeAntworten") + " "
-						+ Main.daten1.getRichtigeAntwort());
+				ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("richtigeAntworten") + " "
+						+ Kartei.getInstance().getRichtigeAntwort());
 		falscheAntwort = new JLabel(
-				ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("falscheAntworten") + " "
-						+ Main.daten1.getFalscheAntwort());
+				ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("falscheAntworten") + " "
+						+ Kartei.getInstance().getFalscheAntwort());
 
 	}
 
@@ -94,16 +91,22 @@ public class PanelKartei extends JPanel {
 
 	public void setBalkendiagramm() {
 		// Setzen von Barwidth
-		grafischeStat.setKart1_WIDTH(Main.daten1.getFachGroesse(0));
-		grafischeStat.setKart2_WIDTH(Main.daten1.getFachGroesse(1));
-		grafischeStat.setKart3_WIDTH(Main.daten1.getFachGroesse(2));
-		grafischeStat.setKart4_WIDTH(Main.daten1.getFachGroesse(3));
-		grafischeStat.setKart5_WIDTH(Main.daten1.getFachGroesse(4));
-		richtigeAntwort.setText(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("richtigeAntworten")
-				+ " " + Main.daten1.getRichtigeAntwort());
-		falscheAntwort.setText(ResourceBundle.getBundle("Bundle", Hauptfenster.locale).getString("falscheAntworten")
-				+ " " + Main.daten1.getFalscheAntwort());
+		grafischeStat.setKart1_WIDTH(Kartei.getInstance().getFachGroesse(0));
+		grafischeStat.setKart2_WIDTH(Kartei.getInstance().getFachGroesse(1));
+		grafischeStat.setKart3_WIDTH(Kartei.getInstance().getFachGroesse(2));
+		grafischeStat.setKart4_WIDTH(Kartei.getInstance().getFachGroesse(3));
+		grafischeStat.setKart5_WIDTH(Kartei.getInstance().getFachGroesse(4));
+		richtigeAntwort.setText(ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("richtigeAntworten")
+				+ " " + Kartei.getInstance().getRichtigeAntwort());
+		falscheAntwort.setText(ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("falscheAntworten")
+				+ " " + Kartei.getInstance().getFalscheAntwort());
 
+	}
+
+	public void spracheWechseln() {
+		richtigeAntwort.setText(ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("richtigeAntworten") + " " + Kartei.getInstance().getRichtigeAntwort());
+		falscheAntwort.setText(ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("falscheAntworten") + " "	+ Kartei.getInstance().getFalscheAntwort());
+		
 	}
 
 }

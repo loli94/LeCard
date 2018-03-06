@@ -1,17 +1,20 @@
+package GUI;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.util.Locale;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import Logik.Sprache;
+
 public class Hauptfenster extends JFrame {
+	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public static Locale locale;
+	private static Hauptfenster instance = null;
 
 	private JPanel statPanel;
 	private PanelLernen panelLernen;
@@ -19,16 +22,26 @@ public class Hauptfenster extends JFrame {
 	private ImageIcon icon;
 	private PanelSidebar panelSidebar;
 	private PanelUserMenu panelUserMenu;
-
-	public Hauptfenster(Locale lokal) {
-		Hauptfenster.locale = lokal;
-		panelSidebar = new PanelSidebar();
-		panelUserMenu = new PanelUserMenu();
-		statPanel = new JPanel();
-		panelKartei = new PanelKartei();
-		icon = new ImageIcon(this.getClass().getResource("LeCard.png"));
-		panelLernen = new PanelLernen();
+	
+	protected Hauptfenster() {
+		this.panelSidebar = new PanelSidebar();
+		this.panelUserMenu = new PanelUserMenu();
+		this.statPanel = new JPanel();
+		this.panelKartei = new PanelKartei();
+		this.icon = new ImageIcon(getClass().getClassLoader().getResource("Images\\LeCard.png"));
+		this.panelLernen = new PanelLernen();
 		initComponents();
+	}
+	
+	public static Hauptfenster getInstance() {
+		if(instance == null) {
+			instance = new Hauptfenster();
+		}
+		return instance;
+	}
+
+	public Sprache getAktuelleSprache() {
+		return getAktuelleSprache();
 	}
 
 	private void initComponents() {
@@ -37,6 +50,7 @@ public class Hauptfenster extends JFrame {
 		final Dimension d = this.getToolkit().getScreenSize();
 		this.setLocation((int) ((d.getWidth() - this.getWidth()) / 3.8),
 				(int) ((d.getHeight() - this.getHeight()) / 3.8));
+		
 	}
 
 	public void paint() {
@@ -60,9 +74,8 @@ public class Hauptfenster extends JFrame {
 
 		panelUserMenu.spracheWechseln();
 		panelSidebar.spracheWechseln();
-		
-		paintPanelLernen();
-		paintPanelStat();
+		panelLernen.spracheWechseln();
+		panelKartei.spracheWechseln();
 
 		this.setJMenuBar(new HauptMenu());
 
@@ -77,7 +90,6 @@ public class Hauptfenster extends JFrame {
 
 	public void paintPanelStat() {
 		statPanel.removeAll();
-		panelKartei.setBalkendiagramm();
 		statPanel.add(new PanelKartei());
 		statPanel.validate();
 		statPanel.repaint();
@@ -94,10 +106,13 @@ public class Hauptfenster extends JFrame {
 	public PanelUserMenu getPanelUserMenu() {
 		return panelUserMenu;
 	}
+
+	public ImageIcon getIcon() {
+		return icon;
+	}
+	
+	
 	
 
-
-
-	
 
 }

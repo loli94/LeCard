@@ -1,8 +1,10 @@
+package Logik;
 import java.io.File;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Formatter;
+import java.util.Locale;
 import java.util.Random;
 
 import javax.xml.bind.JAXBContext;
@@ -18,6 +20,8 @@ import javax.xml.bind.annotation.*;
 @XmlRootElement(name = "Kartei")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Kartei {
+
+	private static Kartei instance = null;
 
 	@XmlElement(name = "Karte")
 	private ArrayList<Karte> kartei;
@@ -41,28 +45,35 @@ public class Kartei {
 	private int richtigeAntwort;
 	@XmlTransient
 	private int falscheAntwort;
-
-	public Kartei() {
-		
-	}
+	@XmlTransient
+	private Locale lokal;
+	@XmlTransient
+	private String pfad;
 	
-	public Kartei(String pfad) throws Exception {
+
+	protected Kartei() {
 		this.kartei = new ArrayList<Karte>();
 		this.sprachen = new ArrayList<Sprache>();
 		this.benutzerListe = new ArrayList<Benutzer>();
 		this.fach = new Fach[5];
-		karteiEinlesen(pfad);
 		this.aktuellesSprachpaar = "DE-EN";
 		this.aktuellesFach = 0;
 		this.richtigeAntwort = 0;
 		this.falscheAntwort = 0;
+		this.lokal = new Locale("de", "DE");
 	}
-		
-	
+
+	public static Kartei getInstance() {
+		if(instance == null) {
+			instance = new Kartei();
+		}
+		return instance;
+	}
+
 	public Sprache getAktuelleSprache() {
 		return aktuelleSprache;
 	}
-	
+
 	public String getAktuellesSprachpaar() {
 		return aktuellesSprachpaar;
 	}
@@ -123,7 +134,7 @@ public class Kartei {
 	/*
 	 * Arraylists mit Sprachen, Benutzern und Karten in XML File exportieren.
 	 */
-	public void lernkarteiSpeichern(String pfad) {
+	public void lernkarteiSpeichern() {
 
 		try {
 
@@ -132,7 +143,7 @@ public class Kartei {
 
 			jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 			jaxbMarshaller.marshal(this, new File(pfad));
-			
+
 		} catch (JAXBException e) {
 			e.printStackTrace();
 		}
@@ -141,14 +152,16 @@ public class Kartei {
 	/*
 	 * XML File einlesen und die enthaltenen Elemente zu Objekten umwandeln
 	 */
-	public void karteiEinlesen(String pfad) throws Exception {
+	public void karteiOeffnen(String p) throws Exception {
 		
+		this.pfad = p;
+
 		try {
 
 			JAXBContext context = JAXBContext.newInstance(Kartei.class);
 			Unmarshaller unmarshaller = context.createUnmarshaller();
 			Kartei imp = (Kartei) unmarshaller.unmarshal(new File(pfad));
-	
+
 			this.kartei = imp.getLernkartei();
 			this.benutzerListe = imp.getBenutzerListe();
 			this.sprachen = imp.getSprachen();
@@ -222,7 +235,7 @@ public class Kartei {
 
 		// Faecher 1-5 erstellen und gegebenenfalls bereits vorhandene Faecher löschen
 		for (int i = 1; i < 6; i++) {
-			fach[i - 1] = new Fach(i - 1);
+			this.fach[i - 1] = new Fach(i - 1);
 
 		}
 
@@ -232,7 +245,7 @@ public class Kartei {
 		for (Karte k : kartei) {
 
 			boolean found = false;
-			
+
 			if (k.getSprache().equalsIgnoreCase(aktuellesSprachpaar)) {
 				for (KartenStatus st : alleStatus) {
 					if (k.getId().equals(st.getUid())) {
@@ -258,7 +271,7 @@ public class Kartei {
 	public boolean gibNaechsteKarte() {
 
 		// Nächste Karte aus diesem Fach in der entsprechenden Sprache ausgeben
-	
+
 		if (aktuellesFach > 0 && fach[aktuellesFach - 1].gibKarten().size() > 0 ) {
 			Random rnd = new Random();
 			int index = rnd.nextInt(fach[aktuellesFach - 1].gibKarten().size());
@@ -381,5 +394,17 @@ public class Kartei {
 		int fg = fach[fachnummer].gibAnzahlKarten();
 		return fg;
 	}
+	
+	public Locale getLocale() {
+		return lokal;
+	}
+
+	public void setLocale(Locale locale) {
+		this.lokal = locale;
+	}
+	
+	
+
+
 
 }

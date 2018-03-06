@@ -1,3 +1,4 @@
+package Logik;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -5,8 +6,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
-
-import sun.text.resources.CollationData;
 /* @autor Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
  * @version 0.3
  * Datum:24.02.2018
@@ -27,7 +26,6 @@ public class LoadCsv {
 		sprache= new ArrayList<>();
 
 		readCsv();
-		uploadData();
 	}
 
 	private void readCsv() throws IOException {
@@ -80,7 +78,7 @@ public class LoadCsv {
 	public void uploadData() {
 		for (int i = 0; i < wortA.size(); i++) {
 			System.out.println("Karte hinzufuegen: " + sprache.get(i) + "; " + wortA.get(i) + "; " + wortB.get(i) );
-			Main.daten1.karteHinzufuegen(new Karte(sprache.get(i),wortA.get(i),wortB.get(i)));
+			Kartei.getInstance().karteHinzufuegen(new Karte(sprache.get(i),wortA.get(i),wortB.get(i)));
 		}
 	
 	}
