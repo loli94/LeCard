@@ -36,7 +36,6 @@ public class PanelSidebar extends JPanel {
 		}
 	}
 
-
 	public void bindListener() {
 
 		for (int i = 0; i <= 5; i++) {

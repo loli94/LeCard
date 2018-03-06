@@ -83,7 +83,8 @@ public class Hauptfenster extends JFrame {
 
 	public void paintPanelLernen() {
 		statPanel.removeAll();
-		statPanel.add(new PanelLernen());
+		statPanel.add(panelLernen);
+		panelLernen.loadCard();
 		statPanel.validate();
 		statPanel.repaint();
 	}

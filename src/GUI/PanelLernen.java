@@ -120,7 +120,6 @@ public class PanelLernen extends JPanel {
 
 	private void bindListener() {
 		bWechsel.addActionListener(new ButtonListenerSpracheWechseln());
-		bPruefen.addActionListener(e -> verifyAnswer());
 		bPruefen.addActionListener(new ButtonListenerPruefen());
 		tSpracheB.addActionListener(new JTextFieldListener());
 
@@ -169,17 +168,25 @@ public class PanelLernen extends JPanel {
 		}
 	}
 
-	// Prueft ob der"Prüfen Button" angezeigt wird oder nicht
-
-	public void verifyAnswer() {
-
-	}
-	
 	
 
 	class ButtonListenerPruefen implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			if (Kartei.getInstance().getAktuelleKarte().getWortB().equalsIgnoreCase(tSpracheB.getText())) {
+			
+			String frage = "";
+			String antwort = "";
+			
+			if (learnReverse == false) {
+				 frage = Kartei.getInstance().getAktuelleKarte().getWortB();
+				 antwort = tSpracheB.getText();
+			}
+			else {
+				 frage = Kartei.getInstance().getAktuelleKarte().getWortA();
+				 antwort = tSpracheA.getText();
+			}
+			
+			
+			if (frage.equalsIgnoreCase(antwort)) {
 
 				System.out.println("Korrekt");
 				Kartei.getInstance().karteVerschieben(Kartei.getInstance().getAktuelleKarte(), Kartei.getInstance().getAktuellesFach() + 1);
@@ -189,8 +196,7 @@ public class PanelLernen extends JPanel {
 				else {
 					tSpracheA.setText("");
 				}
-				
-				
+								
 				lLoesung.setText("Richtig");
 				lLoesung.setFont(lLoesung.getFont().deriveFont(22f));
 				lLoesung.setForeground(Color.GREEN);
@@ -209,6 +215,7 @@ public class PanelLernen extends JPanel {
 				Kartei.getInstance().setFalscheAntwort();
 
 			}
+			
 			Kartei.getInstance().lernkarteiSpeichern();
 
 			loadCard();
