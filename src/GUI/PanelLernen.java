@@ -22,9 +22,6 @@ import Logik.Kartei;
  * Datum:24.02.2018
  */
 public class PanelLernen extends JPanel {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private JButton bWechsel, bPruefen;
 	private JPanel pLernen, pSpracheA, pSpracheB, pPruefen, pAuswertung;
@@ -77,7 +74,10 @@ public class PanelLernen extends JPanel {
 
 	}
 
-	// Prüft die Antwort und gibt die entsprechende Karte aus
+	/**
+	 * Prüft die Antwort und gibt die entsprechende Karte aus
+	 */
+	
 	public void loadCard() {
 		if (Kartei.getInstance().gibNaechsteKarte() == true) {
 			if (learnReverse == false) {
