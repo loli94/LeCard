@@ -39,6 +39,7 @@ public class PanelLernen extends JPanel {
 		init();
 		paint();
 		learnReverse = false;
+		
 	}
 
 	public void init() {
