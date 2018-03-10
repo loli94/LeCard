@@ -1,14 +1,19 @@
 package GUI;
+
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.KeyEventDispatcher;
+import java.awt.KeyboardFocusManager;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import com.sun.glass.events.KeyEvent;
+
 import Logik.Sprache;
 
 public class Hauptfenster extends JFrame {
-	
+
 	/**
 	 * 
 	 */
@@ -22,19 +27,40 @@ public class Hauptfenster extends JFrame {
 	private ImageIcon icon;
 	private PanelSidebar panelSidebar;
 	private PanelUserMenu panelUserMenu;
-	
+
 	protected Hauptfenster() {
 		this.panelSidebar = new PanelSidebar();
 		this.panelUserMenu = new PanelUserMenu();
 		this.statPanel = new JPanel();
+		KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(new KeyEventDispatcher() {
+
+			@Override
+			public boolean dispatchKeyEvent(java.awt.event.KeyEvent e) {
+				if (e.isControlDown() && e.getKeyCode() == KeyEvent.VK_1) {
+					panelSidebar.getBoxAuswahl()[1].doClick();
+				} else if (e.isControlDown() && e.getKeyCode() == KeyEvent.VK_2) {
+					panelSidebar.getBoxAuswahl()[2].doClick();
+				} else if (e.isControlDown() && e.getKeyCode() == KeyEvent.VK_3) {
+					panelSidebar.getBoxAuswahl()[3].doClick();
+				} else if (e.isControlDown() && e.getKeyCode() == KeyEvent.VK_4) {
+					panelSidebar.getBoxAuswahl()[4].doClick();
+				} else if (e.isControlDown() && e.getKeyCode() == KeyEvent.VK_5) {
+					panelSidebar.getBoxAuswahl()[5].doClick();
+				} else if (e.isControlDown() && e.getKeyCode() == KeyEvent.VK_H) {
+					panelSidebar.getBoxAuswahl()[0].doClick();
+				}
+
+				return false;
+			}
+		});
 		this.panelKartei = new PanelKartei();
 		this.icon = new ImageIcon(getClass().getClassLoader().getResource("Images\\LeCard.png"));
 		this.panelLernen = new PanelLernen();
 		initComponents();
 	}
-	
+
 	public static Hauptfenster getInstance() {
-		if(instance == null) {
+		if (instance == null) {
 			instance = new Hauptfenster();
 		}
 		return instance;
@@ -50,7 +76,7 @@ public class Hauptfenster extends JFrame {
 		final Dimension d = this.getToolkit().getScreenSize();
 		this.setLocation((int) ((d.getWidth() - this.getWidth()) / 3.8),
 				(int) ((d.getHeight() - this.getHeight()) / 3.8));
-		
+
 	}
 
 	public void paint() {
@@ -111,9 +137,4 @@ public class Hauptfenster extends JFrame {
 	public ImageIcon getIcon() {
 		return icon;
 	}
-	
-	
-	
-
-
 }
