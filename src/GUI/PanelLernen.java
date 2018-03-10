@@ -19,9 +19,9 @@ import javax.swing.Timer;
 
 import Logik.Kartei;
 
-/* @autor Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
- * @version 0.4
- * Datum:24.02.2018
+/** @autor Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
+ * 	@version 0.6
+ * 	Datum:10.03.2018
  */
 public class PanelLernen extends JPanel {
 	private static final long serialVersionUID = 1L;
@@ -33,6 +33,8 @@ public class PanelLernen extends JPanel {
 	private Timer timer;
 	private int x;
 
+	
+	
 	public PanelLernen() {
 		initComponents();
 		bindListener();
@@ -48,6 +50,11 @@ public class PanelLernen extends JPanel {
 		bindListener();
 	}
 
+		/**
+		 * Intialisiert die einzelnen Komponenten 
+		 * Weisst die Komponenten den entsprechenden Layout zu
+		 */
+	
 	private void initComponents() {
 		pLernen = new JPanel();
 		pSpracheA = new JPanel();
@@ -71,11 +78,9 @@ public class PanelLernen extends JPanel {
 		tSpracheB.addKeyListener(new textfeldListener());
 		tSpracheB.setBorder(javax.swing.BorderFactory.createEmptyBorder());
 		lLoesung = new JLabel("");
-		// initiiere Layout von den Panles
 		pLernen.setLayout(new GridLayout(4, 1));
 		pSpracheA.setLayout(new GridLayout(1, 2));
 		pSpracheB.setLayout(new GridLayout(1, 2));
-		// pAuswertung.setLayout(new GridLayout(1, 2));
 		pPruefen.setLayout(new GridLayout(1, 2));
 
 	}
@@ -96,8 +101,11 @@ public class PanelLernen extends JPanel {
 			}
 
 		}
-
-		// Dialog keine Karte vorhanden und "Prüfen Button" ausblenden
+		/**
+		 * Dialog keine Karte vorhanden und "Prüfen Button" ausblenden
+		 * Antwort TextField wieder neu intialisieren
+		 */
+	
 		else {
 
 			if (learnReverse == false) {
@@ -149,6 +157,10 @@ public class PanelLernen extends JPanel {
 		pLernen.add(pAuswertung);
 		add(pLernen);
 	}
+	
+	/**
+	 * Methode um die Lern Sprache zu wechseln
+	 */
 
 	class ButtonListenerSpracheWechseln implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
@@ -171,6 +183,12 @@ public class PanelLernen extends JPanel {
 		}
 	}
 
+	/**
+	 * Methode um die Antwort mit der Frage zu überprüfen für beide Sprachrrichtungen
+	 *
+	 *
+	 */
+	
 	class ButtonListenerPruefen implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 
@@ -222,12 +240,18 @@ public class PanelLernen extends JPanel {
 
 	}
 
+	
 	public void spracheWechseln() {
 		bPruefen.setText(
 				ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("pruefen"));
 
 	}
-
+	
+	/**
+	 * Listener für die Textfelder
+	 * 
+	 */
+	
 	class textfeldListener implements KeyListener {
 
 		@Override
@@ -251,7 +275,15 @@ public class PanelLernen extends JPanel {
 		}
 
 	}
-
+	/**
+	 * Methode um den Antwort Hinweiss verzögert auszublenden
+	 * @param re Farbe Rot
+	 * @param gr Frarbe Grau
+	 * @param bl Frabe Blau
+	 * @param speed die Geschwindigkeit für das Ausblenden
+	 * @param label 
+	 */
+	
 	private void textAusblenden(int re, int gr, int bl, int speed, JLabel label) {
 
 		x = 0;

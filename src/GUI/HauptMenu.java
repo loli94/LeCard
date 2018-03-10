@@ -13,6 +13,12 @@ import javax.swing.JOptionPane;
 import Logik.Karte;
 import Logik.Kartei;
 
+
+	/* @autor Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
+	 * @version 0.7
+	 * Datum:08.03.2018
+	 */
+
 public class HauptMenu extends JMenuBar {
 
 	private static final long serialVersionUID = 1L;
@@ -20,8 +26,10 @@ public class HauptMenu extends JMenuBar {
 	private JMenuItem menuItem;
 
 	public HauptMenu() {
-
-		// Dateimenu erstellen.
+		/**
+		 * Erstellt das Datei-Menue
+		 */
+	
 		dateiMenu = new JMenu(ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("Datei"));
 
 		menuItem = new JMenuItem(ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("Importieren"));
@@ -35,8 +43,11 @@ public class HauptMenu extends JMenuBar {
 		dateiMenu.add(menuItem);
 
 		this.add(dateiMenu);
-
-		// Menu für Karteibearbeitenung
+		
+		/**
+		 * Menu für Karteibearbeitungen
+		 */
+		
 		karteiMenu = new JMenu(ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("Lernkartei"));
 		
 		kartenMenu = new JMenu(ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("Karte"));
@@ -67,11 +78,16 @@ public class HauptMenu extends JMenuBar {
 		karteiMenu.add(lernsprachenMenu);
 		
 		this.add(karteiMenu);
-
-		// Menu für Anzeige.
+		
+		/**
+		 * Menu für Anzeige
+		 */
+	
 		anzeigeMenu = new JMenu(ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("Anzeige"));
-
-		// Submenu für Spracheinstellung
+		/**
+		 * Submenu für Spracheinstellung
+		 */
+		 
 		lernsprachMenu = new JMenu(ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("Sprache"));
 
 		menuItem = new JMenuItem("Deutsch");
@@ -98,7 +114,16 @@ public class HauptMenu extends JMenuBar {
 		this.add(anzeigeMenu);
 
 	}
-
+	
+	/**
+	 * Intialisiert die einzelnen Komponenten auf dem HauptMenu
+	 * @beenden Schliesst das Programm
+	 * @importieren Kann ein .csv File mit Wörter importieren
+	 * @karteHinzufuegen neue Lern Karte wird hinzugefuegt
+	 * @karteLoeschen die entsprechende Lernkarte wird geloescht
+	 * @karteBearbeiten die entsprechende Karte kann bearbeitet werden
+	 * @SpracheHinzufuegen eine neue Lernsprache kann hinzugefügt werden
+	 */
 	class ListenerHauptMenu implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
@@ -108,6 +133,7 @@ public class HauptMenu extends JMenuBar {
 
 			switch (selection) {
 			case "beenden":
+				System.exit(WHEN_FOCUSED);
 				break;
 			case "importieren":
 				@SuppressWarnings("unused")
