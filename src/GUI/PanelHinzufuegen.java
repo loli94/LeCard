@@ -17,7 +17,8 @@ import javax.swing.JTextField;
 import Logik.Karte;
 import Logik.Kartei;
 
-/* @autor Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
+/**
+ *  @autor Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
  * @version 0.6
  * Datum:24.02.2018
  */
@@ -38,7 +39,7 @@ public class PanelHinzufuegen extends JFrame {
 				(int) ((d.getHeight() - this.getHeight()) / 2.6));
 	}
 	
-	/*
+	/**
 	 * Die verschiedenen Objekte werden Initiert. Zudem werden auch die verschiedenen Labels mit dem jeweiligen Text befüllt.
 	 * 
 	 * */
@@ -78,7 +79,7 @@ public class PanelHinzufuegen extends JFrame {
 				ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("hinzufuegen"));
 	}
 	
-	/*
+	/**
 	 * In dieser Methode wird den einzelnen Objekten der Listener angebunden.
 	 * Dem Button Hinzufügen wird der Listener angebunden.
 	 * */
@@ -87,7 +88,7 @@ public class PanelHinzufuegen extends JFrame {
 		hinzufuegenButton.addActionListener(new ButtonListenerHinzufuegen());
 	}
 	
-	/*
+	/**
 	 * In dieser MEthode wird das Frame gezeichnet. Die einzelnen Labels, Buttons, etc. werden dem Frame zugeordnet.
 	 */
 
@@ -107,7 +108,7 @@ public class PanelHinzufuegen extends JFrame {
 		this.setVisible(true);
 	}
 	
-	/*
+	/**
 	 * In diesem Listener (welcher zum Button Hinzufügen gehört) wird geprüft, ob die eingeabe der verschiedenen Textfelder nicht Leehr sind, ob nur Buchstaben verwendet werden.
 	 * Falls dies zutrifft, wird eine neue Karte erstellt und der Kartei im Fach 1 hinzugefügt.
 	 */
