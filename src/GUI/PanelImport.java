@@ -1,9 +1,11 @@
 package GUI;
 import java.awt.FileDialog;
 import java.io.IOException;
+import java.util.ResourceBundle;
 
 import javax.swing.JFrame;
 
+import Logik.Kartei;
 import Logik.LoadCsv;
 
 /* @autor Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
@@ -21,8 +23,11 @@ public class PanelImport extends JFrame {
 		this.importFile();
 	}
 
+	/*
+	 * Das Fenster für den Import wird definiert. Es kann nur ein csv ausgewählt werden. Dies importiert danach das CSV und wird der jeweiligen Kartei hinzugefügt
+	 * */
 	public void importFile() {
-		FileDialog fd = new FileDialog(this, "File auswählen", FileDialog.LOAD);
+		FileDialog fd = new FileDialog(this, ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("dateiauswählen"), FileDialog.LOAD);
 		fd.setDirectory("C:\\");
 		fd.setFile("*.csv");
 		fd.setVisible(true);
