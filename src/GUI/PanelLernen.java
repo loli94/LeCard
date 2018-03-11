@@ -302,3 +302,4 @@ public class PanelLernen extends JPanel {
 	}
 
 }
+
