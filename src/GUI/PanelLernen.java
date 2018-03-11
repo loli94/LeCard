@@ -30,7 +30,7 @@ public class PanelLernen extends JPanel {
 	private JLabel lSpracheA, lSpracheB, lLoesung;
 	private JTextField tSpracheA, tSpracheB;
 	private boolean learnReverse;
-	private Timer timer;
+	private static Timer timer;
 	private int x;
 
 	
@@ -286,7 +286,9 @@ public class PanelLernen extends JPanel {
 	
 	private void textAusblenden(int re, int gr, int bl, int speed, JLabel label) {
 
+		if (timer !=null) timer.stop();
 		x = 0;
+		label.setForeground(new Color(re, gr, bl, 255));
 
 		timer = new Timer(speed, new ActionListener() {
 
