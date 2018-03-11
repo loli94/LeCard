@@ -1,5 +1,6 @@
 package GUI;
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -76,6 +77,8 @@ public class PanelNeuerBenutzer extends JFrame{
 		this.add(pBenutzer, BorderLayout.NORTH);
 		this.add(pPasswort, BorderLayout.CENTER);
 		this.add(pErstellen, BorderLayout.SOUTH);
+		final Dimension d = this.getToolkit().getScreenSize();
+		this.setLocation((int) ((d.getWidth() - this.getWidth()) / 2.0), (int) ((d.getHeight() - this.getHeight()) / 2.3));
 
 		this.setVisible(true);
 	}
