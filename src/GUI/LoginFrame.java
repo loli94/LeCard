@@ -22,14 +22,14 @@ import javax.swing.JTextField;
 
 import Logik.Kartei;
 
-/* @autor Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
- * @version 0.3
- * Datum:24.02.2018
+/** @autor Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
+ *  @version 0.3
+ *  Datum:11.03.2018
  */
 public class LoginFrame extends JFrame {
 
 	/**
-	 * 
+	 * Die Klasse ermöglicht es sich mit einem Benutzer und Passwort zu authentifizieren 
 	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel loginPanel;
@@ -48,6 +48,7 @@ public class LoginFrame extends JFrame {
 	public LoginFrame() {
 		initComponents();
 		bindListener();
+		// setzt das Fenster in die Mitte des Bildschirms
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		final Dimension d = this.getToolkit().getScreenSize(); 
 		this.setLocation((int) ((d.getWidth() - this.getWidth()) / 2.6), (int) ((d.getHeight() - this.getHeight()) / 2.6));
@@ -56,7 +57,9 @@ public class LoginFrame extends JFrame {
 	public JLabel getlBenutzerlogin() {
 		return lBenutzerlogin;
 	}
-
+	/**
+	 * Intialisiert die einzelnen Komponenten und setzt die entsprechende Farbe
+	 */
 	private void initComponents() {
 		this.setTitle("Login");
 		loginPanel = new JPanel();
@@ -67,10 +70,12 @@ public class LoginFrame extends JFrame {
 		this.language = "de";
 		this.country = "DE";
 		this.lokal = new Locale("de", "DE");
+		// Hier kann die Sprache ausgewählt werden 
 		String spracheBox[] = { "Deutsch", "English", "Francaise", "Italiano" };
 		sprachenMenu = new JComboBox<String>(spracheBox);
 		tUser = new JTextField();
 		pPasswort = new JPasswordField();
+		//Hier wird das Bild für das Logo angezogen
 		this.setIconImage(new ImageIcon(getClass().getClassLoader().getResource("Images\\LeCard.png")).getImage());
 		
 		pPasswort.addKeyListener(new KeyListener() {
@@ -90,18 +95,24 @@ public class LoginFrame extends JFrame {
 				}
 			}
 		});
+		//Buttons mit den entsprechenden Bundel für die Sprachen bezeichnungen 
 		lBenutzerlogin = new JLabel(ResourceBundle.getBundle("Bundles\\Bundle", lokal).getString("Benutzer"));
 		lPasswort = new JLabel(ResourceBundle.getBundle("Bundles\\Bundle", lokal).getString("Passwort"));
 		neuerUser = new JButton(ResourceBundle.getBundle("Bundles\\Bundle", lokal).getString("neuerUser"));
 
 	}
-
+	/**
+	 * listener für Sprache Login und User
+	 */
 	public void bindListener() {
 		sprachenMenu.addActionListener(new DropDownListenerSprache());
 		login.addActionListener(new ButtonListenerLogin());
 		neuerUser.addActionListener(new ButtonListenerNeuerBenutzer());
 	}
-
+	
+	/**
+	 * deklariert die einzelnen Panel mit den dazugehörigen Layouts
+	 */
 	public void paint() {
 		this.setSize(450, 130);
 
@@ -119,10 +130,13 @@ public class LoginFrame extends JFrame {
 
 		this.add(loginPanel, BorderLayout.NORTH);
 		this.add(buttonPanel, BorderLayout.CENTER);
-
+		
+		// setzt das Panel sichtbar
 		this.setVisible(true);
 	}
-
+	/**
+	 * Listener für das SprachMenu 
+	 */
 	class DropDownListenerSprache implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
@@ -156,26 +170,35 @@ public class LoginFrame extends JFrame {
 		}
 
 	}
-
+	/**
+	 * Listener für den Login Button
+	 * Prüft ob der User bereits vorhanden ist 
+	 *
+	 */
 	class ButtonListenerLogin implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
 			JButton b = (JButton) e.getSource();
 			@SuppressWarnings("deprecation")
+			// prüft für den entsprechenden User das entsprechende Passwort
 			Boolean userExist = Kartei.getInstance().benutzerLaden(tUser.getText(), pPasswort.getText());
-			
+			//Wenn es richtig ist
 			if (userExist == true) {
 
 				Kartei.getInstance().setLocale(lokal);
 				Hauptfenster.getInstance().paint();
 				((JFrame) b.getParent().getParent().getParent().getParent().getParent()).setVisible(false);
-			} else {
+			} 
+			//Falls das Passwort Falsch eingegeben wurde 
+			else {
 				JOptionPane.showMessageDialog(null, ResourceBundle.getBundle("Bundles\\Bundle", lokal).getString("falschesPasswort"));
 
 			}
 		}
 	}
-
+	/**
+	 * Listener für den Button Neuer Benutzer
+	 */
 	class ButtonListenerNeuerBenutzer implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {

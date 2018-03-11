@@ -17,9 +17,9 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import Logik.Kartei;
-/* @autor Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
- * @version 0.2
- * Datum:24.02.2018
+/** @autor Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
+ * 	@version 0.2
+ * 	Datum:11.03.2018
  */
 public class PanelNeuerBenutzer extends JFrame{
 
@@ -43,6 +43,9 @@ public class PanelNeuerBenutzer extends JFrame{
 		bindListener();
 		paint();
 	}
+	/**
+	 * intialisiert die Komponenten 
+	 */
 
 	private void initComponents() {
 		this.setTitle(ResourceBundle.getBundle("Bundles\\Bundle", locale).getString("neuerbenutzer"));
@@ -62,6 +65,10 @@ public class PanelNeuerBenutzer extends JFrame{
 		bErstellen.addActionListener(new ButtonListenerBenutzerErstellen());
 	}
 
+	/**
+	 * Setzt die einzelnen Komponenten und teilt die dem richtigen Layout hinzu
+	 * 
+	 */
 	public void paint() {
 		this.setSize(400, 110);
 		pBenutzer.setLayout(new GridLayout(1, 2));
@@ -86,6 +93,10 @@ public class PanelNeuerBenutzer extends JFrame{
 	public void verify() {
 		
 	}
+	/**
+	 * Methode um einen neuen Benutzer zu erstellen 
+	 * Prüft ob der Benutzer bereits vorhanden ist
+	 */
 
 	class ButtonListenerBenutzerErstellen implements ActionListener {
 		@SuppressWarnings("deprecation")
