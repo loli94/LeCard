@@ -131,7 +131,7 @@ public class PanelLernen extends JPanel {
 		}
 
 	}
-
+	
 	private void bindListener() {
 		bWechsel.addActionListener(new ButtonListenerSpracheWechseln());
 		bPruefen.addActionListener(new ButtonListenerPruefen());
