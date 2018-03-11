@@ -21,7 +21,7 @@ import javax.swing.text.PlainDocument;
 
 import Logik.Kartei;
 
-/* @autor Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
+/** @autor Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
  * @version 1.0
  * Datum:28.02.2018
  */
@@ -45,7 +45,10 @@ public class PanelKarteiVerwalten {
 
 	}
 
-	// Components initieren
+	/**
+	 * Intialisiert die einzelnen Komponenten 
+	 * Weisst die Komponenten den entsprechenden Layout zu
+	 */
 
 	private void initComponents() {
 		// TODO Auto-generated method stub
@@ -96,7 +99,9 @@ public class PanelKarteiVerwalten {
 
 	}
 
-	// Paint von dem MainFrame
+	/**
+	 * Erstellung des MainFrame, Panels, TextFields 
+	 */
 	public void paint() {
 		mainFrame.setSize(650, 430);
 		hauptPanel.setLayout(new GridLayout(6, 1));
@@ -126,9 +131,8 @@ public class PanelKarteiVerwalten {
 
 	}
 
-	/*
-	 * Bind von den Listener zu den Buttons und JTextFields. FocusListener sodass
-	 * sofort abgefangen wird ob es weniger als zwei Buchstaben sind
+	/**
+	 * Zusammenführen sowie Erstellung der Listener (Button & KeyListener)
 	 */
 
 	private void bindListener() {
@@ -138,10 +142,9 @@ public class PanelKarteiVerwalten {
 
 	}
 
-	/*
+	/**
 	 * ButtonListener für die Sprachhinzufügung. JTextFiels werden nach dem Anlegen
-	 * wieder clear gemacht. Es wird auch überprüft ob das Sprachpaar bereits
-	 * angelegt ist.
+	 * wieder clear gemacht.
 	 */
 	class ButtonListenerHinzufuegen implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
@@ -173,8 +176,8 @@ public class PanelKarteiVerwalten {
 
 	}
 
-	/*
-	 * FocusListener für Abfrage ob es sicher zwei Buchstaben sind
+	/**
+	 * FocusListener für Abfrage ob es sicher zwei Buchstaben sind mit Meldung wenn ein Fehler auftritt
 	 */
 	class KeyListenerSprache1 implements FocusListener {
 
@@ -197,8 +200,8 @@ public class PanelKarteiVerwalten {
 		}
 	}
 
-	/*
-	 * FocusListener für Abfrage ob es sicher zwei Buchstaben sind
+	/**
+	 * FocusListener für Abfrage ob es sicher zwei Buchstaben sind mit Meldung wenn ein Fehler auftritt
 	 */
 	class KeyListenerSprache2 implements FocusListener {
 
@@ -220,13 +223,10 @@ public class PanelKarteiVerwalten {
 		}
 	}
 
-	/*
+	/**
 	 * Klasse um die Felderbeschränkung auf 2 Zeichen zu setzen
 	 */
 	class MaxGroesseTextfeld extends PlainDocument {
-		/**
-		 * 
-		 */
 		private static final long serialVersionUID = 1L;
 		int maxSize;
 
@@ -234,6 +234,9 @@ public class PanelKarteiVerwalten {
 			this.maxSize = 2;
 		}
 
+		/**
+		 * Methode für das Einfügen des Textes und Abfange um nicht mehr als zwei Zeichen einzufügen
+		 */
 		public void insertString(final int offset, final String text, final AttributeSet attributeSet)
 				throws BadLocationException {
 			if (laengeUeberpruefen(text))
@@ -241,7 +244,10 @@ public class PanelKarteiVerwalten {
 			else
 				Toolkit.getDefaultToolkit().beep();
 		}
-
+		/**
+		 * Überprüfung des Inhaltes
+		 * @param text: Eingabe beim JTextField
+		 */
 		protected boolean laengeUeberpruefen(final String text) {
 			if (getLength() + text.length() <= maxSize)
 				return true;
