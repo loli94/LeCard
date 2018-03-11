@@ -23,9 +23,7 @@ import Logik.Kartei;
  */
 public class PanelHinzufuegen extends JFrame {
 
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	private JPanel hauptsprache, fremdsprache, hinzufuegenPanelButton;
 	private JLabel lSprache1, lSprache2;
@@ -39,6 +37,11 @@ public class PanelHinzufuegen extends JFrame {
 		this.setLocation((int) ((d.getWidth() - this.getWidth()) / 2.6),
 				(int) ((d.getHeight() - this.getHeight()) / 2.6));
 	}
+	
+	/*
+	 * Die verschiedenen Objekte werden Initiert. Zudem werden auch die verschiedenen Labels mit dem jeweiligen Text befüllt.
+	 * 
+	 * */
 
 	private void initComponents() {
 		this.setTitle(ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("hinzufuegen"));
@@ -74,14 +77,22 @@ public class PanelHinzufuegen extends JFrame {
 		hinzufuegenButton = new JButton(
 				ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("hinzufuegen"));
 	}
+	
+	/*
+	 * In dieser Methode wird den einzelnen Objekten der Listener angebunden.
+	 * Dem Button Hinzufügen wird der Listener angebunden.
+	 * */
 
 	private void bindListener() {
 		hinzufuegenButton.addActionListener(new ButtonListenerHinzufuegen());
 	}
+	
+	/*
+	 * In dieser MEthode wird das Frame gezeichnet. Die einzelnen Labels, Buttons, etc. werden dem Frame zugeordnet.
+	 */
 
 	public void paint() {
 		this.setSize(400, 200);
-		// hinzufuegenPanelText.setLayout(new GridLayout(2, 1));
 
 		hauptsprache.add(lSprache1);
 		hauptsprache.add(tSprache1);
@@ -95,6 +106,11 @@ public class PanelHinzufuegen extends JFrame {
 
 		this.setVisible(true);
 	}
+	
+	/*
+	 * In diesem Listener (welcher zum Button Hinzufügen gehört) wird geprüft, ob die eingeabe der verschiedenen Textfelder nicht Leehr sind, ob nur Buchstaben verwendet werden.
+	 * Falls dies zutrifft, wird eine neue Karte erstellt und der Kartei im Fach 1 hinzugefügt.
+	 */
 
 	class ButtonListenerHinzufuegen implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
