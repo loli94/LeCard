@@ -15,9 +15,6 @@ import Logik.Kartei;
 
 public class PanelStatistik extends JPanel {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private int Kart1_X = 100;
 	private int Kart1_Y = 20;
