@@ -2,6 +2,8 @@ package GUI;
 
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.KeyEventDispatcher;
+import java.awt.KeyboardFocusManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ResourceBundle;
@@ -10,6 +12,8 @@ import javax.swing.JPanel;
 import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
+
+import com.sun.glass.events.KeyEvent;
 
 import Logik.Kartei;
 
@@ -35,12 +39,6 @@ public class PanelSidebar extends JPanel {
 			boxAuswahl[i] = new JButton(
 					ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("Fach")
 							+ " " + i);
-			boxAuswahl[i].addActionListener(new ActionListener() {
-				@Override
-				public void actionPerformed(ActionEvent e) {
-
-				}
-			});
 		}
 	}
 
@@ -49,6 +47,8 @@ public class PanelSidebar extends JPanel {
 		for (int i = 0; i <= 5; i++) {
 			boxAuswahl[i].addActionListener(new ButtonListenerSidebar());
 		}
+		
+		KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(new ShortcutListener());
 
 	}
 
@@ -99,8 +99,29 @@ public class PanelSidebar extends JPanel {
 			}
 		}
 	}
+	
+	class ShortcutListener implements KeyEventDispatcher {
+		 public boolean dispatchKeyEvent(java.awt.event.KeyEvent e) {
+				if (e.isControlDown() && e.getKeyCode() == KeyEvent.VK_1) {
+					boxAuswahl[1].doClick();
+				} else if (e.isControlDown() && e.getKeyCode() == KeyEvent.VK_2) {
+					boxAuswahl[2].doClick();
+				} else if (e.isControlDown() && e.getKeyCode() == KeyEvent.VK_3) {
+					boxAuswahl[3].doClick();
+				} else if (e.isControlDown() && e.getKeyCode() == KeyEvent.VK_4) {
+					boxAuswahl[4].doClick();
+				} else if (e.isControlDown() && e.getKeyCode() == KeyEvent.VK_5) {
+					boxAuswahl[5].doClick();
+				} else if (e.isControlDown() && e.getKeyCode() == KeyEvent.VK_H) {
+					boxAuswahl[0].doClick();
+				}
+
+				return false;
+			}
+	}
 
 	public JButton[] getBoxAuswahl() {
 		return boxAuswahl;
 	}
+
 }

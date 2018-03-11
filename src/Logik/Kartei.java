@@ -119,7 +119,6 @@ public class Kartei {
 
 	public void setRichtigeAntwort() {
 		this.richtigeAntwort++;
-		System.out.println("" + richtigeAntwort);
 	}
 
 	public int getFalscheAntwort() {
@@ -172,12 +171,6 @@ public class Kartei {
 
 	}
 
-	public void kartenAnzeigen() {
-		for (Karte k : kartei) {
-			System.out.println(k.toString());
-		}
-
-	}
 
 	public boolean benutzerExistiert(String benutzername) {
 		for (Benutzer b : benutzerListe) {
@@ -197,8 +190,6 @@ public class Kartei {
 					return true;
 
 				} else {
-					// falsches passwort
-					System.out.println("Passwort falsch");
 					return false;
 				}
 			}
@@ -210,7 +201,6 @@ public class Kartei {
 	public void benutzerHinzufuegen(String benutzername, String passwort) {
 		for (Benutzer b : benutzerListe) {
 			if (b.getBenutzername().equals(benutzername)) {
-				System.out.println("Benutzer existiert bereits");
 				return;
 			}
 		}
