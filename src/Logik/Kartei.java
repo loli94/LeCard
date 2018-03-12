@@ -328,6 +328,12 @@ public class Kartei {
 	}
 
 	public boolean spracheHinzugfuegen(String ab, String a, String b) {
+		
+		
+		
+		
+		
+		
 		for (Sprache s : sprachen) {
 			if (s.getSpracheA().equalsIgnoreCase(a) && s.getSpracheB().equalsIgnoreCase(b)) {
 				return false;
