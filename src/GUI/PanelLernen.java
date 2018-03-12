@@ -83,7 +83,7 @@ public class PanelLernen extends JPanel {
 		pSpracheB.setLayout(new GridLayout(1, 2));
 		pPruefen.setLayout(new GridLayout(1, 2));
 
-	}
+	} 
 
 	/**
 	 * Prüft die Antwort und gibt die entsprechende Karte aus

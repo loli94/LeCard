@@ -130,6 +130,7 @@ public class PanelHinzufuegen extends JFrame {
 					Hauptfenster.getInstance().paintPanelStat();
 					Hauptfenster.getInstance().getPanelKartei().validate();
 					tSprache1.requestFocus();
+					Kartei.getInstance().lernkarteiSpeichern();
 
 				} else {
 					JOptionPane.showMessageDialog(null, ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("infoTextHinzufügen2"));
