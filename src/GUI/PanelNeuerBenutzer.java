@@ -48,17 +48,17 @@ public class PanelNeuerBenutzer extends JFrame{
 	 */
 
 	private void initComponents() {
-		this.setTitle(ResourceBundle.getBundle("Bundles\\Bundle", locale).getString("neuerbenutzer"));
-		this.setIconImage(new ImageIcon(getClass().getClassLoader().getResource("Images\\LeCard.png")).getImage());
-		lBenutzer = new JLabel(ResourceBundle.getBundle("Bundles\\Bundle", locale).getString("Benutzer"));
-		lPasswort = new JLabel(ResourceBundle.getBundle("Bundles\\Bundle", locale).getString("Passwort"));
+		this.setTitle(ResourceBundle.getBundle("Bundle", locale).getString("neuerbenutzer"));
+		this.setIconImage(new ImageIcon(getClass().getClassLoader().getResource("/LeCard.png")).getImage());
+		lBenutzer = new JLabel(ResourceBundle.getBundle("Bundle", locale).getString("Benutzer"));
+		lPasswort = new JLabel(ResourceBundle.getBundle("Bundle", locale).getString("Passwort"));
 
 		tBenutzer = new JTextField();
 		tPasswort = new JPasswordField();
 		pBenutzer = new JPanel();
 		pPasswort = new JPanel();
 		pErstellen = new JPanel();
-		bErstellen = new JButton(ResourceBundle.getBundle("Bundles\\Bundle", locale).getString("erstellen"));
+		bErstellen = new JButton(ResourceBundle.getBundle("Bundle", locale).getString("erstellen"));
 	}
 
 	private void bindListener() {
@@ -103,7 +103,7 @@ public class PanelNeuerBenutzer extends JFrame{
 		public void actionPerformed(ActionEvent e) {
 			if (Kartei.getInstance().benutzerExistiert(tBenutzer.getText()) == false){
 				Kartei.getInstance().benutzerHinzufuegen(tBenutzer.getText(), tPasswort.getText());
-				JOptionPane.showMessageDialog(null, ResourceBundle.getBundle("Bundles\\Bundle", locale).getString("Benutzererstellt"));
+				JOptionPane.showMessageDialog(null, ResourceBundle.getBundle("Bundle", locale).getString("Benutzererstellt"));
 				Kartei.getInstance().lernkarteiSpeichern();
 				dispose();
 				LoginFrame gui1 = new LoginFrame();
@@ -112,7 +112,7 @@ public class PanelNeuerBenutzer extends JFrame{
 				
 			}
 			else {
-				JOptionPane.showMessageDialog(null, ResourceBundle.getBundle("Bundles\\Bundle", locale).getString("Benutzerexistiert"));
+				JOptionPane.showMessageDialog(null, ResourceBundle.getBundle("Bundle", locale).getString("Benutzerexistiert"));
 				
 			}
 			

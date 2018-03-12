@@ -44,7 +44,7 @@ public class PanelBearbeiten extends JFrame {
 	 * Komponenten werden iniziert
 	 */
 	private void initComponents() {
-		this.setTitle(ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("bearbeiten"));
+		this.setTitle(ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("bearbeiten"));
 		this.setIconImage(Hauptfenster.getInstance().getIcon().getImage());
 		lSprache1 = new JLabel(Kartei.getInstance().getAktuelleSprache().getSpracheA());
 		lSprache2 = new JLabel(Kartei.getInstance().getAktuelleSprache().getSpracheB());
@@ -74,7 +74,7 @@ public class PanelBearbeiten extends JFrame {
 		fremdsprache.setLocation(100, 100);
 		hinzufuegenPanelButton = new JPanel();
 		hinzufuegenButton = new JButton(
-				ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("bearbeiten"));
+				ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("bearbeiten"));
 	}
 
 	/*
@@ -114,7 +114,7 @@ public class PanelBearbeiten extends JFrame {
 					Kartei.getInstance().getAktuelleKarte().setWortA(tSprache1.getText());
 					Kartei.getInstance().getAktuelleKarte().setWortB(tSprache2.getText());
 					JOptionPane.showMessageDialog(null, "" + tSprache1.getText()
-							+ ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("infoTextBearbeiten1"));
+							+ ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("infoTextBearbeiten1"));
 					tSprache1.setText("");
 					tSprache2.setText("");
 					Kartei.getInstance().lernkarteiSpeichern();
@@ -122,12 +122,12 @@ public class PanelBearbeiten extends JFrame {
 					((JFrame) b.getParent().getParent().getParent().getParent().getParent()).setVisible(false);
 				} else {
 					JOptionPane.showMessageDialog(null,
-							ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("infoTextHinzufügen2"));
+							ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("infoTextHinzufügen2"));
 				}
 
 			} else {
 				JOptionPane.showMessageDialog(null,
-						ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("infoTextHinzufügen3"));
+						ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("infoTextHinzufügen3"));
 			}
 
 		}

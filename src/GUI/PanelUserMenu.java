@@ -32,8 +32,8 @@ public class PanelUserMenu extends JPanel{
 	
 	private void initComponents() {
 		
-		lBenutzer = new JLabel(ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("Benutzer") + ": "+ Kartei.getInstance().getBenutzer().getBenutzername());
-		lLernSprache = new JLabel(ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("Lernsprache") + ": ");
+		lBenutzer = new JLabel(ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("Benutzer") + ": "+ Kartei.getInstance().getBenutzer().getBenutzername());
+		lLernSprache = new JLabel(ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("Lernsprache") + ": ");
 		lLernSprache.setHorizontalAlignment(JTextField.RIGHT);
 		
 		lernSprachenMenu = new JComboBox<String>();
@@ -62,8 +62,8 @@ public class PanelUserMenu extends JPanel{
 	}
 	
 	public void spracheWechseln() {
-		lBenutzer.setText(ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("Benutzer"));
-		lLernSprache.setText(ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("Lernsprache"));
+		lBenutzer.setText(ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("Benutzer"));
+		lLernSprache.setText(ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("Lernsprache"));
 	}
 	
 		

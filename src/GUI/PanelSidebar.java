@@ -37,7 +37,7 @@ public class PanelSidebar extends JPanel {
 		boxAuswahl[0] = new JButton("Home");
 		for (int i = 1; i <= 5; i++) {
 			boxAuswahl[i] = new JButton(
-					ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("Fach")
+					ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("Fach")
 							+ " " + i);
 		}
 	}
@@ -67,11 +67,11 @@ public class PanelSidebar extends JPanel {
 	}
 
 	public void spracheWechseln() {
-		boxAuswahl[0].setText(ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale())
+		boxAuswahl[0].setText(ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale())
 				.getString("ButtonKartei"));
 		for (int i = 1; i <= 5; i++) {
 			boxAuswahl[i].setText(
-					ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("Fach")
+					ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("Fach")
 							+ " " + i);
 		}
 	}

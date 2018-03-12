@@ -29,7 +29,7 @@ public class Hauptfenster extends JFrame {
 		this.panelUserMenu = new PanelUserMenu();
 		this.statPanel = new JPanel();
 		this.panelKartei = new PanelKartei();
-		this.icon = new ImageIcon(getClass().getClassLoader().getResource("Images\\LeCard.png"));
+		this.icon = new ImageIcon(getClass().getClassLoader().getResource("LeCard.png"));
 		this.panelLernen = new PanelLernen();
 		initComponents();
 	}

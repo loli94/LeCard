@@ -85,7 +85,6 @@ public class Kartei {
 	public void karteHinzufuegen(Karte k1) {
 		for (Karte k2 : kartei) {
 			if (k1.getWortA().equalsIgnoreCase(k2.getWortA()) && k2.getWortB().equalsIgnoreCase(k1.getWortB())) {
-				System.out.println("Wortkombination bereits vorhanden");
 				return;
 			}
 		}
@@ -127,7 +126,6 @@ public class Kartei {
 
 	public void setFalscheAntwort() {
 		this.falscheAntwort++;
-		System.out.println("" + falscheAntwort);
 	}
 
 	/*
@@ -194,7 +192,7 @@ public class Kartei {
 				}
 			}
 		}
-		System.out.println("Benutzer nicht gefunden");
+		
 		return false;
 	}
 
@@ -332,11 +330,10 @@ public class Kartei {
 	public boolean spracheHinzugfuegen(String ab, String a, String b) {
 		for (Sprache s : sprachen) {
 			if (s.getSpracheA().equalsIgnoreCase(a) && s.getSpracheB().equalsIgnoreCase(b)) {
-				System.out.println("Sprachpaar existiert bereits");
 				return false;
 			}
+			
 			if (s.getSpracheA().equalsIgnoreCase(b) && s.getSpracheB().equalsIgnoreCase(a)) {
-				System.out.println("Sprachpaar existiert bereits");
 				return false;
 			}
 		}

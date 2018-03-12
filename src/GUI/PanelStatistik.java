@@ -53,7 +53,7 @@ public class PanelStatistik extends JPanel {
 		g.fillRect(Kart1_X, Kart1_Y, Kart1_WIDTH, Kart1_HEIGHT);
 		g.setColor(Color.BLACK);
 		g.drawString(
-				ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("Fach") + " 1",
+				ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("Fach") + " 1",
 				10, 50);
 		g.drawString("" + Kartei.getInstance().getFachGroesse(0), 80, 50);
 
@@ -61,7 +61,7 @@ public class PanelStatistik extends JPanel {
 		g.fillRect(Kart2_X, kart2_Y, kart2_WIDTH, kart2_Height);
 		g.setColor(Color.BLACK);
 		g.drawString(
-				ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("Fach") + " 2",
+				ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("Fach") + " 2",
 				10, 110);
 		g.drawString("" + Kartei.getInstance().getFachGroesse(1), 80, 110);
 
@@ -69,7 +69,7 @@ public class PanelStatistik extends JPanel {
 		g.fillRect(kart3_X, kart3_Y, kart3_WIDTH, kart3_Height);
 		g.setColor(Color.BLACK);
 		g.drawString(
-				ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("Fach") + " 3",
+				ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("Fach") + " 3",
 				10, 175);
 		g.drawString("" + Kartei.getInstance().getFachGroesse(2), 80, 175);
 
@@ -77,7 +77,7 @@ public class PanelStatistik extends JPanel {
 		g.fillRect(kart4_X, kart4_Y, kart4_WIDTH, kart4_Height);
 		g.setColor(Color.BLACK);
 		g.drawString(
-				ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("Fach") + " 4",
+				ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("Fach") + " 4",
 				10, 225);
 		g.drawString("" + Kartei.getInstance().getFachGroesse(3), 80, 225);
 
@@ -85,7 +85,7 @@ public class PanelStatistik extends JPanel {
 		g.fillRect(kart5_X, kart5_Y, kart5_WIDTH, kart5_Height);
 		g.setColor(Color.BLACK);
 		g.drawString(
-				ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("Fach") + " 5",
+				ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("Fach") + " 5",
 				10, 285);
 		g.drawString("" + Kartei.getInstance().getFachGroesse(4), 80, 285);
 	}

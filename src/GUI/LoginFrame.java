@@ -76,7 +76,7 @@ public class LoginFrame extends JFrame {
 		tUser = new JTextField();
 		pPasswort = new JPasswordField();
 		//Hier wird das Bild für das Logo angezogen
-		this.setIconImage(new ImageIcon(getClass().getClassLoader().getResource("Images\\LeCard.png")).getImage());
+		this.setIconImage(new ImageIcon(getClass().getClassLoader().getResource("LeCard.png")).getImage());
 		
 		pPasswort.addKeyListener(new KeyListener() {
 			
@@ -96,9 +96,9 @@ public class LoginFrame extends JFrame {
 			}
 		});
 		//Buttons mit den entsprechenden Bundel für die Sprachen bezeichnungen 
-		lBenutzerlogin = new JLabel(ResourceBundle.getBundle("Bundles\\Bundle", lokal).getString("Benutzer"));
-		lPasswort = new JLabel(ResourceBundle.getBundle("Bundles\\Bundle", lokal).getString("Passwort"));
-		neuerUser = new JButton(ResourceBundle.getBundle("Bundles\\Bundle", lokal).getString("neuerUser"));
+		lBenutzerlogin = new JLabel(ResourceBundle.getBundle("Bundle", lokal).getString("Benutzer"));
+		lPasswort = new JLabel(ResourceBundle.getBundle("Bundle", lokal).getString("Passwort"));
+		neuerUser = new JButton(ResourceBundle.getBundle("Bundle", lokal).getString("neuerUser"));
 
 	}
 	/**
@@ -164,9 +164,9 @@ public class LoginFrame extends JFrame {
 			}
 
 			lokal = new Locale(language, country);
-			lBenutzerlogin.setText(ResourceBundle.getBundle("Bundles\\Bundle", lokal).getString("Benutzer"));
-			lPasswort.setText(ResourceBundle.getBundle("Bundles\\Bundle", lokal).getString("Passwort"));
-			neuerUser.setText(ResourceBundle.getBundle("Bundles\\Bundle", lokal).getString("neuerUser"));
+			lBenutzerlogin.setText(ResourceBundle.getBundle("Bundle", lokal).getString("Benutzer"));
+			lPasswort.setText(ResourceBundle.getBundle("Bundle", lokal).getString("Passwort"));
+			neuerUser.setText(ResourceBundle.getBundle("Bundle", lokal).getString("neuerUser"));
 		}
 
 	}
@@ -191,7 +191,7 @@ public class LoginFrame extends JFrame {
 			} 
 			//Falls das Passwort Falsch eingegeben wurde 
 			else {
-				JOptionPane.showMessageDialog(null, ResourceBundle.getBundle("Bundles\\Bundle", lokal).getString("falschesPasswort"));
+				JOptionPane.showMessageDialog(null, ResourceBundle.getBundle("Bundle", lokal).getString("falschesPasswort"));
 
 			}
 		}

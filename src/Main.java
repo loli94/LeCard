@@ -12,7 +12,7 @@ public class Main {
 	public static void main(String[] args) {
 						
 		try {
-			Kartei.getInstance().karteiOeffnen("C:\\temp\\lernkartei_kombiniert.xml");
+			Kartei.getInstance().karteiOeffnen("lernkartei_kombiniert.xml");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

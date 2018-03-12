@@ -62,7 +62,7 @@ public class PanelLernen extends JPanel {
 		pPruefen = new JPanel();
 		pAuswertung = new JPanel();
 		bPruefen = new JButton(
-				ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("pruefen"));
+				ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("pruefen"));
 		bWechsel = new JButton("<->");
 		bWechsel.setPreferredSize(new Dimension(300, 30));
 		lSpracheA = new JLabel(Kartei.getInstance().getAktuelleSprache().getSpracheA());
@@ -111,7 +111,7 @@ public class PanelLernen extends JPanel {
 			if (learnReverse == false) {
 				if (Kartei.getInstance().getAktuellesFach() != 0) {
 					JOptionPane.showMessageDialog(pLernen,
-							ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale())
+							ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale())
 									.getString("keinKarteVorhanden"));
 					tSpracheB.setText("");
 					tSpracheA.setText("-");
@@ -120,7 +120,7 @@ public class PanelLernen extends JPanel {
 			} else {
 				if (Kartei.getInstance().getAktuellesFach() != 0) {
 					JOptionPane.showMessageDialog(pLernen,
-							ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale())
+							ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale())
 									.getString("keinKarteVorhanden"));
 					tSpracheA.setText("");
 					tSpracheB.setText("-");
@@ -213,7 +213,7 @@ public class PanelLernen extends JPanel {
 					tSpracheA.setText("");
 				}
 
-				lLoesung.setText(ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale())
+				lLoesung.setText(ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale())
 						.getString("richtigeAntwort"));
 				lLoesung.setForeground(Color.GREEN);
 				textAusblenden(0, 255, 0, 5, lLoesung);
@@ -222,9 +222,8 @@ public class PanelLernen extends JPanel {
 			}
 
 			else {
-				System.out.println("Falsch");
 				Kartei.getInstance().karteVerschieben(Kartei.getInstance().getAktuelleKarte(), 1);
-				lLoesung.setText(ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale())
+				lLoesung.setText(ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale())
 						.getString("falscheAntwort") + " :" + Kartei.getInstance().getAktuelleKarte().getWortB());
 				lLoesung.setForeground(Color.RED);
 				tSpracheB.setText("");
@@ -243,7 +242,7 @@ public class PanelLernen extends JPanel {
 	
 	public void spracheWechseln() {
 		bPruefen.setText(
-				ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("pruefen"));
+				ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("pruefen"));
 
 	}
 	

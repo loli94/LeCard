@@ -59,10 +59,10 @@ public class PanelKartei extends JPanel {
 		stat = new JPanel();
 		start = new JPanel();
 		richtigeAntwort = new JLabel(
-				ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("richtigeAntworten") + " "
+				ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("richtigeAntworten") + " "
 						+ Kartei.getInstance().getRichtigeAntwort());
 		falscheAntwort = new JLabel(
-				ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("falscheAntworten") + " "
+				ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("falscheAntworten") + " "
 						+ Kartei.getInstance().getFalscheAntwort());
 
 	}
@@ -108,9 +108,9 @@ public class PanelKartei extends JPanel {
 		grafischeStat.setKart3_WIDTH(Kartei.getInstance().getFachGroesse(2));
 		grafischeStat.setKart4_WIDTH(Kartei.getInstance().getFachGroesse(3));
 		grafischeStat.setKart5_WIDTH(Kartei.getInstance().getFachGroesse(4));
-		richtigeAntwort.setText(ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("richtigeAntworten")
+		richtigeAntwort.setText(ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("richtigeAntworten")
 				+ " " + Kartei.getInstance().getRichtigeAntwort());
-		falscheAntwort.setText(ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("falscheAntworten")
+		falscheAntwort.setText(ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("falscheAntworten")
 				+ " " + Kartei.getInstance().getFalscheAntwort());
 
 	}
@@ -120,8 +120,8 @@ public class PanelKartei extends JPanel {
 	 */
 
 	public void spracheWechseln() {
-		richtigeAntwort.setText(ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("richtigeAntworten") + " " + Kartei.getInstance().getRichtigeAntwort());
-		falscheAntwort.setText(ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("falscheAntworten") + " "	+ Kartei.getInstance().getFalscheAntwort());
+		richtigeAntwort.setText(ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("richtigeAntworten") + " " + Kartei.getInstance().getRichtigeAntwort());
+		falscheAntwort.setText(ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("falscheAntworten") + " "	+ Kartei.getInstance().getFalscheAntwort());
 		
 	}
 

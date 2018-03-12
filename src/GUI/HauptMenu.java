@@ -30,14 +30,14 @@ public class HauptMenu extends JMenuBar {
 		 * Erstellt das Datei-Menue
 		 */
 	
-		dateiMenu = new JMenu(ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("Datei"));
+		dateiMenu = new JMenu(ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("Datei"));
 
-		menuItem = new JMenuItem(ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("Importieren"));
+		menuItem = new JMenuItem(ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("Importieren"));
 		menuItem.addActionListener(new ListenerHauptMenu());
 		menuItem.setName("importieren");
 		dateiMenu.add(menuItem);
 
-		menuItem = new JMenuItem(ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("Beenden"));
+		menuItem = new JMenuItem(ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("Beenden"));
 		menuItem.addActionListener(new ListenerHauptMenu());
 		menuItem.setName("beenden");
 		dateiMenu.add(menuItem);
@@ -48,29 +48,29 @@ public class HauptMenu extends JMenuBar {
 		 * Menu für Karteibearbeitungen
 		 */
 		
-		karteiMenu = new JMenu(ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("Lernkartei"));
+		karteiMenu = new JMenu(ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("Lernkartei"));
 		
-		kartenMenu = new JMenu(ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("Karte"));
+		kartenMenu = new JMenu(ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("Karte"));
 		
-		menuItem = new JMenuItem(ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("hinzufuegen"));
+		menuItem = new JMenuItem(ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("hinzufuegen"));
 		menuItem.setName("karteHinzufuegen");
 		menuItem.addActionListener(new ListenerHauptMenu());
 		kartenMenu.add(menuItem);
 
-		menuItem = new JMenuItem(ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("bearbeiten"));
+		menuItem = new JMenuItem(ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("bearbeiten"));
 		menuItem.setName("karteBearbeiten");
 		menuItem.addActionListener(new ListenerHauptMenu());
 		kartenMenu.add(menuItem);
 
-		menuItem = new JMenuItem(ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("loeschen"));
+		menuItem = new JMenuItem(ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("loeschen"));
 		menuItem.setName("karteLoeschen");
 		menuItem.addActionListener(new ListenerHauptMenu());
 		kartenMenu.add(menuItem);
 			
 		karteiMenu.add(kartenMenu);
 		
-		lernsprachenMenu = new JMenu(ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("Lernsprache"));
-		menuItem = new JMenuItem(ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("hinzufuegen"));
+		lernsprachenMenu = new JMenu(ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("Lernsprache"));
+		menuItem = new JMenuItem(ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("hinzufuegen"));
 		menuItem.setName("spracheHinzufuegen");
 		menuItem.addActionListener(new ListenerHauptMenu());
 		lernsprachenMenu.add(menuItem);
@@ -83,12 +83,12 @@ public class HauptMenu extends JMenuBar {
 		 * Menu für Anzeige
 		 */
 	
-		anzeigeMenu = new JMenu(ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("Anzeige"));
+		anzeigeMenu = new JMenu(ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("Anzeige"));
 		/**
 		 * Submenu für Spracheinstellung
 		 */
 		 
-		lernsprachMenu = new JMenu(ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("Sprache"));
+		lernsprachMenu = new JMenu(ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("Sprache"));
 
 		menuItem = new JMenuItem("Deutsch");
 		menuItem.addActionListener(new ListenerHauptMenu());
@@ -129,7 +129,6 @@ public class HauptMenu extends JMenuBar {
 		public void actionPerformed(ActionEvent e) {
 			JMenuItem menuitem = (JMenuItem) e.getSource();
 			String selection = menuitem.getName();
-			System.out.println(selection);
 
 			switch (selection) {
 			case "beenden":

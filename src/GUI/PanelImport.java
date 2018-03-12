@@ -27,7 +27,7 @@ public class PanelImport extends JFrame {
 	 * Das Fenster für den Import wird definiert. Es kann nur ein csv ausgewählt werden. Dies importiert danach das CSV und wird der jeweiligen Kartei hinzugefügt
 	 * */
 	public void importFile() {
-		FileDialog fd = new FileDialog(this, ResourceBundle.getBundle("Bundles\\Bundle", Kartei.getInstance().getLocale()).getString("dateiauswählen"), FileDialog.LOAD);
+		FileDialog fd = new FileDialog(this, ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("dateiauswählen"), FileDialog.LOAD);
 		fd.setDirectory("C:\\");
 		fd.setFile("*.csv");
 		fd.setVisible(true);
