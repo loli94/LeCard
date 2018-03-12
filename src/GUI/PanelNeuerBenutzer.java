@@ -49,7 +49,7 @@ public class PanelNeuerBenutzer extends JFrame{
 
 	private void initComponents() {
 		this.setTitle(ResourceBundle.getBundle("Bundle", locale).getString("neuerbenutzer"));
-		this.setIconImage(new ImageIcon(getClass().getClassLoader().getResource("/LeCard.png")).getImage());
+		this.setIconImage(new ImageIcon(getClass().getClassLoader().getResource("LeCard.png")).getImage());
 		lBenutzer = new JLabel(ResourceBundle.getBundle("Bundle", locale).getString("Benutzer"));
 		lPasswort = new JLabel(ResourceBundle.getBundle("Bundle", locale).getString("Passwort"));
 
