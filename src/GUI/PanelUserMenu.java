@@ -64,7 +64,7 @@ public class PanelUserMenu extends JPanel{
 	
 	public void spracheWechseln() {
 		lBenutzer.setText(ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("Benutzer") + ": "+ Kartei.getInstance().getBenutzer().getBenutzername());
-		lLernSprache.setText(ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("Lernsprache"));
+		lLernSprache.setText(ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("Lernsprache") + ": ");
 	}
 	
 		
