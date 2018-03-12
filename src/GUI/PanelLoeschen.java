@@ -1,6 +1,6 @@
 package GUI;
-
 import java.awt.BorderLayout;
+
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,15 +15,15 @@ import javax.swing.JPanel;
 import Logik.Karte;
 import Logik.Kartei;
 
-/** @autor Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
- * @version 0.7
- * Datum:12.03.2018
+/**
+ * @autor Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
+ * @version 0.7 Datum:12.03.2018
  */
 
 public class PanelLoeschen extends JFrame {
 
 	private JLabel text;
-	private JPanel textPanel, buttonPanel; 
+	private JPanel textPanel, buttonPanel;
 	private JButton ja, nein;
 
 	public PanelLoeschen() {
@@ -35,30 +35,42 @@ public class PanelLoeschen extends JFrame {
 
 	}
 
+	/**
+	 * Listener werden zusammengeführt
+	 */
 	private void bindListener() {
 		ja.addActionListener(new ButtonListenerJa());
 		nein.addActionListener(new ButtonListenerNein());
 	}
 
+	/**
+	 * Komponenten werden iniziert
+	 */
 	private void initComponents() {
 		text = new JLabel(
 				ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("InfoLoeschen1"));
 		ja = new JButton(ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("Ja"));
 		nein = new JButton(ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("Nein"));
-		textPanel = new JPanel(); 
-		buttonPanel = new JPanel(); 
+		textPanel = new JPanel();
+		buttonPanel = new JPanel();
 	}
 
+	/**
+	 * Frame wird gezeichnet
+	 */
 	public void paint() {
-		this.setSize(400, 200);
+		this.setSize(350, 150);
 		textPanel.add(text);
 		buttonPanel.add(ja);
 		buttonPanel.add(nein);
-		this.add(textPanel, BorderLayout.CENTER); 
+		this.add(textPanel, BorderLayout.CENTER);
 		this.add(buttonPanel, BorderLayout.SOUTH);
 		this.setVisible(true);
 	}
 
+	/**
+	 * Button Ja für das Löschen der Karte
+	 */
 	class ButtonListenerJa implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			Karte kl = Kartei.getInstance().getAktuelleKarte();
@@ -66,15 +78,20 @@ public class PanelLoeschen extends JFrame {
 			Hauptfenster.getInstance().getPanelLernen().loadCard();
 			JButton b = (JButton) e.getSource();
 			((JFrame) b.getParent().getParent().getParent().getParent().getParent()).setVisible(false);
-			JOptionPane.showMessageDialog(null, ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("InfoLoeschen2"));
+			JOptionPane.showMessageDialog(null,
+					ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("InfoLoeschen2"));
 			Kartei.getInstance().lernkarteiSpeichern();
 		}
 	}
 
+	/**
+	 * Button Nein - Vorgang wird abgebrochen
+	 */
 	class ButtonListenerNein implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			JButton b = (JButton) e.getSource();
-			JOptionPane.showMessageDialog(null, ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("InfoLoeschen3"));
+			JOptionPane.showMessageDialog(null,
+					ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("InfoLoeschen3"));
 			((JFrame) b.getParent().getParent().getParent().getParent().getParent()).setVisible(false);
 		}
 	}
