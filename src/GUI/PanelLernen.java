@@ -243,6 +243,8 @@ public class PanelLernen extends JPanel {
 	public void spracheWechseln() {
 		bPruefen.setText(
 				ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("pruefen"));
+		lSpracheA.setText(Kartei.getInstance().getAktuelleSprache().getSpracheA());
+		lSpracheB.setText(Kartei.getInstance().getAktuelleSprache().getSpracheB());
 
 	}
 	
