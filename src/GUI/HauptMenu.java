@@ -151,7 +151,7 @@ public class HauptMenu extends JMenuBar {
 						Kartei.getInstance().karteLoeschen(kl);
 						Hauptfenster.getInstance().getPanelLernen().loadCard();
 					} else if (result == JOptionPane.NO_OPTION) {
-						System.exit(0);
+						break;
 					}
 				break;
 			case "karteBearbeiten":
