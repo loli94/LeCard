@@ -52,6 +52,7 @@ public class PanelUserMenu extends JPanel{
 		Border border = this.getBorder();
 		Border margin = new EmptyBorder(10,10,10,10);
 		
+		
 		this.setLayout(new GridLayout(1, 2));
 		this.setBorder(new CompoundBorder(border, margin));
 				
@@ -62,7 +63,7 @@ public class PanelUserMenu extends JPanel{
 	}
 	
 	public void spracheWechseln() {
-		lBenutzer.setText(ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("Benutzer"));
+		lBenutzer.setText(ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("Benutzer") + ": "+ Kartei.getInstance().getBenutzer().getBenutzername());
 		lLernSprache.setText(ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("Lernsprache"));
 	}
 	
