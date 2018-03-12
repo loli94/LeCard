@@ -99,7 +99,7 @@ public class PanelKartei extends JPanel {
 	public void spracheWechseln() {
 		this.richtigeAntwort.setText(ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("richtigeAntworten") + " " + Kartei.getInstance().getRichtigeAntwort());
 		this.falscheAntwort.setText(ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("falscheAntworten") + " "	+ Kartei.getInstance().getFalscheAntwort());
-		System.out.println(hashCode());
 	}
+
 
 }
