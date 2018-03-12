@@ -1,4 +1,5 @@
 package Logik;
+
 import java.io.File;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -6,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Formatter;
 import java.util.Locale;
 import java.util.Random;
+import java.util.UUID;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -49,7 +51,6 @@ public class Kartei {
 	private Locale lokal;
 	@XmlTransient
 	private String pfad;
-	
 
 	protected Kartei() {
 		this.kartei = new ArrayList<Karte>();
@@ -64,7 +65,7 @@ public class Kartei {
 	}
 
 	public static Kartei getInstance() {
-		if(instance == null) {
+		if (instance == null) {
 			instance = new Kartei();
 		}
 		return instance;
@@ -150,7 +151,7 @@ public class Kartei {
 	 * XML File einlesen und die enthaltenen Elemente zu Objekten umwandeln
 	 */
 	public void karteiOeffnen(String p) throws Exception {
-		
+
 		this.pfad = p;
 
 		try {
@@ -168,7 +169,6 @@ public class Kartei {
 		}
 
 	}
-
 
 	public boolean benutzerExistiert(String benutzername) {
 		for (Benutzer b : benutzerListe) {
@@ -192,7 +192,7 @@ public class Kartei {
 				}
 			}
 		}
-		
+
 		return false;
 	}
 
@@ -260,15 +260,14 @@ public class Kartei {
 
 		// Nächste Karte aus diesem Fach in der entsprechenden Sprache ausgeben
 
-		if (aktuellesFach > 0 && fach[aktuellesFach - 1].gibKarten().size() > 0 ) {
+		if (aktuellesFach > 0 && fach[aktuellesFach - 1].gibKarten().size() > 0) {
 			Random rnd = new Random();
 			int index = rnd.nextInt(fach[aktuellesFach - 1].gibKarten().size());
 			this.aktuelleKarte = fach[aktuellesFach - 1].gibKarten().get(index);
 			return true;
-		}
-		else {
+		} else {
 			this.aktuelleKarte = null;
-			return false;	
+			return false;
 		}
 	}
 
@@ -329,15 +328,14 @@ public class Kartei {
 
 	public boolean spracheHinzugfuegen(String ab, String a, String b) {
 
-		
 		for (Sprache s : sprachen) {
-			if (s.getSpracheA().equalsIgnoreCase(a) && s.getSpracheB().equalsIgnoreCase(b) || 
-				s.getSpracheA().equalsIgnoreCase(b) && s.getSpracheB().equalsIgnoreCase(a) ||
-				s.getSprachPaar().equalsIgnoreCase(ab.substring(0,2)+"-"+ ab.substring(3,5)) ||
-				s.getSprachPaar().equalsIgnoreCase(ab.substring(3,5)+"-"+ ab.substring(0,2))){
+			if (s.getSpracheA().equalsIgnoreCase(a) && s.getSpracheB().equalsIgnoreCase(b)
+					|| s.getSpracheA().equalsIgnoreCase(b) && s.getSpracheB().equalsIgnoreCase(a)
+					|| s.getSprachPaar().equalsIgnoreCase(ab.substring(0, 2) + "-" + ab.substring(3, 5))
+					|| s.getSprachPaar().equalsIgnoreCase(ab.substring(3, 5) + "-" + ab.substring(0, 2))) {
 				return false;
 			}
-		
+
 		}
 
 		sprachen.add(new Sprache(ab, a, b));
@@ -383,7 +381,7 @@ public class Kartei {
 		int fg = fach[fachnummer].gibAnzahlKarten();
 		return fg;
 	}
-	
+
 	public Locale getLocale() {
 		return lokal;
 	}
@@ -392,7 +390,41 @@ public class Kartei {
 		this.lokal = locale;
 	}
 
-	//TODO Methode Benutzerstatus bereinigen
+	public void statusBereinigen() {
+		ArrayList<UUID> idListe = new ArrayList<UUID>();
+		for (Karte k : kartei) {
+			idListe.add(k.getId());
 
+		}
+
+		for (Benutzer b : benutzerListe) {
+			if (b.getLernfortschritte() != null) {
+				for (KartenStatus ks : b.getLernfortschritte()) {
+					if (idListe.contains(ks.getUid())) {
+						break;
+					} else {
+						b.getLernfortschritte().remove(ks);
+					}
+
+				}
+			}
+
+		}
+	}
+
+	public void sprachpaarLoeschen(String sp) {
+		for (Karte k : kartei) {
+			if (k.getSprache().equalsIgnoreCase(sp)) {
+				kartei.remove(k);
+			}
+
+		}
+
+		for (Sprache s : sprachen) {
+			if (s.getSprachPaar().equalsIgnoreCase(sp)) {
+				sprachen.remove(s);
+			}
+		}
+	}
 
 }
