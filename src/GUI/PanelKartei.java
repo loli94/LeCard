@@ -89,6 +89,7 @@ public class PanelKartei extends JPanel {
 		grafischeStat.setKart3_WIDTH(Kartei.getInstance().getFachGroesse(2));
 		grafischeStat.setKart4_WIDTH(Kartei.getInstance().getFachGroesse(3));
 		grafischeStat.setKart5_WIDTH(Kartei.getInstance().getFachGroesse(4));
+		spracheWechseln();
 
 	}
 	

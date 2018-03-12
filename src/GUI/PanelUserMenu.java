@@ -86,9 +86,11 @@ public class PanelUserMenu extends JPanel{
 			if (Kartei.getInstance().getAktuellesFach() > 0) {
 				Hauptfenster.getInstance().paintPanelLernen();
 				Hauptfenster.getInstance().getPanelLernen().spracheWechseln();
+				Hauptfenster.getInstance().getPanelKartei().setBalkendiagramm();
 			}
 			if (Kartei.getInstance().getAktuellesFach() == 0) {
 				Hauptfenster.getInstance().paintPanelStat();
+				Hauptfenster.getInstance().getPanelKartei().setBalkendiagramm();
 			}
 		}
 

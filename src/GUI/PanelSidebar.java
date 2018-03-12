@@ -90,6 +90,7 @@ public class PanelSidebar extends JPanel {
 			if (fach == 0) {
 				boxAuswahl[0].setBackground(Color.CYAN);
 				Hauptfenster.getInstance().paintPanelStat();
+				Hauptfenster.getInstance().getPanelKartei().setBalkendiagramm();
 			}
 
 			else {
