@@ -18,7 +18,6 @@ import Logik.Kartei;
 public class PanelKartei extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	private JPanel mainFrame;
 	private JPanel kartei;
 	private JPanel stat;
 	private JPanel start;
@@ -30,26 +29,14 @@ public class PanelKartei extends JPanel {
 	public PanelKartei() {
 		initComponents();
 		setBalkendiagramm();
-		bindListener();
 		paint();
 	}
-	
-	/**
-	 * diese Methode wird benötigt um das ganze Panel neu zu Zeichnen.
-	 */
 
-	public void repaint() {
-		initComponents();
-		bindListener();
-		setBalkendiagramm();
-
-	}
 
 	/**
 	 * Hier werden alle Objekte vom Panel initiert.
 	 */
 	public void initComponents() {
-		mainFrame = new JPanel();
 
 		grafischeStat = new PanelStatistik();
 		grafischeStat.setPreferredSize(new Dimension(400, 400));
@@ -67,10 +54,6 @@ public class PanelKartei extends JPanel {
 
 	}
 
-	private void bindListener() {
-
-	}
-
 	/**
 	 * Hier wird das Panel gezeichnet und die verschiedenen Komponenten dem Panel hinzugefügt.
 	 */
@@ -79,7 +62,7 @@ public class PanelKartei extends JPanel {
 		datenStatistik.add(richtigeAntwort);
 		datenStatistik.add(falscheAntwort);
 
-		mainFrame.setLayout(new BoxLayout(mainFrame, BoxLayout.PAGE_AXIS));
+		this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 
 
 		kartei.setLayout(new FlowLayout());
@@ -89,10 +72,8 @@ public class PanelKartei extends JPanel {
 		stat.add(grafischeStat);
 		stat.add(datenStatistik);
 
-		mainFrame.add(stat);
-		mainFrame.add(start);
-
-		add(mainFrame);
+		this.add(stat);
+		this.add(start);
 
 	}
 	
@@ -108,10 +89,6 @@ public class PanelKartei extends JPanel {
 		grafischeStat.setKart3_WIDTH(Kartei.getInstance().getFachGroesse(2));
 		grafischeStat.setKart4_WIDTH(Kartei.getInstance().getFachGroesse(3));
 		grafischeStat.setKart5_WIDTH(Kartei.getInstance().getFachGroesse(4));
-		richtigeAntwort.setText(ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("richtigeAntworten")
-				+ " " + Kartei.getInstance().getRichtigeAntwort());
-		falscheAntwort.setText(ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("falscheAntworten")
-				+ " " + Kartei.getInstance().getFalscheAntwort());
 
 	}
 	
@@ -120,9 +97,9 @@ public class PanelKartei extends JPanel {
 	 */
 
 	public void spracheWechseln() {
-		richtigeAntwort.setText(ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("richtigeAntworten") + " " + Kartei.getInstance().getRichtigeAntwort());
-		falscheAntwort.setText(ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("falscheAntworten") + " "	+ Kartei.getInstance().getFalscheAntwort());
-		
+		this.richtigeAntwort.setText(ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("richtigeAntworten") + " " + Kartei.getInstance().getRichtigeAntwort());
+		this.falscheAntwort.setText(ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("falscheAntworten") + " "	+ Kartei.getInstance().getFalscheAntwort());
+		System.out.println(hashCode());
 	}
 
 }

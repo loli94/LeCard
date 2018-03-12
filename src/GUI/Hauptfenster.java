@@ -76,7 +76,8 @@ public class Hauptfenster extends JFrame {
 		panelSidebar.spracheWechseln();
 		panelLernen.spracheWechseln();
 		panelKartei.spracheWechseln();
-
+		paintPanelStat();
+		
 		this.setJMenuBar(new HauptMenu());
 
 	}
@@ -91,7 +92,7 @@ public class Hauptfenster extends JFrame {
 
 	public void paintPanelStat() {
 		statPanel.removeAll();
-		statPanel.add(new PanelKartei());
+		statPanel.add(panelKartei);
 		statPanel.validate();
 		statPanel.repaint();
 	}
