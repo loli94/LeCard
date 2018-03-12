@@ -145,14 +145,8 @@ public class HauptMenu extends JMenuBar {
 				ph.paint();
 				break;
 			case "karteLoeschen":
-					int result = JOptionPane.showConfirmDialog(null, "Delete this Card?", "Confirm", JOptionPane.YES_NO_OPTION);
-					if (result == JOptionPane.YES_OPTION) {
-						Karte kl = Kartei.getInstance().getAktuelleKarte();
-						Kartei.getInstance().karteLoeschen(kl);
-						Hauptfenster.getInstance().getPanelLernen().loadCard();
-					} else if (result == JOptionPane.NO_OPTION) {
-						break;
-					}
+				PanelLoeschen pl = new PanelLoeschen(); 
+				pl.paint(); 
 				break;
 			case "karteBearbeiten":
 				PanelBearbeiten pb = new PanelBearbeiten();
