@@ -328,20 +328,16 @@ public class Kartei {
 	}
 
 	public boolean spracheHinzugfuegen(String ab, String a, String b) {
-		
-		
-		
-		
-		
+
 		
 		for (Sprache s : sprachen) {
-			if (s.getSpracheA().equalsIgnoreCase(a) && s.getSpracheB().equalsIgnoreCase(b)) {
+			if (s.getSpracheA().equalsIgnoreCase(a) && s.getSpracheB().equalsIgnoreCase(b) || 
+				s.getSpracheA().equalsIgnoreCase(b) && s.getSpracheB().equalsIgnoreCase(a) ||
+				s.getSprachPaar().equalsIgnoreCase(ab.substring(0,2)+"-"+ ab.substring(3,5)) ||
+				s.getSprachPaar().equalsIgnoreCase(ab.substring(3,5)+"-"+ ab.substring(0,2))){
 				return false;
 			}
-			
-			if (s.getSpracheA().equalsIgnoreCase(b) && s.getSpracheB().equalsIgnoreCase(a)) {
-				return false;
-			}
+		
 		}
 
 		sprachen.add(new Sprache(ab, a, b));
@@ -395,9 +391,8 @@ public class Kartei {
 	public void setLocale(Locale locale) {
 		this.lokal = locale;
 	}
-	
-	
 
+	//TODO Methode Benutzerstatus bereinigen
 
 
 }
