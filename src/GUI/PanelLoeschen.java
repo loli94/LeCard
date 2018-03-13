@@ -16,6 +16,9 @@ import Logik.Karte;
 import Logik.Kartei;
 
 /**
+ * Klasse beinhaltet das Löschen der Karte in dem Fach. Mit dem Ja Button wird die Karte gelöscht und mit dem Nein Button wird
+ * der Vorgang abgebrochen.
+ * 
  * @autor Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
  * @version 0.7 Datum:12.03.2018
  */
@@ -35,17 +38,11 @@ public class PanelLoeschen extends JFrame {
 
 	}
 
-	/**
-	 * Listener werden zusammengeführt
-	 */
 	private void bindListener() {
 		ja.addActionListener(new ButtonListenerJa());
 		nein.addActionListener(new ButtonListenerNein());
 	}
 
-	/**
-	 * Komponenten werden iniziert
-	 */
 	private void initComponents() {
 		text = new JLabel(
 				ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("InfoLoeschen1"));
@@ -55,9 +52,6 @@ public class PanelLoeschen extends JFrame {
 		buttonPanel = new JPanel();
 	}
 
-	/**
-	 * Frame wird gezeichnet
-	 */
 	public void paint() {
 		this.setSize(350, 150);
 		textPanel.add(text);
@@ -69,7 +63,7 @@ public class PanelLoeschen extends JFrame {
 	}
 
 	/**
-	 * Button Ja für das Löschen der Karte
+	 * ButtonListener Ja für das Löschen der Karte
 	 */
 	class ButtonListenerJa implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
@@ -85,7 +79,7 @@ public class PanelLoeschen extends JFrame {
 	}
 
 	/**
-	 * Button Nein - Vorgang wird abgebrochen
+	 * ButtonListener Nein - Vorgang wird abgebrochen
 	 */
 	class ButtonListenerNein implements ActionListener {
 		public void actionPerformed(ActionEvent e) {

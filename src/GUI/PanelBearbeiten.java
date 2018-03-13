@@ -1,4 +1,5 @@
 package GUI;
+
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -16,15 +17,15 @@ import javax.swing.JTextField;
 
 import Logik.Kartei;
 
-/* @autor Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
- * @version 0.6
- * Datum:24.02.2018
+/**
+ * 
+ * Klasse beinhaltet das Bearbeiten von Karten. Karte wird in einem neuen Panel
+ * angezeigt mit aktueller Karte welche bearbeitet werden soll.
+ * 
+ * @autor Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
+ * @version 0.6 Datum:24.02.2018
  */
 public class PanelBearbeiten extends JFrame {
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel hauptsprache, fremdsprache, hinzufuegenPanelButton;
 	private JLabel lSprache1, lSprache2;
@@ -40,9 +41,6 @@ public class PanelBearbeiten extends JFrame {
 
 	}
 
-	/*
-	 * Komponenten werden iniziert
-	 */
 	private void initComponents() {
 		this.setTitle(ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("bearbeiten"));
 		this.setIconImage(Hauptfenster.getInstance().getIcon().getImage());
@@ -77,16 +75,10 @@ public class PanelBearbeiten extends JFrame {
 				ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("bearbeiten"));
 	}
 
-	/*
-	 * ActionListener werden zusammen gefügt
-	 */
 	private void bindListener() {
 		hinzufuegenButton.addActionListener(new ButtonListenerBearbeiten());
 	}
 
-	/*
-	 * Paint von dem Fenster
-	 */
 	public void paint() {
 		this.setSize(400, 200);
 		hauptsprache.add(lSprache1);
@@ -100,10 +92,12 @@ public class PanelBearbeiten extends JFrame {
 		this.add(hinzufuegenPanelButton, BorderLayout.SOUTH);
 
 		this.setVisible(true);
+		
 	}
 
-	/*
-	 * ButtonListener für das hinzufügen von einer Karte
+	/**
+	 * ButtonListener für das Bearbeiten von einer Karte. Sobald der Bearbeiten
+	 * Button angewählt wird, wird die Karte gespeichert. 
 	 */
 	class ButtonListenerBearbeiten implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
@@ -113,21 +107,21 @@ public class PanelBearbeiten extends JFrame {
 				if (tSprache1.getText().matches("[a-zA-Z]+") && tSprache2.getText().matches("[a-zA-Z]+")) {
 					Kartei.getInstance().getAktuelleKarte().setWortA(tSprache1.getText());
 					Kartei.getInstance().getAktuelleKarte().setWortB(tSprache2.getText());
-					JOptionPane.showMessageDialog(null, "" + tSprache1.getText()
-							+ ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("infoTextBearbeiten1"));
+					JOptionPane.showMessageDialog(null, "" + tSprache1.getText() + ResourceBundle
+							.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("infoTextBearbeiten1"));
 					tSprache1.setText("");
 					tSprache2.setText("");
 					Kartei.getInstance().lernkarteiSpeichern();
 					JButton b = (JButton) e.getSource();
 					((JFrame) b.getParent().getParent().getParent().getParent().getParent()).setVisible(false);
 				} else {
-					JOptionPane.showMessageDialog(null,
-							ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("infoTextHinzufügen2"));
+					JOptionPane.showMessageDialog(null, ResourceBundle
+							.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("infoTextHinzufügen2"));
 				}
 
 			} else {
-				JOptionPane.showMessageDialog(null,
-						ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("infoTextHinzufügen3"));
+				JOptionPane.showMessageDialog(null, ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale())
+						.getString("infoTextHinzufügen3"));
 			}
 
 		}
