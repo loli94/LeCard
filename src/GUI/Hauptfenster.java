@@ -6,6 +6,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import Logik.Kartei;
 import Logik.Sprache;
 
 /** @author Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
@@ -81,7 +82,13 @@ public class Hauptfenster extends JFrame {
 		panelSidebar.spracheWechseln();
 		panelLernen.spracheWechseln();
 		panelKartei.spracheWechseln();
-		paintPanelStat();
+		if (Kartei.getInstance().getAktuellesFach() == 0) {
+			paintPanelStat();
+		}
+		else {
+			paintPanelLernen();
+		}
+		
 		
 		this.setJMenuBar(new HauptMenu());
 
