@@ -101,7 +101,7 @@ public class Kartei {
 	 * 
 	 * Einlesen der Objekte aus dem XML File und Übernahme der Daten in die aktuelle Instanz.
 	 * @param p Pfad von dem das XML File geöffnet wird.
-	 * @throws Fehler ausgeben wenn Import nicht erfolgreich
+	 * @throws Exception Fehler ausgeben wenn Import nicht erfolgreich
 	 */
 	public void karteiOeffnen(String p) throws Exception {
 
