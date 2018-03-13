@@ -12,7 +12,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import Logik.Karte;
 import Logik.Kartei;
 
 /**
@@ -22,6 +21,10 @@ import Logik.Kartei;
 
 public class PanelLoeschenSprache extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JLabel text;
 	private JPanel textPanel, buttonPanel;
 	private JButton ja, nein;
