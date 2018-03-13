@@ -12,25 +12,24 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import Logik.Karte;
 import Logik.Kartei;
-import Logik.Sprache;
 
 /**
- * Klasse beinhaltet das Löschen der Karte in dem Fach. Mit dem Ja Button wird die Karte gelöscht und mit dem Nein Button wird
- * der Vorgang abgebrochen.
- * 
  * @autor Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
  * @version 0.7 Datum:12.03.2018
  */
 
-public class PanelLoeschen extends JFrame {
+public class FrameLoeschenSprachen extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JLabel text;
 	private JPanel textPanel, buttonPanel;
 	private JButton ja, nein;
 
-	public PanelLoeschen() {
+	public FrameLoeschenSprachen() {
 		initComponents();
 		bindListener();
 		final Dimension d = this.getToolkit().getScreenSize();
@@ -39,22 +38,31 @@ public class PanelLoeschen extends JFrame {
 
 	}
 
+	/**
+	 * Listener werden zusammengeführt
+	 */
 	private void bindListener() {
 		ja.addActionListener(new ButtonListenerJa());
 		nein.addActionListener(new ButtonListenerNein());
 	}
 
+	/**
+	 * Komponenten werden iniziert
+	 */
 	private void initComponents() {
 		text = new JLabel(
-				ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("InfoLoeschen1"));
+				ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("InfoLoeschen4"));
 		ja = new JButton(ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("Ja"));
 		nein = new JButton(ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("Nein"));
 		textPanel = new JPanel();
 		buttonPanel = new JPanel();
 	}
 
+	/**
+	 * Frame wird gezeichnet
+	 */
 	public void paint() {
-		this.setSize(350, 150);
+		this.setSize(600, 150);
 		textPanel.add(text);
 		buttonPanel.add(ja);
 		buttonPanel.add(nein);
@@ -64,29 +72,32 @@ public class PanelLoeschen extends JFrame {
 	}
 
 	/**
-	 * ButtonListener Ja für das Löschen der Karte
+	 * Button Ja für das Löschen der Karte
 	 */
 	class ButtonListenerJa implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			Karte kl = Kartei.getInstance().getAktuelleKarte();
-			Kartei.getInstance().karteLoeschen(kl);
+			Kartei.getInstance().sprachpaarLoeschen(Kartei.getInstance().getAktuellesSprachpaar());
+			Kartei.getInstance().statusBereinigen();
+			Hauptfenster.getInstance().getPanelUserMenu().getLernSprachenMenu().removeItem(Hauptfenster.getInstance().getPanelUserMenu().getLernSprachenMenu().getSelectedItem());
+			Kartei.getInstance().spracheWaehlen(Kartei.getInstance().getSprachen().get(0).getSprachPaar());
+			
 			Hauptfenster.getInstance().getPanelLernen().loadCard();
 			JButton b = (JButton) e.getSource();
 			((JFrame) b.getParent().getParent().getParent().getParent().getParent()).setVisible(false);
 			JOptionPane.showMessageDialog(null,
-					ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("InfoLoeschen2"));
+					ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("InfoLoeschen5"));
 			Kartei.getInstance().lernkarteiSpeichern();
 		}
 	}
 
 	/**
-	 * ButtonListener Nein - Vorgang wird abgebrochen
+	 * Button Nein - Vorgang wird abgebrochen
 	 */
 	class ButtonListenerNein implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			JButton b = (JButton) e.getSource();
 			JOptionPane.showMessageDialog(null,
-					ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("InfoLoeschen3"));
+					ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("InfoLoeschen6"));
 			((JFrame) b.getParent().getParent().getParent().getParent().getParent()).setVisible(false);
 		}
 	}

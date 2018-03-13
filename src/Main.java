@@ -1,4 +1,4 @@
-import GUI.LoginFrame;
+import GUI.FrameLogin;
 import Logik.Kartei;
 
 /**
@@ -21,7 +21,7 @@ public class Main {
 		//Standardsprache auswählen
 		Kartei.getInstance().spracheWaehlen("de-en");
 		
-		LoginFrame l1 = new LoginFrame();
+		FrameLogin l1 = new FrameLogin();
 		l1.paint();
 		
 	}

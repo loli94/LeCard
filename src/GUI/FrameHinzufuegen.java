@@ -15,41 +15,47 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import Logik.Karte;
 import Logik.Kartei;
 
 /**
  * 
- * Klasse beinhaltet das Bearbeiten von Karten. Karte wird in einem neuen Panel
- * angezeigt mit aktueller Karte welche bearbeitet werden soll.
+ * Klasse beinhaltet das Hinzufügen von neuen Karten.
  * 
  * @autor Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
  * @version 0.6 Datum:24.02.2018
  */
-public class PanelBearbeiten extends JFrame {
+public class FrameHinzufuegen extends JFrame {
+
 	private static final long serialVersionUID = 1L;
 	private JPanel hauptsprache, fremdsprache, hinzufuegenPanelButton;
 	private JLabel lSprache1, lSprache2;
 	private JTextField tSprache1, tSprache2;
 	private JButton hinzufuegenButton;
 
-	public PanelBearbeiten() {
+	public FrameHinzufuegen() {
 		initComponents();
 		bindListener();
 		final Dimension d = this.getToolkit().getScreenSize();
 		this.setLocation((int) ((d.getWidth() - this.getWidth()) / 2.6),
 				(int) ((d.getHeight() - this.getHeight()) / 2.6));
-
 	}
 
+	/**
+	 * Die verschiedenen Objekte werden Initiert. Zudem werden auch die
+	 * verschiedenen Labels mit dem jeweiligen Text befüllt.
+	 * 
+	 */
+
 	private void initComponents() {
-		this.setTitle(ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("bearbeiten"));
+		this.setTitle(ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("hinzufuegen"));
 		this.setIconImage(Hauptfenster.getInstance().getIcon().getImage());
 		lSprache1 = new JLabel(Kartei.getInstance().getAktuelleSprache().getSpracheA());
 		lSprache2 = new JLabel(Kartei.getInstance().getAktuelleSprache().getSpracheB());
-		tSprache1 = new JTextField(Kartei.getInstance().getAktuelleKarte().getWortA());
+		tSprache1 = new JTextField();
 		tSprache1.setPreferredSize(new Dimension(220, 22));
-		tSprache2 = new JTextField(Kartei.getInstance().getAktuelleKarte().getWortB());
-		tSprache2.setPreferredSize(new Dimension(220, 22));
+		tSprache1.setLocation(0, 15);
+		tSprache2 = new JTextField();
 		tSprache2.addKeyListener(new KeyListener() {
 			@Override
 			public void keyTyped(KeyEvent e) {
@@ -67,20 +73,32 @@ public class PanelBearbeiten extends JFrame {
 			}
 		});
 
+		tSprache2.setPreferredSize(new Dimension(220, 22));
+
 		hauptsprache = new JPanel();
 		fremdsprache = new JPanel();
-		fremdsprache.setLocation(100, 100);
 		hinzufuegenPanelButton = new JPanel();
 		hinzufuegenButton = new JButton(
-				ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("bearbeiten"));
+				ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("hinzufuegen"));
 	}
 
+	/**
+	 * In dieser Methode wird den einzelnen Objekten der Listener angebunden. Dem
+	 * Button Hinzufügen wird der Listener angebunden.
+	 */
+
 	private void bindListener() {
-		hinzufuegenButton.addActionListener(new ButtonListenerBearbeiten());
+		hinzufuegenButton.addActionListener(new ButtonListenerHinzufuegen());
 	}
+
+	/**
+	 * In dieser MEthode wird das Frame gezeichnet. Die einzelnen Labels, Buttons,
+	 * etc. werden dem Frame zugeordnet.
+	 */
 
 	public void paint() {
 		this.setSize(400, 200);
+
 		hauptsprache.add(lSprache1);
 		hauptsprache.add(tSprache1);
 		fremdsprache.add(lSprache2);
@@ -92,28 +110,35 @@ public class PanelBearbeiten extends JFrame {
 		this.add(hinzufuegenPanelButton, BorderLayout.SOUTH);
 
 		this.setVisible(true);
-		
 	}
 
 	/**
-	 * ButtonListener für das Bearbeiten von einer Karte. Sobald der Bearbeiten
-	 * Button angewählt wird, wird die Karte gespeichert. 
+	 * In diesem Listener (welcher zum Button Hinzufügen gehört) wird geprüft, ob
+	 * die Eingabe der verschiedenen Textfelder nicht leer sind, ob nur Buchstaben
+	 * verwendet werden. Falls dies zutrifft, wird eine neue Karte erstellt und der
+	 * Kartei im Fach 1 hinzugefügt.
 	 */
-	class ButtonListenerBearbeiten implements ActionListener {
+
+	class ButtonListenerHinzufuegen implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			// Abfrage ob ein Feld leer ist
+
 			if (!tSprache1.getText().isEmpty() || !tSprache2.getText().isEmpty()) {
-				// Abfrage ob ein Feld Zahlen enthält
+
 				if (tSprache1.getText().matches("[a-zA-Z]+") && tSprache2.getText().matches("[a-zA-Z]+")) {
-					Kartei.getInstance().getAktuelleKarte().setWortA(tSprache1.getText());
-					Kartei.getInstance().getAktuelleKarte().setWortB(tSprache2.getText());
-					JOptionPane.showMessageDialog(null, "" + tSprache1.getText() + ResourceBundle
-							.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("infoTextBearbeiten1"));
+					Karte k1 = new Karte(Kartei.getInstance().getAktuellesSprachpaar(), tSprache1.getText(),
+							tSprache2.getText());
+					Kartei.getInstance().karteHinzufuegen(k1);
+					Kartei.getInstance().getFach(1).karteHinzufuegen(k1);
+					JOptionPane.showMessageDialog(null, "" + tSprache1.getText() + " " + ResourceBundle
+							.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("infoTextHinzufügen1"));
 					tSprache1.setText("");
 					tSprache2.setText("");
 					Kartei.getInstance().lernkarteiSpeichern();
-					JButton b = (JButton) e.getSource();
-					((JFrame) b.getParent().getParent().getParent().getParent().getParent()).setVisible(false);
+					Hauptfenster.getInstance().paintPanelStat();
+					Hauptfenster.getInstance().getPanelKartei().validate();
+					tSprache1.requestFocus();
+					Kartei.getInstance().lernkarteiSpeichern();
+
 				} else {
 					JOptionPane.showMessageDialog(null, ResourceBundle
 							.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("infoTextHinzufügen2"));

@@ -26,7 +26,7 @@ import Logik.Kartei;
  *  @version 0.3
  *  Datum:11.03.2018
  */
-public class LoginFrame extends JFrame {
+public class FrameLogin extends JFrame {
 
 	/**
 	 * Die Klasse ermöglicht es sich mit einem Benutzer und Passwort zu authentifizieren 
@@ -45,7 +45,7 @@ public class LoginFrame extends JFrame {
 	private JLabel lBenutzerlogin;
 	private JLabel lPasswort;
 
-	public LoginFrame() {
+	public FrameLogin() {
 		initComponents();
 		bindListener();
 		// setzt das Fenster in die Mitte des Bildschirms
@@ -203,7 +203,7 @@ public class LoginFrame extends JFrame {
 
 		public void actionPerformed(ActionEvent e) {
 			JButton b = (JButton) e.getSource();
-			PanelNeuerBenutzer h1 = new PanelNeuerBenutzer(lokal);
+			FrameNeuerBenutzer h1 = new FrameNeuerBenutzer(lokal);
 			h1.paint();
 			((JFrame) b.getParent().getParent().getParent().getParent().getParent()).setVisible(false);
 		}

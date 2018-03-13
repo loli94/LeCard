@@ -12,14 +12,14 @@ import Logik.LoadCsv;
  * @version 0.6
  * Datum:24.02.2018
  */
-public class PanelImport extends JFrame {
+public class FrameImport extends JFrame {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public PanelImport() {
+	public FrameImport() {
 		this.importFile();
 	}
 

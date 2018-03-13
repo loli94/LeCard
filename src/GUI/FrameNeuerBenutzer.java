@@ -21,7 +21,7 @@ import Logik.Kartei;
  * 	@version 0.2
  * 	Datum:11.03.2018
  */
-public class PanelNeuerBenutzer extends JFrame{
+public class FrameNeuerBenutzer extends JFrame{
 
 	/**
 	 * 
@@ -37,7 +37,7 @@ public class PanelNeuerBenutzer extends JFrame{
 	private JButton bErstellen;
 	private Locale locale;
 
-	public PanelNeuerBenutzer(Locale lokal) {
+	public FrameNeuerBenutzer(Locale lokal) {
 		this.locale = lokal;
 		initComponents();
 		bindListener();
@@ -106,7 +106,7 @@ public class PanelNeuerBenutzer extends JFrame{
 				JOptionPane.showMessageDialog(null, ResourceBundle.getBundle("Bundle", locale).getString("Benutzererstellt"));
 				Kartei.getInstance().lernkarteiSpeichern();
 				dispose();
-				LoginFrame gui1 = new LoginFrame();
+				FrameLogin gui1 = new FrameLogin();
 				gui1.paint();
 				
 				

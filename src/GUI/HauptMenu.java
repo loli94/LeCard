@@ -143,20 +143,20 @@ public class HauptMenu extends JMenuBar {
 				break;
 			case "importieren":
 				@SuppressWarnings("unused")
-				PanelImport imp = new PanelImport();
+				FrameImport imp = new FrameImport();
 				Kartei.getInstance().lernkarteiSpeichern();
 				Kartei.getInstance().faecherBefuellen();
 				break;
 			case "karteHinzufuegen":
-				PanelHinzufuegen ph = new PanelHinzufuegen();
+				FrameHinzufuegen ph = new FrameHinzufuegen();
 				ph.paint();
 				break;
 			case "karteLoeschen":
-				PanelLoeschen pl = new PanelLoeschen(); 
+				FrameLoeschen pl = new FrameLoeschen(); 
 				pl.paint(); 
 				break;
 			case "karteBearbeiten":
-				PanelBearbeiten pb = new PanelBearbeiten();
+				FrameBearbeiten pb = new FrameBearbeiten();
 				pb.paint();
 				break;
 			case "DE":
@@ -171,7 +171,7 @@ public class HauptMenu extends JMenuBar {
 				pkv.paint();
 				break;
 			case "spracheLoeschen":
-				PanelLoeschenSprache pls = new PanelLoeschenSprache();
+				FrameLoeschenSprachen pls = new FrameLoeschenSprachen();
 				pls.paint();
 				break;
 
