@@ -124,7 +124,7 @@ public class PanelLernen extends JPanel {
 					JOptionPane.showMessageDialog(pLernen,
 							ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale())
 									.getString("keinKarteVorhanden"));
-					tSpracheA.setEditable(false);
+					tSpracheA.setEditable(false); 
 					tSpracheB.setText("-");
 					pPruefen.setVisible(false);
 				}
