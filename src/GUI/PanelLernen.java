@@ -90,6 +90,7 @@ public class PanelLernen extends JPanel {
 	 * Prüft die Antwort und gibt die entsprechende Karte aus
 	 */
 	
+	
 	public void loadCard() {
 		if (Kartei.getInstance().gibNaechsteKarte() == true) {
 			if (learnReverse == false) {
