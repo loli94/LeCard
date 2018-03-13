@@ -89,7 +89,6 @@ public class Hauptfenster extends JFrame {
 			paintPanelLernen();
 		}
 		
-		
 		this.setJMenuBar(new HauptMenu());
 
 	}
