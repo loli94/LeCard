@@ -82,15 +82,13 @@ public class PanelUserMenu extends JPanel{
 			String selection = (String) lernSprachenMenu.getSelectedItem();
 			Kartei.getInstance().spracheWaehlen(selection);
 			Kartei.getInstance().faecherBefuellen();
+			Hauptfenster.getInstance().getPanelLernen().spracheWechseln();
 			
 			if (Kartei.getInstance().getAktuellesFach() > 0) {
 				Hauptfenster.getInstance().paintPanelLernen();
-				Hauptfenster.getInstance().getPanelLernen().spracheWechseln();
-				Hauptfenster.getInstance().getPanelKartei().setBalkendiagramm();
 			}
 			if (Kartei.getInstance().getAktuellesFach() == 0) {
 				Hauptfenster.getInstance().paintPanelStat();
-				Hauptfenster.getInstance().getPanelKartei().setBalkendiagramm();
 			}
 		}
 
