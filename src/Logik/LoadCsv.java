@@ -6,10 +6,15 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
-/* @autor Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
- * @version 0.3
- * Datum:24.02.2018
- */
+
+	/**
+	 * Die Klasse ermöglicht es ein .csv File mit Wörter und Wort-Paarungen einzulesen
+	 * 
+	 * @autor Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
+	 * @version 0.3
+	 * Datum:24.02.2018
+	 */
+
 public class LoadCsv {
 	private File f;
 	private String separator;
@@ -27,6 +32,11 @@ public class LoadCsv {
 
 		readCsv();
 	}
+	
+	/**
+	 * 
+	 * @throws IOException Falls kein File ausgewählt wird
+	 */
 
 	private void readCsv() throws IOException {
 		// prüfen, ob Datei existiert
@@ -63,7 +73,10 @@ public class LoadCsv {
 
 	}
 
-	// speichert die Wörter ins Array
+	/**
+	 *  speichert die Wörter ins Array
+	 *  @param col Variable für das Array
+	 */
 	private void saveInList(String[] col) {
 		wortA.add(col[0]);
 		System.out.println(wortA);
@@ -73,7 +86,9 @@ public class LoadCsv {
 		System.out.println(sprache);
 	}
 
-	// übergibt die Wörter an die Kartei
+	/**
+	 *  übergibt die Wörter an die Kartei
+	 */
 	
 	public void uploadData() {
 		for (int i = 0; i < wortA.size(); i++) {
