@@ -69,14 +69,12 @@ public class PanelLernen extends JPanel {
 		lSpracheA.setPreferredSize(new Dimension(300, 30));
 		tSpracheA = new JTextField();
 		tSpracheA.setPreferredSize(new Dimension(300, 30));
-		tSpracheA.addKeyListener(new textfeldListener());
 		tSpracheA.setEditable(false);
 		tSpracheA.setBorder(javax.swing.BorderFactory.createEmptyBorder());
 		lSpracheB = new JLabel(Kartei.getInstance().getAktuelleSprache().getSpracheB());
 		lSpracheB.setPreferredSize(new Dimension(300, 30));
 		tSpracheB = new JTextField();
-		tSpracheB.setPreferredSize(new Dimension(300, 30));
-		tSpracheB.addKeyListener(new textfeldListener());
+		tSpracheB.setPreferredSize(new Dimension(300, 30));	
 		tSpracheB.setBorder(javax.swing.BorderFactory.createEmptyBorder());
 		lLoesung = new JLabel("");
 		pLernen.setLayout(new GridLayout(4, 1));
@@ -136,7 +134,8 @@ public class PanelLernen extends JPanel {
 	private void bindListener() {
 		bWechsel.addActionListener(new ButtonListenerSpracheWechseln());
 		bPruefen.addActionListener(new ButtonListenerPruefen());
-
+		tSpracheA.addKeyListener(new textfeldListener());
+		tSpracheB.addKeyListener(new textfeldListener());
 	}
 
 	public void paint() {
@@ -227,6 +226,7 @@ public class PanelLernen extends JPanel {
 				lLoesung.setText(ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale())
 						.getString("falscheAntwort") + " :" + Kartei.getInstance().getAktuelleKarte().getWortB());
 				lLoesung.setForeground(Color.RED);
+				tSpracheA.setText("");
 				tSpracheB.setText("");
 				textAusblenden(255, 0, 0, 5, lLoesung);
 				Kartei.getInstance().setFalscheAntwort();
