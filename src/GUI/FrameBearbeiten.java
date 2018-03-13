@@ -92,32 +92,28 @@ public class FrameBearbeiten extends JFrame {
 		this.add(hinzufuegenPanelButton, BorderLayout.SOUTH);
 
 		this.setVisible(true);
-		
+
 	}
 
 	/**
 	 * ButtonListener für das Bearbeiten von einer Karte. Sobald der Bearbeiten
-	 * Button angewählt wird, wird die Karte gespeichert. 
+	 * Button angewählt wird, wird die Karte gespeichert.
 	 */
 	class ButtonListenerBearbeiten implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			// Abfrage ob ein Feld leer ist
 			if (!tSprache1.getText().isEmpty() || !tSprache2.getText().isEmpty()) {
 				// Abfrage ob ein Feld Zahlen enthält
-				if (tSprache1.getText().matches("[a-zA-Z]+") && tSprache2.getText().matches("[a-zA-Z]+")) {
-					Kartei.getInstance().getAktuelleKarte().setWortA(tSprache1.getText());
-					Kartei.getInstance().getAktuelleKarte().setWortB(tSprache2.getText());
-					JOptionPane.showMessageDialog(null, "" + tSprache1.getText() + ResourceBundle
-							.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("infoTextBearbeiten1"));
-					tSprache1.setText("");
-					tSprache2.setText("");
-					Kartei.getInstance().lernkarteiSpeichern();
-					JButton b = (JButton) e.getSource();
-					((JFrame) b.getParent().getParent().getParent().getParent().getParent()).setVisible(false);
-				} else {
-					JOptionPane.showMessageDialog(null, ResourceBundle
-							.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("infoTextHinzufügen2"));
-				}
+
+				Kartei.getInstance().getAktuelleKarte().setWortA(tSprache1.getText());
+				Kartei.getInstance().getAktuelleKarte().setWortB(tSprache2.getText());
+				JOptionPane.showMessageDialog(null, "" + tSprache1.getText() + " "+ ResourceBundle
+						.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("infoTextBearbeiten1"));
+				tSprache1.setText("");
+				tSprache2.setText("");
+				Kartei.getInstance().lernkarteiSpeichern();
+				JButton b = (JButton) e.getSource();
+				((JFrame) b.getParent().getParent().getParent().getParent().getParent()).setVisible(false);
 
 			} else {
 				JOptionPane.showMessageDialog(null, ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale())
