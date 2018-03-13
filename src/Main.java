@@ -3,7 +3,7 @@ import Logik.Kartei;
 
 /**
  *  @autor Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
- * @version 1.2
+ * @version 1.3
  * Datum:24.02.2018
  */
 public class Main {
