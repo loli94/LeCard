@@ -1,4 +1,5 @@
 package GUI;
+
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -18,12 +19,13 @@ import Logik.Karte;
 import Logik.Kartei;
 
 /**
- *  @autor Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
- * @version 0.6
- * Datum:24.02.2018
+ * 
+ * Klasse beinhaltet das Hinzufügen von neuen Karten.
+ * 
+ * @autor Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
+ * @version 0.6 Datum:24.02.2018
  */
 public class PanelHinzufuegen extends JFrame {
-
 
 	private static final long serialVersionUID = 1L;
 	private JPanel hauptsprache, fremdsprache, hinzufuegenPanelButton;
@@ -38,11 +40,12 @@ public class PanelHinzufuegen extends JFrame {
 		this.setLocation((int) ((d.getWidth() - this.getWidth()) / 2.6),
 				(int) ((d.getHeight() - this.getHeight()) / 2.6));
 	}
-	
+
 	/**
-	 * Die verschiedenen Objekte werden Initiert. Zudem werden auch die verschiedenen Labels mit dem jeweiligen Text befüllt.
+	 * Die verschiedenen Objekte werden Initiert. Zudem werden auch die
+	 * verschiedenen Labels mit dem jeweiligen Text befüllt.
 	 * 
-	 * */
+	 */
 
 	private void initComponents() {
 		this.setTitle(ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("hinzufuegen"));
@@ -78,18 +81,19 @@ public class PanelHinzufuegen extends JFrame {
 		hinzufuegenButton = new JButton(
 				ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("hinzufuegen"));
 	}
-	
+
 	/**
-	 * In dieser Methode wird den einzelnen Objekten der Listener angebunden.
-	 * Dem Button Hinzufügen wird der Listener angebunden.
-	 * */
+	 * In dieser Methode wird den einzelnen Objekten der Listener angebunden. Dem
+	 * Button Hinzufügen wird der Listener angebunden.
+	 */
 
 	private void bindListener() {
 		hinzufuegenButton.addActionListener(new ButtonListenerHinzufuegen());
 	}
-	
+
 	/**
-	 * In dieser MEthode wird das Frame gezeichnet. Die einzelnen Labels, Buttons, etc. werden dem Frame zugeordnet.
+	 * In dieser MEthode wird das Frame gezeichnet. Die einzelnen Labels, Buttons,
+	 * etc. werden dem Frame zugeordnet.
 	 */
 
 	public void paint() {
@@ -107,10 +111,12 @@ public class PanelHinzufuegen extends JFrame {
 
 		this.setVisible(true);
 	}
-	
+
 	/**
-	 * In diesem Listener (welcher zum Button Hinzufügen gehört) wird geprüft, ob die eingeabe der verschiedenen Textfelder nicht Leehr sind, ob nur Buchstaben verwendet werden.
-	 * Falls dies zutrifft, wird eine neue Karte erstellt und der Kartei im Fach 1 hinzugefügt.
+	 * In diesem Listener (welcher zum Button Hinzufügen gehört) wird geprüft, ob
+	 * die Eingabe der verschiedenen Textfelder nicht leer sind, ob nur Buchstaben
+	 * verwendet werden. Falls dies zutrifft, wird eine neue Karte erstellt und der
+	 * Kartei im Fach 1 hinzugefügt.
 	 */
 
 	class ButtonListenerHinzufuegen implements ActionListener {
@@ -119,11 +125,12 @@ public class PanelHinzufuegen extends JFrame {
 			if (!tSprache1.getText().isEmpty() || !tSprache2.getText().isEmpty()) {
 
 				if (tSprache1.getText().matches("[a-zA-Z]+") && tSprache2.getText().matches("[a-zA-Z]+")) {
-					Karte k1 = new Karte(Kartei.getInstance().getAktuellesSprachpaar(), tSprache1.getText(), tSprache2.getText());
+					Karte k1 = new Karte(Kartei.getInstance().getAktuellesSprachpaar(), tSprache1.getText(),
+							tSprache2.getText());
 					Kartei.getInstance().karteHinzufuegen(k1);
 					Kartei.getInstance().getFach(1).karteHinzufuegen(k1);
-					JOptionPane.showMessageDialog(null, "" + tSprache1.getText() + " "
-							+ ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("infoTextHinzufügen1"));
+					JOptionPane.showMessageDialog(null, "" + tSprache1.getText() + " " + ResourceBundle
+							.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("infoTextHinzufügen1"));
 					tSprache1.setText("");
 					tSprache2.setText("");
 					Kartei.getInstance().lernkarteiSpeichern();
@@ -133,11 +140,13 @@ public class PanelHinzufuegen extends JFrame {
 					Kartei.getInstance().lernkarteiSpeichern();
 
 				} else {
-					JOptionPane.showMessageDialog(null, ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("infoTextHinzufügen2"));
+					JOptionPane.showMessageDialog(null, ResourceBundle
+							.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("infoTextHinzufügen2"));
 				}
 
 			} else {
-				JOptionPane.showMessageDialog(null, ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("infoTextHinzufügen3"));
+				JOptionPane.showMessageDialog(null, ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale())
+						.getString("infoTextHinzufügen3"));
 			}
 
 		}
