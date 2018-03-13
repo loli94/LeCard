@@ -15,9 +15,19 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 
-/* @autor Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
- * @version 0.3
- * Datum:24.02.2018
+/**
+ * @author Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
+ * Klasse Kartei beinhaltet alle zentralen Verwaltungselemente des Programs, also User-, Karten- und Sprachhandling.
+ * Kartei ist nach dem Singleton Template aufgebaut, damit die aktuelle Kartei aus anderen Klassen und Methoden direkt aufgerufen werden kann.
+ *
+ */
+/**
+ * @author HEIM
+ *
+ */
+/**
+ * @author HEIM
+ *
  */
 @XmlRootElement(name = "Kartei")
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -52,6 +62,9 @@ public class Kartei {
 	@XmlTransient
 	private String pfad;
 
+	/**
+	 * Standardkonstruktor für Kartei. Protected, damit die Klasse nur über GetInstance aufgerufen werden kann.
+	 */
 	protected Kartei() {
 		this.kartei = new ArrayList<Karte>();
 		this.sprachen = new ArrayList<Sprache>();
@@ -71,66 +84,9 @@ public class Kartei {
 		return instance;
 	}
 
-	public Sprache getAktuelleSprache() {
-		return aktuelleSprache;
-	}
 
-	public String getAktuellesSprachpaar() {
-		return aktuellesSprachpaar;
-	}
-
-	public void setAktuelleSprache(String aktuelleSprache) {
-		this.aktuellesSprachpaar = aktuelleSprache;
-	}
-
-	public void karteHinzufuegen(Karte k1) {
-		for (Karte k2 : kartei) {
-			if (k1.getWortA().equalsIgnoreCase(k2.getWortA()) && k2.getWortB().equalsIgnoreCase(k1.getWortB())) {
-				return;
-			}
-		}
-
-		kartei.add(k1);
-
-	}
-
-	public void karteLoeschen(Karte k) {
-		if (aktuellesFach > 0) {
-			fach[aktuellesFach - 1].karteEnfernen(k);
-			kartei.remove(k);
-		}
-	}
-
-	public ArrayList<Karte> getLernkartei() {
-		return kartei;
-	}
-
-	public ArrayList<Benutzer> getBenutzeriste() {
-		return benutzerListe;
-	}
-
-	public void setLernkartei(ArrayList<Karte> lernkartei) {
-		this.kartei = lernkartei;
-	}
-
-	public int getRichtigeAntwort() {
-		return richtigeAntwort;
-	}
-
-	public void setRichtigeAntwort() {
-		this.richtigeAntwort++;
-	}
-
-	public int getFalscheAntwort() {
-		return falscheAntwort;
-	}
-
-	public void setFalscheAntwort() {
-		this.falscheAntwort++;
-	}
-
-	/*
-	 * Arraylists mit Sprachen, Benutzern und Karten in XML File exportieren.
+	/**
+	 * Alle Karten, Sprachen und Benutzer werden in das XML File geschrieben
 	 */
 	public void lernkarteiSpeichern() {
 
@@ -147,8 +103,11 @@ public class Kartei {
 		}
 	}
 
-	/*
-	 * XML File einlesen und die enthaltenen Elemente zu Objekten umwandeln
+	/**
+	 * 
+	 * Einlesen der Objekte aus dem XML File und Übernahme der Daten in die aktuelle Instanz.
+	 * @param p Pfad von dem das XML File geöffnet wird.
+	 * @throws Exception
 	 */
 	public void karteiOeffnen(String p) throws Exception {
 
@@ -169,7 +128,13 @@ public class Kartei {
 		}
 
 	}
+	
+	
 
+	/**
+	 * @param benutzername 
+	 * @return 
+	 */
 	public boolean benutzerExistiert(String benutzername) {
 		for (Benutzer b : benutzerListe) {
 			if (b.getBenutzername().equals(benutzername)) {
@@ -179,6 +144,7 @@ public class Kartei {
 		return false;
 	}
 
+	
 	public boolean benutzerLaden(String benutzername, String passwort) {
 		for (Benutzer b : benutzerListe) {
 			if (b.getBenutzername().equals(benutzername) || b.getBenutzername().toLowerCase().equals(benutzername)) {
@@ -213,6 +179,10 @@ public class Kartei {
 		return benutzerListe;
 	}
 
+	/**
+	 * Alle Karten aus der Kartei werden mit der aktuellen Sprache abgeglichen und die Karten derr aktuellen Sprache werden geladen.
+	 * Falls der Benutzer die Karte schonmal gelernt hat, dann wird sie in das entsprechende Fach abgelegt, sonst in Fach 1. 
+	 */
 	public void faecherBefuellen() {
 
 		if (benutzer.getLernfortschritte() == (null)) {
@@ -252,10 +222,11 @@ public class Kartei {
 
 	}
 
-	public Fach getFach(int x) {
-		return fach[x - 1];
-	}
-
+	
+	/**
+	 * Zufälliges Laden einer neuen Karte aus dem aktuelle Fach. Die Karte wird dann als aktuelleKarte gesetzt.
+	 * @return Falls keine weitere Karte in dem Fach vorhanden ist (null) wird false zurückgegeben.
+	 */
 	public boolean gibNaechsteKarte() {
 
 		// Nächste Karte aus diesem Fach in der entsprechenden Sprache ausgeben
@@ -270,7 +241,16 @@ public class Kartei {
 			return false;
 		}
 	}
+	
 
+	/**
+	 * Die Karte k wird aus dem aktuellen Fach entfernt und in das neue Zielfach verschoben.
+	 * 
+	 * 
+	 * @param k Karten welche verschobenw erden soll
+	 * @param neuesFach Zielfach, in welchem die Karte abgelegt werden soll
+	 * @return Rückgabe ob das verschieben erfolgreich war.
+	 */
 	public boolean karteVerschieben(Karte k, int neuesFach) {
 
 		if (k != null && neuesFach < 6 && neuesFach > 0) {
@@ -302,14 +282,14 @@ public class Kartei {
 
 	}
 
-	public Benutzer getBenutzer() {
-		return benutzer;
-	}
 
-	public void setBenutzer(Benutzer benutzer) {
-		this.benutzer = benutzer;
-	}
 
+	/**
+	 * Umwandlung des eingegebenen Passworts in einen Hash, welcher im XML File anstatt des Passwords abgelegt wird. 
+	 * Deckt nur minimale Sicherheitsanforderungen ab, also nur um zu verhindern, dass ein Benutezr versehentlich mit einem falschen Account lernt. Passwort könnte im XML jederzeit überschrieben werden
+	 * @param str Übergabe des Strings, welcher verschlüsselt werden soll
+	 * @return Rückgabe des Passwordhash
+	 */
 	public static String getMD5Hash(String str) {
 		StringBuilder sb = new StringBuilder(32);
 		try {
@@ -325,7 +305,17 @@ public class Kartei {
 		}
 		return sb.toString();
 	}
+	
 
+	
+	/**
+	 * Erstellen eines neuen Objekts Sprache und Hinzufügen zur Sprachenliste.
+	 * 
+	 * @param ab Sprachpaarung in Kurzform z.B. de-en 
+	 * @param a Erste Sprache in Langform z.B. Deutsch
+	 * @param b Zweite Sprache in Lanform z.B. Englisch
+	 * @return
+	 */
 	public boolean spracheHinzugfuegen(String ab, String a, String b) {
 
 		for (Sprache s : sprachen) {
@@ -343,22 +333,14 @@ public class Kartei {
 		return true;
 	}
 
-	public int getAktuellesFach() {
-		return aktuellesFach;
-	}
 
-	public void setAktuellesFach(int aktuellesFach) {
-		this.aktuellesFach = aktuellesFach;
-	}
 
-	public Karte getAktuelleKarte() {
-		return aktuelleKarte;
-	}
-
-	public void setAktuelleKarte(Karte aktuelleKarte) {
-		this.aktuelleKarte = aktuelleKarte;
-	}
-
+	/**
+	 * Durchsuchen der Sprachenliste nach dem entsprechenden Objekt der gewählten Sprachpaarung. Das Sprachobjekt wird dann als aktuelle Sprache in der Kartei gesetzt.
+	 * 
+	 * @param sprachpaar Sprachpaarung welche durchsucht werden soll.
+	 * @return True wenn die Sprache gefunden wurde. False wenn die Sprachpaarung nicht existiert.
+	 */
 	public boolean spracheWaehlen(String sprachpaar) {
 
 		for (Sprache s : sprachen) {
@@ -372,6 +354,35 @@ public class Kartei {
 
 		return false;
 	}
+	
+	
+	
+	/**
+	 * Karte k1 wird zur Kartei hinzugefügt. Falls die Sprachpaarung schon exisistiert wird nichts gemacht.
+	 * @param k1 Karte welche hinzugefügt werden soll.
+	 */
+	public void karteHinzufuegen(Karte k1) {
+		for (Karte k2 : kartei) {
+			if (k1.getWortA().equalsIgnoreCase(k2.getWortA()) && k2.getWortB().equalsIgnoreCase(k1.getWortB())) {
+				return;
+			}
+		}
+
+		kartei.add(k1);
+
+	}
+
+	
+	/**
+	 * Karte k wird aus der Kartei und aus dem aktuellen Fach entfernt.
+	 * @param k Zu löschende Karte
+	 */
+	public void karteLoeschen(Karte k) {
+		if (aktuellesFach > 0) {
+			fach[aktuellesFach - 1].karteEnfernen(k);
+			kartei.remove(k);
+		}
+	}
 
 	public ArrayList<Sprache> getSprachen() {
 		return sprachen;
@@ -382,14 +393,12 @@ public class Kartei {
 		return fg;
 	}
 
-	public Locale getLocale() {
-		return lokal;
-	}
-
-	public void setLocale(Locale locale) {
-		this.lokal = locale;
-	}
-
+	
+	/**
+	 * Cleanupfunktion.
+	 * Vergleichen aller Benutzerstatus mit den bestehenden Karten in der Kartei.
+	 * Falls die Karte nicht mehr existiert, können die Benutzerstatus ebenfalls gelöscht werden.
+	 */
 	public void statusBereinigen() {
 		ArrayList<UUID> idListe = new ArrayList<UUID>();
 		for (Karte k : kartei) {
@@ -412,6 +421,11 @@ public class Kartei {
 		}
 	}
 
+	
+	/**
+	 * Löschen des Sprachpaars sp und aller zugehöriger Karten.
+	 * @param sp Sprachpaar welches gelöscht werden soll in der Kurzform z.B. de-en
+	 */
 	public void sprachpaarLoeschen(String sp) {
 		for (Karte k : kartei) {
 			if (k.getSprache().equalsIgnoreCase(sp)) {
@@ -427,4 +441,85 @@ public class Kartei {
 		}
 	}
 
+	/**
+	 * Gibt jeweils das ausgewählte Fach zurück. Korrektur mit -1 da Array mit 0 anfängt.
+	 * @param x Nummer des gewählten Fachs
+	 * @return Rückgabe des Fach x
+	 */
+	public Fach getFach(int x) {
+		return fach[x - 1];
+	}
+	
+	public Benutzer getBenutzer() {
+		return benutzer;
+	}
+
+	public void setBenutzer(Benutzer benutzer) {
+		this.benutzer = benutzer;
+	}
+	
+	public int getAktuellesFach() {
+		return aktuellesFach;
+	}
+
+	public void setAktuellesFach(int aktuellesFach) {
+		this.aktuellesFach = aktuellesFach;
+	}
+
+	public Karte getAktuelleKarte() {
+		return aktuelleKarte;
+	}
+
+	public void setAktuelleKarte(Karte aktuelleKarte) {
+		this.aktuelleKarte = aktuelleKarte;
+	}
+	
+	public Locale getLocale() {
+		return lokal;
+	}
+
+	public void setLocale(Locale locale) {
+		this.lokal = locale;
+	}
+	
+	public ArrayList<Karte> getLernkartei() {
+		return kartei;
+	}
+
+	public ArrayList<Benutzer> getBenutzeriste() {
+		return benutzerListe;
+	}
+
+	public void setLernkartei(ArrayList<Karte> lernkartei) {
+		this.kartei = lernkartei;
+	}
+
+	public int getRichtigeAntwort() {
+		return richtigeAntwort;
+	}
+
+	public void setRichtigeAntwort() {
+		this.richtigeAntwort++;
+	}
+
+	public int getFalscheAntwort() {
+		return falscheAntwort;
+	}
+
+	public void setFalscheAntwort() {
+		this.falscheAntwort++;
+	}
+	
+	public Sprache getAktuelleSprache() {
+		return aktuelleSprache;
+	}
+
+	public String getAktuellesSprachpaar() {
+		return aktuellesSprachpaar;
+	}
+
+	public void setAktuelleSprache(String aktuelleSprache) {
+		this.aktuellesSprachpaar = aktuelleSprache;
+	}
+	
 }
