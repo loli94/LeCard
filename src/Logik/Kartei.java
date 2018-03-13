@@ -16,19 +16,13 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 
 /**
- * @author Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
  * Klasse Kartei beinhaltet alle zentralen Verwaltungselemente des Programs, also User-, Karten- und Sprachhandling.
  * Kartei ist nach dem Singleton Template aufgebaut, damit die aktuelle Kartei aus anderen Klassen und Methoden direkt aufgerufen werden kann.
- *
+ * 
+ * @author Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
+ * 
  */
-/**
- * @author HEIM
- *
- */
-/**
- * @author HEIM
- *
- */
+
 @XmlRootElement(name = "Kartei")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Kartei {
@@ -107,7 +101,6 @@ public class Kartei {
 	 * 
 	 * Einlesen der Objekte aus dem XML File und Übernahme der Daten in die aktuelle Instanz.
 	 * @param p Pfad von dem das XML File geöffnet wird.
-	 * @throws Exception
 	 */
 	public void karteiOeffnen(String p) throws Exception {
 
@@ -132,8 +125,9 @@ public class Kartei {
 	
 
 	/**
-	 * @param benutzername 
-	 * @return 
+	 * Benutzerliste durchsuchen ob ein Benutzer mit diesem Benutzernamen bereits existiert.
+	 * @param benutzername Zu suchender Benutzername.
+	 * @return True wenn Benutzer gefunden wurde. False wenn kein ensprechender Benutzer gefunden wurde.
 	 */
 	public boolean benutzerExistiert(String benutzername) {
 		for (Benutzer b : benutzerListe) {
@@ -145,6 +139,12 @@ public class Kartei {
 	}
 
 	
+	/**
+	 * Benutzer in der Benutzerliste suchen und das Benutzerobjekt laden wenn die Passworteingabe korrekt ist
+	 * @param benutzername Benutzername
+	 * @param passwort Passwort
+	 * @return True wenn Benutzer geladen werden konnte, sonst False.
+	 */
 	public boolean benutzerLaden(String benutzername, String passwort) {
 		for (Benutzer b : benutzerListe) {
 			if (b.getBenutzername().equals(benutzername) || b.getBenutzername().toLowerCase().equals(benutzername)) {
@@ -162,6 +162,13 @@ public class Kartei {
 		return false;
 	}
 
+	/**
+	 * Neues Benutzerobjekt erstellen und zur benutzerListe hinzufügen
+	 * Passwort wird in MD5 Hash umgewandelt.
+	 * 
+	 * @param benutzername Benutzername des neuen Benutzers
+	 * @param passwort Passwort des neuen Benutezrs.
+	 */
 	public void benutzerHinzufuegen(String benutzername, String passwort) {
 		for (Benutzer b : benutzerListe) {
 			if (b.getBenutzername().equals(benutzername)) {
@@ -171,12 +178,12 @@ public class Kartei {
 		benutzerListe.add(new Benutzer(benutzername, getMD5Hash(passwort)));
 	}
 
+	/**
+	 * Benutzer löschen
+	 * @param b Zu löschender Benutzer
+	 */
 	public void benutzerLoeschen(Benutzer b) {
 		benutzerListe.remove(b);
-	}
-
-	public ArrayList<Benutzer> getBenutzerListe() {
-		return benutzerListe;
 	}
 
 	/**
@@ -314,7 +321,7 @@ public class Kartei {
 	 * @param ab Sprachpaarung in Kurzform z.B. de-en 
 	 * @param a Erste Sprache in Langform z.B. Deutsch
 	 * @param b Zweite Sprache in Lanform z.B. Englisch
-	 * @return
+	 * @return True wenn Sprache hinzugefügt werden konnte. Sonst False.
 	 */
 	public boolean spracheHinzugfuegen(String ab, String a, String b) {
 
@@ -520,6 +527,10 @@ public class Kartei {
 
 	public void setAktuelleSprache(String aktuelleSprache) {
 		this.aktuellesSprachpaar = aktuelleSprache;
+	}
+	
+	public ArrayList<Benutzer> getBenutzerListe() {
+		return benutzerListe;
 	}
 	
 }
