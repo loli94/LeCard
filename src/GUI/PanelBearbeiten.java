@@ -92,6 +92,7 @@ public class PanelBearbeiten extends JFrame {
 		this.add(hinzufuegenPanelButton, BorderLayout.SOUTH);
 
 		this.setVisible(true);
+		
 	}
 
 	/**
