@@ -25,6 +25,7 @@ import Logik.Kartei;
 
 public class FrameLoeschen extends JFrame {
 
+	private static final long serialVersionUID = 1L;
 	private JLabel text;
 	private JPanel textPanel, buttonPanel;
 	private JButton ja, nein;
