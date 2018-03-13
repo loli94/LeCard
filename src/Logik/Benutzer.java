@@ -9,8 +9,13 @@ import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 
-/* @autor Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
- * @version 0.3
+/**
+ *   Diese Klasse speichert die einzelnen Benutzer 
+ *  
+ *   @autor Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
+ *   @version 0.3
+ *   @param benutzername Benutzername für den User
+ *   @param passwort Passwort für den User
  */
 
 @XmlRootElement(name = "Benutzer")
@@ -64,7 +69,9 @@ public class Benutzer {
 			}
 		}
 	}
-
+	/**
+	 * Zeigt den Status des Benutzer an
+	 */
 	public void benutzerStatusAnzeigen() {
 		System.out.println(benutzername);
 		for (KartenStatus k : lernfortschritte) {
