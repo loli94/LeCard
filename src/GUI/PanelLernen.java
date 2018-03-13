@@ -93,9 +93,11 @@ public class PanelLernen extends JPanel {
 			if (learnReverse == false) {
 				tSpracheA.setText(Kartei.getInstance().getAktuelleKarte().getWortA());
 				pPruefen.setVisible(true);
+				tSpracheB.setEditable(true);
 			} else {
 				tSpracheB.setText(Kartei.getInstance().getAktuelleKarte().getWortB());
 				pPruefen.setVisible(true);
+				tSpracheA.setEditable(true);
 
 			}
 
@@ -112,16 +114,17 @@ public class PanelLernen extends JPanel {
 					JOptionPane.showMessageDialog(pLernen,
 							ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale())
 									.getString("keinKarteVorhanden"));
-					tSpracheB.setText("");
+					tSpracheB.setEditable(false);
 					tSpracheA.setText("-");
 					pPruefen.setVisible(false);
+					
 				}
 			} else {
 				if (Kartei.getInstance().getAktuellesFach() != 0) {
 					JOptionPane.showMessageDialog(pLernen,
 							ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale())
 									.getString("keinKarteVorhanden"));
-					tSpracheA.setText("");
+					tSpracheA.setEditable(false);
 					tSpracheB.setText("-");
 					pPruefen.setVisible(false);
 				}
