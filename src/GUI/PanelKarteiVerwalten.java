@@ -1,4 +1,5 @@
 package GUI;
+
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
@@ -21,9 +22,13 @@ import javax.swing.text.PlainDocument;
 
 import Logik.Kartei;
 
-/** @autor Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
- * @version 1.0
- * Datum:28.02.2018
+/**
+ * Klasse beinhaltet das Erstellen eines neuen Sprachpaares. Sprachpaare werden
+ * mit dem Buchstabencode (zwei Zweichen) sowie das ausschreiben der kompletten
+ * Sprache erstellt.
+ * 
+ * @autor Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
+ * @version 1.0 Datum:28.02.2018
  */
 
 public class PanelKarteiVerwalten {
@@ -45,26 +50,25 @@ public class PanelKarteiVerwalten {
 
 	}
 
-	/**
-	 * Intialisiert die einzelnen Komponenten 
-	 * Weisst die Komponenten den entsprechenden Layout zu
-	 */
-
 	private void initComponents() {
 		// TODO Auto-generated method stub
-		mainFrame = new JFrame(ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("hinzufuegen"));
+		mainFrame = new JFrame(
+				ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("hinzufuegen"));
 		hauptPanel = new JPanel();
 		strich = new JLabel("-");
 		buttonPanelHinzufuegen = new JPanel();
 		info1 = new JLabel(ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("info1"));
 		info2 = new JLabel(ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("info2"));
-		hinzufuegen = new JButton(ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("hinzufuegen"));
+		hinzufuegen = new JButton(
+				ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("hinzufuegen"));
 		hinzufuegen.setLocation(200, 20);
 		hinzufuegen.setSize(220, 30);
-		sprache1 = new JLabel(ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("sprache1"));
+		sprache1 = new JLabel(
+				ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("sprache1"));
 		sprache1.setPreferredSize(new Dimension(220, 22));
 		sprache1.setBounds(235, 35, 220, 30);
-		sprache2 = new JLabel(ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("sprache2"));
+		sprache2 = new JLabel(
+				ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("sprache2"));
 		sprache2.setPreferredSize(new Dimension(220, 22));
 		sprache2.setBounds(330, 35, 220, 30);
 		sprache1hinzufuegenZweiBuchstaben = new JTextField(new MaxGroesseTextfeld(), "", 0);
@@ -99,9 +103,6 @@ public class PanelKarteiVerwalten {
 
 	}
 
-	/**
-	 * Erstellung des MainFrame, Panels, TextFields 
-	 */
 	public void paint() {
 		mainFrame.setSize(650, 430);
 		hauptPanel.setLayout(new GridLayout(6, 1));
@@ -130,10 +131,6 @@ public class PanelKarteiVerwalten {
 		mainFrame.setVisible(true);
 
 	}
-
-	/**
-	 * Zusammenführen sowie Erstellung der Listener (Button & KeyListener)
-	 */
 
 	private void bindListener() {
 		hinzufuegen.addActionListener(new ButtonListenerHinzufuegen());
@@ -177,14 +174,14 @@ public class PanelKarteiVerwalten {
 	}
 
 	/**
-	 * FocusListener für Abfrage ob es sicher zwei Buchstaben sind mit Meldung wenn ein Fehler auftritt
+	 * FocusListener für Abfrage ob es sicher zwei Buchstaben sind mit Meldung wenn
+	 * ein Fehler auftritt
 	 */
 	class KeyListenerSprache1 implements FocusListener {
 
-
 		@Override
 		public void focusLost(FocusEvent arg0) {
-	
+
 			if (sprache1hinzufuegenZweiBuchstaben.getText().length() < 2) {
 				JOptionPane.showMessageDialog(mainFrame,
 						ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("info3"));
@@ -196,12 +193,13 @@ public class PanelKarteiVerwalten {
 		@Override
 		public void focusGained(FocusEvent arg0) {
 			// TODO Auto-generated method stub
-			
+
 		}
 	}
 
 	/**
-	 * FocusListener für Abfrage ob es sicher zwei Buchstaben sind mit Meldung wenn ein Fehler auftritt
+	 * FocusListener für Abfrage ob es sicher zwei Buchstaben sind mit Meldung wenn
+	 * ein Fehler auftritt
 	 */
 	class KeyListenerSprache2 implements FocusListener {
 
@@ -235,7 +233,8 @@ public class PanelKarteiVerwalten {
 		}
 
 		/**
-		 * Methode für das Einfügen des Textes und Abfange um nicht mehr als zwei Zeichen einzufügen
+		 * Methode für das Einfügen des Textes und Abfange um nicht mehr als zwei
+		 * Zeichen einzufügen
 		 */
 		public void insertString(final int offset, final String text, final AttributeSet attributeSet)
 				throws BadLocationException {
@@ -244,8 +243,10 @@ public class PanelKarteiVerwalten {
 			else
 				Toolkit.getDefaultToolkit().beep();
 		}
+
 		/**
 		 * Überprüfung des Inhaltes
+		 * 
 		 * @param text: Eingabe beim JTextField
 		 */
 		protected boolean laengeUeberpruefen(final String text) {
