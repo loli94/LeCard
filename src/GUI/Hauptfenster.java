@@ -95,6 +95,7 @@ public class Hauptfenster extends JFrame {
 		statPanel.add(panelKartei);
 		statPanel.validate();
 		statPanel.repaint();
+		panelKartei.setBalkendiagramm();
 	}
 
 	public PanelLernen getPanelLernen() {
