@@ -70,8 +70,15 @@ public class HauptMenu extends JMenuBar {
 		karteiMenu.add(kartenMenu);
 		
 		lernsprachenMenu = new JMenu(ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("Lernsprache"));
+		
 		menuItem = new JMenuItem(ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("hinzufuegen"));
 		menuItem.setName("spracheHinzufuegen");
+		menuItem.addActionListener(new ListenerHauptMenu());
+		lernsprachenMenu.add(menuItem);
+		
+		
+		menuItem = new JMenuItem(ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("loeschen"));
+		menuItem.setName("spracheLoeschen");
 		menuItem.addActionListener(new ListenerHauptMenu());
 		lernsprachenMenu.add(menuItem);
 		
@@ -160,8 +167,12 @@ public class HauptMenu extends JMenuBar {
 				Hauptfenster.getInstance().spracheWechseln();
 				break;
 			case "spracheHinzufuegen":
-				PanelKarteiVerwalten gui1 = new PanelKarteiVerwalten();
-				gui1.paint();
+				PanelKarteiVerwalten pkv = new PanelKarteiVerwalten();
+				pkv.paint();
+				break;
+			case "spracheLoeschen":
+				PanelLoeschenSprache pls = new PanelLoeschenSprache();
+				pls.paint();
 				break;
 
 			}

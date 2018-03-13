@@ -413,19 +413,30 @@ public class Kartei {
 
 		}
 
+		
+		
 		for (Benutzer b : benutzerListe) {
+			
+			ArrayList<KartenStatus> ksdelete = new ArrayList<KartenStatus>();
+			
 			if (b.getLernfortschritte() != null) {
 				for (KartenStatus ks : b.getLernfortschritte()) {
 					if (idListe.contains(ks.getUid())) {
 						break;
 					} else {
-						b.getLernfortschritte().remove(ks);
+						ksdelete.add(ks);
 					}
 
 				}
 			}
+			
+			for (KartenStatus ks : ksdelete) {
+				b.getLernfortschritte().remove(ks);			
+			}
 
 		}
+		
+
 	}
 
 	
@@ -434,18 +445,30 @@ public class Kartei {
 	 * @param sp Sprachpaar welches gelöscht werden soll in der Kurzform z.B. de-en
 	 */
 	public void sprachpaarLoeschen(String sp) {
+		
+		ArrayList<Karte> kartenL = new ArrayList<Karte>();
+		
 		for (Karte k : kartei) {
 			if (k.getSprache().equalsIgnoreCase(sp)) {
-				kartei.remove(k);
+				kartenL.add(k);
 			}
 
 		}
-
+		
+		for (Karte k : kartenL) {
+			kartei.remove(k);
+		}
+		
+		Sprache spracheL = null;
+		
 		for (Sprache s : sprachen) {
 			if (s.getSprachPaar().equalsIgnoreCase(sp)) {
-				sprachen.remove(s);
+				spracheL = s;
 			}
 		}
+		
+		sprachen.remove(spracheL);
+		
 	}
 
 	/**
