@@ -69,6 +69,7 @@ public class PanelLernen extends JPanel {
 		lSpracheA.setPreferredSize(new Dimension(300, 30));
 		tSpracheA = new JTextField();
 		tSpracheA.setPreferredSize(new Dimension(300, 30));
+		tSpracheA.addKeyListener(new textfeldListener());
 		tSpracheA.setEditable(false);
 		tSpracheA.setBorder(javax.swing.BorderFactory.createEmptyBorder());
 		lSpracheB = new JLabel(Kartei.getInstance().getAktuelleSprache().getSpracheB());

@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 
 import Logik.Karte;
 import Logik.Kartei;
+import Logik.Sprache;
 
 /**
  * Klasse beinhaltet das Löschen der Karte in dem Fach. Mit dem Ja Button wird die Karte gelöscht und mit dem Nein Button wird
