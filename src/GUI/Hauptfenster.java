@@ -8,6 +8,11 @@ import javax.swing.JPanel;
 
 import Logik.Sprache;
 
+/** @author Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
+ *  @version 1
+ *  Datum:11.03.2018
+ */
+
 public class Hauptfenster extends JFrame {
 
 	/**

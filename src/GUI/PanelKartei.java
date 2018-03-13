@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 import Logik.Kartei;
 
 /**
- * @autor Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
+ * @author Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
  * @version 0.8
  * Datum:24.02.2018
  */

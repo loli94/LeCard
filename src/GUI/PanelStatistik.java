@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 import Logik.Kartei;
 
 /**
- * @autor Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
+ * @author Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
  * @version 1.0 Datum:28.02.2018
  */
 
@@ -40,8 +40,8 @@ public class PanelStatistik extends JPanel {
 	/**
 	 * Hier wird das Balkendiagramm auf einer Graphicsfläche gezeichnet.
 	 * 
-	 * @param g
-	 *            Zeichnungsfläche
+	 * @param g Zeichnungsfläche
+	 *            
 	 * @see javax.swing.JComponent#paintComponent(java.awt.Graphics)
 	 */
 
@@ -91,18 +91,18 @@ public class PanelStatistik extends JPanel {
 	}
 
 	/**
-	 * Karte1_WIDTh wird zurück gegeben
 	 * 
-	 * @return int Karte1_WIDTh
+	 * 
+	 * @return int Karte1_WIDTH Karte1_WIDTh wird zurück gegeben
 	 */
 	public int getKart1_WIDTH() {
 		return Kart1_WIDTH;
 	}
 
 	/**
-	 * Hier wird die Breite des ersten Balken gesetzt.
 	 * 
-	 * @param kart1_WIDTH
+	 * 
+	 * @param kart1_WIDTH Hier wird die Breite des ersten Balken gesetzt.
 	 */
 
 	public void setKart1_WIDTH(int kart1_WIDTH) {
@@ -110,9 +110,9 @@ public class PanelStatistik extends JPanel {
 	}
 
 	/**
-	 * Karte2_WIDTH wird zurück gegeben
 	 * 
-	 * @return int Karte2_WIDTH
+	 * 
+	 * @return Karte2_WIDTH Karte2_WIDTH wird zurück gegeben
 	 */
 
 	public int getKart2_WIDTH() {
@@ -120,9 +120,9 @@ public class PanelStatistik extends JPanel {
 	}
 
 	/**
-	 * Hier wird die Breite des zweiten Balken gesetzt
 	 * 
-	 * @param kart2_WIDTH
+	 * 
+	 * @param kart2_WIDTH Hier wird die Breite des zweiten Balken gesetzt
 	 */
 
 	public void setKart2_WIDTH(int kart2_WIDTH) {
@@ -130,27 +130,26 @@ public class PanelStatistik extends JPanel {
 	}
 
 	/**
-	 * Karte3_WIDTH wird zurück gegeben
 	 * 
-	 * @return int Karte3_WIDTH
+	 * @return Karte3_WIDTH Karte3_WIDTH wird zurück gegeben
 	 */
 	public int getKart3_WIDTH() {
 		return kart3_WIDTH;
 	}
 
 	/**
-	 * Hier wird die Breite des dritten Balken gesetzt
 	 * 
-	 * @param kart3_WIDTH
+	 * 
+	 * @param kart3_WIDTH Hier wird die Breite des dritten Balken gesetzt
 	 */
 	public void setKart3_WIDTH(int kart3_WIDTH) {
 		this.kart3_WIDTH = kart3_WIDTH * 10;
 	}
 
 	/**
-	 * Karte4_WIDTH wird zurück gegeben
+	 *
 	 * 
-	 * @return int Karte4_WIDTH
+	 * @return int Karte4_WIDTH Karte4_WIDTH wird zurück gegeben
 	 */
 
 	public int getKart4_WIDTH() {
@@ -158,18 +157,18 @@ public class PanelStatistik extends JPanel {
 	}
 
 	/**
-	 * Hier wird die Breite des vierten Balken gesetzt
+	 *
 	 * 
-	 * @param kart4_WIDTH
+	 * @param kart4_WIDTH Hier wird die Breite des vierten Balken gesetzt
 	 */
 	public void setKart4_WIDTH(int kart4_WIDTH) {
 		this.kart4_WIDTH = kart4_WIDTH * 10;
 	}
 
 	/**
-	 * Karte2_WIDTH wird zurück gegeben
 	 * 
-	 * @return int Karte2_WIDTH
+	 * 
+	 * @return int Karte5_WIDTH Karte5_WIDTH wird zurück gegeben
 	 */
 
 	public int getKart5_WIDTH() {
@@ -177,9 +176,9 @@ public class PanelStatistik extends JPanel {
 	}
 
 	/**
-	 * Hier wird die Breite des fünften Balken gesetzt
 	 * 
-	 * @param kart5_WIDTH
+	 * 
+	 * @param kart5_WIDTH Hier wird die Breite des fünften Balken gesetzt
 	 */
 
 	public void setKart5_WIDTH(int kart5_WIDTH) {

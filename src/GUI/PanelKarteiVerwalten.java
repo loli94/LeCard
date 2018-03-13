@@ -27,7 +27,7 @@ import Logik.Kartei;
  * mit dem Buchstabencode (zwei Zweichen) sowie das ausschreiben der kompletten
  * Sprache erstellt.
  * 
- * @autor Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
+ * @author Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
  * @version 1.0 Datum:28.02.2018
  */
 

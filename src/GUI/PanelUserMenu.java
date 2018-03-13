@@ -16,11 +16,13 @@ import javax.swing.border.EmptyBorder;
 import Logik.Kartei;
 import Logik.Sprache;
 
+/** @author Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
+ *  @version 1.0
+ *  Datum:11.03.2018
+ */
+
 public class PanelUserMenu extends JPanel {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private JComboBox<String> lernSprachenMenu;
 	private JLabel lBenutzer, lLernSprache;

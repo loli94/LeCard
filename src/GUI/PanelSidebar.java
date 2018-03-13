@@ -17,6 +17,11 @@ import com.sun.glass.events.KeyEvent;
 
 import Logik.Kartei;
 
+/** @author Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
+ *  @version 1.2
+ *  Datum:11.03.2018
+ */
+
 public class PanelSidebar extends JPanel {
 
 	/**

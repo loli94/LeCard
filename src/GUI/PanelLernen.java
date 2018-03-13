@@ -19,7 +19,7 @@ import javax.swing.Timer;
 
 import Logik.Kartei;
 
-/** @autor Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
+/** @author Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
  * 	@version 0.6
  * 	Datum:10.03.2018
  */

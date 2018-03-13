@@ -11,7 +11,8 @@ import javax.swing.JMenuItem;
 import Logik.Kartei;
 
 
-	/* @autor Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
+	/** 
+	 * @author Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
 	 * @version 0.7
 	 * Datum:08.03.2018
 	 */
