@@ -5,7 +5,7 @@ import javax.xml.bind.annotation.*;
 /** 
  * Klasse für den Inhalt der Lernkarten
  * 
- *  @autor Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
+ *  @author Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
  *  @version 0.7
  *  Datum:14.03.2018
  */

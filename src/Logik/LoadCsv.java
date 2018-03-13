@@ -10,7 +10,7 @@ import java.util.Scanner;
 	/**
 	 * Die Klasse ermöglicht es ein .csv File mit Wörter und Wort-Paarungen einzulesen
 	 * 
-	 * @autor Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
+	 * @author Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
 	 * @version 0.3
 	 * Datum:24.02.2018
 	 */

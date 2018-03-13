@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.XmlElement;
 	 * 
 	 *  Diese Klasse generiert pro Karte einen Kartenstatus
 	 *  
-	 *  @autor Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
+	 *  @author Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
 	 *  @version 0.3
 	 *  Datum:24.02.2018
 	 */

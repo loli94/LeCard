@@ -4,7 +4,7 @@ import java.util.ArrayList;
 /** 
  *  Diese Klasse speichert die einzelnen Karten in eine Fach 
  *  
- *  @autor Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
+ *  @author Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
  *  @version 1.6
  *  Datum:24.02.2018
  */

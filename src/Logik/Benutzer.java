@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 /**
  *   Diese Klasse speichert die einzelnen Benutzer 
  *  
- *   @autor Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
+ *   @author Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
  *   @version 0.3
  *   @param benutzername Benutzername für den User
  *   @param passwort Passwort für den User
