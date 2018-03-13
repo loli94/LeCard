@@ -124,7 +124,7 @@ public class FrameHinzufuegen extends JFrame {
 
 			if (!tSprache1.getText().isEmpty() || !tSprache2.getText().isEmpty()) {
 
-				if (tSprache1.getText().matches("[a-zA-Z]+") && tSprache2.getText().matches("[a-zA-Z]+")) {
+				
 					Karte k1 = new Karte(Kartei.getInstance().getAktuellesSprachpaar(), tSprache1.getText(),
 							tSprache2.getText());
 					Kartei.getInstance().karteHinzufuegen(k1);
@@ -138,11 +138,6 @@ public class FrameHinzufuegen extends JFrame {
 					Hauptfenster.getInstance().getPanelKartei().validate();
 					tSprache1.requestFocus();
 					Kartei.getInstance().lernkarteiSpeichern();
-
-				} else {
-					JOptionPane.showMessageDialog(null, ResourceBundle
-							.getBundle("Bundle", Kartei.getInstance().getLocale()).getString("infoTextHinzufügen2"));
-				}
 
 			} else {
 				JOptionPane.showMessageDialog(null, ResourceBundle.getBundle("Bundle", Kartei.getInstance().getLocale())
