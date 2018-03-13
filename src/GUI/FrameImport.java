@@ -8,7 +8,11 @@ import javax.swing.JFrame;
 import Logik.Kartei;
 import Logik.LoadCsv;
 
-/* @autor Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
+/**
+ * 
+ * Diese Klasse beinhaltet den Import mit einer csv Datein.
+ * 
+ * @author Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
  * @version 0.6
  * Datum:24.02.2018
  */

@@ -17,9 +17,12 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import Logik.Kartei;
-/** @autor Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
- * 	@version 0.2
- * 	Datum:11.03.2018
+/** 
+ * Diese Klasse beinhaltet das Frame um einen neuen Benutzer zu erstellen. Neuer Benutzer wird ins xml File geladen.
+ * 
+ * @author Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
+ * @version 0.2
+ * Datum:11.03.2018
  */
 public class FrameNeuerBenutzer extends JFrame{
 

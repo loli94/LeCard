@@ -19,7 +19,7 @@ import Logik.Kartei;
  * Klasse beinhaltet das Löschen der Karte in dem Fach. Mit dem Ja Button wird die Karte gelöscht und mit dem Nein Button wird
  * der Vorgang abgebrochen.
  * 
- * @autor Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
+ * @author Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
  * @version 0.7 Datum:12.03.2018
  */
 

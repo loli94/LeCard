@@ -22,7 +22,7 @@ import Logik.Kartei;
  * 
  * Klasse beinhaltet das Hinzufügen von neuen Karten.
  * 
- * @autor Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
+ * @author Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
  * @version 0.6 Datum:24.02.2018
  */
 public class FrameHinzufuegen extends JFrame {

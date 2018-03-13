@@ -15,7 +15,10 @@ import javax.swing.JPanel;
 import Logik.Kartei;
 
 /**
- * @autor Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
+ * 
+ * Diese Klasse ebeinhaltet das löschen des Sprachpaares. Erfasste Sprachpaare können gelöscht werden.
+ * 
+ * @author Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
  * @version 0.7 Datum:12.03.2018
  */
 

@@ -22,9 +22,13 @@ import javax.swing.JTextField;
 
 import Logik.Kartei;
 
-/** @autor Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
- *  @version 0.3
- *  Datum:11.03.2018
+/** 
+ * 
+ * Diese Klasse beinhaltet das Login Frame mit den Login eingaben. 
+ * 
+ * @author Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
+ * @version 0.3
+ * Datum:11.03.2018
  */
 public class FrameLogin extends JFrame {
 

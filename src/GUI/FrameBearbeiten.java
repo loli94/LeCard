@@ -22,7 +22,7 @@ import Logik.Kartei;
  * Klasse beinhaltet das Bearbeiten von Karten. Karte wird in einem neuen Panel
  * angezeigt mit aktueller Karte welche bearbeitet werden soll.
  * 
- * @autor Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
+ * @author Lars Weder,Martin Heinzle,Roman Vorburger, Marvin Kündig
  * @version 0.6 Datum:24.02.2018
  */
 public class FrameBearbeiten extends JFrame {
